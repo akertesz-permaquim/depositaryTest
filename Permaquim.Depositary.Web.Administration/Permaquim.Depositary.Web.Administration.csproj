@@ -26,14 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Reports\PermisosUsuario.View.razor" />
     <Content Remove="Components\UserRolViewer.razor" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
-    <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
     <PackageReference Include="ClosedXML" Version="0.100.3" />
     <PackageReference Include="Eziriz.Reactor.Licensing" Version="6.9.0" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Radzen.Blazor" Version="4.3.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -89,6 +91,81 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\Crud\Aplicacion\ConfiguracionTipoDato.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Aplicacion\ConfiguracionValidacionDato.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Banca\Banco.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Banca\TipoCuenta.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\ComandoContadora.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\ComandoPlaca.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\DepositarioMoneda.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\PlantillaMoneda.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\PlantillaMonedaDetalle.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\TipoContadora.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Dispositivo\TipoPlaca.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Estilo\TipoEsquemaDetalle.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Geografia\Zona.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Impresion\TipoTicket.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Operacion\TipoContenedor.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Operacion\TipoEvento.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Operacion\TipoTransaccion.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Seguridad\TipoAplicacion.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Seguridad\TipoFuncion.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Seguridad\TipoMenu.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Sincronizacion\Configuracion.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Sincronizacion\Entidad.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Valor\OrigenValor.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Valor\RelacionMonedaTipoValor.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Crud\Valor\Tipo.Crud.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Components\CustomCrud\Customizador\Entidad.Crud.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

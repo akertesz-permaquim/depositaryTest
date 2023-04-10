@@ -54,11 +54,11 @@
         <hr>
         if (crudMode == CrudMode.List)
         {
-            <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" CellRender="@UsuarioSectorCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" FilterMode="FilterMode.Advanced" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            <RadzenDataGrid @bind-Settings="@GridSettings" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" CellRender="@UsuarioSectorCellRender" PageSizeOptions="@(new int[]{10,20,50,100})" FilterMode="FilterMode.Advanced" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)
                 Data="@UsuarioSector_entities" TItem="UsuarioSector" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                 <EmptyTemplate>
-                    <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                    <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
                 </EmptyTemplate>
                 <Columns>
                     <RadzenDataGridColumn TItem="UsuarioSector" TextAlign="TextAlign.Center" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("TemplateABM",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("TemplateABM",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("TemplateABM",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("TemplateABM",dataCustomizacionPagina.AtributosColumnas)>
@@ -69,7 +69,7 @@
                         <Template Context="element">
                             <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuarioSector",dataFunciones,"PuedeModificar") Class="m-1" Click="@(args => Edit(element,false))" @onclick:stopPropagation="true">
                             </RadzenButton>
-                            <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuarioSector",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
+                            <RadzenButton Icon="delete" Disabled="@(!element.Habilitado)" ButtonStyle="ButtonStyle.Danger" Visible=@SeguridadController.VerificarPermisoFuncion("SeguridadUsuarioSector",dataFunciones,"PuedeEliminar") Class="m-1" Click="@(args => Edit(element,true))" @onclick:stopPropagation="true">
                             </RadzenButton>
                         </Template>
                     </RadzenDataGridColumn>
@@ -220,7 +220,7 @@
                         <div class="col-md-4">
                             @if ((@Sector_SectorId_entities.Count > 0 && @Sector_SectorId_entities.FirstOrDefault(c => c.Id == @UsuarioSector_entity.SectorId) != null) || crudMode != CrudMode.Delete)
                             {
-                                var dataSet = crudMode == CrudMode.Add ? Sector_SectorId_entities.Where(x => x.Habilitado == true) : Sector_SectorId_entities.Where(x => x.Habilitado == true || x.Id == UsuarioSector_entity.SectorId);
+                                var dataSet = crudMode == CrudMode.Add ? Sector_SectorId_entities.Where(x => x.Habilitado == true && x.EmpresaId == EmpresaId) : Sector_SectorId_entities.Where(x => x.Habilitado == true || x.Id == UsuarioSector_entity.SectorId);
                                 <RadzenDropDown Name="SectorId" AllowClear="true" TValue="Int64" Class="w-100" @bind-Value="@(UsuarioSector_entity.SectorId)"
                                 Data=@dataSet TextProperty="NombreSucursalSector" ValueProperty="Id"
                                 Change=@(args => SelectSector_SectorIdValueChanged(args))
@@ -293,6 +293,7 @@ else
         public string Nombre { get; set; }
         public Int64 SucursalId { get; set; }
         public bool Habilitado { get; set; }
+        public Int64 EmpresaId { get; set; }
     }
 
     [Parameter]
@@ -470,6 +471,12 @@ else
             }
         }
 
+        //Agrego los sectores que no pertenecen a la empresa que tiene asociada el usuario (por si opero en algun momento con un sector de otra empresa)
+        if(Sector_SectorId_local.Where.Count > 0)
+            Sector_SectorId_local.Where.Add(sqlEnum.ConjunctionEnum.OR, Business.Relations.Directorio.Sector.ColumnEnum.Id, sqlEnum.OperandEnum.In, UsuarioSector_entities.Select(x => x.SectorId).ToList());
+        else
+            Sector_SectorId_local.Where.Add(Business.Relations.Directorio.Sector.ColumnEnum.Id, sqlEnum.OperandEnum.In, UsuarioSector_entities.Select(x => x.SectorId).ToList());
+
         Sector_SectorId_local.Items();
 
         if (Sector_SectorId_local.Result.Count > 0)
@@ -478,11 +485,13 @@ else
             foreach (var sectorEntitie in Sector_SectorId_local.Result)
             {
                 Sector sector = new();
+                var sucursal = sectorEntitie.SucursalId;
                 sector.Id = sectorEntitie.Id;
                 sector.Habilitado = sectorEntitie.Habilitado;
                 sector.Nombre = sectorEntitie.Nombre;
-                sector.NombreSucursalSector = sectorEntitie.SucursalId.Nombre + " -> " + sectorEntitie.Nombre;
+                sector.NombreSucursalSector = sucursal.Nombre + " -> " + sectorEntitie.Nombre;
                 sector.SucursalId = sectorEntitie._SucursalId;
+                sector.EmpresaId = sucursal._EmpresaId;
 
                 Sector_SectorId_entities.Add(sector);
             }

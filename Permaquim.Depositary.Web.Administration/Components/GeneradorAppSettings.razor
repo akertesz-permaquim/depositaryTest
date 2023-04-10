@@ -30,10 +30,10 @@
 
             <hr>
 
-            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" CellRender="@depositarioCellRender" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+            <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnPicking="true" PageSizeOptions="@(new int[]{10,20,50,100})" CellRender="@depositarioCellRender" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                 Data="@Depositario_entities" TItem="DispositivoEntities.DepositarioABM" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.And">
                 <EmptyTemplate>
-                    <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                    <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
                 </EmptyTemplate>
                 <Columns>
                     <RadzenDataGridColumn Title=@MultilenguajeController.ObtenerTextoPorClave("GENERAR",dataLenguaje) TItem="DispositivoEntities.DepositarioABM" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="80px">
@@ -160,7 +160,7 @@
     }
     else
     {
-        <p>No tiene permisos para visualizar los registros.</p>
+        <p>@MultilenguajeController.ObtenerTextoPorClave("SIN_PERMISO_VISUALIZACION",dataLenguaje)</p>
     }
 }
 else
@@ -186,9 +186,35 @@ else
     public class ArchivoAppSettings
     {
         public ClaveAppSettings AppSettings { get; set; }
+        public bool DetailedErrors { get; set; }
+        public ClaveLogging Logging { get; set; }
         public string TaskJson { get; set; }
         public int TaskDelay { get; set; }
         public string LogFile { get; set; }
+    }
+
+    public class ClaveLogLevel
+    {
+        public string Default { get; set; }
+
+        [JsonProperty(PropertyName = "Microsoft.Hosting.Lifetime")]
+        public string MicrosoftHostingLifetime { get; set; }
+
+        public ClaveLogLevel()
+        {
+            Default = "Information";
+            MicrosoftHostingLifetime = "Information";
+        }
+    }
+
+    public class ClaveLogging
+    {
+        public ClaveLogLevel LogLevel { get; set; }
+
+        public ClaveLogging()
+        {
+            LogLevel = new();
+        }
     }
 
     public class ClaveAppSettings
@@ -239,6 +265,7 @@ else
     private string TaskJson = "C:\\Permaquim\\App0stol\\ServiceTasks.json";
     private string LogFile = "C:\\Permaquim\\App0stol\\Log.txt";
     private int TaskDelay = 15000;
+    private bool DetailedErrors = true;
 
     List<TipoAutenticacionBaseDatos> tipoAutenticacionBaseDatos = new();
 
@@ -332,9 +359,10 @@ else
 
         entity.Items();
 
+        Depositario_entities = new();
+
         if (entity.Result.Count > 0)
         {
-            Depositario_entities = new();
             foreach (var row in entity.Result)
             {
                 DispositivoEntities.DepositarioABM depositarioABM = new();
@@ -458,78 +486,88 @@ else
                 </div>
                 @if (mostrarCredencialesConexion)
                 {
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3" style="font-weight:bold">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOSQL",dataLenguaje) Component="UsuarioSQL" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-auto">
-                                <RadzenTextBox style="display: block" @bind-Value="@(generacionAppSettings.UsuarioSQL)" Name="UsuarioSQL">
-                                </RadzenTextBox>
-                                <RadzenRequiredValidator Component="UsuarioSQL" Text="UsuarioSQL is required" Style="position: absolute">
-                                </RadzenRequiredValidator>
-                            </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3" style="font-weight:bold">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("USUARIOSQL",dataLenguaje) Component="UsuarioSQL" style="width: 100%">
+                            </RadzenLabel>
                         </div>
-                        <div style="margin-bottom: 1rem" class="row">
-                            <div class="col-md-3" style="font-weight:bold">
-                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CONTRASEÑASQL",dataLenguaje) Component="ContraseñaSQL" style="width: 100%">
-                                </RadzenLabel>
-                            </div>
-                            <div class="col-md-auto">
-                                <RadzenPassword @bind-Value="@(generacionAppSettings.ContraseñaSQL)" style="width: 100%" Name="ContraseñaSQL">
-                                </RadzenPassword>
-                                <RadzenRequiredValidator Component="ContraseñaSQL" Text="ContraseñaSQL is required" Style="position: absolute">
-                                </RadzenRequiredValidator>
-                            </div>
+                        <div class="col-md-auto">
+                            <RadzenTextBox style="display: block" @bind-Value="@(generacionAppSettings.UsuarioSQL)" Name="UsuarioSQL">
+                            </RadzenTextBox>
+                            <RadzenRequiredValidator Component="UsuarioSQL" Text="UsuarioSQL is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
                         </div>
+                    </div>
+                    <div style="margin-bottom: 1rem" class="row">
+                        <div class="col-md-3" style="font-weight:bold">
+                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CONTRASEÑASQL",dataLenguaje) Component="ContraseñaSQL" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-auto">
+                            <RadzenPassword @bind-Value="@(generacionAppSettings.ContraseñaSQL)" style="width: 100%" Name="ContraseñaSQL">
+                            </RadzenPassword>
+                            <RadzenRequiredValidator Component="ContraseñaSQL" Text="ContraseñaSQL is required" Style="position: absolute">
+                            </RadzenRequiredValidator>
+                        </div>
+                    </div>
                 }
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3" style="font-weight:bold">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKJSON",dataLenguaje) Component="TaskJson" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-auto">
-                            <RadzenTextBox style="display: block" @bind-Value="@TaskJson" Name="TaskJson">
-                            </RadzenTextBox>
-                            <RadzenRequiredValidator Component="TaskJson" Text="TaskJson is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3" style="font-weight:bold">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKJSON",dataLenguaje) Component="TaskJson" style="width: 100%">
+                        </RadzenLabel>
                     </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3" style="font-weight:bold">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LOGFILE",dataLenguaje) Component="LogFile" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-auto">
-                            <RadzenTextBox style="display: block" @bind-Value="@LogFile" Name="LogFile">
-                            </RadzenTextBox>
-                            <RadzenRequiredValidator Component="LogFile" Text="LogFile is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        </div>
+                    <div class="col-md-auto">
+                        <RadzenTextBox style="display: block" @bind-Value="@TaskJson" Name="TaskJson">
+                        </RadzenTextBox>
+                        <RadzenRequiredValidator Component="TaskJson" Text="TaskJson is required" Style="position: absolute">
+                        </RadzenRequiredValidator>
                     </div>
-                    <div style="margin-bottom: 1rem" class="row">
-                        <div class="col-md-3" style="font-weight:bold">
-                            <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKDELAY",dataLenguaje) Component="TaskDelay" style="width: 100%">
-                            </RadzenLabel>
-                        </div>
-                        <div class="col-md-auto">
-                            <RadzenNumeric style="display: block" @bind-Value="@TaskDelay" Name="TaskDelay">
-                            </RadzenNumeric>
-                            <RadzenRequiredValidator Component="TaskDelay" Text="TaskDelay is required" Style="position: absolute">
-                            </RadzenRequiredValidator>
-                        </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3" style="font-weight:bold">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("LOGFILE",dataLenguaje) Component="LogFile" style="width: 100%">
+                        </RadzenLabel>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col col-md-auto">
-                            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
-                            </RadzenButton>
-                            <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="() => ds.Close(false)">
-                            </RadzenButton>
-                        </div>
+                    <div class="col-md-auto">
+                        <RadzenTextBox style="display: block" @bind-Value="@LogFile" Name="LogFile">
+                        </RadzenTextBox>
+                        <RadzenRequiredValidator Component="LogFile" Text="LogFile is required" Style="position: absolute">
+                        </RadzenRequiredValidator>
                     </div>
-                </ChildContent>
-            </RadzenTemplateForm>
-        </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3" style="font-weight:bold">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("TASKDELAY",dataLenguaje) Component="TaskDelay" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-auto">
+                        <RadzenNumeric style="display: block" @bind-Value="@TaskDelay" Name="TaskDelay">
+                        </RadzenNumeric>
+                        <RadzenRequiredValidator Component="TaskDelay" Text="TaskDelay is required" Style="position: absolute">
+                        </RadzenRequiredValidator>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3" style="font-weight:bold">
+                        <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("DETAILEDERRORS",dataLenguaje) Component="DetailedErrors" style="width: 100%">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-md-auto">
+                        <RadzenCheckBox style="display: block" @bind-Value="@DetailedErrors" Name="DetailedErrors">
+                        </RadzenCheckBox>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-md-auto">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_ACEPTAR",dataLenguaje) ButtonStyle="ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="save" style="margin-left: 1rem" Text=@MultilenguajeController.ObtenerTextoPorClave("BOTON_CANCELAR",dataLenguaje) Click="() => ds.Close(false)">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenTemplateForm>
+            </div>
     );
     }
 
@@ -551,9 +589,9 @@ else
     {
         ClaveAppSettings claveAppSettings = new();
 
-        claveAppSettings.CodigoDepositario = Cryptography.Encrypt(generacionAppSettings.CodigoDepositario, generacionAppSettings.PasswordKey);
+        claveAppSettings.PasswordKey = Convert.ToBase64String(Encoding.GetEncoding(28591).GetBytes(generacionAppSettings.PasswordKey));
+        claveAppSettings.CodigoDepositario = Cryptography.Encrypt(generacionAppSettings.CodigoDepositario, claveAppSettings.PasswordKey);
         claveAppSettings.WebApiUrl = generacionAppSettings.WebApiUrl;
-        claveAppSettings.PasswordKey = generacionAppSettings.PasswordKey;
 
         string ConnectionStringSinEncriptar = "";
         string InicioConnectionString = "Data Source=" + generacionAppSettings.ServidorBaseDatos + ";Initial Catalog=" + generacionAppSettings.NombreBaseDatos + ";";
@@ -567,15 +605,22 @@ else
                 break;
         }
 
-        claveAppSettings.ConnectionString = Cryptography.Encrypt(ConnectionStringSinEncriptar, generacionAppSettings.PasswordKey);
+        claveAppSettings.ConnectionString = Cryptography.Encrypt(ConnectionStringSinEncriptar, claveAppSettings.PasswordKey);
 
         ArchivoAppSettings archivoAppSettings = new();
         archivoAppSettings.AppSettings = claveAppSettings;
         archivoAppSettings.TaskDelay = TaskDelay;
         archivoAppSettings.LogFile = LogFile;
         archivoAppSettings.TaskJson = TaskJson;
+        archivoAppSettings.DetailedErrors = DetailedErrors;
 
-        string jsonAppSettings = JsonConvert.SerializeObject(archivoAppSettings);
+        if (DetailedErrors)
+            archivoAppSettings.Logging = new();
+
+        string jsonAppSettings = JsonConvert.SerializeObject(archivoAppSettings, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
 
         if (jsonAppSettings != "")
         {
@@ -670,8 +715,7 @@ else
     }
 
     #endregion
-
-    }
+}
 
 <style>
     .row-depositarioNoValido {

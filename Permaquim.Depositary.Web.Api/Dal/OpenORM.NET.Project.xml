@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <NetVersion>NetCore</NetVersion>
-  <GarbageCollectionCode>GC.Collect(2, GCCollectionMode.Forced);</GarbageCollectionCode>
-  <UsesExplicitGarbageCollection>true</UsesExplicitGarbageCollection>
   <SupportedCharacters> .</SupportedCharacters>
   <ConnectionStringName>ConnectionString</ConnectionStringName>
   <ChildrenPrefix>ListOf_</ChildrenPrefix>
@@ -20,18 +18,12 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioIntegracion;Data Source=PC-SISTEMAS</ConnectionString>
-  <SelectedViews>
-    <string>Integracion.OperacionTransaccion</string>
-    <string>Integracion.OperacionTransaccionDetalle</string>
-    <string>Integracion.OperacionTransaccionSobre</string>
-    <string>Integracion.OperacionTransaccionSobreDetalle</string>
-  </SelectedViews>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=NB000101</ConnectionString>
+  <SelectedViews />
   <SelectedStoredProcedures>
     <string>Sincronizacion.ObtenerIdDestino</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
-    <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>dbo.IniciarPrimeraSincronizacion</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
@@ -265,8 +257,6 @@
     <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
-    <string>Customizador.Entidad</string>
-    <string>Customizador.EntidadAtributo</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.RelacionMonedaSucursal</string>
@@ -344,10 +334,9 @@
     <string>Visualizacion.PerfilItem</string>
     <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
-  <SelectedDatabase>DepositarioIntegracion</SelectedDatabase>
+  <SelectedDatabase>Depositario</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
-    <string>353e226c-6bf1-4079-a822-ba12163b71c9</string>
   </SelectedTemplates>
   <Location>\</Location>
   <DatasourceServer />

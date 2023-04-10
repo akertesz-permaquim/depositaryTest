@@ -1491,6 +1491,7 @@ using System.Text;
 					public const string HabilitarOrdenamiento = "HabilitarOrdenamiento";
 					public const string HabilitarRedimensionamiento = "HabilitarRedimensionamiento";
 					public const string HabilitarPaginado = "HabilitarPaginado";
+					public const string RegistrosPorPagina = "RegistrosPorPagina";
 					public const string HabilitarAuditoria = "HabilitarAuditoria";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
@@ -1511,6 +1512,7 @@ using System.Text;
 					HabilitarOrdenamiento,
 					HabilitarRedimensionamiento,
 					HabilitarPaginado,
+					RegistrosPorPagina,
 					HabilitarAuditoria,
 					Habilitado,
 					UsuarioCreacion,
@@ -1524,7 +1526,7 @@ using System.Text;
                 public Entidad()
                 {
                 }
-                public  Entidad(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
+                public  Entidad(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32? RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.Tipo = Tipo;
@@ -1537,6 +1539,7 @@ using System.Text;
                     this.HabilitarOrdenamiento = HabilitarOrdenamiento;
                     this.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
                     this.HabilitarPaginado = HabilitarPaginado;
+                    this.RegistrosPorPagina = RegistrosPorPagina;
                     this.HabilitarAuditoria = HabilitarAuditoria;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
@@ -1568,6 +1571,8 @@ using System.Text;
              public Boolean HabilitarRedimensionamiento { get; set; }
              [DataItemAttributeFieldName("HabilitarPaginado","HabilitarPaginado")]
              public Boolean HabilitarPaginado { get; set; }
+             [DataItemAttributeFieldName("RegistrosPorPagina","RegistrosPorPagina")]
+             public Int32? RegistrosPorPagina { get; set; }
              [DataItemAttributeFieldName("HabilitarAuditoria","HabilitarAuditoria")]
              public Boolean HabilitarAuditoria { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]

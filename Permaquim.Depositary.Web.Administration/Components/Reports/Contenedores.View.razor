@@ -6,29 +6,29 @@
 @inject NavigationManager NavManager
 
 
+<RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+    <ChildContent>
+        <div>
+            <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_CONTENEDORES",dataLenguaje)</h4>
+        </div>
+    </ChildContent>
+</RadzenBadge>
+<hr>
+
 @if (estaCargandoParametrosReporte)
 {
     <div class="spinner"></div>
 }
 else
 {
-    <RadzenBadge Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoTituloBadge", false) BadgeStyle="BadgeStyle.Secondary">
+    <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
+        <HeaderTemplate>
+            <h4 class="m-0 d-flex align-items-center">
+                <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
+            </h4>
+        </HeaderTemplate>
         <ChildContent>
-            <div>
-                <h4 style="color:white;">@MultilenguajeController.ObtenerTextoPorClave("TITULO_REPORTE_CONTENEDORES",dataLenguaje)</h4>
-            </div>
-        </ChildContent>
-    </RadzenBadge>
-    <hr>
-
-    <RadzenTemplateForm TItem="parametros" Data="@parametrosContenedoresView" @bind-Value="parametrosContenedoresView" Submit="LoadMainEntityData">
-        <ChildContent>
-            <RadzenPanel AllowCollapse="true" Style=@EstiloController.ObtenerItemEstilo(dataEsquemaDetalle, "ColorFondoPanelParametrosReporte", false)>
-                <HeaderTemplate>
-                    <h4 class="m-0 d-flex align-items-center">
-                        <RadzenIcon Icon="account_box" Class="mr-1" /><b>@MultilenguajeController.ObtenerTextoPorClave("TITULO_PARAMETROSBUSQUEDA",dataLenguaje)</b>
-                    </h4>
-                </HeaderTemplate>
+            <RadzenTemplateForm TItem="parametros" Data="@parametrosContenedoresView" @bind-Value="parametrosContenedoresView" Submit="LoadMainEntityData">
                 <ChildContent>
                     <table class="table table-borderless w-auto" style="vertical-align: middle">
                         <tbody>
@@ -138,7 +138,7 @@ else
                                     <div>
                                         <RadzenDropDown AllowClear="true" Name="dropDownDepositarios" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                                                     @bind-Value=@(parametrosContenedoresView.depositarioSeleccionado) Placeholder="@MultilenguajeController.ObtenerTextoPorClave("PLACEHOLDER_DEPOSITARIOS",dataLenguaje)" Data=@dataDepositariosCombo TextProperty="DepositarioNombre" ValueProperty="DepositarioId"
-                                                        Class="w-100" />
+                                                    Class="w-100" />
                                     </div>
                                 </td>
                                 <td>
@@ -155,26 +155,26 @@ else
                             </tr>
                         </tbody>
                     </table>
+                    <div style="margin-bottom: 1rem" class="row justify-content-center">
+                        <div class="col col-md-auto">
+                            <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
+                            </RadzenButton>
+                        </div>
+                        <div class="col col-md-auto">
+                            <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
+                            </RadzenButton>
+                        </div>
+                    </div>
                 </ChildContent>
-            </RadzenPanel>
-            <br />
-            <div style="margin-bottom: 1rem" class="row justify-content-center">
-                <div class="col col-md-auto">
-                    <RadzenButton ButtonType="ButtonType.Reset" Click="resetParametros" Icon="cleaning_services" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_LIMPIAR",dataLenguaje)" ButtonStyle="ButtonStyle.Secondary">
-                    </RadzenButton>
-                </div>
-                <div class="col col-md-auto">
-                    <RadzenButton ButtonType="ButtonType.Submit" Icon="search" Text="@MultilenguajeController.ObtenerTextoPorClave("BOTON_BUSCAR",dataLenguaje)" ButtonStyle="ButtonStyle.Primary">
-                    </RadzenButton>
-                </div>
-            </div>
+            </RadzenTemplateForm>
         </ChildContent>
-    </RadzenTemplateForm>
+    </RadzenPanel>
 }
 
 <div>
     @if (dataContenedoresView != null)
     {
+        <br />
         <br />
         if (gridContenedoresView != null)
         {
@@ -183,13 +183,13 @@ else
                 <GridExport T="ResultReporte" Grid="@gridContenedoresView" TituloBoton="@MultilenguajeController.ObtenerTextoPorClave("BOTON_EXPORTAR_EXCEL",dataLenguaje)" NombreArchivo="@MultilenguajeController.ObtenerTextoPorClave("NOMBRE_ARCHIVO_REPORTE_CONTENEDORES",dataLenguaje)"></GridExport>
             }
         }
-        <RadzenDataGrid @ref="@gridContenedoresView" id="gridContenedoresView" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)"
+        <RadzenDataGrid @ref="@gridContenedoresView" id="gridContenedoresView" FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeOptions="@(new int[]{10,20,50,100})" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)"
                     @bind-Settings="@GridSettings"
                     AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionPagina.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionPagina.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionPagina.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionPagina.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionPagina.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionPagina.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionPagina.AtributosTabla)
-                    Render="@ReportRender" PageSize="@EstiloController.ObtenerPaginadoDefault(dataUsuario.EmpresaId)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Render="@ReportRender" PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionPagina.AtributosTabla)" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
                     Data="@dataContenedoresView" TItem="ResultReporte" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
             <EmptyTemplate>
-                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">No existen registros.</p>
+                <p style="color: lightgrey; font-size: 24px; text-align: center; margin: 2rem;">@MultilenguajeController.ObtenerTextoPorClave("SIN_REGISTROS", dataLenguaje)</p>
             </EmptyTemplate>
             <Columns>
                 <RadzenDataGridColumn TItem="ResultReporte" Property="Empresa" Title="@MultilenguajeController.ObtenerTextoPorClave("EMPRESA",dataLenguaje)" Frozen="false"
@@ -446,32 +446,37 @@ else
         else
         {
             //Construimos el where general segun las empresas/sucursales/sectores/depositarios que puede ver el usuario
-            entity.Where.OpenParentheses();
-            entity.Where.OpenParentheses();
-
-            for (int i = 0; i < sectoresUsuario.Count; i++)
+            //entity.Where.OpenParentheses();
+            if (sectoresUsuario.Count > 0)
             {
-                if (i > 0)
-                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
                 entity.Where.OpenParentheses();
-                entity.Where.Add(Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
-                var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
-                if (sucursal != null)
+
+                for (int i = 0; i < sectoresUsuario.Count; i++)
                 {
-                    entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
-                    var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
-                    if (empresa != null)
-                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    if (i > 0)
+                        entity.Where.AddOperand(sqlEnum.ConjunctionEnum.OR);
+                    entity.Where.OpenParentheses();
+                    entity.Where.Add(Business.Views.Reporte.Contenedores.ColumnEnum.SectorId, sqlEnum.OperandEnum.Equal, sectoresUsuario[i].SectorId);
+                    var sucursal = sucursalesUsuario.Where(x => x.SucursalId == sectoresUsuario[i].SucursalId).FirstOrDefault();
+                    if (sucursal != null)
+                    {
+                        entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.SucursalId, sqlEnum.OperandEnum.Equal, sucursal.SucursalId);
+                        var empresa = empresasUsuario.Where(x => x.EmpresaId == sucursal.EmpresaId).FirstOrDefault();
+                        if (empresa != null)
+                            entity.Where.Add(sqlEnum.ConjunctionEnum.AND, Business.Views.Reporte.Contenedores.ColumnEnum.EmpresaId, sqlEnum.OperandEnum.Equal, empresa.EmpresaId);
+                    }
+                    entity.Where.CloseParentheses();
                 }
+
                 entity.Where.CloseParentheses();
             }
 
-            entity.Where.CloseParentheses();
 
             //Construimos el where segun los parametros de los controles
             if (parametrosContenedoresView.empresaSeleccionada.HasValue || parametrosContenedoresView.sucursalSeleccionada.HasValue || parametrosContenedoresView.sectorSeleccionado.HasValue || parametrosContenedoresView.depositarioSeleccionado.HasValue)
             {
-                entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
+                if (entity.Where.Count > 0)
+                    entity.Where.AddOperand(sqlEnum.ConjunctionEnum.AND);
 
                 entity.Where.OpenParentheses();
 
@@ -510,34 +515,60 @@ else
                 entity.Where.CloseParentheses();
             }
 
-            entity.Where.CloseParentheses();
+            //entity.Where.CloseParentheses();
 
             if (parametrosContenedoresView.fechaAperturaDesde.HasValue)
             {
                 parametrosContenedoresView.fechaAperturaDesde = new DateTime(parametrosContenedoresView.fechaAperturaDesde.Value.Year, parametrosContenedoresView.fechaAperturaDesde.Value.Month, parametrosContenedoresView.fechaAperturaDesde.Value.Day, 0, 0, 0);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaAperturaDesde.Value);
+
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaAperturaDesde.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaAperturaDesde.Value);
+
             }
 
             if (parametrosContenedoresView.fechaAperturaHasta.HasValue)
             {
                 parametrosContenedoresView.fechaAperturaHasta = new DateTime(parametrosContenedoresView.fechaAperturaHasta.Value.Year, parametrosContenedoresView.fechaAperturaHasta.Value.Month, parametrosContenedoresView.fechaAperturaHasta.Value.Day, 23, 59, 59);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaAperturaHasta.Value);
+
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaAperturaHasta.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaAperturaHasta.Value);
+
             }
 
             if (parametrosContenedoresView.fechaCierreDesde.HasValue)
             {
                 parametrosContenedoresView.fechaCierreDesde = new DateTime(parametrosContenedoresView.fechaCierreDesde.Value.Year, parametrosContenedoresView.fechaCierreDesde.Value.Month, parametrosContenedoresView.fechaCierreDesde.Value.Day, 0, 0, 0);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaCierreDesde.Value);
+
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaCierreDesde.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.GreaterThanOrEqual, parametrosContenedoresView.fechaCierreDesde.Value);
+
             }
 
             if (parametrosContenedoresView.fechaCierreHasta.HasValue)
             {
                 parametrosContenedoresView.fechaCierreHasta = new DateTime(parametrosContenedoresView.fechaCierreHasta.Value.Year, parametrosContenedoresView.fechaCierreHasta.Value.Month, parametrosContenedoresView.fechaCierreHasta.Value.Day, 23, 59, 59);
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaCierreHasta.Value);
+
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaCierreHasta.Value);
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.FechaCierre, Depositary.sqlEnum.OperandEnum.LessThanOrEqual, parametrosContenedoresView.fechaCierreHasta.Value);
+
             }
 
             if (parametrosContenedoresView.identificador != string.Empty && parametrosContenedoresView.identificador != null)
-                entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosContenedoresView.identificador + "%");
+            {
+                if (entity.Where.Count > 0)
+                    entity.Where.Add(Depositary.sqlEnum.ConjunctionEnum.AND, Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosContenedoresView.identificador + "%");
+                else
+                    entity.Where.Add(Depositary.Business.Views.Reporte.Contenedores.ColumnEnum.Identificador, Depositary.sqlEnum.OperandEnum.Like, "%" + parametrosContenedoresView.identificador + "%");
+
+            }
 
             entity.OrderBy.Add(Business.Views.Reporte.Contenedores.ColumnEnum.FechaApertura, sqlEnum.DirEnum.DESC);
 
@@ -586,4 +617,4 @@ else
     }
 
     #endregion
-}
+    }

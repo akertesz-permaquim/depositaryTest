@@ -346,17 +346,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Configuracion
 	} //namespace DepositaryWebApi.Business.Relations.Aplicacion
 	namespace DepositaryWebApi.Business.Relations.Aplicacion {
@@ -703,17 +692,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionEmpresa
 	} //namespace DepositaryWebApi.Business.Relations.Aplicacion
 	namespace DepositaryWebApi.Business.Relations.Aplicacion {
@@ -1009,17 +987,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionTipoDato
 	} //namespace DepositaryWebApi.Business.Relations.Aplicacion
 	namespace DepositaryWebApi.Business.Relations.Aplicacion {
@@ -1349,17 +1316,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionValidacionDato
 	} //namespace DepositaryWebApi.Business.Relations.Aplicacion
 	namespace DepositaryWebApi.Business.Relations.Auditoria {
@@ -1672,17 +1628,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Log
 	} //namespace DepositaryWebApi.Business.Relations.Auditoria
 	namespace DepositaryWebApi.Business.Relations.Auditoria {
@@ -1978,17 +1923,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoLog
 	} //namespace DepositaryWebApi.Business.Relations.Auditoria
 	namespace DepositaryWebApi.Business.Relations.Banca {
@@ -2318,17 +2252,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Banco
 	} //namespace DepositaryWebApi.Business.Relations.Banca
 	namespace DepositaryWebApi.Business.Relations.Banca {
@@ -2352,8 +2275,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Banca.Cuenta> _cacheItemList = new List<Entities.Relations.Banca.Cuenta>();
 			   protected List<Entities.Relations.Banca.Cuenta> _entities = null;
@@ -2406,11 +2328,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Banca.Cuenta</returns>
-			public Entities.Relations.Banca.Cuenta Add(DepositaryWebApi.Entities.Relations.Banca.TipoCuenta TipoId,DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Numero,String Alias,String CBU,DepositaryWebApi.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Banca.Cuenta Add(DepositaryWebApi.Entities.Relations.Banca.TipoCuenta TipoId,DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Numero,String Alias,String CBU,DepositaryWebApi.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Banca.Cuenta)base.Add(new Entities.Relations.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,Alias,CBU,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Banca.Cuenta)base.Add(new Entities.Relations.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,Alias,CBU,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Banca.Cuenta> Items()
             {
@@ -2457,9 +2378,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -2630,18 +2550,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Banca.Cuenta> Result 
@@ -2677,9 +2585,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Banca.Cuenta item = new Entities.Tables.Banca.Cuenta();
                  item.Id = Id;
@@ -2696,7 +2603,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -2743,17 +2649,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Cuenta
 	} //namespace DepositaryWebApi.Business.Relations.Banca
 	namespace DepositaryWebApi.Business.Relations.Banca {
@@ -2772,8 +2667,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Banca.TipoCuenta> _cacheItemList = new List<Entities.Relations.Banca.TipoCuenta>();
 			   protected List<Entities.Relations.Banca.TipoCuenta> _entities = null;
@@ -2821,11 +2715,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Banca.TipoCuenta</returns>
-			public Entities.Relations.Banca.TipoCuenta Add(DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,String Nombre,String Descripcion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Banca.TipoCuenta Add(DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,String Nombre,String Descripcion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Banca.TipoCuenta)base.Add(new Entities.Relations.Banca.TipoCuenta(MonedaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Banca.TipoCuenta)base.Add(new Entities.Relations.Banca.TipoCuenta(MonedaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Banca.TipoCuenta> Items()
             {
@@ -2867,9 +2760,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Banca.TipoCuenta> Items(Int64? Id,Int64? MonedaId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Banca.TipoCuenta> Items(Int64? Id,Int64? MonedaId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -2980,18 +2872,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Banca.TipoCuenta> Result 
@@ -3022,9 +2902,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,Int64 MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Banca.TipoCuenta item = new Entities.Tables.Banca.TipoCuenta();
                  item.Id = Id;
@@ -3036,7 +2915,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -3083,17 +2961,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoCuenta
 	} //namespace DepositaryWebApi.Business.Relations.Banca
 	namespace DepositaryWebApi.Business.Relations.Banca {
@@ -3389,17 +3256,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioCuenta
 	} //namespace DepositaryWebApi.Business.Relations.Banca
 	namespace DepositaryWebApi.Business.Relations.Biometria {
@@ -3712,954 +3568,8 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class HuellaDactilar
 	} //namespace DepositaryWebApi.Business.Relations.Biometria
-	namespace DepositaryWebApi.Business.Relations.Customizador {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class Entidad : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					Tipo,
-					Nombre,
-					Esquema,
-					HabilitarAgrupamiento,
-					HabilitarMovilidad,
-					HabilitarFiltrado,
-					HabilitarColumnasOpcionales,
-					HabilitarOrdenamiento,
-					HabilitarRedimensionamiento,
-					HabilitarPaginado,
-					HabilitarAuditoria,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-			   protected List<Entities.Relations.Customizador.Entidad> _cacheItemList = new List<Entities.Relations.Customizador.Entidad>();
-			   protected List<Entities.Relations.Customizador.Entidad> _entities = null;
-            public CustomWhereParameter Where { get; set; }
-            public CustomOrderByParameter OrderBy { get; set; }
-            public CustomGroupByParameter GroupBy { get; set; }
-            public CustomAggregateParameter Aggregate { get; set; }
-            public Entidad() : base()
-            {
-                base._dataItem = new Entities.Relations.Customizador.Entidad();
-                Where = new CustomWhereParameter();
-                OrderBy = new CustomOrderByParameter();
-                GroupBy = new CustomGroupByParameter();
-                Aggregate = new CustomAggregateParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Customizador.Entidad item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// Entidad Add Method
-         /// </summary>
-         /// <param name='Tipo'></param>
-         /// <param name='Nombre'></param>
-         /// <param name='Esquema'></param>
-         /// <param name='HabilitarAgrupamiento'></param>
-         /// <param name='HabilitarMovilidad'></param>
-         /// <param name='HabilitarFiltrado'></param>
-         /// <param name='HabilitarColumnasOpcionales'></param>
-         /// <param name='HabilitarOrdenamiento'></param>
-         /// <param name='HabilitarRedimensionamiento'></param>
-         /// <param name='HabilitarPaginado'></param>
-         /// <param name='HabilitarAuditoria'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Relations.Customizador.Entidad</returns>
-			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
-			{
-			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Relations.Customizador.Entidad> Items()
-            {
-                base.WhereParameter = this.Where.whereParameter;
-                base.OrderByParameter = this.OrderBy.orderByParameter;
-                base.GroupByParameter = this.GroupBy.groupByParameter;
-                base.TopQuantity = this.TopQuantity;
-                base.AnalizeIDataItem();
-                _entities = base.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Customizador.Entidad items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.Entidad> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Tipo"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Esquema"></param>
-            /// <param name="HabilitarAgrupamiento"></param>
-            /// <param name="HabilitarMovilidad"></param>
-            /// <param name="HabilitarFiltrado"></param>
-            /// <param name="HabilitarColumnasOpcionales"></param>
-            /// <param name="HabilitarOrdenamiento"></param>
-            /// <param name="HabilitarRedimensionamiento"></param>
-            /// <param name="HabilitarPaginado"></param>
-            /// <param name="HabilitarAuditoria"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (Tipo != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Tipo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Tipo);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Tipo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Tipo);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (Esquema != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Esquema, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Esquema);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Esquema, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Esquema);
-                    }
-                   
-                }
-                if (HabilitarAgrupamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarAgrupamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAgrupamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
-                    }
-                   
-                }
-                if (HabilitarMovilidad != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarMovilidad, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarMovilidad, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
-                    }
-                   
-                }
-                if (HabilitarFiltrado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarFiltrado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarFiltrado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
-                    }
-                   
-                }
-                if (HabilitarColumnasOpcionales != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarColumnasOpcionales, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarColumnasOpcionales, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
-                    }
-                   
-                }
-                if (HabilitarOrdenamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarOrdenamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarOrdenamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
-                    }
-                   
-                }
-                if (HabilitarRedimensionamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarRedimensionamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarRedimensionamiento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
-                    }
-                   
-                }
-                if (HabilitarPaginado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarPaginado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarPaginado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
-                    }
-                   
-                }
-                if (HabilitarAuditoria != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarAuditoria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAuditoria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Customizador.Entidad> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Customizador.Entidad Add(Entities.Relations.Customizador.Entidad item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Customizador.Entidad)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Customizador.Entidad item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Customizador.Entidad item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Customizador.Entidad with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Tipo"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Esquema"></param>
-            /// <param name="HabilitarAgrupamiento"></param>
-            /// <param name="HabilitarMovilidad"></param>
-            /// <param name="HabilitarFiltrado"></param>
-            /// <param name="HabilitarColumnasOpcionales"></param>
-            /// <param name="HabilitarOrdenamiento"></param>
-            /// <param name="HabilitarRedimensionamiento"></param>
-            /// <param name="HabilitarPaginado"></param>
-            /// <param name="HabilitarAuditoria"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
-            {
-                 Entities.Tables.Customizador.Entidad item = new Entities.Tables.Customizador.Entidad();
-                 item.Id = Id;
-                 item.Tipo = Tipo;
-                 item.Nombre = Nombre;
-                 item.Esquema = Esquema;
-                 item.HabilitarAgrupamiento = HabilitarAgrupamiento;
-                 item.HabilitarMovilidad = HabilitarMovilidad;
-                 item.HabilitarFiltrado = HabilitarFiltrado;
-                 item.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
-                 item.HabilitarOrdenamiento = HabilitarOrdenamiento;
-                 item.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
-                 item.HabilitarPaginado = HabilitarPaginado;
-                 item.HabilitarAuditoria = HabilitarAuditoria;
-                 item.Habilitado = Habilitado;
-                 item.UsuarioCreacion = UsuarioCreacion;
-                 item.FechaCreacion = FechaCreacion;
-                 item.UsuarioModificacion = UsuarioModificacion;
-                 item.FechaModificacion = FechaModificacion;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-            }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
-        } // class Entidad
-	} //namespace DepositaryWebApi.Business.Relations.Customizador
-	namespace DepositaryWebApi.Business.Relations.Customizador {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class EntidadAtributo : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					EntidadId,
-					Nombre,
-					VisibleEnGrilla,
-					VisibleEnSelectorColumnas,
-					Redimensionable,
-					Agrupable,
-					Movible,
-					Ordenable,
-					Filtrable,
-					PosicionEnGrilla,
-					AnchoMinimoEnGrilla,
-					AnchoEnGrilla,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-			   protected List<Entities.Relations.Customizador.EntidadAtributo> _cacheItemList = new List<Entities.Relations.Customizador.EntidadAtributo>();
-			   protected List<Entities.Relations.Customizador.EntidadAtributo> _entities = null;
-            public CustomWhereParameter Where { get; set; }
-            public CustomOrderByParameter OrderBy { get; set; }
-            public CustomGroupByParameter GroupBy { get; set; }
-            public CustomAggregateParameter Aggregate { get; set; }
-            public EntidadAtributo() : base()
-            {
-                base._dataItem = new Entities.Relations.Customizador.EntidadAtributo();
-                Where = new CustomWhereParameter();
-                OrderBy = new CustomOrderByParameter();
-                GroupBy = new CustomGroupByParameter();
-                Aggregate = new CustomAggregateParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(DepositaryWebApi.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Customizador.EntidadAtributo item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// EntidadAtributo Add Method
-         /// </summary>
-         /// <param name='DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId'></param>
-         /// <param name='Nombre'></param>
-         /// <param name='VisibleEnGrilla'></param>
-         /// <param name='VisibleEnSelectorColumnas'></param>
-         /// <param name='Redimensionable'></param>
-         /// <param name='Agrupable'></param>
-         /// <param name='Movible'></param>
-         /// <param name='Ordenable'></param>
-         /// <param name='Filtrable'></param>
-         /// <param name='PosicionEnGrilla'></param>
-         /// <param name='AnchoMinimoEnGrilla'></param>
-         /// <param name='AnchoEnGrilla'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Relations.Customizador.EntidadAtributo</returns>
-			public Entities.Relations.Customizador.EntidadAtributo Add(DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
-			{
-			  return (Entities.Relations.Customizador.EntidadAtributo)base.Add(new Entities.Relations.Customizador.EntidadAtributo(EntidadId,Nombre,VisibleEnGrilla,VisibleEnSelectorColumnas,Redimensionable,Agrupable,Movible,Ordenable,Filtrable,PosicionEnGrilla,AnchoMinimoEnGrilla,AnchoEnGrilla,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Relations.Customizador.EntidadAtributo> Items()
-            {
-                base.WhereParameter = this.Where.whereParameter;
-                base.OrderByParameter = this.OrderBy.orderByParameter;
-                base.GroupByParameter = this.GroupBy.groupByParameter;
-                base.TopQuantity = this.TopQuantity;
-                base.AnalizeIDataItem();
-                _entities = base.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Customizador.EntidadAtributo items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="EntidadId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="VisibleEnGrilla"></param>
-            /// <param name="VisibleEnSelectorColumnas"></param>
-            /// <param name="Redimensionable"></param>
-            /// <param name="Agrupable"></param>
-            /// <param name="Movible"></param>
-            /// <param name="Ordenable"></param>
-            /// <param name="Filtrable"></param>
-            /// <param name="PosicionEnGrilla"></param>
-            /// <param name="AnchoMinimoEnGrilla"></param>
-            /// <param name="AnchoEnGrilla"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64? Id,Int64? EntidadId,String Nombre,Boolean? VisibleEnGrilla,Boolean? VisibleEnSelectorColumnas,Boolean? Redimensionable,Boolean? Agrupable,Boolean? Movible,Boolean? Ordenable,Boolean? Filtrable,Int32? PosicionEnGrilla,Int32? AnchoMinimoEnGrilla,Int32? AnchoEnGrilla,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (EntidadId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EntidadId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (VisibleEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.VisibleEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
-                    }
-                   
-                }
-                if (VisibleEnSelectorColumnas != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.VisibleEnSelectorColumnas, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnSelectorColumnas, DepositaryWebApi.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
-                    }
-                   
-                }
-                if (Redimensionable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Redimensionable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Redimensionable);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Redimensionable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Redimensionable);
-                    }
-                   
-                }
-                if (Agrupable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Agrupable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Agrupable);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Agrupable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Agrupable);
-                    }
-                   
-                }
-                if (Movible != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Movible, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Movible);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Movible, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Movible);
-                    }
-                   
-                }
-                if (Ordenable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Ordenable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Ordenable);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Ordenable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Ordenable);
-                    }
-                   
-                }
-                if (Filtrable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Filtrable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Filtrable);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Filtrable, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Filtrable);
-                    }
-                   
-                }
-                if (PosicionEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.PosicionEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PosicionEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
-                    }
-                   
-                }
-                if (AnchoMinimoEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoMinimoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoMinimoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
-                    }
-                   
-                }
-                if (AnchoEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoEnGrilla, DepositaryWebApi.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Customizador.EntidadAtributo> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Customizador.EntidadAtributo Add(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Customizador.EntidadAtributo)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Customizador.EntidadAtributo with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="EntidadId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="VisibleEnGrilla"></param>
-            /// <param name="VisibleEnSelectorColumnas"></param>
-            /// <param name="Redimensionable"></param>
-            /// <param name="Agrupable"></param>
-            /// <param name="Movible"></param>
-            /// <param name="Ordenable"></param>
-            /// <param name="Filtrable"></param>
-            /// <param name="PosicionEnGrilla"></param>
-            /// <param name="AnchoMinimoEnGrilla"></param>
-            /// <param name="AnchoEnGrilla"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
-            {
-                 Entities.Tables.Customizador.EntidadAtributo item = new Entities.Tables.Customizador.EntidadAtributo();
-                 item.Id = Id;
-                 item.EntidadId = EntidadId;
-                 item.Nombre = Nombre;
-                 item.VisibleEnGrilla = VisibleEnGrilla;
-                 item.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
-                 item.Redimensionable = Redimensionable;
-                 item.Agrupable = Agrupable;
-                 item.Movible = Movible;
-                 item.Ordenable = Ordenable;
-                 item.Filtrable = Filtrable;
-                 item.PosicionEnGrilla = PosicionEnGrilla;
-                 item.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
-                 item.AnchoEnGrilla = AnchoEnGrilla;
-                 item.Habilitado = Habilitado;
-                 item.UsuarioCreacion = UsuarioCreacion;
-                 item.FechaCreacion = FechaCreacion;
-                 item.UsuarioModificacion = UsuarioModificacion;
-                 item.FechaModificacion = FechaModificacion;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, DepositaryWebApi.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(DepositaryWebApi.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, DepositaryWebApi.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, DepositaryWebApi.sqlEnum.DirEnum direction = DepositaryWebApi.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-            }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
-        } // class EntidadAtributo
-	} //namespace DepositaryWebApi.Business.Relations.Customizador
 	namespace DepositaryWebApi.Business.Relations.Directorio {
 	    /// <summary>
 	    /// 
@@ -5072,17 +3982,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Empresa
 	} //namespace DepositaryWebApi.Business.Relations.Directorio
 	namespace DepositaryWebApi.Business.Relations.Directorio {
@@ -5395,17 +4294,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Grupo
 	} //namespace DepositaryWebApi.Business.Relations.Directorio
 	namespace DepositaryWebApi.Business.Relations.Directorio {
@@ -5718,17 +4606,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RelacionMonedaSucursal
 	} //namespace DepositaryWebApi.Business.Relations.Directorio
 	namespace DepositaryWebApi.Business.Relations.Directorio {
@@ -5747,8 +4624,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Directorio.Sector> _cacheItemList = new List<Entities.Relations.Directorio.Sector>();
 			   protected List<Entities.Relations.Directorio.Sector> _entities = null;
@@ -5796,11 +4672,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Directorio.Sector</returns>
-			public Entities.Relations.Directorio.Sector Add(DepositaryWebApi.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Directorio.Sector Add(DepositaryWebApi.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Directorio.Sector)base.Add(new Entities.Relations.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Directorio.Sector)base.Add(new Entities.Relations.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Directorio.Sector> Items()
             {
@@ -5842,9 +4717,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Directorio.Sector> Items(Int64? Id,Int64? SucursalId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Directorio.Sector> Items(Int64? Id,Int64? SucursalId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -5955,18 +4829,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Directorio.Sector> Result 
@@ -5997,9 +4859,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Directorio.Sector item = new Entities.Tables.Directorio.Sector();
                  item.Id = Id;
@@ -6011,7 +4872,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -6058,17 +4918,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sector
 	} //namespace DepositaryWebApi.Business.Relations.Directorio
 	namespace DepositaryWebApi.Business.Relations.Directorio {
@@ -6449,17 +5298,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sucursal
 	} //namespace DepositaryWebApi.Business.Relations.Directorio
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -6823,17 +5661,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ComandoContadora
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -7197,17 +6024,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ComandoPlaca
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -7520,17 +6336,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class ConfiguracionDepositario
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -7911,17 +6716,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Depositario
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -8421,17 +7215,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioContadora
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -8778,17 +7561,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioEstado
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -9101,17 +7873,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioMoneda
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -9764,17 +8525,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class DepositarioPlaca
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -10070,17 +8820,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Marca
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -10427,17 +9166,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Modelo
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -10733,17 +9461,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PlantillaMoneda
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -11090,17 +9807,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PlantillaMonedaDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -11447,17 +10153,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoConfiguracionDepositario
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -11957,17 +10652,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoContadora
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Dispositivo {
@@ -12637,17 +11321,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoPlaca
 	} //namespace DepositaryWebApi.Business.Relations.Dispositivo
 	namespace DepositaryWebApi.Business.Relations.Estilo {
@@ -12960,17 +11633,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Esquema
 	} //namespace DepositaryWebApi.Business.Relations.Estilo
 	namespace DepositaryWebApi.Business.Relations.Estilo {
@@ -13351,17 +12013,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Estilo
 	namespace DepositaryWebApi.Business.Relations.Estilo {
@@ -13657,17 +12308,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoEsquemaDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Estilo
 	namespace DepositaryWebApi.Business.Relations.Geografia {
@@ -13997,17 +12637,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ciudad
 	} //namespace DepositaryWebApi.Business.Relations.Geografia
 	namespace DepositaryWebApi.Business.Relations.Geografia {
@@ -14337,17 +12966,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class CodigoPostal
 	} //namespace DepositaryWebApi.Business.Relations.Geografia
 	namespace DepositaryWebApi.Business.Relations.Geografia {
@@ -14677,17 +13295,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Pais
 	} //namespace DepositaryWebApi.Business.Relations.Geografia
 	namespace DepositaryWebApi.Business.Relations.Geografia {
@@ -15017,17 +13624,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Provincia
 	} //namespace DepositaryWebApi.Business.Relations.Geografia
 	namespace DepositaryWebApi.Business.Relations.Geografia {
@@ -15046,8 +13642,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Geografia.Zona> _cacheItemList = new List<Entities.Relations.Geografia.Zona>();
 			   protected List<Entities.Relations.Geografia.Zona> _entities = null;
@@ -15095,11 +13690,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Geografia.Zona</returns>
-			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Geografia.Zona)base.Add(new Entities.Relations.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Geografia.Zona)base.Add(new Entities.Relations.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Geografia.Zona> Items()
             {
@@ -15141,9 +13735,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Geografia.Zona> Items(Int64? Id,String Nombre,String Descripcion,String Codigo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Geografia.Zona> Items(Int64? Id,String Nombre,String Descripcion,String Codigo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -15254,18 +13847,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Geografia.Zona> Result 
@@ -15296,9 +13877,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Geografia.Zona item = new Entities.Tables.Geografia.Zona();
                  item.Id = Id;
@@ -15310,7 +13890,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -15357,17 +13936,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Zona
 	} //namespace DepositaryWebApi.Business.Relations.Geografia
 	namespace DepositaryWebApi.Business.Relations.Impresion {
@@ -16003,17 +14571,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ticket
 	} //namespace DepositaryWebApi.Business.Relations.Impresion
 	namespace DepositaryWebApi.Business.Relations.Impresion {
@@ -16326,17 +14883,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoTicket
 	} //namespace DepositaryWebApi.Business.Relations.Impresion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -16666,17 +15212,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class CierreDiario
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -17040,17 +15575,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Contenedor
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -17329,17 +15853,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Evento
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -17601,17 +16114,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Sesion
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -17630,8 +16132,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _cacheItemList = new List<Entities.Relations.Operacion.TipoContenedor>();
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _entities = null;
@@ -17679,11 +16180,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Operacion.TipoContenedor</returns>
-			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Operacion.TipoContenedor)base.Add(new Entities.Relations.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Operacion.TipoContenedor)base.Add(new Entities.Relations.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Operacion.TipoContenedor> Items()
             {
@@ -17725,9 +16225,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Operacion.TipoContenedor> Items(Int64? Id,String Nombre,String Descripcion,Int32? Capacidad,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Operacion.TipoContenedor> Items(Int64? Id,String Nombre,String Descripcion,Int32? Capacidad,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -17838,18 +16337,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Operacion.TipoContenedor> Result 
@@ -17880,9 +16367,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Operacion.TipoContenedor item = new Entities.Tables.Operacion.TipoContenedor();
                  item.Id = Id;
@@ -17894,7 +16380,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -17941,17 +16426,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoContenedor
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -18264,17 +16738,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoEvento
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -18587,17 +17050,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoTransaccion
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -19148,17 +17600,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Transaccion
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -19403,17 +17844,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -19641,17 +18071,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionSobre
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -19913,17 +18332,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TransaccionSobreDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -20355,17 +18763,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Turno
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Operacion {
@@ -20661,17 +19058,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TurnoUsuario
 	} //namespace DepositaryWebApi.Business.Relations.Operacion
 	namespace DepositaryWebApi.Business.Relations.Regionalizacion {
@@ -21001,17 +19387,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Lenguaje
 	} //namespace DepositaryWebApi.Business.Relations.Regionalizacion
 	namespace DepositaryWebApi.Business.Relations.Regionalizacion {
@@ -21341,17 +19716,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class LenguajeItem
 	} //namespace DepositaryWebApi.Business.Relations.Regionalizacion
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -21664,17 +20028,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Aplicacion
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -21970,17 +20323,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AplicacionParametro
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -22293,17 +20635,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AplicacionParametroValor
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -22650,17 +20981,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Funcion
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -22973,17 +21293,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class IdentificadorUsuario
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -23347,17 +21656,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Menu
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -23377,8 +21675,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Seguridad.Rol> _cacheItemList = new List<Entities.Relations.Seguridad.Rol>();
 			   protected List<Entities.Relations.Seguridad.Rol> _entities = null;
@@ -23427,11 +21724,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Seguridad.Rol</returns>
-			public Entities.Relations.Seguridad.Rol Add(DepositaryWebApi.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Seguridad.Rol Add(DepositaryWebApi.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Seguridad.Rol)base.Add(new Entities.Relations.Seguridad.Rol(AplicacionId,Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Seguridad.Rol)base.Add(new Entities.Relations.Seguridad.Rol(AplicacionId,Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Seguridad.Rol> Items()
             {
@@ -23474,9 +21770,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Rol> Items(Int64? Id,Int64? AplicacionId,String Nombre,String Descripcion,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Seguridad.Rol> Items(Int64? Id,Int64? AplicacionId,String Nombre,String Descripcion,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -23599,18 +21894,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Seguridad.Rol> Result 
@@ -23642,9 +21925,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 AplicacionId,String Nombre,String Descripcion,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,Int64 AplicacionId,String Nombre,String Descripcion,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.Rol item = new Entities.Tables.Seguridad.Rol();
                  item.Id = Id;
@@ -23657,7 +21939,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -23704,17 +21985,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Rol
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -24095,17 +22365,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RolFuncion
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -24401,17 +22660,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoAplicacion
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -24707,17 +22955,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoFuncion
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -25030,17 +23267,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoIdentificador
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -25336,17 +23562,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class TipoMenu
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -25381,8 +23596,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Seguridad.Usuario> _cacheItemList = new List<Entities.Relations.Seguridad.Usuario>();
 			   protected List<Entities.Relations.Seguridad.Usuario> _entities = null;
@@ -25446,11 +23660,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Seguridad.Usuario</returns>
-			public Entities.Relations.Seguridad.Usuario Add(DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,DepositaryWebApi.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,DepositaryWebApi.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Seguridad.Usuario Add(DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,DepositaryWebApi.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,DepositaryWebApi.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Seguridad.Usuario)base.Add(new Entities.Relations.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,NombreApellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,FechaExpiracion,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Seguridad.Usuario)base.Add(new Entities.Relations.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,NombreApellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,FechaExpiracion,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Seguridad.Usuario> Items()
             {
@@ -25508,9 +23721,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,DateTime? FechaExpiracion,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,DateTime? FechaExpiracion,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -25813,18 +24025,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Seguridad.Usuario> Result 
@@ -25871,9 +24071,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.Usuario item = new Entities.Tables.Seguridad.Usuario();
                  item.Id = Id;
@@ -25901,7 +24100,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -25948,17 +24146,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Usuario
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -26254,17 +24441,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioRol
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Seguridad {
@@ -26560,17 +24736,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class UsuarioSector
 	} //namespace DepositaryWebApi.Business.Relations.Seguridad
 	namespace DepositaryWebApi.Business.Relations.Sincronizacion {
@@ -26866,17 +25031,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Configuracion
 	} //namespace DepositaryWebApi.Business.Relations.Sincronizacion
 	namespace DepositaryWebApi.Business.Relations.Sincronizacion {
@@ -27138,17 +25292,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Ejecucion
 	} //namespace DepositaryWebApi.Business.Relations.Sincronizacion
 	namespace DepositaryWebApi.Business.Relations.Sincronizacion {
@@ -27206,13 +25349,13 @@ using System.Text;
          /// Entidad Add Method
          /// </summary>
          /// <param name='Nombre'></param>
-         /// <param name='UsuarioCreacion'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='UsuarioModificacion'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Sincronizacion.Entidad</returns>
-			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Sincronizacion.Entidad)base.Add(new Entities.Relations.Sincronizacion.Entidad(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -27427,17 +25570,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Entidad
 	} //namespace DepositaryWebApi.Business.Relations.Sincronizacion
 	namespace DepositaryWebApi.Business.Relations.Sincronizacion {
@@ -27493,13 +25625,13 @@ using System.Text;
          /// <summary>
          /// EntidadCabecera Add Method
          /// </summary>
-         /// <param name='DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad EntidadId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Sincronizacion.Ejecucion EjecucionId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Relations.Sincronizacion.EntidadCabecera Add(DepositaryWebApi.Entities.Relations.Customizador.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,DepositaryWebApi.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
+			public Entities.Relations.Sincronizacion.EntidadCabecera Add(DepositaryWebApi.Entities.Relations.Sincronizacion.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,DepositaryWebApi.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadCabecera)base.Add(new Entities.Relations.Sincronizacion.EntidadCabecera(EntidadId,Valor,Fechainicio,Fechafin,EjecucionId));
 			}
@@ -27699,17 +25831,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EntidadCabecera
 	} //namespace DepositaryWebApi.Business.Relations.Sincronizacion
 	namespace DepositaryWebApi.Business.Relations.Sincronizacion {
@@ -27764,12 +25885,12 @@ using System.Text;
          /// <summary>
          /// EntidadDetalle Add Method
          /// </summary>
-         /// <param name='EntidadCabeceraId'></param>
+         /// <param name='DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='OrigenId'></param>
          /// <param name='DestinoId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadDetalle</returns>
-			public Entities.Relations.Sincronizacion.EntidadDetalle Add(Int64 EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
+			public Entities.Relations.Sincronizacion.EntidadDetalle Add(DepositaryWebApi.Entities.Relations.Sincronizacion.EntidadCabecera EntidadCabeceraId,DateTime FechaCreacion,Int64 OrigenId,Int64 DestinoId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadDetalle)base.Add(new Entities.Relations.Sincronizacion.EntidadDetalle(EntidadCabeceraId,FechaCreacion,OrigenId,DestinoId));
 			}
@@ -27954,17 +26075,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EntidadDetalle
 	} //namespace DepositaryWebApi.Business.Relations.Sincronizacion
 	namespace DepositaryWebApi.Business.Relations.Turno {
@@ -28311,17 +26421,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class AgendaTurno
 	} //namespace DepositaryWebApi.Business.Relations.Turno
 	namespace DepositaryWebApi.Business.Relations.Turno {
@@ -28634,17 +26733,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaDetalleTurno
 	} //namespace DepositaryWebApi.Business.Relations.Turno
 	namespace DepositaryWebApi.Business.Relations.Turno {
@@ -28657,8 +26745,6 @@ using System.Text;
                 {
 					Id,
 					Nombre,
-					OperaSinTurno,
-					OperaDiasCorridos,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -28704,17 +26790,15 @@ using System.Text;
          /// EsquemaTurno Add Method
          /// </summary>
          /// <param name='Nombre'></param>
-         /// <param name='OperaSinTurno'></param>
-         /// <param name='OperaDiasCorridos'></param>
          /// <param name='Habilitado'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Turno.EsquemaTurno</returns>
-			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean OperaSinTurno,Boolean OperaDiasCorridos,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,OperaSinTurno,OperaDiasCorridos,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Turno.EsquemaTurno> Items()
             {
@@ -28749,15 +26833,13 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
-            /// <param name="OperaSinTurno"></param>
-            /// <param name="OperaDiasCorridos"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? OperaSinTurno,Boolean? OperaDiasCorridos,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -28781,30 +26863,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (OperaSinTurno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.OperaSinTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperaSinTurno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaSinTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperaSinTurno);
-                    }
-                   
-                }
-                if (OperaDiasCorridos != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.OperaDiasCorridos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaDiasCorridos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
                     }
                    
                 }
@@ -28891,21 +26949,17 @@ using System.Text;
             /// </summary>
             /// <param name="Id"></param>
             /// <param name="Nombre"></param>
-            /// <param name="OperaSinTurno"></param>
-            /// <param name="OperaDiasCorridos"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Boolean OperaSinTurno,Boolean OperaDiasCorridos,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Turno.EsquemaTurno item = new Entities.Tables.Turno.EsquemaTurno();
                  item.Id = Id;
                  item.Nombre = Nombre;
-                 item.OperaSinTurno = OperaSinTurno;
-                 item.OperaDiasCorridos = OperaDiasCorridos;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -28957,17 +27011,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class EsquemaTurno
 	} //namespace DepositaryWebApi.Business.Relations.Turno
 	namespace DepositaryWebApi.Business.Relations.Valor {
@@ -28986,7 +27029,6 @@ using System.Text;
 					Imagen,
 					CodigoCcTalk,
 					Posicion,
-					CodigoExterno,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -29038,16 +27080,15 @@ using System.Text;
          /// <param name='Imagen'></param>
          /// <param name='CodigoCcTalk'></param>
          /// <param name='Posicion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.Denominacion</returns>
-			public Entities.Relations.Valor.Denominacion Add(String Nombre,DepositaryWebApi.Entities.Relations.Valor.Tipo TipoValorId,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,String CodigoExterno,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Denominacion Add(String Nombre,DepositaryWebApi.Entities.Relations.Valor.Tipo TipoValorId,DepositaryWebApi.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Valor.Denominacion)base.Add(new Entities.Relations.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Denominacion)base.Add(new Entities.Relations.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Valor.Denominacion> Items()
             {
@@ -29088,14 +27129,13 @@ using System.Text;
             /// <param name="Imagen"></param>
             /// <param name="CodigoCcTalk"></param>
             /// <param name="Posicion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Int32? Posicion,String CodigoExterno,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Int32? Posicion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -29194,18 +27234,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 if (Habilitado != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -29295,14 +27323,13 @@ using System.Text;
             /// <param name="Imagen"></param>
             /// <param name="CodigoCcTalk"></param>
             /// <param name="Posicion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Valor.Denominacion item = new Entities.Tables.Valor.Denominacion();
                  item.Id = Id;
@@ -29313,7 +27340,6 @@ using System.Text;
                  item.Imagen = Imagen;
                  item.CodigoCcTalk = CodigoCcTalk;
                  item.Posicion = Posicion;
-                 item.CodigoExterno = CodigoExterno;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -29365,17 +27391,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Denominacion
 	} //namespace DepositaryWebApi.Business.Relations.Valor
 	namespace DepositaryWebApi.Business.Relations.Valor {
@@ -29391,7 +27406,6 @@ using System.Text;
 					PaisId,
 					Codigo,
 					Simbolo,
-					CodigoExterno,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -29440,16 +27454,15 @@ using System.Text;
          /// <param name='DepositaryWebApi.Entities.Relations.Geografia.Pais PaisId'></param>
          /// <param name='Codigo'></param>
          /// <param name='Simbolo'></param>
-         /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.Moneda</returns>
-			public Entities.Relations.Valor.Moneda Add(String Nombre,DepositaryWebApi.Entities.Relations.Geografia.Pais PaisId,String Codigo,String Simbolo,String CodigoExterno,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Moneda Add(String Nombre,DepositaryWebApi.Entities.Relations.Geografia.Pais PaisId,String Codigo,String Simbolo,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Valor.Moneda)base.Add(new Entities.Relations.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Moneda)base.Add(new Entities.Relations.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Valor.Moneda> Items()
             {
@@ -29487,14 +27500,13 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
-            /// <param name="CodigoExterno"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,String CodigoExterno,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -29554,18 +27566,6 @@ using System.Text;
                     else
                     {
                         this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Simbolo);
-                    }
-                   
-                }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
                     }
                    
                 }
@@ -29655,14 +27655,13 @@ using System.Text;
             /// <param name="PaisId"></param>
             /// <param name="Codigo"></param>
             /// <param name="Simbolo"></param>
-            /// <param name="CodigoExterno"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Int64 PaisId,String Codigo,String Simbolo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Valor.Moneda item = new Entities.Tables.Valor.Moneda();
                  item.Id = Id;
@@ -29670,7 +27669,6 @@ using System.Text;
                  item.PaisId = PaisId;
                  item.Codigo = Codigo;
                  item.Simbolo = Simbolo;
-                 item.CodigoExterno = CodigoExterno;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -29722,17 +27720,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Moneda
 	} //namespace DepositaryWebApi.Business.Relations.Valor
 	namespace DepositaryWebApi.Business.Relations.Valor {
@@ -29751,8 +27738,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Valor.OrigenValor> _cacheItemList = new List<Entities.Relations.Valor.OrigenValor>();
 			   protected List<Entities.Relations.Valor.OrigenValor> _entities = null;
@@ -29800,11 +27786,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.OrigenValor</returns>
-			public Entities.Relations.Valor.OrigenValor Add(String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Valor.OrigenValor Add(String Nombre,String Descripcion,DepositaryWebApi.Entities.Relations.Directorio.Empresa EmpresaId,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Valor.OrigenValor)base.Add(new Entities.Relations.Valor.OrigenValor(Nombre,Descripcion,EmpresaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Valor.OrigenValor)base.Add(new Entities.Relations.Valor.OrigenValor(Nombre,Descripcion,EmpresaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Valor.OrigenValor> Items()
             {
@@ -29846,9 +27831,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Int64? EmpresaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Int64? EmpresaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -29959,18 +27943,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.OrigenValor> Result 
@@ -30001,9 +27973,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 EmpresaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 EmpresaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Valor.OrigenValor item = new Entities.Tables.Valor.OrigenValor();
                  item.Id = Id;
@@ -30015,7 +27986,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -30062,17 +28032,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class OrigenValor
 	} //namespace DepositaryWebApi.Business.Relations.Valor
 	namespace DepositaryWebApi.Business.Relations.Valor {
@@ -30368,17 +28327,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class RelacionMonedaTipoValor
 	} //namespace DepositaryWebApi.Business.Relations.Valor
 	namespace DepositaryWebApi.Business.Relations.Valor {
@@ -30397,8 +28345,7 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion,
-					CodigoExterno
+					FechaModificacion
 				}
 			   protected List<Entities.Relations.Valor.Tipo> _cacheItemList = new List<Entities.Relations.Valor.Tipo>();
 			   protected List<Entities.Relations.Valor.Tipo> _entities = null;
@@ -30446,11 +28393,10 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
-         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.Tipo</returns>
-			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,String Imagen,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
+			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,String Imagen,Boolean Habilitado,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
+			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Valor.Tipo> Items()
             {
@@ -30492,9 +28438,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
+            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -30605,18 +28550,6 @@ using System.Text;
                     }
                    
                 }
-                if (CodigoExterno != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                    else
-                    {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, CodigoExterno);
-                    }
-                   
-                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.Tipo> Result 
@@ -30647,9 +28580,8 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
-            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Valor.Tipo item = new Entities.Tables.Valor.Tipo();
                  item.Id = Id;
@@ -30661,7 +28593,6 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
-                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -30708,17 +28639,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Tipo
 	} //namespace DepositaryWebApi.Business.Relations.Valor
 	namespace DepositaryWebApi.Business.Relations.Visualizacion {
@@ -31031,17 +28951,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class Perfil
 	} //namespace DepositaryWebApi.Business.Relations.Visualizacion
 	namespace DepositaryWebApi.Business.Relations.Visualizacion {
@@ -31337,17 +29246,6 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PerfilItem
 	} //namespace DepositaryWebApi.Business.Relations.Visualizacion
 	namespace DepositaryWebApi.Business.Relations.Visualizacion {
@@ -31660,16 +29558,5 @@ using System.Text;
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
             }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
         } // class PerfilTipo
 	} //namespace DepositaryWebApi.Business.Relations.Visualizacion

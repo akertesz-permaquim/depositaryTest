@@ -222,6 +222,97 @@ using System.Text;
 		namespace Permaquim.Depositary.Entities.Views.Reporte {
 			[Serializable()]                         //
 			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
+			[DataItemAttributeObjectName("ConfiguracionesDepositario","ConfiguracionesDepositario")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class ConfiguracionesDepositario : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string DepositarioId = "DepositarioId";
+					public const string CodigoExterno = "CodigoExterno";
+					public const string NombreDepositario = "NombreDepositario";
+					public const string SectorId = "SectorId";
+					public const string Sector = "Sector";
+					public const string SucursalId = "SucursalId";
+					public const string Sucursal = "Sucursal";
+					public const string EmpresaId = "EmpresaId";
+					public const string Empresa = "Empresa";
+					public const string Clave = "Clave";
+					public const string DescripcionConfiguracion = "DescripcionConfiguracion";
+					public const string Valor = "Valor";
+				}
+				public enum FieldEnum : int
+                {
+					DepositarioId,
+					CodigoExterno,
+					NombreDepositario,
+					SectorId,
+					Sector,
+					SucursalId,
+					Sucursal,
+					EmpresaId,
+					Empresa,
+					Clave,
+					DescripcionConfiguracion,
+					Valor
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public ConfiguracionesDepositario()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  ConfiguracionesDepositario(Int64 DepositarioId,String CodigoExterno,String NombreDepositario,Int64 SectorId,String Sector,Int64 SucursalId,String Sucursal,Int64 EmpresaId,String Empresa,String Clave,String DescripcionConfiguracion,String Valor)
+                {
+                    this.DepositarioId = DepositarioId;
+                    this.CodigoExterno = CodigoExterno;
+                    this.NombreDepositario = NombreDepositario;
+                    this.SectorId = SectorId;
+                    this.Sector = Sector;
+                    this.SucursalId = SucursalId;
+                    this.Sucursal = Sucursal;
+                    this.EmpresaId = EmpresaId;
+                    this.Empresa = Empresa;
+                    this.Clave = Clave;
+                    this.DescripcionConfiguracion = DescripcionConfiguracion;
+                    this.Valor = Valor;
+                }
+             [DataItemAttributeFieldName("DepositarioId","DepositarioId")]
+             public Int64 DepositarioId { get; set; }
+             [DataItemAttributeFieldName("CodigoExterno","CodigoExterno")]
+             public String CodigoExterno { get; set; }
+             [DataItemAttributeFieldName("NombreDepositario","NombreDepositario")]
+             public String NombreDepositario { get; set; }
+             [DataItemAttributeFieldName("SectorId","SectorId")]
+             public Int64 SectorId { get; set; }
+             [DataItemAttributeFieldName("Sector","Sector")]
+             public String Sector { get; set; }
+             [DataItemAttributeFieldName("SucursalId","SucursalId")]
+             public Int64 SucursalId { get; set; }
+             [DataItemAttributeFieldName("Sucursal","Sucursal")]
+             public String Sucursal { get; set; }
+             [DataItemAttributeFieldName("EmpresaId","EmpresaId")]
+             public Int64 EmpresaId { get; set; }
+             [DataItemAttributeFieldName("Empresa","Empresa")]
+             public String Empresa { get; set; }
+             [DataItemAttributeFieldName("Clave","Clave")]
+             public String Clave { get; set; }
+             [DataItemAttributeFieldName("DescripcionConfiguracion","DescripcionConfiguracion")]
+             public String DescripcionConfiguracion { get; set; }
+             [DataItemAttributeFieldName("Valor","Valor")]
+             public String Valor { get; set; }
+				
+			} //Class ConfiguracionesDepositario 
+			
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
 			[DataItemAttributeObjectName("Contenedores","Contenedores")]    // Object name  and alias in Database
 			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
 			public class Contenedores : IDataItem
@@ -619,6 +710,82 @@ using System.Text;
              public String Moneda { get; set; }
 				
 			} //Class DetalleTransaccionesSobre 
+			
+} //namespace Permaquim.Depositary.Entities.Views.Reporte
+//////////////////////////////////////////////////////////////////////////////////
+		namespace Permaquim.Depositary.Entities.Views.Reporte {
+			[Serializable()]                         //
+			[DataItemAttributeSchemaName("Reporte")]  // Database Schema Name
+			[DataItemAttributeObjectName("PermisosUsuario","PermisosUsuario")]    // Object name  and alias in Database
+			[DataItemAttributeObjectType(DataItemAttributeObjectType.ObjectTypeEnum.View)] // Table, View,StoredProcedure,Function
+			public class PermisosUsuario : IDataItem
+			{
+				        
+				public class ColumnNames
+				{
+					public const string NombreApellido = "NombreApellido";
+					public const string Usuario = "Usuario";
+					public const string Aplicacion = "Aplicacion";
+					public const string Rol = "Rol";
+					public const string Funcion = "Funcion";
+					public const string UsuarioId = "UsuarioId";
+					public const string RolId = "RolId";
+					public const string FuncionId = "FuncionId";
+					public const string AplicacionId = "AplicacionId";
+				}
+				public enum FieldEnum : int
+                {
+					NombreApellido,
+					Usuario,
+					Aplicacion,
+					Rol,
+					Funcion,
+					UsuarioId,
+					RolId,
+					FuncionId,
+					AplicacionId
+				}
+	               /// <summary>
+                /// Parameterless Constructor
+	               /// <summary>
+                public PermisosUsuario()
+                {
+                }
+	               /// <summary>
+                /// Constructor with Parameters 
+	               /// <summary>
+                public  PermisosUsuario(String NombreApellido,String Usuario,String Aplicacion,String Rol,String Funcion,Int64 UsuarioId,Int64 RolId,Int64 FuncionId,Int64 AplicacionId)
+                {
+                    this.NombreApellido = NombreApellido;
+                    this.Usuario = Usuario;
+                    this.Aplicacion = Aplicacion;
+                    this.Rol = Rol;
+                    this.Funcion = Funcion;
+                    this.UsuarioId = UsuarioId;
+                    this.RolId = RolId;
+                    this.FuncionId = FuncionId;
+                    this.AplicacionId = AplicacionId;
+                }
+             [DataItemAttributeFieldName("NombreApellido","NombreApellido")]
+             public String NombreApellido { get; set; }
+             [DataItemAttributeFieldName("Usuario","Usuario")]
+             public String Usuario { get; set; }
+             [DataItemAttributeFieldName("Aplicacion","Aplicacion")]
+             public String Aplicacion { get; set; }
+             [DataItemAttributeFieldName("Rol","Rol")]
+             public String Rol { get; set; }
+             [DataItemAttributeFieldName("Funcion","Funcion")]
+             public String Funcion { get; set; }
+             [DataItemAttributeFieldName("UsuarioId","UsuarioId")]
+             public Int64 UsuarioId { get; set; }
+             [DataItemAttributeFieldName("RolId","RolId")]
+             public Int64 RolId { get; set; }
+             [DataItemAttributeFieldName("FuncionId","FuncionId")]
+             public Int64 FuncionId { get; set; }
+             [DataItemAttributeFieldName("AplicacionId","AplicacionId")]
+             public Int64 AplicacionId { get; set; }
+				
+			} //Class PermisosUsuario 
 			
 } //namespace Permaquim.Depositary.Entities.Views.Reporte
 //////////////////////////////////////////////////////////////////////////////////

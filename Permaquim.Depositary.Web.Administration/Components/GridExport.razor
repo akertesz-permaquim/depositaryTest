@@ -6,11 +6,6 @@
 
 @typeparam T
 
-@if (estaGenerando)
-{
-    <div style="z-index:3" class="spinnerCentradoRelativo"></div>
-}
-
 <RadzenButton Text="@TituloBoton" Style="background-color:green" Click="@(() => Task.Run(GenerateWorkBook))" />
 
 @code {
@@ -24,17 +19,12 @@
     [Parameter]
     public string TituloBoton { get; set; }
 
-    private bool estaGenerando = false;
-
     public async void GenerateWorkBook()
     {
         try
         {
             using (var workbook = new XLWorkbook())
             {
-                estaGenerando = true;
-                this.InvokeAsync(() => this.StateHasChanged());
-
                 IXLWorksheet worksheet =
                 workbook.Worksheets.Add("Grid");
 
@@ -160,10 +150,6 @@
                     await BlazorDownloadFileService.DownloadFile(filename, content, contentType);
 
                 }
-
-                estaGenerando = false;
-                this.InvokeAsync(() => this.StateHasChanged());
-
             }
         }
         catch (Exception ex)
@@ -172,4 +158,4 @@
         }
 
     }
-}
+    }
