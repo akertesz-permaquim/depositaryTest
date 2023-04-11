@@ -26769,6 +26769,7 @@ using System.Text;
 					FuncionId,
 					Imagen,
 					DependeDe,
+					Orden,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -26821,15 +26822,16 @@ using System.Text;
          /// <param name='FuncionId'></param>
          /// <param name='Imagen'></param>
          /// <param name='DependeDe'></param>
+         /// <param name='Orden'></param>
          /// <param name='Habilitado'></param>
          /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Tables.Seguridad.Menu</returns>
-			public Entities.Tables.Seguridad.Menu Add(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
+			public Entities.Tables.Seguridad.Menu Add(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Int32 Orden,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion) 
 			{
-			  return (Entities.Tables.Seguridad.Menu)base.Add(new Entities.Tables.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Tables.Seguridad.Menu)base.Add(new Entities.Tables.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Orden,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Tables.Seguridad.Menu> Items()
             {
@@ -26869,13 +26871,14 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Tables.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Tables.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Int32? Orden,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.Clear();
                 if (Id != null)
@@ -26959,6 +26962,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.DependeDe, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DependeDe);
+                    }
+                   
+                }
+                if (Orden != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Orden, sqlEnum.OperandEnum.Equal, Orden);
+                    }
+                    else
+                    {
+                        this.Where.Add(sqlEnum.ConjunctionEnum.AND,ColumnEnum.Orden, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Orden);
                     }
                    
                 }
@@ -27068,15 +27083,16 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Int64 funcionid,String imagen,Int64? dependede,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
+            public Int64 Update(Int64 id,Int64 tipoid,String nombre,String descripcion,Int64 funcionid,String imagen,Int64? dependede,Int32 orden,Boolean habilitado,Int64 usuariocreacion,DateTime fechacreacion,Int64? usuariomodificacion,DateTime? fechamodificacion)
             {
-                return base.Update((IDataItem) new Entities.Tables.Seguridad.Menu {Id = id,TipoId = tipoid,Nombre = nombre,Descripcion = descripcion,FuncionId = funcionid,Imagen = imagen,DependeDe = dependede,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
+                return base.Update((IDataItem) new Entities.Tables.Seguridad.Menu {Id = id,TipoId = tipoid,Nombre = nombre,Descripcion = descripcion,FuncionId = funcionid,Imagen = imagen,DependeDe = dependede,Orden = orden,Habilitado = habilitado,UsuarioCreacion = usuariocreacion,FechaCreacion = fechacreacion,UsuarioModificacion = usuariomodificacion,FechaModificacion = fechamodificacion});
             }
             /// <summary>
             /// Deletes an instance of Entities.Tables.Seguridad.Menu

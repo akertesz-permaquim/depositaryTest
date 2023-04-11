@@ -58,6 +58,7 @@
         public Int64 MenuId { get; set; }
         public Int64? DependeDe { get; set; }
         public Int64 TipoMenuId { get; set; }
+        public int Orden { get; set; }
         public string MenuNombre { get; set; }
         public string MenuDescripcion { get; set; }
         public string Imagen { get; set; }

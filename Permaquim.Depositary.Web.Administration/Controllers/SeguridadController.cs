@@ -205,6 +205,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
             if (_bRelationsRolFuncion.Result.Count > 0)
             {
+                //Recorro la lista de funciones y voy armando los menues asociados a funciones.
                 foreach (var rolfuncion in _bRelationsRolFuncion.Result)
                 {
                     var funcion = rolfuncion.FuncionId;
@@ -215,6 +216,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                         menu.DependeDe = menuAccesible._DependeDe == 0 ? null : menuAccesible._DependeDe;
                         menu.MenuDescripcion = menuAccesible.Descripcion;
                         menu.MenuNombre = menuAccesible.Nombre;
+                        menu.Orden = menuAccesible.Orden;
                         menu.TipoMenuId = menuAccesible._TipoId;
                         menu.Imagen = menuAccesible.Imagen;
                         menu.Referencia = funcion.Referencia;
@@ -226,7 +228,8 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
 
             if (resultado.Count > 0)
             {
-                //Verifico cuantos menues dependen de otros y si no estan en la lista los agrego.
+                //Verifico cuantos menues dependen de otros y si no estan en la lista los agrego
+                //(pueden no estar por no tener funciones asociadas ya que pueden funcionar como contenedores de otros menues.).
                 var menuesDependientes = resultado.Where(x => x.DependeDe != null).ToList();
 
                 if (menuesDependientes.Count > 0)
@@ -250,6 +253,7 @@ namespace Permaquim.Depositary.Web.Administration.Controllers
                                 menu.MenuDescripcion = menuPadre.Descripcion;
                                 menu.MenuNombre = menuPadre.Nombre;
                                 menu.TipoMenuId = menuPadre._TipoId;
+                                menu.Orden = menuPadre.Orden;
                                 menu.Imagen = menuPadre.Imagen;
                                 menu.Referencia = menuPadre.FuncionId.Referencia;
 

@@ -349,7 +349,7 @@
                                                 int conversionInt;
                                                 if (int.TryParse(Configuracion_entity.Valor, out conversionInt))
                                                 {
-                                                    <RadzenNumeric style="display: block" TValue="int" @bind-Value="@valorInt" Disabled="@(crudMode == CrudMode.Delete || estaProcesando)">
+                                                    <RadzenNumeric style="display: block" TValue="int" @bind-Value="@valorInt" Change=@(args => ValorIntChange(args)) Disabled="@(crudMode == CrudMode.Delete || estaProcesando)">
                                                     </RadzenNumeric>
                                                     <RadzenTextBox Visible="false" @bind-Value="@(Configuracion_entity.Valor)" Name="Valor">
                                                     </RadzenTextBox>

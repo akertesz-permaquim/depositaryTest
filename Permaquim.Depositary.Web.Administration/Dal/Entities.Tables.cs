@@ -5957,6 +5957,7 @@ using System.Text;
 					public const string FuncionId = "FuncionId";
 					public const string Imagen = "Imagen";
 					public const string DependeDe = "DependeDe";
+					public const string Orden = "Orden";
 					public const string Habilitado = "Habilitado";
 					public const string UsuarioCreacion = "UsuarioCreacion";
 					public const string FechaCreacion = "FechaCreacion";
@@ -5972,6 +5973,7 @@ using System.Text;
 					FuncionId,
 					Imagen,
 					DependeDe,
+					Orden,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -5984,7 +5986,7 @@ using System.Text;
                 public Menu()
                 {
                 }
-                public  Menu(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+                public  Menu(Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64? DependeDe,Int32 Orden,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
                 {
                     this.Id = Id;
                     this.TipoId = TipoId;
@@ -5993,6 +5995,7 @@ using System.Text;
                     this.FuncionId = FuncionId;
                     this.Imagen = Imagen;
                     this.DependeDe = DependeDe;
+                    this.Orden = Orden;
                     this.Habilitado = Habilitado;
                     this.UsuarioCreacion = UsuarioCreacion;
                     this.FechaCreacion = FechaCreacion;
@@ -6022,6 +6025,8 @@ using System.Text;
              [PropertyAttribute(PropertyAttribute.PropertyAttributeEnum.Fk)] //Is Foreign Key
              [PropertyAttributeForeignKeyObjectName("Menu")]// Object name in Database
              public Int64? DependeDe { get; set; }
+             [DataItemAttributeFieldName("Orden","Orden")]
+             public Int32 Orden { get; set; }
              [DataItemAttributeFieldName("Habilitado","Habilitado")]
              public Boolean Habilitado { get; set; }
              [DataItemAttributeFieldName("UsuarioCreacion","UsuarioCreacion")]

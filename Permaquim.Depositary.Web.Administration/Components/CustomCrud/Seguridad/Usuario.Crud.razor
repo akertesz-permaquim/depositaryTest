@@ -480,8 +480,8 @@
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
-                                    <RadzenRequiredValidator Component="Mail" Text="Mail is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
+@*                                    <RadzenRequiredValidator Component="Mail" Text="Mail is required" Style="position: absolute">
+                                    </RadzenRequiredValidator>*@
                                     <RadzenEmailValidator Component="Mail" Style="position: absolute"></RadzenEmailValidator>
                                 }
                             </div>
@@ -517,8 +517,8 @@
                             </div>
                             <div class="col-md-auto">
                                 <RadzenFileInput Name="Avatar" @bind-Value="@Usuario_entity.Avatar" Error="@ErrorFileInput_Avatar" TValue="string" Class="w-100" />
-                                <RadzenRequiredValidator Component="Avatar" Text="Avatar is required" Style="position : inherit ">
-                                </RadzenRequiredValidator>
+@*                                <RadzenRequiredValidator Component="Avatar" Text="Avatar is required" Style="position : inherit ">
+                                </RadzenRequiredValidator>*@
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">

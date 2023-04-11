@@ -1,0 +1,30 @@
+﻿@page "/AjusteFechaHora"
+
+@using Radzen.Blazor
+@using Permaquim.Depositary.Web.Administration.Controllers;
+@using System.Management
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+
+<div style="text-align:center; vertical-align: middle">
+
+    <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_FECHAHORA_DESACTUALIZADA_1",dataLenguaje)</h2>
+    <h2>@MultilenguajeController.ObtenerTextoPorClave("TEXTO_FECHAHORA_DESACTUALIZADA_2",dataLenguaje)</h2>
+
+</div>
+<br>
+<br>
+<div style="text-align:center; vertical-align: middle">
+    <RadzenImage Path="images/AjustarFechaHora.png">
+
+    </RadzenImage>
+</div>
+
+@code {
+    private List<Entities.TextoLenguaje> dataLenguaje;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataLenguaje = await sessionStorage.GetItemAsync<List<Entities.TextoLenguaje>>("DataLenguaje");
+    }
+}

@@ -605,5 +605,32 @@
 
         #endregion
 
+        #region General
+
+        public static bool VerificarFechaServidor()
+        {
+            bool resultado = false;
+
+            //Se lee la ultima transaccion recibida y se compara la fecha y hora del servidor contra la de la transaccion
+            Depositary.Business.Tables.Operacion.Transaccion transaccion = new();
+            transaccion.OrderBy.Add(Business.Tables.Operacion.Transaccion.ColumnEnum.Fecha, sqlEnum.DirEnum.DESC);
+            transaccion.TopQuantity = 1;
+
+            transaccion.Items();
+
+            if (transaccion.Result.Count == 0)
+                resultado = true;
+            else
+            {
+                if((DateTime.Now - transaccion.Result.FirstOrDefault().Fecha).TotalSeconds >= 0)
+                    resultado = true;
+            }
+
+            return resultado;
+
+        }
+
+        #endregion
+
     }
 }

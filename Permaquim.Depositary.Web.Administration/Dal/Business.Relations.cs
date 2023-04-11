@@ -23477,6 +23477,7 @@ using System.Text;
 					FuncionId,
 					Imagen,
 					DependeDe,
+					Orden,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -23527,15 +23528,16 @@ using System.Text;
          /// <param name='Permaquim.Depositary.Entities.Relations.Seguridad.Funcion FuncionId'></param>
          /// <param name='Imagen'></param>
          /// <param name='Permaquim.Depositary.Entities.Relations.Seguridad.Menu DependeDe'></param>
+         /// <param name='Orden'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Menu</returns>
-			public Entities.Relations.Seguridad.Menu Add(Permaquim.Depositary.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositary.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Menu Add(Permaquim.Depositary.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositary.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositary.Entities.Relations.Seguridad.Menu DependeDe,Int32 Orden,Boolean Habilitado,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositary.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Seguridad.Menu)base.Add(new Entities.Relations.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Seguridad.Menu)base.Add(new Entities.Relations.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Orden,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Seguridad.Menu> Items()
             {
@@ -23575,13 +23577,14 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Int32? Orden,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -23665,6 +23668,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DependeDe, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, DependeDe);
+                    }
+                   
+                }
+                if (Orden != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Orden, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Orden);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositary.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Orden, Permaquim.Depositary.sqlEnum.OperandEnum.Equal, Orden);
                     }
                    
                 }
@@ -23756,13 +23771,14 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64 DependeDe,Int32 Orden,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.Menu item = new Entities.Tables.Seguridad.Menu();
                  item.Id = Id;
@@ -23772,6 +23788,7 @@ using System.Text;
                  item.FuncionId = FuncionId;
                  item.Imagen = Imagen;
                  item.DependeDe = DependeDe;
+                 item.Orden = Orden;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
