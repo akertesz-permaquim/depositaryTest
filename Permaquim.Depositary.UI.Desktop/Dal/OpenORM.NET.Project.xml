@@ -34,6 +34,7 @@
   </SelectedViews>
   <SelectedStoredProcedures />
   <UnselectedStoredProcedures>
+    <string>Auditoria.DepurarAuditoria</string>
     <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
     <string>dbo.fn_diagramobjects</string>

@@ -338,12 +338,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -695,12 +715,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -1001,12 +1041,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -1341,12 +1401,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -1664,12 +1744,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -1970,12 +2070,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -2310,12 +2430,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -2718,12 +2858,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -3041,12 +3201,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -3347,12 +3527,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -3670,12 +3870,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -4146,12 +4366,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -4622,12 +4862,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -5047,12 +5307,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -5370,12 +5650,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -5693,12 +5993,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -6016,12 +6336,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -6407,12 +6747,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -6781,12 +7141,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -7155,12 +7535,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -7478,12 +7878,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -7869,12 +8289,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -8379,12 +8819,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -8736,12 +9196,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -9059,12 +9539,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -9722,12 +10222,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -10028,12 +10548,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -10385,12 +10925,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -10691,12 +11251,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -11048,12 +11628,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -11405,12 +12005,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -11915,12 +12535,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -12595,12 +13235,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -12918,12 +13578,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -13309,12 +13989,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -13615,12 +14315,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -13955,12 +14675,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -14295,12 +15035,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -14635,12 +15395,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -14975,12 +15755,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -15298,12 +16098,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -15842,12 +16662,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -16488,12 +17328,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -16811,12 +17671,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -17151,12 +18031,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -17525,12 +18425,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -17814,12 +18734,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -18086,12 +19026,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -18409,12 +19369,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -18732,12 +19712,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -19055,12 +20055,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -19616,12 +20636,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -19871,12 +20911,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -20109,12 +21169,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -20381,12 +21461,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -20823,12 +21923,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -21129,12 +22249,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -21469,12 +22609,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -21809,12 +22969,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -22132,12 +23312,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -22438,12 +23638,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -22761,12 +23981,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -23118,12 +24358,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -23441,12 +24701,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -23815,12 +25095,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -24155,12 +25455,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -24546,12 +25866,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -24852,12 +26192,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -25158,12 +26518,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -25481,12 +26861,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -25787,12 +27187,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -26382,12 +27802,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -26688,12 +28128,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -26994,12 +28454,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -27300,12 +28780,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -27572,12 +29072,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -27861,12 +29381,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -28133,12 +29673,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -28388,12 +29948,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -28745,12 +30325,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -29068,12 +30668,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -29391,12 +31011,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -29782,12 +31422,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -30122,12 +31782,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -30445,12 +32125,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -30751,12 +32451,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -31074,12 +32794,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -31397,12 +33137,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -31703,12 +33463,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()
@@ -32026,12 +33806,32 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
                  public void Add(ColumnEnum column)
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
                  }
             }
              public void Dispose()

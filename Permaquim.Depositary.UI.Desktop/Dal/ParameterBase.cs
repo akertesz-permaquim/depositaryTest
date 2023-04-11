@@ -174,7 +174,7 @@ public class OrderByParameterBase
     {
         _orderByParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _orderByParameters.Count; }
     }
@@ -215,7 +215,7 @@ public class GroupByParameterBase
     {
         _groupByParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _groupByParameters.Count; }
     }
@@ -290,7 +290,7 @@ public  class AggregateParameterBase
     {
         _aggregateParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _aggregateParameters.Count; }
     }
