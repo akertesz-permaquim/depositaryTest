@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         }
 
         [HttpPost("ObtenerToken")]
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult ObtenerToken([FromBody] LoginModel model)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -68,8 +68,13 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             //}
         }
 
+        /// <summary>
+        /// Obtiene el token del usuario registrado para integración
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("TokenUsuario")]
-
+        [ApiConventionMethod(typeof(DefaultApiConventions),nameof(DefaultApiConventions.Post))]
         public ActionResult ObtenerTokenusuario([FromBody] UserLoginModel model)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));

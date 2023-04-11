@@ -17,10 +17,16 @@ namespace Permaquim.Depositary.Web.Api.Controllers
             _configuration = configuration;
         }
         #region Endpoints
+        /// <summary>
+        /// Obtiene las transacciones realizadas por los depositarios
+        /// 
+        /// </summary>
+        /// <response code="200"> Retorna Lista de Transacciones de billetes, sobres y retiro de Contenedor (Bolsa) </response>
 
-        [HttpGet]
+        [HttpGet,Authorize]
+        [Produces("application/json")]
         [Route("Transacciones")]
-        [Authorize]
+        [ProducesResponseType(typeof(IntegracionTransaccionModel), StatusCodes.Status200OK)]
         public async Task<IntegracionTransaccionModel> Transacciones()
         {
 

@@ -10,114 +10,232 @@ using System.Text;
 		{
 				public enum ColumnEnum : int
                 {
-					Operacion_Transaccion_Id,
-					Operacion_Transaccion_TipoId,
-					Operacion_Transaccion_DepositarioId,
-					Operacion_Transaccion_SectorId,
-					Operacion_Transaccion_SucursalId,
-					Operacion_Transaccion_MonedaId,
-					Operacion_Transaccion_UsuarioId,
-					Operacion_Transaccion_CuentaId,
-					Operacion_Transaccion_ContenedorId,
-					Operacion_Transaccion_SesionId,
-					Operacion_Transaccion_TurnoId,
-					Operacion_Transaccion_CierreDiarioId,
-					Operacion_Transaccion_TotalValidado,
-					Operacion_Transaccion_TotalAValidar,
-					Operacion_Transaccion_Fecha,
-					Operacion_Transaccion_Finalizada,
-					Operacion_Transaccion_EsDepositoAutomatico,
-					Operacion_Transaccion_OrigenValorId,
-					Operacion_Transaccion_CodigoOperacion,
-					Operacion_Transaccion_FechaCreacion,
-					Operacion_Transaccion_FechaModificacion,
-					Operacion_Transaccion_UsuarioCreacion,
-					Operacion_Transaccion_UsuarioModificacion,
-					Operacion_TipoTransaccion_Id,
-					Operacion_TipoTransaccion_Nombre,
-					Operacion_TipoTransaccion_Descripcion,
-					Dispositivo_Depositario_Id,
-					Dispositivo_Depositario_Nombre,
-					Dispositivo_Depositario_Descripcion,
-					Dispositivo_Depositario_SectorId,
-					Dispositivo_Depositario_NumeroSerie,
-					Dispositivo_Depositario_CodigoExterno,
-					Directorio_Sector_Id,
-					Directorio_Sector_SucursalId,
-					Directorio_Sector_Nombre,
-					Directorio_Sector_Descripcion,
-					Directorio_Sector_CodigoExterno,
-					Directorio_Sucursal_Id,
-					Directorio_Sucursal_Nombre,
-					Directorio_Sucursal_Descripcion,
-					Directorio_Sucursal_EmpresaId,
-					Directorio_Sucursal_CodigoExterno,
-					Directorio_Sucursal_Direccion,
-					Directorio_Sucursal_CodigoPostalId,
-					Directorio_Sucursal_ZonaId,
-					Valor_Moneda_Id,
-					Valor_Moneda_Nombre,
-					Valor_Moneda_PaisId,
-					Valor_Moneda_Codigo,
-					Valor_Moneda_Simbolo,
-					Valor_Moneda_CodigoExterno,
-					Seguridad_Usuario_Id,
-					Seguridad_Usuario_EmpresaId,
-					Seguridad_Usuario_LenguajeId,
-					Seguridad_Usuario_PerfilId,
-					Seguridad_Usuario_Nombre,
-					Seguridad_Usuario_Apellido,
-					Seguridad_Usuario_NombreApellido,
-					Seguridad_Usuario_Documento,
-					Seguridad_Usuario_Legajo,
-					Seguridad_Usuario_CodigoExterno,
-					Banca_Cuenta_Id,
-					Banca_Cuenta_TipoId,
-					Banca_Cuenta_EmpresaId,
-					Banca_Cuenta_Nombre,
-					Banca_Cuenta_Numero,
-					Banca_Cuenta_Alias,
-					Banca_Cuenta_CBU,
-					Banca_Cuenta_BancoId,
-					Banca_Cuenta_SucursalBancaria,
-					Banca_Cuenta_CodigoExterno,
-					Operacion_Contenedor_Id,
-					Operacion_Contenedor_Nombre,
-					Operacion_Contenedor_DepositarioId,
-					Operacion_Contenedor_TipoId,
-					Operacion_Contenedor_Identificador,
-					Operacion_Contenedor_FechaApertura,
-					Operacion_Contenedor_FechaCierre,
-					Operacion_Sesion_Id,
-					Operacion_Sesion_UsuarioId,
-					Operacion_Sesion_FechaInicio,
-					Operacion_Sesion_FechaCierre,
-					Operacion_Sesion_EsCierreAutomatico,
-					Operacion_Turno_Id,
-					Operacion_Turno_TurnoDepositarioId,
-					Operacion_Turno_DepositarioId,
-					Operacion_Turno_SectorId,
-					Operacion_Turno_FechaApertura,
-					Operacion_Turno_FechaCierre,
-					Operacion_Turno_Fecha,
-					Operacion_Turno_Secuencia,
-					Operacion_Turno_CierreDiarioId,
-					Operacion_Turno_Observaciones,
-					Operacion_Turno_CodigoTurno,
-					Operacion_CierreDiario_Id,
-					Operacion_CierreDiario_Nombre,
-					Operacion_CierreDiario_Fecha,
-					Operacion_CierreDiario_DepositarioId,
-					Operacion_CierreDiario_SesionId,
-					Operacion_CierreDiario_CodigoCierre,
-					Operacion_CierreDiario_UsuarioCreacion,
-					Operacion_CierreDiario_FechaCreacion,
-					Operacion_CierreDiario_UsuarioModificacion,
-					Operacion_CierreDiario_FechaModificacion,
-					Valor_OrigenValor_Id,
-					Valor_OrigenValor_Nombre,
-					Valor_OrigenValor_Descripcion,
-					Valor_OrigenValor_CodigoExterno
+					OperacionTransaccion_Id,
+					OperacionTransaccion_TipoId,
+					OperacionTransaccion_DepositarioId,
+					OperacionTransaccion_SectorId,
+					OperacionTransaccion_SucursalId,
+					OperacionTransaccion_MonedaId,
+					OperacionTransaccion_UsuarioId,
+					OperacionTransaccion_CuentaId,
+					OperacionTransaccion_ContenedorId,
+					OperacionTransaccion_SesionId,
+					OperacionTransaccion_TurnoId,
+					OperacionTransaccion_CierreDiarioId,
+					OperacionTransaccion_TotalValidado,
+					OperacionTransaccion_TotalAValidar,
+					OperacionTransaccion_Fecha,
+					OperacionTransaccion_Finalizada,
+					OperacionTransaccion_EsDepositoAutomatico,
+					OperacionTransaccion_OrigenValorId,
+					OperacionTransaccion_CodigoOperacion,
+					OperacionTransaccion_FechaCreacion,
+					OperacionTransaccion_FechaModificacion,
+					OperacionTransaccion_UsuarioCreacion,
+					OperacionTransaccion_UsuarioModificacion,
+					OperacionTipoTransaccion_Id,
+					OperacionTipoTransaccion_Nombre,
+					OperacionTipoTransaccion_Descripcion,
+					OperacionTipoTransaccion_FuncionId,
+					OperacionTipoTransaccion_Habilitado,
+					OperacionTipoTransaccion_UsuarioCreacion,
+					OperacionTipoTransaccion_FechaCreacion,
+					OperacionTipoTransaccion_UsuarioModificacion,
+					OperacionTipoTransaccion_FechaModificacion,
+					DispositivoDepositario_Id,
+					DispositivoDepositario_Nombre,
+					DispositivoDepositario_Descripcion,
+					DispositivoDepositario_SectorId,
+					DispositivoDepositario_NumeroSerie,
+					DispositivoDepositario_CodigoExterno,
+					DispositivoDepositario_TipoContenedorId,
+					DispositivoDepositario_ModeloId,
+					DispositivoDepositario_Habilitado,
+					DispositivoDepositario_UsuarioCreacion,
+					DispositivoDepositario_FechaCreacion,
+					DispositivoDepositario_UsuarioModificacion,
+					DispositivoDepositario_FechaModificacion,
+					DirectorioSector_Id,
+					DirectorioSector_SucursalId,
+					DirectorioSector_Nombre,
+					DirectorioSector_Descripcion,
+					DirectorioSector_Habilitado,
+					DirectorioSector_UsuarioCreacion,
+					DirectorioSector_FechaCreacion,
+					DirectorioSector_UsuarioModificacion,
+					DirectorioSector_FechaModificacion,
+					DirectorioSector_CodigoExterno,
+					DirectorioSucursal_Id,
+					DirectorioSucursal_Nombre,
+					DirectorioSucursal_Descripcion,
+					DirectorioSucursal_EmpresaId,
+					DirectorioSucursal_CodigoExterno,
+					DirectorioSucursal_Direccion,
+					DirectorioSucursal_CodigoPostalId,
+					DirectorioSucursal_ZonaId,
+					DirectorioSucursal_Habilitado,
+					DirectorioSucursal_UsuarioCreacion,
+					DirectorioSucursal_FechaCreacion,
+					DirectorioSucursal_UsuarioModificacion,
+					DirectorioSucursal_FechaModificacion,
+					ValorMoneda_Id,
+					ValorMoneda_Nombre,
+					ValorMoneda_PaisId,
+					ValorMoneda_Codigo,
+					ValorMoneda_Simbolo,
+					ValorMoneda_CodigoExterno,
+					ValorMoneda_Habilitado,
+					ValorMoneda_UsuarioCreacion,
+					ValorMoneda_FechaCreacion,
+					ValorMoneda_UsuarioModificacion,
+					ValorMoneda_FechaModificacion,
+					SeguridadUsuario_Id,
+					SeguridadUsuario_EmpresaId,
+					SeguridadUsuario_LenguajeId,
+					SeguridadUsuario_PerfilId,
+					SeguridadUsuario_Nombre,
+					SeguridadUsuario_Apellido,
+					SeguridadUsuario_NombreApellido,
+					SeguridadUsuario_Documento,
+					SeguridadUsuario_Legajo,
+					SeguridadUsuario_Mail,
+					SeguridadUsuario_FechaIngreso,
+					SeguridadUsuario_NickName,
+					SeguridadUsuario_Password,
+					SeguridadUsuario_Token,
+					SeguridadUsuario_Avatar,
+					SeguridadUsuario_FechaUltimoLogin,
+					SeguridadUsuario_DebeCambiarPassword,
+					SeguridadUsuario_Habilitado,
+					SeguridadUsuario_CantidadLogueosIncorrectos,
+					SeguridadUsuario_Bloqueado,
+					SeguridadUsuario_FechaExpiracion,
+					SeguridadUsuario_UsuarioCreacion,
+					SeguridadUsuario_FechaCreacion,
+					SeguridadUsuario_UsuarioModificacion,
+					SeguridadUsuario_FechaModificacion,
+					SeguridadUsuario_CodigoExterno,
+					BancaCuenta_Id,
+					BancaCuenta_TipoId,
+					BancaCuenta_EmpresaId,
+					BancaCuenta_Nombre,
+					BancaCuenta_Numero,
+					BancaCuenta_Alias,
+					BancaCuenta_CBU,
+					BancaCuenta_BancoId,
+					BancaCuenta_SucursalBancaria,
+					BancaCuenta_Habilitado,
+					BancaCuenta_UsuarioCreacion,
+					BancaCuenta_FechaCreacion,
+					BancaCuenta_UsuarioModificacion,
+					BancaCuenta_FechaModificacion,
+					BancaCuenta_CodigoExterno,
+					OperacionContenedor_Id,
+					OperacionContenedor_Nombre,
+					OperacionContenedor_DepositarioId,
+					OperacionContenedor_TipoId,
+					OperacionContenedor_Identificador,
+					OperacionContenedor_FechaApertura,
+					OperacionContenedor_FechaCierre,
+					OperacionContenedor_Habilitado,
+					OperacionContenedor_UsuarioCreacion,
+					OperacionContenedor_FechaCreacion,
+					OperacionContenedor_UsuarioModificacion,
+					OperacionContenedor_FechaModificacion,
+					OperacionSesion_Id,
+					OperacionSesion_DepositarioId,
+					OperacionSesion_UsuarioId,
+					OperacionSesion_FechaInicio,
+					OperacionSesion_FechaCierre,
+					OperacionSesion_EsCierreAutomatico,
+					OperacionTurno_Id,
+					OperacionTurno_TurnoDepositarioId,
+					OperacionTurno_DepositarioId,
+					OperacionTurno_SectorId,
+					OperacionTurno_FechaApertura,
+					OperacionTurno_FechaCierre,
+					OperacionTurno_Fecha,
+					OperacionTurno_Secuencia,
+					OperacionTurno_CierreDiarioId,
+					OperacionTurno_Observaciones,
+					OperacionTurno_CodigoTurno,
+					OperacionTurno_UsuarioCreacion,
+					OperacionTurno_FechaCreacion,
+					OperacionTurno_UsuarioModificacion,
+					OperacionTurno_FechaModificacion,
+					OperacionTurno_Habilitado,
+					OperacionCierreDiario_Id,
+					OperacionCierreDiario_Nombre,
+					OperacionCierreDiario_Fecha,
+					OperacionCierreDiario_DepositarioId,
+					OperacionCierreDiario_SesionId,
+					OperacionCierreDiario_CodigoCierre,
+					OperacionCierreDiario_UsuarioCreacion,
+					OperacionCierreDiario_FechaCreacion,
+					OperacionCierreDiario_UsuarioModificacion,
+					OperacionCierreDiario_FechaModificacion,
+					ValorOrigenValor_Id,
+					ValorOrigenValor_Nombre,
+					ValorOrigenValor_Descripcion,
+					ValorOrigenValor_EmpresaId,
+					ValorOrigenValor_Habilitado,
+					ValorOrigenValor_UsuarioCreacion,
+					ValorOrigenValor_FechaCreacion,
+					ValorOrigenValor_UsuarioModificacion,
+					ValorOrigenValor_FechaModificacion,
+					ValorOrigenValor_CodigoExterno,
+					SeguridadUsuario_UsuarioCreacion_Id,
+					SeguridadUsuario_UsuarioCreacion_EmpresaId,
+					SeguridadUsuario_UsuarioCreacion_LenguajeId,
+					SeguridadUsuario_UsuarioCreacion_PerfilId,
+					SeguridadUsuario_UsuarioCreacion_Nombre,
+					SeguridadUsuario_UsuarioCreacion_Apellido,
+					SeguridadUsuario_UsuarioCreacion_NombreApellido,
+					SeguridadUsuario_UsuarioCreacion_Documento,
+					SeguridadUsuario_UsuarioCreacion_Legajo,
+					SeguridadUsuario_UsuarioCreacion_Mail,
+					SeguridadUsuario_UsuarioCreacion_FechaIngreso,
+					SeguridadUsuario_UsuarioCreacion_NickName,
+					SeguridadUsuario_UsuarioCreacion_Password,
+					SeguridadUsuario_UsuarioCreacion_Token,
+					SeguridadUsuario_UsuarioCreacion_Avatar,
+					SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin,
+					SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword,
+					SeguridadUsuario_UsuarioCreacion_Habilitado,
+					SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos,
+					SeguridadUsuario_UsuarioCreacion_Bloqueado,
+					SeguridadUsuario_UsuarioCreacion_FechaExpiracion,
+					SeguridadUsuario_UsuarioCreacion_UsuarioCreacion,
+					SeguridadUsuario_UsuarioCreacion_FechaCreacion,
+					SeguridadUsuario_UsuarioCreacion_UsuarioModificacion,
+					SeguridadUsuario_UsuarioCreacion_FechaModificacion,
+					SeguridadUsuario_UsuarioCreacion_CodigoExterno,
+					SeguridadUsuario_UsuarioModificacion_Id,
+					SeguridadUsuario_UsuarioModificacion_EmpresaId,
+					SeguridadUsuario_UsuarioModificacion_LenguajeId,
+					SeguridadUsuario_UsuarioModificacion_PerfilId,
+					SeguridadUsuario_UsuarioModificacion_Nombre,
+					SeguridadUsuario_UsuarioModificacion_Apellido,
+					SeguridadUsuario_UsuarioModificacion_NombreApellido,
+					SeguridadUsuario_UsuarioModificacion_Documento,
+					SeguridadUsuario_UsuarioModificacion_Legajo,
+					SeguridadUsuario_UsuarioModificacion_Mail,
+					SeguridadUsuario_UsuarioModificacion_FechaIngreso,
+					SeguridadUsuario_UsuarioModificacion_NickName,
+					SeguridadUsuario_UsuarioModificacion_Password,
+					SeguridadUsuario_UsuarioModificacion_Token,
+					SeguridadUsuario_UsuarioModificacion_Avatar,
+					SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin,
+					SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword,
+					SeguridadUsuario_UsuarioModificacion_Habilitado,
+					SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos,
+					SeguridadUsuario_UsuarioModificacion_Bloqueado,
+					SeguridadUsuario_UsuarioModificacion_FechaExpiracion,
+					SeguridadUsuario_UsuarioModificacion_UsuarioCreacion,
+					SeguridadUsuario_UsuarioModificacion_FechaCreacion,
+					SeguridadUsuario_UsuarioModificacion_UsuarioModificacion,
+					SeguridadUsuario_UsuarioModificacion_FechaModificacion,
+					SeguridadUsuario_UsuarioModificacion_CodigoExterno
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where = new WhereCollection();
@@ -162,9 +280,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Integracion.OperacionTransaccion Add(Int64 Operacion_Transaccion_Id,Int64 Operacion_Transaccion_TipoId,Int64 Operacion_Transaccion_DepositarioId,Int64 Operacion_Transaccion_SectorId,Int64 Operacion_Transaccion_SucursalId,Int64 Operacion_Transaccion_MonedaId,Int64 Operacion_Transaccion_UsuarioId,Int64 Operacion_Transaccion_CuentaId,Int64 Operacion_Transaccion_ContenedorId,Int64 Operacion_Transaccion_SesionId,Int64 Operacion_Transaccion_TurnoId,Int64 Operacion_Transaccion_CierreDiarioId,Double Operacion_Transaccion_TotalValidado,Double Operacion_Transaccion_TotalAValidar,DateTime Operacion_Transaccion_Fecha,Boolean Operacion_Transaccion_Finalizada,Boolean Operacion_Transaccion_EsDepositoAutomatico,Int64 Operacion_Transaccion_OrigenValorId,String Operacion_Transaccion_CodigoOperacion,DateTime Operacion_Transaccion_FechaCreacion,DateTime Operacion_Transaccion_FechaModificacion,Int64 Operacion_Transaccion_UsuarioCreacion,Int64 Operacion_Transaccion_UsuarioModificacion,Int64 Operacion_TipoTransaccion_Id,String Operacion_TipoTransaccion_Nombre,String Operacion_TipoTransaccion_Descripcion,Int64 Dispositivo_Depositario_Id,String Dispositivo_Depositario_Nombre,String Dispositivo_Depositario_Descripcion,Int64 Dispositivo_Depositario_SectorId,String Dispositivo_Depositario_NumeroSerie,String Dispositivo_Depositario_CodigoExterno,Int64 Directorio_Sector_Id,Int64 Directorio_Sector_SucursalId,String Directorio_Sector_Nombre,String Directorio_Sector_Descripcion,String Directorio_Sector_CodigoExterno,Int64 Directorio_Sucursal_Id,String Directorio_Sucursal_Nombre,String Directorio_Sucursal_Descripcion,Int64 Directorio_Sucursal_EmpresaId,String Directorio_Sucursal_CodigoExterno,String Directorio_Sucursal_Direccion,Int64 Directorio_Sucursal_CodigoPostalId,Int64 Directorio_Sucursal_ZonaId,Int64 Valor_Moneda_Id,String Valor_Moneda_Nombre,Int64 Valor_Moneda_PaisId,String Valor_Moneda_Codigo,String Valor_Moneda_Simbolo,String Valor_Moneda_CodigoExterno,Int64 Seguridad_Usuario_Id,Int64 Seguridad_Usuario_EmpresaId,Int64 Seguridad_Usuario_LenguajeId,Int64 Seguridad_Usuario_PerfilId,String Seguridad_Usuario_Nombre,String Seguridad_Usuario_Apellido,String Seguridad_Usuario_NombreApellido,String Seguridad_Usuario_Documento,String Seguridad_Usuario_Legajo,String Seguridad_Usuario_CodigoExterno,Int64 Banca_Cuenta_Id,Int64 Banca_Cuenta_TipoId,Int64 Banca_Cuenta_EmpresaId,String Banca_Cuenta_Nombre,String Banca_Cuenta_Numero,String Banca_Cuenta_Alias,String Banca_Cuenta_CBU,Int64 Banca_Cuenta_BancoId,String Banca_Cuenta_SucursalBancaria,String Banca_Cuenta_CodigoExterno,Int64 Operacion_Contenedor_Id,String Operacion_Contenedor_Nombre,Int64 Operacion_Contenedor_DepositarioId,Int64 Operacion_Contenedor_TipoId,String Operacion_Contenedor_Identificador,DateTime Operacion_Contenedor_FechaApertura,DateTime Operacion_Contenedor_FechaCierre,Int64 Operacion_Sesion_Id,Int64 Operacion_Sesion_UsuarioId,DateTime Operacion_Sesion_FechaInicio,DateTime Operacion_Sesion_FechaCierre,Boolean Operacion_Sesion_EsCierreAutomatico,Int64 Operacion_Turno_Id,Int64 Operacion_Turno_TurnoDepositarioId,Int64 Operacion_Turno_DepositarioId,Int64 Operacion_Turno_SectorId,DateTime Operacion_Turno_FechaApertura,DateTime Operacion_Turno_FechaCierre,DateTime Operacion_Turno_Fecha,Int32 Operacion_Turno_Secuencia,Int64 Operacion_Turno_CierreDiarioId,String Operacion_Turno_Observaciones,String Operacion_Turno_CodigoTurno,Int64 Operacion_CierreDiario_Id,String Operacion_CierreDiario_Nombre,DateTime Operacion_CierreDiario_Fecha,Int64 Operacion_CierreDiario_DepositarioId,Int64 Operacion_CierreDiario_SesionId,String Operacion_CierreDiario_CodigoCierre,Int64 Operacion_CierreDiario_UsuarioCreacion,DateTime Operacion_CierreDiario_FechaCreacion,Int64 Operacion_CierreDiario_UsuarioModificacion,DateTime Operacion_CierreDiario_FechaModificacion,Int64 Valor_OrigenValor_Id,String Valor_OrigenValor_Nombre,String Valor_OrigenValor_Descripcion,String Valor_OrigenValor_CodigoExterno) 
+			public Entities.Views.Integracion.OperacionTransaccion Add(Int64 OperacionTransaccion_Id,Int64 OperacionTransaccion_TipoId,Int64 OperacionTransaccion_DepositarioId,Int64 OperacionTransaccion_SectorId,Int64 OperacionTransaccion_SucursalId,Int64 OperacionTransaccion_MonedaId,Int64 OperacionTransaccion_UsuarioId,Int64 OperacionTransaccion_CuentaId,Int64 OperacionTransaccion_ContenedorId,Int64 OperacionTransaccion_SesionId,Int64 OperacionTransaccion_TurnoId,Int64 OperacionTransaccion_CierreDiarioId,Double OperacionTransaccion_TotalValidado,Double OperacionTransaccion_TotalAValidar,DateTime OperacionTransaccion_Fecha,Boolean OperacionTransaccion_Finalizada,Boolean OperacionTransaccion_EsDepositoAutomatico,Int64 OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime OperacionTransaccion_FechaCreacion,DateTime OperacionTransaccion_FechaModificacion,Int64 OperacionTransaccion_UsuarioCreacion,Int64 OperacionTransaccion_UsuarioModificacion,Int64 OperacionTipoTransaccion_Id,String OperacionTipoTransaccion_Nombre,String OperacionTipoTransaccion_Descripcion,Int64 OperacionTipoTransaccion_FuncionId,Boolean OperacionTipoTransaccion_Habilitado,Int64 OperacionTipoTransaccion_UsuarioCreacion,DateTime OperacionTipoTransaccion_FechaCreacion,Int64 OperacionTipoTransaccion_UsuarioModificacion,DateTime OperacionTipoTransaccion_FechaModificacion,Int64 DispositivoDepositario_Id,String DispositivoDepositario_Nombre,String DispositivoDepositario_Descripcion,Int64 DispositivoDepositario_SectorId,String DispositivoDepositario_NumeroSerie,String DispositivoDepositario_CodigoExterno,Int64 DispositivoDepositario_TipoContenedorId,Int64 DispositivoDepositario_ModeloId,Boolean DispositivoDepositario_Habilitado,Int64 DispositivoDepositario_UsuarioCreacion,DateTime DispositivoDepositario_FechaCreacion,Int64 DispositivoDepositario_UsuarioModificacion,DateTime DispositivoDepositario_FechaModificacion,Int64 DirectorioSector_Id,Int64 DirectorioSector_SucursalId,String DirectorioSector_Nombre,String DirectorioSector_Descripcion,Boolean DirectorioSector_Habilitado,Int64 DirectorioSector_UsuarioCreacion,DateTime DirectorioSector_FechaCreacion,Int64 DirectorioSector_UsuarioModificacion,DateTime DirectorioSector_FechaModificacion,String DirectorioSector_CodigoExterno,Int64 DirectorioSucursal_Id,String DirectorioSucursal_Nombre,String DirectorioSucursal_Descripcion,Int64 DirectorioSucursal_EmpresaId,String DirectorioSucursal_CodigoExterno,String DirectorioSucursal_Direccion,Int64 DirectorioSucursal_CodigoPostalId,Int64 DirectorioSucursal_ZonaId,Boolean DirectorioSucursal_Habilitado,Int64 DirectorioSucursal_UsuarioCreacion,DateTime DirectorioSucursal_FechaCreacion,Int64 DirectorioSucursal_UsuarioModificacion,DateTime DirectorioSucursal_FechaModificacion,Int64 ValorMoneda_Id,String ValorMoneda_Nombre,Int64 ValorMoneda_PaisId,String ValorMoneda_Codigo,String ValorMoneda_Simbolo,String ValorMoneda_CodigoExterno,Boolean ValorMoneda_Habilitado,Int64 ValorMoneda_UsuarioCreacion,DateTime ValorMoneda_FechaCreacion,Int64 ValorMoneda_UsuarioModificacion,DateTime ValorMoneda_FechaModificacion,Int64 SeguridadUsuario_Id,Int64 SeguridadUsuario_EmpresaId,Int64 SeguridadUsuario_LenguajeId,Int64 SeguridadUsuario_PerfilId,String SeguridadUsuario_Nombre,String SeguridadUsuario_Apellido,String SeguridadUsuario_NombreApellido,String SeguridadUsuario_Documento,String SeguridadUsuario_Legajo,String SeguridadUsuario_Mail,DateTime SeguridadUsuario_FechaIngreso,String SeguridadUsuario_NickName,String SeguridadUsuario_Password,String SeguridadUsuario_Token,String SeguridadUsuario_Avatar,DateTime SeguridadUsuario_FechaUltimoLogin,Boolean SeguridadUsuario_DebeCambiarPassword,Boolean SeguridadUsuario_Habilitado,Int32 SeguridadUsuario_CantidadLogueosIncorrectos,Boolean SeguridadUsuario_Bloqueado,DateTime SeguridadUsuario_FechaExpiracion,Int64 SeguridadUsuario_UsuarioCreacion,DateTime SeguridadUsuario_FechaCreacion,Int64 SeguridadUsuario_UsuarioModificacion,DateTime SeguridadUsuario_FechaModificacion,String SeguridadUsuario_CodigoExterno,Int64 BancaCuenta_Id,Int64 BancaCuenta_TipoId,Int64 BancaCuenta_EmpresaId,String BancaCuenta_Nombre,String BancaCuenta_Numero,String BancaCuenta_Alias,String BancaCuenta_CBU,Int64 BancaCuenta_BancoId,String BancaCuenta_SucursalBancaria,Boolean BancaCuenta_Habilitado,Int64 BancaCuenta_UsuarioCreacion,DateTime BancaCuenta_FechaCreacion,Int64 BancaCuenta_UsuarioModificacion,DateTime BancaCuenta_FechaModificacion,String BancaCuenta_CodigoExterno,Int64 OperacionContenedor_Id,String OperacionContenedor_Nombre,Int64 OperacionContenedor_DepositarioId,Int64 OperacionContenedor_TipoId,String OperacionContenedor_Identificador,DateTime OperacionContenedor_FechaApertura,DateTime OperacionContenedor_FechaCierre,Boolean OperacionContenedor_Habilitado,Int64 OperacionContenedor_UsuarioCreacion,DateTime OperacionContenedor_FechaCreacion,Int64 OperacionContenedor_UsuarioModificacion,DateTime OperacionContenedor_FechaModificacion,Int64 OperacionSesion_Id,Int64 OperacionSesion_DepositarioId,Int64 OperacionSesion_UsuarioId,DateTime OperacionSesion_FechaInicio,DateTime OperacionSesion_FechaCierre,Boolean OperacionSesion_EsCierreAutomatico,Int64 OperacionTurno_Id,Int64 OperacionTurno_TurnoDepositarioId,Int64 OperacionTurno_DepositarioId,Int64 OperacionTurno_SectorId,DateTime OperacionTurno_FechaApertura,DateTime OperacionTurno_FechaCierre,DateTime OperacionTurno_Fecha,Int32 OperacionTurno_Secuencia,Int64 OperacionTurno_CierreDiarioId,String OperacionTurno_Observaciones,String OperacionTurno_CodigoTurno,Int64 OperacionTurno_UsuarioCreacion,DateTime OperacionTurno_FechaCreacion,Int64 OperacionTurno_UsuarioModificacion,DateTime OperacionTurno_FechaModificacion,Boolean OperacionTurno_Habilitado,Int64 OperacionCierreDiario_Id,String OperacionCierreDiario_Nombre,DateTime OperacionCierreDiario_Fecha,Int64 OperacionCierreDiario_DepositarioId,Int64 OperacionCierreDiario_SesionId,String OperacionCierreDiario_CodigoCierre,Int64 OperacionCierreDiario_UsuarioCreacion,DateTime OperacionCierreDiario_FechaCreacion,Int64 OperacionCierreDiario_UsuarioModificacion,DateTime OperacionCierreDiario_FechaModificacion,Int64 ValorOrigenValor_Id,String ValorOrigenValor_Nombre,String ValorOrigenValor_Descripcion,Int64 ValorOrigenValor_EmpresaId,Boolean ValorOrigenValor_Habilitado,Int64 ValorOrigenValor_UsuarioCreacion,DateTime ValorOrigenValor_FechaCreacion,Int64 ValorOrigenValor_UsuarioModificacion,DateTime ValorOrigenValor_FechaModificacion,String ValorOrigenValor_CodigoExterno,Int64 SeguridadUsuario_UsuarioCreacion_Id,Int64 SeguridadUsuario_UsuarioCreacion_EmpresaId,Int64 SeguridadUsuario_UsuarioCreacion_LenguajeId,Int64 SeguridadUsuario_UsuarioCreacion_PerfilId,String SeguridadUsuario_UsuarioCreacion_Nombre,String SeguridadUsuario_UsuarioCreacion_Apellido,String SeguridadUsuario_UsuarioCreacion_NombreApellido,String SeguridadUsuario_UsuarioCreacion_Documento,String SeguridadUsuario_UsuarioCreacion_Legajo,String SeguridadUsuario_UsuarioCreacion_Mail,DateTime SeguridadUsuario_UsuarioCreacion_FechaIngreso,String SeguridadUsuario_UsuarioCreacion_NickName,String SeguridadUsuario_UsuarioCreacion_Password,String SeguridadUsuario_UsuarioCreacion_Token,String SeguridadUsuario_UsuarioCreacion_Avatar,DateTime SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin,Boolean SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword,Boolean SeguridadUsuario_UsuarioCreacion_Habilitado,Int32 SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos,Boolean SeguridadUsuario_UsuarioCreacion_Bloqueado,DateTime SeguridadUsuario_UsuarioCreacion_FechaExpiracion,Int64 SeguridadUsuario_UsuarioCreacion_UsuarioCreacion,DateTime SeguridadUsuario_UsuarioCreacion_FechaCreacion,Int64 SeguridadUsuario_UsuarioCreacion_UsuarioModificacion,DateTime SeguridadUsuario_UsuarioCreacion_FechaModificacion,String SeguridadUsuario_UsuarioCreacion_CodigoExterno,Int64 SeguridadUsuario_UsuarioModificacion_Id,Int64 SeguridadUsuario_UsuarioModificacion_EmpresaId,Int64 SeguridadUsuario_UsuarioModificacion_LenguajeId,Int64 SeguridadUsuario_UsuarioModificacion_PerfilId,String SeguridadUsuario_UsuarioModificacion_Nombre,String SeguridadUsuario_UsuarioModificacion_Apellido,String SeguridadUsuario_UsuarioModificacion_NombreApellido,String SeguridadUsuario_UsuarioModificacion_Documento,String SeguridadUsuario_UsuarioModificacion_Legajo,String SeguridadUsuario_UsuarioModificacion_Mail,DateTime SeguridadUsuario_UsuarioModificacion_FechaIngreso,String SeguridadUsuario_UsuarioModificacion_NickName,String SeguridadUsuario_UsuarioModificacion_Password,String SeguridadUsuario_UsuarioModificacion_Token,String SeguridadUsuario_UsuarioModificacion_Avatar,DateTime SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin,Boolean SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword,Boolean SeguridadUsuario_UsuarioModificacion_Habilitado,Int32 SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos,Boolean SeguridadUsuario_UsuarioModificacion_Bloqueado,DateTime SeguridadUsuario_UsuarioModificacion_FechaExpiracion,Int64 SeguridadUsuario_UsuarioModificacion_UsuarioCreacion,DateTime SeguridadUsuario_UsuarioModificacion_FechaCreacion,Int64 SeguridadUsuario_UsuarioModificacion_UsuarioModificacion,DateTime SeguridadUsuario_UsuarioModificacion_FechaModificacion,String SeguridadUsuario_UsuarioModificacion_CodigoExterno) 
 			{
-			  return (Entities.Views.Integracion.OperacionTransaccion)base.Add(new Entities.Views.Integracion.OperacionTransaccion(Operacion_Transaccion_Id,Operacion_Transaccion_TipoId,Operacion_Transaccion_DepositarioId,Operacion_Transaccion_SectorId,Operacion_Transaccion_SucursalId,Operacion_Transaccion_MonedaId,Operacion_Transaccion_UsuarioId,Operacion_Transaccion_CuentaId,Operacion_Transaccion_ContenedorId,Operacion_Transaccion_SesionId,Operacion_Transaccion_TurnoId,Operacion_Transaccion_CierreDiarioId,Operacion_Transaccion_TotalValidado,Operacion_Transaccion_TotalAValidar,Operacion_Transaccion_Fecha,Operacion_Transaccion_Finalizada,Operacion_Transaccion_EsDepositoAutomatico,Operacion_Transaccion_OrigenValorId,Operacion_Transaccion_CodigoOperacion,Operacion_Transaccion_FechaCreacion,Operacion_Transaccion_FechaModificacion,Operacion_Transaccion_UsuarioCreacion,Operacion_Transaccion_UsuarioModificacion,Operacion_TipoTransaccion_Id,Operacion_TipoTransaccion_Nombre,Operacion_TipoTransaccion_Descripcion,Dispositivo_Depositario_Id,Dispositivo_Depositario_Nombre,Dispositivo_Depositario_Descripcion,Dispositivo_Depositario_SectorId,Dispositivo_Depositario_NumeroSerie,Dispositivo_Depositario_CodigoExterno,Directorio_Sector_Id,Directorio_Sector_SucursalId,Directorio_Sector_Nombre,Directorio_Sector_Descripcion,Directorio_Sector_CodigoExterno,Directorio_Sucursal_Id,Directorio_Sucursal_Nombre,Directorio_Sucursal_Descripcion,Directorio_Sucursal_EmpresaId,Directorio_Sucursal_CodigoExterno,Directorio_Sucursal_Direccion,Directorio_Sucursal_CodigoPostalId,Directorio_Sucursal_ZonaId,Valor_Moneda_Id,Valor_Moneda_Nombre,Valor_Moneda_PaisId,Valor_Moneda_Codigo,Valor_Moneda_Simbolo,Valor_Moneda_CodigoExterno,Seguridad_Usuario_Id,Seguridad_Usuario_EmpresaId,Seguridad_Usuario_LenguajeId,Seguridad_Usuario_PerfilId,Seguridad_Usuario_Nombre,Seguridad_Usuario_Apellido,Seguridad_Usuario_NombreApellido,Seguridad_Usuario_Documento,Seguridad_Usuario_Legajo,Seguridad_Usuario_CodigoExterno,Banca_Cuenta_Id,Banca_Cuenta_TipoId,Banca_Cuenta_EmpresaId,Banca_Cuenta_Nombre,Banca_Cuenta_Numero,Banca_Cuenta_Alias,Banca_Cuenta_CBU,Banca_Cuenta_BancoId,Banca_Cuenta_SucursalBancaria,Banca_Cuenta_CodigoExterno,Operacion_Contenedor_Id,Operacion_Contenedor_Nombre,Operacion_Contenedor_DepositarioId,Operacion_Contenedor_TipoId,Operacion_Contenedor_Identificador,Operacion_Contenedor_FechaApertura,Operacion_Contenedor_FechaCierre,Operacion_Sesion_Id,Operacion_Sesion_UsuarioId,Operacion_Sesion_FechaInicio,Operacion_Sesion_FechaCierre,Operacion_Sesion_EsCierreAutomatico,Operacion_Turno_Id,Operacion_Turno_TurnoDepositarioId,Operacion_Turno_DepositarioId,Operacion_Turno_SectorId,Operacion_Turno_FechaApertura,Operacion_Turno_FechaCierre,Operacion_Turno_Fecha,Operacion_Turno_Secuencia,Operacion_Turno_CierreDiarioId,Operacion_Turno_Observaciones,Operacion_Turno_CodigoTurno,Operacion_CierreDiario_Id,Operacion_CierreDiario_Nombre,Operacion_CierreDiario_Fecha,Operacion_CierreDiario_DepositarioId,Operacion_CierreDiario_SesionId,Operacion_CierreDiario_CodigoCierre,Operacion_CierreDiario_UsuarioCreacion,Operacion_CierreDiario_FechaCreacion,Operacion_CierreDiario_UsuarioModificacion,Operacion_CierreDiario_FechaModificacion,Valor_OrigenValor_Id,Valor_OrigenValor_Nombre,Valor_OrigenValor_Descripcion,Valor_OrigenValor_CodigoExterno));
+			  return (Entities.Views.Integracion.OperacionTransaccion)base.Add(new Entities.Views.Integracion.OperacionTransaccion(OperacionTransaccion_Id,OperacionTransaccion_TipoId,OperacionTransaccion_DepositarioId,OperacionTransaccion_SectorId,OperacionTransaccion_SucursalId,OperacionTransaccion_MonedaId,OperacionTransaccion_UsuarioId,OperacionTransaccion_CuentaId,OperacionTransaccion_ContenedorId,OperacionTransaccion_SesionId,OperacionTransaccion_TurnoId,OperacionTransaccion_CierreDiarioId,OperacionTransaccion_TotalValidado,OperacionTransaccion_TotalAValidar,OperacionTransaccion_Fecha,OperacionTransaccion_Finalizada,OperacionTransaccion_EsDepositoAutomatico,OperacionTransaccion_OrigenValorId,OperacionTransaccion_CodigoOperacion,OperacionTransaccion_FechaCreacion,OperacionTransaccion_FechaModificacion,OperacionTransaccion_UsuarioCreacion,OperacionTransaccion_UsuarioModificacion,OperacionTipoTransaccion_Id,OperacionTipoTransaccion_Nombre,OperacionTipoTransaccion_Descripcion,OperacionTipoTransaccion_FuncionId,OperacionTipoTransaccion_Habilitado,OperacionTipoTransaccion_UsuarioCreacion,OperacionTipoTransaccion_FechaCreacion,OperacionTipoTransaccion_UsuarioModificacion,OperacionTipoTransaccion_FechaModificacion,DispositivoDepositario_Id,DispositivoDepositario_Nombre,DispositivoDepositario_Descripcion,DispositivoDepositario_SectorId,DispositivoDepositario_NumeroSerie,DispositivoDepositario_CodigoExterno,DispositivoDepositario_TipoContenedorId,DispositivoDepositario_ModeloId,DispositivoDepositario_Habilitado,DispositivoDepositario_UsuarioCreacion,DispositivoDepositario_FechaCreacion,DispositivoDepositario_UsuarioModificacion,DispositivoDepositario_FechaModificacion,DirectorioSector_Id,DirectorioSector_SucursalId,DirectorioSector_Nombre,DirectorioSector_Descripcion,DirectorioSector_Habilitado,DirectorioSector_UsuarioCreacion,DirectorioSector_FechaCreacion,DirectorioSector_UsuarioModificacion,DirectorioSector_FechaModificacion,DirectorioSector_CodigoExterno,DirectorioSucursal_Id,DirectorioSucursal_Nombre,DirectorioSucursal_Descripcion,DirectorioSucursal_EmpresaId,DirectorioSucursal_CodigoExterno,DirectorioSucursal_Direccion,DirectorioSucursal_CodigoPostalId,DirectorioSucursal_ZonaId,DirectorioSucursal_Habilitado,DirectorioSucursal_UsuarioCreacion,DirectorioSucursal_FechaCreacion,DirectorioSucursal_UsuarioModificacion,DirectorioSucursal_FechaModificacion,ValorMoneda_Id,ValorMoneda_Nombre,ValorMoneda_PaisId,ValorMoneda_Codigo,ValorMoneda_Simbolo,ValorMoneda_CodigoExterno,ValorMoneda_Habilitado,ValorMoneda_UsuarioCreacion,ValorMoneda_FechaCreacion,ValorMoneda_UsuarioModificacion,ValorMoneda_FechaModificacion,SeguridadUsuario_Id,SeguridadUsuario_EmpresaId,SeguridadUsuario_LenguajeId,SeguridadUsuario_PerfilId,SeguridadUsuario_Nombre,SeguridadUsuario_Apellido,SeguridadUsuario_NombreApellido,SeguridadUsuario_Documento,SeguridadUsuario_Legajo,SeguridadUsuario_Mail,SeguridadUsuario_FechaIngreso,SeguridadUsuario_NickName,SeguridadUsuario_Password,SeguridadUsuario_Token,SeguridadUsuario_Avatar,SeguridadUsuario_FechaUltimoLogin,SeguridadUsuario_DebeCambiarPassword,SeguridadUsuario_Habilitado,SeguridadUsuario_CantidadLogueosIncorrectos,SeguridadUsuario_Bloqueado,SeguridadUsuario_FechaExpiracion,SeguridadUsuario_UsuarioCreacion,SeguridadUsuario_FechaCreacion,SeguridadUsuario_UsuarioModificacion,SeguridadUsuario_FechaModificacion,SeguridadUsuario_CodigoExterno,BancaCuenta_Id,BancaCuenta_TipoId,BancaCuenta_EmpresaId,BancaCuenta_Nombre,BancaCuenta_Numero,BancaCuenta_Alias,BancaCuenta_CBU,BancaCuenta_BancoId,BancaCuenta_SucursalBancaria,BancaCuenta_Habilitado,BancaCuenta_UsuarioCreacion,BancaCuenta_FechaCreacion,BancaCuenta_UsuarioModificacion,BancaCuenta_FechaModificacion,BancaCuenta_CodigoExterno,OperacionContenedor_Id,OperacionContenedor_Nombre,OperacionContenedor_DepositarioId,OperacionContenedor_TipoId,OperacionContenedor_Identificador,OperacionContenedor_FechaApertura,OperacionContenedor_FechaCierre,OperacionContenedor_Habilitado,OperacionContenedor_UsuarioCreacion,OperacionContenedor_FechaCreacion,OperacionContenedor_UsuarioModificacion,OperacionContenedor_FechaModificacion,OperacionSesion_Id,OperacionSesion_DepositarioId,OperacionSesion_UsuarioId,OperacionSesion_FechaInicio,OperacionSesion_FechaCierre,OperacionSesion_EsCierreAutomatico,OperacionTurno_Id,OperacionTurno_TurnoDepositarioId,OperacionTurno_DepositarioId,OperacionTurno_SectorId,OperacionTurno_FechaApertura,OperacionTurno_FechaCierre,OperacionTurno_Fecha,OperacionTurno_Secuencia,OperacionTurno_CierreDiarioId,OperacionTurno_Observaciones,OperacionTurno_CodigoTurno,OperacionTurno_UsuarioCreacion,OperacionTurno_FechaCreacion,OperacionTurno_UsuarioModificacion,OperacionTurno_FechaModificacion,OperacionTurno_Habilitado,OperacionCierreDiario_Id,OperacionCierreDiario_Nombre,OperacionCierreDiario_Fecha,OperacionCierreDiario_DepositarioId,OperacionCierreDiario_SesionId,OperacionCierreDiario_CodigoCierre,OperacionCierreDiario_UsuarioCreacion,OperacionCierreDiario_FechaCreacion,OperacionCierreDiario_UsuarioModificacion,OperacionCierreDiario_FechaModificacion,ValorOrigenValor_Id,ValorOrigenValor_Nombre,ValorOrigenValor_Descripcion,ValorOrigenValor_EmpresaId,ValorOrigenValor_Habilitado,ValorOrigenValor_UsuarioCreacion,ValorOrigenValor_FechaCreacion,ValorOrigenValor_UsuarioModificacion,ValorOrigenValor_FechaModificacion,ValorOrigenValor_CodigoExterno,SeguridadUsuario_UsuarioCreacion_Id,SeguridadUsuario_UsuarioCreacion_EmpresaId,SeguridadUsuario_UsuarioCreacion_LenguajeId,SeguridadUsuario_UsuarioCreacion_PerfilId,SeguridadUsuario_UsuarioCreacion_Nombre,SeguridadUsuario_UsuarioCreacion_Apellido,SeguridadUsuario_UsuarioCreacion_NombreApellido,SeguridadUsuario_UsuarioCreacion_Documento,SeguridadUsuario_UsuarioCreacion_Legajo,SeguridadUsuario_UsuarioCreacion_Mail,SeguridadUsuario_UsuarioCreacion_FechaIngreso,SeguridadUsuario_UsuarioCreacion_NickName,SeguridadUsuario_UsuarioCreacion_Password,SeguridadUsuario_UsuarioCreacion_Token,SeguridadUsuario_UsuarioCreacion_Avatar,SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin,SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword,SeguridadUsuario_UsuarioCreacion_Habilitado,SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos,SeguridadUsuario_UsuarioCreacion_Bloqueado,SeguridadUsuario_UsuarioCreacion_FechaExpiracion,SeguridadUsuario_UsuarioCreacion_UsuarioCreacion,SeguridadUsuario_UsuarioCreacion_FechaCreacion,SeguridadUsuario_UsuarioCreacion_UsuarioModificacion,SeguridadUsuario_UsuarioCreacion_FechaModificacion,SeguridadUsuario_UsuarioCreacion_CodigoExterno,SeguridadUsuario_UsuarioModificacion_Id,SeguridadUsuario_UsuarioModificacion_EmpresaId,SeguridadUsuario_UsuarioModificacion_LenguajeId,SeguridadUsuario_UsuarioModificacion_PerfilId,SeguridadUsuario_UsuarioModificacion_Nombre,SeguridadUsuario_UsuarioModificacion_Apellido,SeguridadUsuario_UsuarioModificacion_NombreApellido,SeguridadUsuario_UsuarioModificacion_Documento,SeguridadUsuario_UsuarioModificacion_Legajo,SeguridadUsuario_UsuarioModificacion_Mail,SeguridadUsuario_UsuarioModificacion_FechaIngreso,SeguridadUsuario_UsuarioModificacion_NickName,SeguridadUsuario_UsuarioModificacion_Password,SeguridadUsuario_UsuarioModificacion_Token,SeguridadUsuario_UsuarioModificacion_Avatar,SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin,SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword,SeguridadUsuario_UsuarioModificacion_Habilitado,SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos,SeguridadUsuario_UsuarioModificacion_Bloqueado,SeguridadUsuario_UsuarioModificacion_FechaExpiracion,SeguridadUsuario_UsuarioModificacion_UsuarioCreacion,SeguridadUsuario_UsuarioModificacion_FechaCreacion,SeguridadUsuario_UsuarioModificacion_UsuarioModificacion,SeguridadUsuario_UsuarioModificacion_FechaModificacion,SeguridadUsuario_UsuarioModificacion_CodigoExterno));
 			}
             public new List<Entities.Views.Integracion.OperacionTransaccion> Items()
             {
@@ -187,1411 +305,2945 @@ using System.Text;
             /// <summary>
             /// Gets 
             /// </summary>
-            /// <param name="Operacion_Transaccion_Id"></param>
-            /// <param name="Operacion_Transaccion_TipoId"></param>
-            /// <param name="Operacion_Transaccion_DepositarioId"></param>
-            /// <param name="Operacion_Transaccion_SectorId"></param>
-            /// <param name="Operacion_Transaccion_SucursalId"></param>
-            /// <param name="Operacion_Transaccion_MonedaId"></param>
-            /// <param name="Operacion_Transaccion_UsuarioId"></param>
-            /// <param name="Operacion_Transaccion_CuentaId"></param>
-            /// <param name="Operacion_Transaccion_ContenedorId"></param>
-            /// <param name="Operacion_Transaccion_SesionId"></param>
-            /// <param name="Operacion_Transaccion_TurnoId"></param>
-            /// <param name="Operacion_Transaccion_CierreDiarioId"></param>
-            /// <param name="Operacion_Transaccion_TotalValidado"></param>
-            /// <param name="Operacion_Transaccion_TotalAValidar"></param>
-            /// <param name="Operacion_Transaccion_Fecha"></param>
-            /// <param name="Operacion_Transaccion_Finalizada"></param>
-            /// <param name="Operacion_Transaccion_EsDepositoAutomatico"></param>
-            /// <param name="Operacion_Transaccion_OrigenValorId"></param>
-            /// <param name="Operacion_Transaccion_CodigoOperacion"></param>
-            /// <param name="Operacion_Transaccion_FechaCreacion"></param>
-            /// <param name="Operacion_Transaccion_FechaModificacion"></param>
-            /// <param name="Operacion_Transaccion_UsuarioCreacion"></param>
-            /// <param name="Operacion_Transaccion_UsuarioModificacion"></param>
-            /// <param name="Operacion_TipoTransaccion_Id"></param>
-            /// <param name="Operacion_TipoTransaccion_Nombre"></param>
-            /// <param name="Operacion_TipoTransaccion_Descripcion"></param>
-            /// <param name="Dispositivo_Depositario_Id"></param>
-            /// <param name="Dispositivo_Depositario_Nombre"></param>
-            /// <param name="Dispositivo_Depositario_Descripcion"></param>
-            /// <param name="Dispositivo_Depositario_SectorId"></param>
-            /// <param name="Dispositivo_Depositario_NumeroSerie"></param>
-            /// <param name="Dispositivo_Depositario_CodigoExterno"></param>
-            /// <param name="Directorio_Sector_Id"></param>
-            /// <param name="Directorio_Sector_SucursalId"></param>
-            /// <param name="Directorio_Sector_Nombre"></param>
-            /// <param name="Directorio_Sector_Descripcion"></param>
-            /// <param name="Directorio_Sector_CodigoExterno"></param>
-            /// <param name="Directorio_Sucursal_Id"></param>
-            /// <param name="Directorio_Sucursal_Nombre"></param>
-            /// <param name="Directorio_Sucursal_Descripcion"></param>
-            /// <param name="Directorio_Sucursal_EmpresaId"></param>
-            /// <param name="Directorio_Sucursal_CodigoExterno"></param>
-            /// <param name="Directorio_Sucursal_Direccion"></param>
-            /// <param name="Directorio_Sucursal_CodigoPostalId"></param>
-            /// <param name="Directorio_Sucursal_ZonaId"></param>
-            /// <param name="Valor_Moneda_Id"></param>
-            /// <param name="Valor_Moneda_Nombre"></param>
-            /// <param name="Valor_Moneda_PaisId"></param>
-            /// <param name="Valor_Moneda_Codigo"></param>
-            /// <param name="Valor_Moneda_Simbolo"></param>
-            /// <param name="Valor_Moneda_CodigoExterno"></param>
-            /// <param name="Seguridad_Usuario_Id"></param>
-            /// <param name="Seguridad_Usuario_EmpresaId"></param>
-            /// <param name="Seguridad_Usuario_LenguajeId"></param>
-            /// <param name="Seguridad_Usuario_PerfilId"></param>
-            /// <param name="Seguridad_Usuario_Nombre"></param>
-            /// <param name="Seguridad_Usuario_Apellido"></param>
-            /// <param name="Seguridad_Usuario_NombreApellido"></param>
-            /// <param name="Seguridad_Usuario_Documento"></param>
-            /// <param name="Seguridad_Usuario_Legajo"></param>
-            /// <param name="Seguridad_Usuario_CodigoExterno"></param>
-            /// <param name="Banca_Cuenta_Id"></param>
-            /// <param name="Banca_Cuenta_TipoId"></param>
-            /// <param name="Banca_Cuenta_EmpresaId"></param>
-            /// <param name="Banca_Cuenta_Nombre"></param>
-            /// <param name="Banca_Cuenta_Numero"></param>
-            /// <param name="Banca_Cuenta_Alias"></param>
-            /// <param name="Banca_Cuenta_CBU"></param>
-            /// <param name="Banca_Cuenta_BancoId"></param>
-            /// <param name="Banca_Cuenta_SucursalBancaria"></param>
-            /// <param name="Banca_Cuenta_CodigoExterno"></param>
-            /// <param name="Operacion_Contenedor_Id"></param>
-            /// <param name="Operacion_Contenedor_Nombre"></param>
-            /// <param name="Operacion_Contenedor_DepositarioId"></param>
-            /// <param name="Operacion_Contenedor_TipoId"></param>
-            /// <param name="Operacion_Contenedor_Identificador"></param>
-            /// <param name="Operacion_Contenedor_FechaApertura"></param>
-            /// <param name="Operacion_Contenedor_FechaCierre"></param>
-            /// <param name="Operacion_Sesion_Id"></param>
-            /// <param name="Operacion_Sesion_UsuarioId"></param>
-            /// <param name="Operacion_Sesion_FechaInicio"></param>
-            /// <param name="Operacion_Sesion_FechaCierre"></param>
-            /// <param name="Operacion_Sesion_EsCierreAutomatico"></param>
-            /// <param name="Operacion_Turno_Id"></param>
-            /// <param name="Operacion_Turno_TurnoDepositarioId"></param>
-            /// <param name="Operacion_Turno_DepositarioId"></param>
-            /// <param name="Operacion_Turno_SectorId"></param>
-            /// <param name="Operacion_Turno_FechaApertura"></param>
-            /// <param name="Operacion_Turno_FechaCierre"></param>
-            /// <param name="Operacion_Turno_Fecha"></param>
-            /// <param name="Operacion_Turno_Secuencia"></param>
-            /// <param name="Operacion_Turno_CierreDiarioId"></param>
-            /// <param name="Operacion_Turno_Observaciones"></param>
-            /// <param name="Operacion_Turno_CodigoTurno"></param>
-            /// <param name="Operacion_CierreDiario_Id"></param>
-            /// <param name="Operacion_CierreDiario_Nombre"></param>
-            /// <param name="Operacion_CierreDiario_Fecha"></param>
-            /// <param name="Operacion_CierreDiario_DepositarioId"></param>
-            /// <param name="Operacion_CierreDiario_SesionId"></param>
-            /// <param name="Operacion_CierreDiario_CodigoCierre"></param>
-            /// <param name="Operacion_CierreDiario_UsuarioCreacion"></param>
-            /// <param name="Operacion_CierreDiario_FechaCreacion"></param>
-            /// <param name="Operacion_CierreDiario_UsuarioModificacion"></param>
-            /// <param name="Operacion_CierreDiario_FechaModificacion"></param>
-            /// <param name="Valor_OrigenValor_Id"></param>
-            /// <param name="Valor_OrigenValor_Nombre"></param>
-            /// <param name="Valor_OrigenValor_Descripcion"></param>
-            /// <param name="Valor_OrigenValor_CodigoExterno"></param>
+            /// <param name="OperacionTransaccion_Id"></param>
+            /// <param name="OperacionTransaccion_TipoId"></param>
+            /// <param name="OperacionTransaccion_DepositarioId"></param>
+            /// <param name="OperacionTransaccion_SectorId"></param>
+            /// <param name="OperacionTransaccion_SucursalId"></param>
+            /// <param name="OperacionTransaccion_MonedaId"></param>
+            /// <param name="OperacionTransaccion_UsuarioId"></param>
+            /// <param name="OperacionTransaccion_CuentaId"></param>
+            /// <param name="OperacionTransaccion_ContenedorId"></param>
+            /// <param name="OperacionTransaccion_SesionId"></param>
+            /// <param name="OperacionTransaccion_TurnoId"></param>
+            /// <param name="OperacionTransaccion_CierreDiarioId"></param>
+            /// <param name="OperacionTransaccion_TotalValidado"></param>
+            /// <param name="OperacionTransaccion_TotalAValidar"></param>
+            /// <param name="OperacionTransaccion_Fecha"></param>
+            /// <param name="OperacionTransaccion_Finalizada"></param>
+            /// <param name="OperacionTransaccion_EsDepositoAutomatico"></param>
+            /// <param name="OperacionTransaccion_OrigenValorId"></param>
+            /// <param name="OperacionTransaccion_CodigoOperacion"></param>
+            /// <param name="OperacionTransaccion_FechaCreacion"></param>
+            /// <param name="OperacionTransaccion_FechaModificacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioCreacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioModificacion"></param>
+            /// <param name="OperacionTipoTransaccion_Id"></param>
+            /// <param name="OperacionTipoTransaccion_Nombre"></param>
+            /// <param name="OperacionTipoTransaccion_Descripcion"></param>
+            /// <param name="OperacionTipoTransaccion_FuncionId"></param>
+            /// <param name="OperacionTipoTransaccion_Habilitado"></param>
+            /// <param name="OperacionTipoTransaccion_UsuarioCreacion"></param>
+            /// <param name="OperacionTipoTransaccion_FechaCreacion"></param>
+            /// <param name="OperacionTipoTransaccion_UsuarioModificacion"></param>
+            /// <param name="OperacionTipoTransaccion_FechaModificacion"></param>
+            /// <param name="DispositivoDepositario_Id"></param>
+            /// <param name="DispositivoDepositario_Nombre"></param>
+            /// <param name="DispositivoDepositario_Descripcion"></param>
+            /// <param name="DispositivoDepositario_SectorId"></param>
+            /// <param name="DispositivoDepositario_NumeroSerie"></param>
+            /// <param name="DispositivoDepositario_CodigoExterno"></param>
+            /// <param name="DispositivoDepositario_TipoContenedorId"></param>
+            /// <param name="DispositivoDepositario_ModeloId"></param>
+            /// <param name="DispositivoDepositario_Habilitado"></param>
+            /// <param name="DispositivoDepositario_UsuarioCreacion"></param>
+            /// <param name="DispositivoDepositario_FechaCreacion"></param>
+            /// <param name="DispositivoDepositario_UsuarioModificacion"></param>
+            /// <param name="DispositivoDepositario_FechaModificacion"></param>
+            /// <param name="DirectorioSector_Id"></param>
+            /// <param name="DirectorioSector_SucursalId"></param>
+            /// <param name="DirectorioSector_Nombre"></param>
+            /// <param name="DirectorioSector_Descripcion"></param>
+            /// <param name="DirectorioSector_Habilitado"></param>
+            /// <param name="DirectorioSector_UsuarioCreacion"></param>
+            /// <param name="DirectorioSector_FechaCreacion"></param>
+            /// <param name="DirectorioSector_UsuarioModificacion"></param>
+            /// <param name="DirectorioSector_FechaModificacion"></param>
+            /// <param name="DirectorioSector_CodigoExterno"></param>
+            /// <param name="DirectorioSucursal_Id"></param>
+            /// <param name="DirectorioSucursal_Nombre"></param>
+            /// <param name="DirectorioSucursal_Descripcion"></param>
+            /// <param name="DirectorioSucursal_EmpresaId"></param>
+            /// <param name="DirectorioSucursal_CodigoExterno"></param>
+            /// <param name="DirectorioSucursal_Direccion"></param>
+            /// <param name="DirectorioSucursal_CodigoPostalId"></param>
+            /// <param name="DirectorioSucursal_ZonaId"></param>
+            /// <param name="DirectorioSucursal_Habilitado"></param>
+            /// <param name="DirectorioSucursal_UsuarioCreacion"></param>
+            /// <param name="DirectorioSucursal_FechaCreacion"></param>
+            /// <param name="DirectorioSucursal_UsuarioModificacion"></param>
+            /// <param name="DirectorioSucursal_FechaModificacion"></param>
+            /// <param name="ValorMoneda_Id"></param>
+            /// <param name="ValorMoneda_Nombre"></param>
+            /// <param name="ValorMoneda_PaisId"></param>
+            /// <param name="ValorMoneda_Codigo"></param>
+            /// <param name="ValorMoneda_Simbolo"></param>
+            /// <param name="ValorMoneda_CodigoExterno"></param>
+            /// <param name="ValorMoneda_Habilitado"></param>
+            /// <param name="ValorMoneda_UsuarioCreacion"></param>
+            /// <param name="ValorMoneda_FechaCreacion"></param>
+            /// <param name="ValorMoneda_UsuarioModificacion"></param>
+            /// <param name="ValorMoneda_FechaModificacion"></param>
+            /// <param name="SeguridadUsuario_Id"></param>
+            /// <param name="SeguridadUsuario_EmpresaId"></param>
+            /// <param name="SeguridadUsuario_LenguajeId"></param>
+            /// <param name="SeguridadUsuario_PerfilId"></param>
+            /// <param name="SeguridadUsuario_Nombre"></param>
+            /// <param name="SeguridadUsuario_Apellido"></param>
+            /// <param name="SeguridadUsuario_NombreApellido"></param>
+            /// <param name="SeguridadUsuario_Documento"></param>
+            /// <param name="SeguridadUsuario_Legajo"></param>
+            /// <param name="SeguridadUsuario_Mail"></param>
+            /// <param name="SeguridadUsuario_FechaIngreso"></param>
+            /// <param name="SeguridadUsuario_NickName"></param>
+            /// <param name="SeguridadUsuario_Password"></param>
+            /// <param name="SeguridadUsuario_Token"></param>
+            /// <param name="SeguridadUsuario_Avatar"></param>
+            /// <param name="SeguridadUsuario_FechaUltimoLogin"></param>
+            /// <param name="SeguridadUsuario_DebeCambiarPassword"></param>
+            /// <param name="SeguridadUsuario_Habilitado"></param>
+            /// <param name="SeguridadUsuario_CantidadLogueosIncorrectos"></param>
+            /// <param name="SeguridadUsuario_Bloqueado"></param>
+            /// <param name="SeguridadUsuario_FechaExpiracion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion"></param>
+            /// <param name="SeguridadUsuario_FechaCreacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion"></param>
+            /// <param name="SeguridadUsuario_FechaModificacion"></param>
+            /// <param name="SeguridadUsuario_CodigoExterno"></param>
+            /// <param name="BancaCuenta_Id"></param>
+            /// <param name="BancaCuenta_TipoId"></param>
+            /// <param name="BancaCuenta_EmpresaId"></param>
+            /// <param name="BancaCuenta_Nombre"></param>
+            /// <param name="BancaCuenta_Numero"></param>
+            /// <param name="BancaCuenta_Alias"></param>
+            /// <param name="BancaCuenta_CBU"></param>
+            /// <param name="BancaCuenta_BancoId"></param>
+            /// <param name="BancaCuenta_SucursalBancaria"></param>
+            /// <param name="BancaCuenta_Habilitado"></param>
+            /// <param name="BancaCuenta_UsuarioCreacion"></param>
+            /// <param name="BancaCuenta_FechaCreacion"></param>
+            /// <param name="BancaCuenta_UsuarioModificacion"></param>
+            /// <param name="BancaCuenta_FechaModificacion"></param>
+            /// <param name="BancaCuenta_CodigoExterno"></param>
+            /// <param name="OperacionContenedor_Id"></param>
+            /// <param name="OperacionContenedor_Nombre"></param>
+            /// <param name="OperacionContenedor_DepositarioId"></param>
+            /// <param name="OperacionContenedor_TipoId"></param>
+            /// <param name="OperacionContenedor_Identificador"></param>
+            /// <param name="OperacionContenedor_FechaApertura"></param>
+            /// <param name="OperacionContenedor_FechaCierre"></param>
+            /// <param name="OperacionContenedor_Habilitado"></param>
+            /// <param name="OperacionContenedor_UsuarioCreacion"></param>
+            /// <param name="OperacionContenedor_FechaCreacion"></param>
+            /// <param name="OperacionContenedor_UsuarioModificacion"></param>
+            /// <param name="OperacionContenedor_FechaModificacion"></param>
+            /// <param name="OperacionSesion_Id"></param>
+            /// <param name="OperacionSesion_DepositarioId"></param>
+            /// <param name="OperacionSesion_UsuarioId"></param>
+            /// <param name="OperacionSesion_FechaInicio"></param>
+            /// <param name="OperacionSesion_FechaCierre"></param>
+            /// <param name="OperacionSesion_EsCierreAutomatico"></param>
+            /// <param name="OperacionTurno_Id"></param>
+            /// <param name="OperacionTurno_TurnoDepositarioId"></param>
+            /// <param name="OperacionTurno_DepositarioId"></param>
+            /// <param name="OperacionTurno_SectorId"></param>
+            /// <param name="OperacionTurno_FechaApertura"></param>
+            /// <param name="OperacionTurno_FechaCierre"></param>
+            /// <param name="OperacionTurno_Fecha"></param>
+            /// <param name="OperacionTurno_Secuencia"></param>
+            /// <param name="OperacionTurno_CierreDiarioId"></param>
+            /// <param name="OperacionTurno_Observaciones"></param>
+            /// <param name="OperacionTurno_CodigoTurno"></param>
+            /// <param name="OperacionTurno_UsuarioCreacion"></param>
+            /// <param name="OperacionTurno_FechaCreacion"></param>
+            /// <param name="OperacionTurno_UsuarioModificacion"></param>
+            /// <param name="OperacionTurno_FechaModificacion"></param>
+            /// <param name="OperacionTurno_Habilitado"></param>
+            /// <param name="OperacionCierreDiario_Id"></param>
+            /// <param name="OperacionCierreDiario_Nombre"></param>
+            /// <param name="OperacionCierreDiario_Fecha"></param>
+            /// <param name="OperacionCierreDiario_DepositarioId"></param>
+            /// <param name="OperacionCierreDiario_SesionId"></param>
+            /// <param name="OperacionCierreDiario_CodigoCierre"></param>
+            /// <param name="OperacionCierreDiario_UsuarioCreacion"></param>
+            /// <param name="OperacionCierreDiario_FechaCreacion"></param>
+            /// <param name="OperacionCierreDiario_UsuarioModificacion"></param>
+            /// <param name="OperacionCierreDiario_FechaModificacion"></param>
+            /// <param name="ValorOrigenValor_Id"></param>
+            /// <param name="ValorOrigenValor_Nombre"></param>
+            /// <param name="ValorOrigenValor_Descripcion"></param>
+            /// <param name="ValorOrigenValor_EmpresaId"></param>
+            /// <param name="ValorOrigenValor_Habilitado"></param>
+            /// <param name="ValorOrigenValor_UsuarioCreacion"></param>
+            /// <param name="ValorOrigenValor_FechaCreacion"></param>
+            /// <param name="ValorOrigenValor_UsuarioModificacion"></param>
+            /// <param name="ValorOrigenValor_FechaModificacion"></param>
+            /// <param name="ValorOrigenValor_CodigoExterno"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Id"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_EmpresaId"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_LenguajeId"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_PerfilId"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Nombre"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Apellido"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_NombreApellido"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Documento"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Legajo"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Mail"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_FechaIngreso"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_NickName"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Password"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Token"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Avatar"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Habilitado"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_Bloqueado"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_FechaExpiracion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_UsuarioCreacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_FechaCreacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_UsuarioModificacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_FechaModificacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioCreacion_CodigoExterno"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Id"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_EmpresaId"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_LenguajeId"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_PerfilId"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Nombre"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Apellido"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_NombreApellido"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Documento"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Legajo"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Mail"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_FechaIngreso"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_NickName"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Password"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Token"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Avatar"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Habilitado"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_Bloqueado"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_FechaExpiracion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_UsuarioCreacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_FechaCreacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_UsuarioModificacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_FechaModificacion"></param>
+            /// <param name="SeguridadUsuario_UsuarioModificacion_CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Views.Integracion.OperacionTransaccion> Items(Int64? Operacion_Transaccion_Id,Int64? Operacion_Transaccion_TipoId,Int64? Operacion_Transaccion_DepositarioId,Int64? Operacion_Transaccion_SectorId,Int64? Operacion_Transaccion_SucursalId,Int64? Operacion_Transaccion_MonedaId,Int64? Operacion_Transaccion_UsuarioId,Int64? Operacion_Transaccion_CuentaId,Int64? Operacion_Transaccion_ContenedorId,Int64? Operacion_Transaccion_SesionId,Int64? Operacion_Transaccion_TurnoId,Int64? Operacion_Transaccion_CierreDiarioId,Double? Operacion_Transaccion_TotalValidado,Double? Operacion_Transaccion_TotalAValidar,DateTime? Operacion_Transaccion_Fecha,Boolean? Operacion_Transaccion_Finalizada,Boolean? Operacion_Transaccion_EsDepositoAutomatico,Int64? Operacion_Transaccion_OrigenValorId,String Operacion_Transaccion_CodigoOperacion,DateTime? Operacion_Transaccion_FechaCreacion,DateTime? Operacion_Transaccion_FechaModificacion,Int64? Operacion_Transaccion_UsuarioCreacion,Int64? Operacion_Transaccion_UsuarioModificacion,Int64? Operacion_TipoTransaccion_Id,String Operacion_TipoTransaccion_Nombre,String Operacion_TipoTransaccion_Descripcion,Int64? Dispositivo_Depositario_Id,String Dispositivo_Depositario_Nombre,String Dispositivo_Depositario_Descripcion,Int64? Dispositivo_Depositario_SectorId,String Dispositivo_Depositario_NumeroSerie,String Dispositivo_Depositario_CodigoExterno,Int64? Directorio_Sector_Id,Int64? Directorio_Sector_SucursalId,String Directorio_Sector_Nombre,String Directorio_Sector_Descripcion,String Directorio_Sector_CodigoExterno,Int64? Directorio_Sucursal_Id,String Directorio_Sucursal_Nombre,String Directorio_Sucursal_Descripcion,Int64? Directorio_Sucursal_EmpresaId,String Directorio_Sucursal_CodigoExterno,String Directorio_Sucursal_Direccion,Int64? Directorio_Sucursal_CodigoPostalId,Int64? Directorio_Sucursal_ZonaId,Int64? Valor_Moneda_Id,String Valor_Moneda_Nombre,Int64? Valor_Moneda_PaisId,String Valor_Moneda_Codigo,String Valor_Moneda_Simbolo,String Valor_Moneda_CodigoExterno,Int64? Seguridad_Usuario_Id,Int64? Seguridad_Usuario_EmpresaId,Int64? Seguridad_Usuario_LenguajeId,Int64? Seguridad_Usuario_PerfilId,String Seguridad_Usuario_Nombre,String Seguridad_Usuario_Apellido,String Seguridad_Usuario_NombreApellido,String Seguridad_Usuario_Documento,String Seguridad_Usuario_Legajo,String Seguridad_Usuario_CodigoExterno,Int64? Banca_Cuenta_Id,Int64? Banca_Cuenta_TipoId,Int64? Banca_Cuenta_EmpresaId,String Banca_Cuenta_Nombre,String Banca_Cuenta_Numero,String Banca_Cuenta_Alias,String Banca_Cuenta_CBU,Int64? Banca_Cuenta_BancoId,String Banca_Cuenta_SucursalBancaria,String Banca_Cuenta_CodigoExterno,Int64? Operacion_Contenedor_Id,String Operacion_Contenedor_Nombre,Int64? Operacion_Contenedor_DepositarioId,Int64? Operacion_Contenedor_TipoId,String Operacion_Contenedor_Identificador,DateTime? Operacion_Contenedor_FechaApertura,DateTime? Operacion_Contenedor_FechaCierre,Int64? Operacion_Sesion_Id,Int64? Operacion_Sesion_UsuarioId,DateTime? Operacion_Sesion_FechaInicio,DateTime? Operacion_Sesion_FechaCierre,Boolean? Operacion_Sesion_EsCierreAutomatico,Int64? Operacion_Turno_Id,Int64? Operacion_Turno_TurnoDepositarioId,Int64? Operacion_Turno_DepositarioId,Int64? Operacion_Turno_SectorId,DateTime? Operacion_Turno_FechaApertura,DateTime? Operacion_Turno_FechaCierre,DateTime? Operacion_Turno_Fecha,Int32? Operacion_Turno_Secuencia,Int64? Operacion_Turno_CierreDiarioId,String Operacion_Turno_Observaciones,String Operacion_Turno_CodigoTurno,Int64? Operacion_CierreDiario_Id,String Operacion_CierreDiario_Nombre,DateTime? Operacion_CierreDiario_Fecha,Int64? Operacion_CierreDiario_DepositarioId,Int64? Operacion_CierreDiario_SesionId,String Operacion_CierreDiario_CodigoCierre,Int64? Operacion_CierreDiario_UsuarioCreacion,DateTime? Operacion_CierreDiario_FechaCreacion,Int64? Operacion_CierreDiario_UsuarioModificacion,DateTime? Operacion_CierreDiario_FechaModificacion,Int64? Valor_OrigenValor_Id,String Valor_OrigenValor_Nombre,String Valor_OrigenValor_Descripcion,String Valor_OrigenValor_CodigoExterno)
+            public List<Entities.Views.Integracion.OperacionTransaccion> Items(Int64? OperacionTransaccion_Id,Int64? OperacionTransaccion_TipoId,Int64? OperacionTransaccion_DepositarioId,Int64? OperacionTransaccion_SectorId,Int64? OperacionTransaccion_SucursalId,Int64? OperacionTransaccion_MonedaId,Int64? OperacionTransaccion_UsuarioId,Int64? OperacionTransaccion_CuentaId,Int64? OperacionTransaccion_ContenedorId,Int64? OperacionTransaccion_SesionId,Int64? OperacionTransaccion_TurnoId,Int64? OperacionTransaccion_CierreDiarioId,Double? OperacionTransaccion_TotalValidado,Double? OperacionTransaccion_TotalAValidar,DateTime? OperacionTransaccion_Fecha,Boolean? OperacionTransaccion_Finalizada,Boolean? OperacionTransaccion_EsDepositoAutomatico,Int64? OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime? OperacionTransaccion_FechaCreacion,DateTime? OperacionTransaccion_FechaModificacion,Int64? OperacionTransaccion_UsuarioCreacion,Int64? OperacionTransaccion_UsuarioModificacion,Int64? OperacionTipoTransaccion_Id,String OperacionTipoTransaccion_Nombre,String OperacionTipoTransaccion_Descripcion,Int64? OperacionTipoTransaccion_FuncionId,Boolean? OperacionTipoTransaccion_Habilitado,Int64? OperacionTipoTransaccion_UsuarioCreacion,DateTime? OperacionTipoTransaccion_FechaCreacion,Int64? OperacionTipoTransaccion_UsuarioModificacion,DateTime? OperacionTipoTransaccion_FechaModificacion,Int64? DispositivoDepositario_Id,String DispositivoDepositario_Nombre,String DispositivoDepositario_Descripcion,Int64? DispositivoDepositario_SectorId,String DispositivoDepositario_NumeroSerie,String DispositivoDepositario_CodigoExterno,Int64? DispositivoDepositario_TipoContenedorId,Int64? DispositivoDepositario_ModeloId,Boolean? DispositivoDepositario_Habilitado,Int64? DispositivoDepositario_UsuarioCreacion,DateTime? DispositivoDepositario_FechaCreacion,Int64? DispositivoDepositario_UsuarioModificacion,DateTime? DispositivoDepositario_FechaModificacion,Int64? DirectorioSector_Id,Int64? DirectorioSector_SucursalId,String DirectorioSector_Nombre,String DirectorioSector_Descripcion,Boolean? DirectorioSector_Habilitado,Int64? DirectorioSector_UsuarioCreacion,DateTime? DirectorioSector_FechaCreacion,Int64? DirectorioSector_UsuarioModificacion,DateTime? DirectorioSector_FechaModificacion,String DirectorioSector_CodigoExterno,Int64? DirectorioSucursal_Id,String DirectorioSucursal_Nombre,String DirectorioSucursal_Descripcion,Int64? DirectorioSucursal_EmpresaId,String DirectorioSucursal_CodigoExterno,String DirectorioSucursal_Direccion,Int64? DirectorioSucursal_CodigoPostalId,Int64? DirectorioSucursal_ZonaId,Boolean? DirectorioSucursal_Habilitado,Int64? DirectorioSucursal_UsuarioCreacion,DateTime? DirectorioSucursal_FechaCreacion,Int64? DirectorioSucursal_UsuarioModificacion,DateTime? DirectorioSucursal_FechaModificacion,Int64? ValorMoneda_Id,String ValorMoneda_Nombre,Int64? ValorMoneda_PaisId,String ValorMoneda_Codigo,String ValorMoneda_Simbolo,String ValorMoneda_CodigoExterno,Boolean? ValorMoneda_Habilitado,Int64? ValorMoneda_UsuarioCreacion,DateTime? ValorMoneda_FechaCreacion,Int64? ValorMoneda_UsuarioModificacion,DateTime? ValorMoneda_FechaModificacion,Int64? SeguridadUsuario_Id,Int64? SeguridadUsuario_EmpresaId,Int64? SeguridadUsuario_LenguajeId,Int64? SeguridadUsuario_PerfilId,String SeguridadUsuario_Nombre,String SeguridadUsuario_Apellido,String SeguridadUsuario_NombreApellido,String SeguridadUsuario_Documento,String SeguridadUsuario_Legajo,String SeguridadUsuario_Mail,DateTime? SeguridadUsuario_FechaIngreso,String SeguridadUsuario_NickName,String SeguridadUsuario_Password,String SeguridadUsuario_Token,String SeguridadUsuario_Avatar,DateTime? SeguridadUsuario_FechaUltimoLogin,Boolean? SeguridadUsuario_DebeCambiarPassword,Boolean? SeguridadUsuario_Habilitado,Int32? SeguridadUsuario_CantidadLogueosIncorrectos,Boolean? SeguridadUsuario_Bloqueado,DateTime? SeguridadUsuario_FechaExpiracion,Int64? SeguridadUsuario_UsuarioCreacion,DateTime? SeguridadUsuario_FechaCreacion,Int64? SeguridadUsuario_UsuarioModificacion,DateTime? SeguridadUsuario_FechaModificacion,String SeguridadUsuario_CodigoExterno,Int64? BancaCuenta_Id,Int64? BancaCuenta_TipoId,Int64? BancaCuenta_EmpresaId,String BancaCuenta_Nombre,String BancaCuenta_Numero,String BancaCuenta_Alias,String BancaCuenta_CBU,Int64? BancaCuenta_BancoId,String BancaCuenta_SucursalBancaria,Boolean? BancaCuenta_Habilitado,Int64? BancaCuenta_UsuarioCreacion,DateTime? BancaCuenta_FechaCreacion,Int64? BancaCuenta_UsuarioModificacion,DateTime? BancaCuenta_FechaModificacion,String BancaCuenta_CodigoExterno,Int64? OperacionContenedor_Id,String OperacionContenedor_Nombre,Int64? OperacionContenedor_DepositarioId,Int64? OperacionContenedor_TipoId,String OperacionContenedor_Identificador,DateTime? OperacionContenedor_FechaApertura,DateTime? OperacionContenedor_FechaCierre,Boolean? OperacionContenedor_Habilitado,Int64? OperacionContenedor_UsuarioCreacion,DateTime? OperacionContenedor_FechaCreacion,Int64? OperacionContenedor_UsuarioModificacion,DateTime? OperacionContenedor_FechaModificacion,Int64? OperacionSesion_Id,Int64? OperacionSesion_DepositarioId,Int64? OperacionSesion_UsuarioId,DateTime? OperacionSesion_FechaInicio,DateTime? OperacionSesion_FechaCierre,Boolean? OperacionSesion_EsCierreAutomatico,Int64? OperacionTurno_Id,Int64? OperacionTurno_TurnoDepositarioId,Int64? OperacionTurno_DepositarioId,Int64? OperacionTurno_SectorId,DateTime? OperacionTurno_FechaApertura,DateTime? OperacionTurno_FechaCierre,DateTime? OperacionTurno_Fecha,Int32? OperacionTurno_Secuencia,Int64? OperacionTurno_CierreDiarioId,String OperacionTurno_Observaciones,String OperacionTurno_CodigoTurno,Int64? OperacionTurno_UsuarioCreacion,DateTime? OperacionTurno_FechaCreacion,Int64? OperacionTurno_UsuarioModificacion,DateTime? OperacionTurno_FechaModificacion,Boolean? OperacionTurno_Habilitado,Int64? OperacionCierreDiario_Id,String OperacionCierreDiario_Nombre,DateTime? OperacionCierreDiario_Fecha,Int64? OperacionCierreDiario_DepositarioId,Int64? OperacionCierreDiario_SesionId,String OperacionCierreDiario_CodigoCierre,Int64? OperacionCierreDiario_UsuarioCreacion,DateTime? OperacionCierreDiario_FechaCreacion,Int64? OperacionCierreDiario_UsuarioModificacion,DateTime? OperacionCierreDiario_FechaModificacion,Int64? ValorOrigenValor_Id,String ValorOrigenValor_Nombre,String ValorOrigenValor_Descripcion,Int64? ValorOrigenValor_EmpresaId,Boolean? ValorOrigenValor_Habilitado,Int64? ValorOrigenValor_UsuarioCreacion,DateTime? ValorOrigenValor_FechaCreacion,Int64? ValorOrigenValor_UsuarioModificacion,DateTime? ValorOrigenValor_FechaModificacion,String ValorOrigenValor_CodigoExterno,Int64? SeguridadUsuario_UsuarioCreacion_Id,Int64? SeguridadUsuario_UsuarioCreacion_EmpresaId,Int64? SeguridadUsuario_UsuarioCreacion_LenguajeId,Int64? SeguridadUsuario_UsuarioCreacion_PerfilId,String SeguridadUsuario_UsuarioCreacion_Nombre,String SeguridadUsuario_UsuarioCreacion_Apellido,String SeguridadUsuario_UsuarioCreacion_NombreApellido,String SeguridadUsuario_UsuarioCreacion_Documento,String SeguridadUsuario_UsuarioCreacion_Legajo,String SeguridadUsuario_UsuarioCreacion_Mail,DateTime? SeguridadUsuario_UsuarioCreacion_FechaIngreso,String SeguridadUsuario_UsuarioCreacion_NickName,String SeguridadUsuario_UsuarioCreacion_Password,String SeguridadUsuario_UsuarioCreacion_Token,String SeguridadUsuario_UsuarioCreacion_Avatar,DateTime? SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin,Boolean? SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword,Boolean? SeguridadUsuario_UsuarioCreacion_Habilitado,Int32? SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos,Boolean? SeguridadUsuario_UsuarioCreacion_Bloqueado,DateTime? SeguridadUsuario_UsuarioCreacion_FechaExpiracion,Int64? SeguridadUsuario_UsuarioCreacion_UsuarioCreacion,DateTime? SeguridadUsuario_UsuarioCreacion_FechaCreacion,Int64? SeguridadUsuario_UsuarioCreacion_UsuarioModificacion,DateTime? SeguridadUsuario_UsuarioCreacion_FechaModificacion,String SeguridadUsuario_UsuarioCreacion_CodigoExterno,Int64? SeguridadUsuario_UsuarioModificacion_Id,Int64? SeguridadUsuario_UsuarioModificacion_EmpresaId,Int64? SeguridadUsuario_UsuarioModificacion_LenguajeId,Int64? SeguridadUsuario_UsuarioModificacion_PerfilId,String SeguridadUsuario_UsuarioModificacion_Nombre,String SeguridadUsuario_UsuarioModificacion_Apellido,String SeguridadUsuario_UsuarioModificacion_NombreApellido,String SeguridadUsuario_UsuarioModificacion_Documento,String SeguridadUsuario_UsuarioModificacion_Legajo,String SeguridadUsuario_UsuarioModificacion_Mail,DateTime? SeguridadUsuario_UsuarioModificacion_FechaIngreso,String SeguridadUsuario_UsuarioModificacion_NickName,String SeguridadUsuario_UsuarioModificacion_Password,String SeguridadUsuario_UsuarioModificacion_Token,String SeguridadUsuario_UsuarioModificacion_Avatar,DateTime? SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin,Boolean? SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword,Boolean? SeguridadUsuario_UsuarioModificacion_Habilitado,Int32? SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos,Boolean? SeguridadUsuario_UsuarioModificacion_Bloqueado,DateTime? SeguridadUsuario_UsuarioModificacion_FechaExpiracion,Int64? SeguridadUsuario_UsuarioModificacion_UsuarioCreacion,DateTime? SeguridadUsuario_UsuarioModificacion_FechaCreacion,Int64? SeguridadUsuario_UsuarioModificacion_UsuarioModificacion,DateTime? SeguridadUsuario_UsuarioModificacion_FechaModificacion,String SeguridadUsuario_UsuarioModificacion_CodigoExterno)
             {
                 this.Where.Clear();
-                if (Operacion_Transaccion_Id != null)
+                if (OperacionTransaccion_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
                     }
                    
                 }
-                if (Operacion_Transaccion_TipoId != null)
+                if (OperacionTransaccion_TipoId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TipoId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TipoId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
                     }
                    
                 }
-                if (Operacion_Transaccion_DepositarioId != null)
+                if (OperacionTransaccion_DepositarioId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_DepositarioId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_DepositarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
                     }
                    
                 }
-                if (Operacion_Transaccion_SectorId != null)
+                if (OperacionTransaccion_SectorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SectorId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SectorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
                     }
                    
                 }
-                if (Operacion_Transaccion_SucursalId != null)
+                if (OperacionTransaccion_SucursalId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SucursalId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SucursalId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
                     }
                    
                 }
-                if (Operacion_Transaccion_MonedaId != null)
+                if (OperacionTransaccion_MonedaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_MonedaId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_MonedaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
                     }
                    
                 }
-                if (Operacion_Transaccion_UsuarioId != null)
+                if (OperacionTransaccion_UsuarioId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
                     }
                    
                 }
-                if (Operacion_Transaccion_CuentaId != null)
+                if (OperacionTransaccion_CuentaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CuentaId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CuentaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
                     }
                    
                 }
-                if (Operacion_Transaccion_ContenedorId != null)
+                if (OperacionTransaccion_ContenedorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_ContenedorId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_ContenedorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
                     }
                    
                 }
-                if (Operacion_Transaccion_SesionId != null)
+                if (OperacionTransaccion_SesionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SesionId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_SesionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
                     }
                    
                 }
-                if (Operacion_Transaccion_TurnoId != null)
+                if (OperacionTransaccion_TurnoId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TurnoId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TurnoId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
                     }
                    
                 }
-                if (Operacion_Transaccion_CierreDiarioId != null)
+                if (OperacionTransaccion_CierreDiarioId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CierreDiarioId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CierreDiarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
                     }
                    
                 }
-                if (Operacion_Transaccion_TotalValidado != null)
+                if (OperacionTransaccion_TotalValidado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TotalValidado);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TotalValidado);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
                     }
                    
                 }
-                if (Operacion_Transaccion_TotalAValidar != null)
+                if (OperacionTransaccion_TotalAValidar != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TotalAValidar);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_TotalAValidar);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
                     }
                    
                 }
-                if (Operacion_Transaccion_Fecha != null)
+                if (OperacionTransaccion_Fecha != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Fecha);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
                     }
                    
                 }
-                if (Operacion_Transaccion_Finalizada != null)
+                if (OperacionTransaccion_Finalizada != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Finalizada);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Finalizada);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
                     }
                    
                 }
-                if (Operacion_Transaccion_EsDepositoAutomatico != null)
+                if (OperacionTransaccion_EsDepositoAutomatico != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_EsDepositoAutomatico);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_EsDepositoAutomatico);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
                     }
                    
                 }
-                if (Operacion_Transaccion_OrigenValorId != null)
+                if (OperacionTransaccion_OrigenValorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_OrigenValorId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_OrigenValorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
                     }
                    
                 }
-                if (Operacion_Transaccion_CodigoOperacion != null)
+                if (OperacionTransaccion_CodigoOperacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CodigoOperacion);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_CodigoOperacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
                     }
                    
                 }
-                if (Operacion_Transaccion_FechaCreacion != null)
+                if (OperacionTransaccion_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_FechaCreacion);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_FechaCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
                     }
                    
                 }
-                if (Operacion_Transaccion_FechaModificacion != null)
+                if (OperacionTransaccion_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_FechaModificacion);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_FechaModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
                     }
                    
                 }
-                if (Operacion_Transaccion_UsuarioCreacion != null)
+                if (OperacionTransaccion_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioCreacion);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
                     }
                    
                 }
-                if (Operacion_Transaccion_UsuarioModificacion != null)
+                if (OperacionTransaccion_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioModificacion);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_UsuarioModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
                     }
                    
                 }
-                if (Operacion_TipoTransaccion_Id != null)
+                if (OperacionTipoTransaccion_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TipoTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Id);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TipoTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Id);
                     }
                    
                 }
-                if (Operacion_TipoTransaccion_Nombre != null)
+                if (OperacionTipoTransaccion_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TipoTransaccion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Nombre);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TipoTransaccion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Nombre);
                     }
                    
                 }
-                if (Operacion_TipoTransaccion_Descripcion != null)
+                if (OperacionTipoTransaccion_Descripcion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TipoTransaccion_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Descripcion);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Descripcion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TipoTransaccion_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TipoTransaccion_Descripcion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Descripcion);
                     }
                    
                 }
-                if (Dispositivo_Depositario_Id != null)
+                if (OperacionTipoTransaccion_FuncionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Id);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_FuncionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FuncionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_FuncionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FuncionId);
                     }
                    
                 }
-                if (Dispositivo_Depositario_Nombre != null)
+                if (OperacionTipoTransaccion_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Nombre);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_Habilitado);
                     }
                    
                 }
-                if (Dispositivo_Depositario_Descripcion != null)
+                if (OperacionTipoTransaccion_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Descripcion);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_Descripcion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_UsuarioCreacion);
                     }
                    
                 }
-                if (Dispositivo_Depositario_SectorId != null)
+                if (OperacionTipoTransaccion_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_SectorId);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_SectorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FechaCreacion);
                     }
                    
                 }
-                if (Dispositivo_Depositario_NumeroSerie != null)
+                if (OperacionTipoTransaccion_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_NumeroSerie, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_NumeroSerie);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_NumeroSerie, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_NumeroSerie);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_UsuarioModificacion);
                     }
                    
                 }
-                if (Dispositivo_Depositario_CodigoExterno != null)
+                if (OperacionTipoTransaccion_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Dispositivo_Depositario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_CodigoExterno);
+                        this.Where.Add(ColumnEnum.OperacionTipoTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Dispositivo_Depositario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Dispositivo_Depositario_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTipoTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTipoTransaccion_FechaModificacion);
                     }
                    
                 }
-                if (Directorio_Sector_Id != null)
+                if (DispositivoDepositario_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sector_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Id);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sector_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Id);
                     }
                    
                 }
-                if (Directorio_Sector_SucursalId != null)
+                if (DispositivoDepositario_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sector_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_SucursalId);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sector_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_SucursalId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Nombre);
                     }
                    
                 }
-                if (Directorio_Sector_Nombre != null)
+                if (DispositivoDepositario_Descripcion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sector_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Nombre);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Descripcion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sector_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Descripcion);
                     }
                    
                 }
-                if (Directorio_Sector_Descripcion != null)
+                if (DispositivoDepositario_SectorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sector_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Descripcion);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sector_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_Descripcion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_SectorId);
                     }
                    
                 }
-                if (Directorio_Sector_CodigoExterno != null)
+                if (DispositivoDepositario_NumeroSerie != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sector_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_CodigoExterno);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_NumeroSerie, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_NumeroSerie);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sector_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sector_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_NumeroSerie, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_NumeroSerie);
                     }
                    
                 }
-                if (Directorio_Sucursal_Id != null)
+                if (DispositivoDepositario_CodigoExterno != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Id);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_CodigoExterno);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_CodigoExterno);
                     }
                    
                 }
-                if (Directorio_Sucursal_Nombre != null)
+                if (DispositivoDepositario_TipoContenedorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Nombre);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_TipoContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_TipoContenedorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_TipoContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_TipoContenedorId);
                     }
                    
                 }
-                if (Directorio_Sucursal_Descripcion != null)
+                if (DispositivoDepositario_ModeloId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Descripcion);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_ModeloId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_ModeloId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Descripcion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_ModeloId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_ModeloId);
                     }
                    
                 }
-                if (Directorio_Sucursal_EmpresaId != null)
+                if (DispositivoDepositario_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_EmpresaId);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_EmpresaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_Habilitado);
                     }
                    
                 }
-                if (Directorio_Sucursal_CodigoExterno != null)
+                if (DispositivoDepositario_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_CodigoExterno);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_UsuarioCreacion);
                     }
                    
                 }
-                if (Directorio_Sucursal_Direccion != null)
+                if (DispositivoDepositario_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_Direccion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Direccion);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_Direccion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_Direccion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_FechaCreacion);
                     }
                    
                 }
-                if (Directorio_Sucursal_CodigoPostalId != null)
+                if (DispositivoDepositario_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_CodigoPostalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_CodigoPostalId);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_CodigoPostalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_CodigoPostalId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_UsuarioModificacion);
                     }
                    
                 }
-                if (Directorio_Sucursal_ZonaId != null)
+                if (DispositivoDepositario_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Directorio_Sucursal_ZonaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_ZonaId);
+                        this.Where.Add(ColumnEnum.DispositivoDepositario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Directorio_Sucursal_ZonaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Directorio_Sucursal_ZonaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DispositivoDepositario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DispositivoDepositario_FechaModificacion);
                     }
                    
                 }
-                if (Valor_Moneda_Id != null)
+                if (DirectorioSector_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Id);
+                        this.Where.Add(ColumnEnum.DirectorioSector_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Id);
                     }
                    
                 }
-                if (Valor_Moneda_Nombre != null)
+                if (DirectorioSector_SucursalId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Nombre);
+                        this.Where.Add(ColumnEnum.DirectorioSector_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_SucursalId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_SucursalId);
                     }
                    
                 }
-                if (Valor_Moneda_PaisId != null)
+                if (DirectorioSector_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_PaisId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_PaisId);
+                        this.Where.Add(ColumnEnum.DirectorioSector_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_PaisId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_PaisId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Nombre);
                     }
                    
                 }
-                if (Valor_Moneda_Codigo != null)
+                if (DirectorioSector_Descripcion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_Codigo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Codigo);
+                        this.Where.Add(ColumnEnum.DirectorioSector_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Descripcion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_Codigo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Codigo);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Descripcion);
                     }
                    
                 }
-                if (Valor_Moneda_Simbolo != null)
+                if (DirectorioSector_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Simbolo);
+                        this.Where.Add(ColumnEnum.DirectorioSector_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_Simbolo);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_Habilitado);
                     }
                    
                 }
-                if (Valor_Moneda_CodigoExterno != null)
+                if (DirectorioSector_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Moneda_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_CodigoExterno);
+                        this.Where.Add(ColumnEnum.DirectorioSector_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Moneda_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Moneda_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_UsuarioCreacion);
                     }
                    
                 }
-                if (Seguridad_Usuario_Id != null)
+                if (DirectorioSector_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Id);
+                        this.Where.Add(ColumnEnum.DirectorioSector_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_FechaCreacion);
                     }
                    
                 }
-                if (Seguridad_Usuario_EmpresaId != null)
+                if (DirectorioSector_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_EmpresaId);
+                        this.Where.Add(ColumnEnum.DirectorioSector_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_EmpresaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_UsuarioModificacion);
                     }
                    
                 }
-                if (Seguridad_Usuario_LenguajeId != null)
+                if (DirectorioSector_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_LenguajeId);
+                        this.Where.Add(ColumnEnum.DirectorioSector_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_LenguajeId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_FechaModificacion);
                     }
                    
                 }
-                if (Seguridad_Usuario_PerfilId != null)
+                if (DirectorioSector_CodigoExterno != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_PerfilId);
+                        this.Where.Add(ColumnEnum.DirectorioSector_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_CodigoExterno);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_PerfilId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSector_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSector_CodigoExterno);
                     }
                    
                 }
-                if (Seguridad_Usuario_Nombre != null)
+                if (DirectorioSucursal_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Nombre);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Id);
                     }
                    
                 }
-                if (Seguridad_Usuario_Apellido != null)
+                if (DirectorioSucursal_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Apellido);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Apellido);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Nombre);
                     }
                    
                 }
-                if (Seguridad_Usuario_NombreApellido != null)
+                if (DirectorioSucursal_Descripcion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_NombreApellido);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Descripcion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_NombreApellido);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Descripcion);
                     }
                    
                 }
-                if (Seguridad_Usuario_Documento != null)
+                if (DirectorioSucursal_EmpresaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Documento);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_EmpresaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Documento);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_EmpresaId);
                     }
                    
                 }
-                if (Seguridad_Usuario_Legajo != null)
+                if (DirectorioSucursal_CodigoExterno != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Legajo);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_CodigoExterno);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_Legajo);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_CodigoExterno);
                     }
                    
                 }
-                if (Seguridad_Usuario_CodigoExterno != null)
+                if (DirectorioSucursal_Direccion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Seguridad_Usuario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_CodigoExterno);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_Direccion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Direccion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Seguridad_Usuario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Seguridad_Usuario_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_Direccion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Direccion);
                     }
                    
                 }
-                if (Banca_Cuenta_Id != null)
+                if (DirectorioSucursal_CodigoPostalId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Id);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_CodigoPostalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_CodigoPostalId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_CodigoPostalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_CodigoPostalId);
                     }
                    
                 }
-                if (Banca_Cuenta_TipoId != null)
+                if (DirectorioSucursal_ZonaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_TipoId);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_ZonaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_ZonaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_TipoId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_ZonaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_ZonaId);
                     }
                    
                 }
-                if (Banca_Cuenta_EmpresaId != null)
+                if (DirectorioSucursal_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_EmpresaId);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_EmpresaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_Habilitado);
                     }
                    
                 }
-                if (Banca_Cuenta_Nombre != null)
+                if (DirectorioSucursal_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Nombre);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_UsuarioCreacion);
                     }
                    
                 }
-                if (Banca_Cuenta_Numero != null)
+                if (DirectorioSucursal_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_Numero, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Numero);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_Numero, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Numero);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_FechaCreacion);
                     }
                    
                 }
-                if (Banca_Cuenta_Alias != null)
+                if (DirectorioSucursal_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_Alias, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Alias);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_Alias, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_Alias);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_UsuarioModificacion);
                     }
                    
                 }
-                if (Banca_Cuenta_CBU != null)
+                if (DirectorioSucursal_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_CBU, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_CBU);
+                        this.Where.Add(ColumnEnum.DirectorioSucursal_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_CBU, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_CBU);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DirectorioSucursal_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, DirectorioSucursal_FechaModificacion);
                     }
                    
                 }
-                if (Banca_Cuenta_BancoId != null)
+                if (ValorMoneda_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_BancoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_BancoId);
+                        this.Where.Add(ColumnEnum.ValorMoneda_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_BancoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_BancoId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Id);
                     }
                    
                 }
-                if (Banca_Cuenta_SucursalBancaria != null)
+                if (ValorMoneda_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_SucursalBancaria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_SucursalBancaria);
+                        this.Where.Add(ColumnEnum.ValorMoneda_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_SucursalBancaria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_SucursalBancaria);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Nombre);
                     }
                    
                 }
-                if (Banca_Cuenta_CodigoExterno != null)
+                if (ValorMoneda_PaisId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Banca_Cuenta_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_CodigoExterno);
+                        this.Where.Add(ColumnEnum.ValorMoneda_PaisId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_PaisId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Banca_Cuenta_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Banca_Cuenta_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_PaisId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_PaisId);
                     }
                    
                 }
-                if (Operacion_Contenedor_Id != null)
+                if (ValorMoneda_Codigo != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Id);
+                        this.Where.Add(ColumnEnum.ValorMoneda_Codigo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Codigo);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_Codigo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Codigo);
                     }
                    
                 }
-                if (Operacion_Contenedor_Nombre != null)
+                if (ValorMoneda_Simbolo != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Nombre);
+                        this.Where.Add(ColumnEnum.ValorMoneda_Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Simbolo);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_Simbolo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Simbolo);
                     }
                    
                 }
-                if (Operacion_Contenedor_DepositarioId != null)
+                if (ValorMoneda_CodigoExterno != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_DepositarioId);
+                        this.Where.Add(ColumnEnum.ValorMoneda_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_CodigoExterno);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_DepositarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_CodigoExterno);
                     }
                    
                 }
-                if (Operacion_Contenedor_TipoId != null)
+                if (ValorMoneda_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_TipoId);
+                        this.Where.Add(ColumnEnum.ValorMoneda_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_TipoId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_Habilitado);
                     }
                    
                 }
-                if (Operacion_Contenedor_Identificador != null)
+                if (ValorMoneda_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_Identificador, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Identificador);
+                        this.Where.Add(ColumnEnum.ValorMoneda_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_Identificador, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_Identificador);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_UsuarioCreacion);
                     }
                    
                 }
-                if (Operacion_Contenedor_FechaApertura != null)
+                if (ValorMoneda_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_FechaApertura);
+                        this.Where.Add(ColumnEnum.ValorMoneda_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_FechaApertura);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_FechaCreacion);
                     }
                    
                 }
-                if (Operacion_Contenedor_FechaCierre != null)
+                if (ValorMoneda_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Contenedor_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_FechaCierre);
+                        this.Where.Add(ColumnEnum.ValorMoneda_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Contenedor_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Contenedor_FechaCierre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_UsuarioModificacion);
                     }
                    
                 }
-                if (Operacion_Sesion_Id != null)
+                if (ValorMoneda_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Sesion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_Id);
+                        this.Where.Add(ColumnEnum.ValorMoneda_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Sesion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorMoneda_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorMoneda_FechaModificacion);
                     }
                    
                 }
-                if (Operacion_Sesion_UsuarioId != null)
+                if (SeguridadUsuario_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Sesion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_UsuarioId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Sesion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_UsuarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Id);
                     }
                    
                 }
-                if (Operacion_Sesion_FechaInicio != null)
+                if (SeguridadUsuario_EmpresaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Sesion_FechaInicio, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_FechaInicio);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_EmpresaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Sesion_FechaInicio, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_FechaInicio);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_EmpresaId);
                     }
                    
                 }
-                if (Operacion_Sesion_FechaCierre != null)
+                if (SeguridadUsuario_LenguajeId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Sesion_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_FechaCierre);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_LenguajeId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Sesion_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_FechaCierre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_LenguajeId);
                     }
                    
                 }
-                if (Operacion_Sesion_EsCierreAutomatico != null)
+                if (SeguridadUsuario_PerfilId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Sesion_EsCierreAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_EsCierreAutomatico);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_PerfilId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Sesion_EsCierreAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Sesion_EsCierreAutomatico);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_PerfilId);
                     }
                    
                 }
-                if (Operacion_Turno_Id != null)
+                if (SeguridadUsuario_Nombre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Id);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Nombre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Nombre);
                     }
                    
                 }
-                if (Operacion_Turno_TurnoDepositarioId != null)
+                if (SeguridadUsuario_Apellido != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_TurnoDepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_TurnoDepositarioId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Apellido);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_TurnoDepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_TurnoDepositarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Apellido);
                     }
                    
                 }
-                if (Operacion_Turno_DepositarioId != null)
+                if (SeguridadUsuario_NombreApellido != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_DepositarioId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_NombreApellido);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_DepositarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_NombreApellido);
                     }
                    
                 }
-                if (Operacion_Turno_SectorId != null)
+                if (SeguridadUsuario_Documento != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_SectorId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Documento);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_SectorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Documento);
                     }
                    
                 }
-                if (Operacion_Turno_FechaApertura != null)
+                if (SeguridadUsuario_Legajo != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_FechaApertura);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Legajo);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_FechaApertura);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Legajo);
                     }
                    
                 }
-                if (Operacion_Turno_FechaCierre != null)
+                if (SeguridadUsuario_Mail != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_FechaCierre);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Mail);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_FechaCierre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Mail);
                     }
                    
                 }
-                if (Operacion_Turno_Fecha != null)
+                if (SeguridadUsuario_FechaIngreso != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Fecha);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaIngreso);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaIngreso);
                     }
                    
                 }
-                if (Operacion_Turno_Secuencia != null)
+                if (SeguridadUsuario_NickName != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_Secuencia, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Secuencia);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_NickName);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_Secuencia, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Secuencia);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_NickName);
                     }
                    
                 }
-                if (Operacion_Turno_CierreDiarioId != null)
+                if (SeguridadUsuario_Password != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_CierreDiarioId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Password);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_CierreDiarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Password);
                     }
                    
                 }
-                if (Operacion_Turno_Observaciones != null)
+                if (SeguridadUsuario_Token != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_Observaciones, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Observaciones);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Token);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_Observaciones, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_Observaciones);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Token);
                     }
                    
                 }
-                if (Operacion_Turno_CodigoTurno != null)
+                if (SeguridadUsuario_Avatar != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Turno_CodigoTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_CodigoTurno);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Avatar);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Turno_CodigoTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Turno_CodigoTurno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Avatar);
                     }
                    
                 }
-                if (Operacion_CierreDiario_Id != null)
+                if (SeguridadUsuario_FechaUltimoLogin != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Id);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaUltimoLogin);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaUltimoLogin);
                     }
                    
                 }
-                if (Operacion_CierreDiario_Nombre != null)
+                if (SeguridadUsuario_DebeCambiarPassword != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Nombre);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_DebeCambiarPassword);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_DebeCambiarPassword);
                     }
                    
                 }
-                if (Operacion_CierreDiario_Fecha != null)
+                if (SeguridadUsuario_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Fecha);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Habilitado);
                     }
                    
                 }
-                if (Operacion_CierreDiario_DepositarioId != null)
+                if (SeguridadUsuario_CantidadLogueosIncorrectos != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_DepositarioId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_CantidadLogueosIncorrectos);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_DepositarioId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_CantidadLogueosIncorrectos);
                     }
                    
                 }
-                if (Operacion_CierreDiario_SesionId != null)
+                if (SeguridadUsuario_Bloqueado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_SesionId);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Bloqueado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_SesionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_Bloqueado);
                     }
                    
                 }
-                if (Operacion_CierreDiario_CodigoCierre != null)
+                if (SeguridadUsuario_FechaExpiracion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_CodigoCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_CodigoCierre);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaExpiracion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_CodigoCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_CodigoCierre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaExpiracion);
                     }
                    
                 }
-                if (Operacion_CierreDiario_UsuarioCreacion != null)
+                if (SeguridadUsuario_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_UsuarioCreacion);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_UsuarioCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion);
                     }
                    
                 }
-                if (Operacion_CierreDiario_FechaCreacion != null)
+                if (SeguridadUsuario_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_FechaCreacion);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_FechaCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaCreacion);
                     }
                    
                 }
-                if (Operacion_CierreDiario_UsuarioModificacion != null)
+                if (SeguridadUsuario_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_UsuarioModificacion);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_UsuarioModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion);
                     }
                    
                 }
-                if (Operacion_CierreDiario_FechaModificacion != null)
+                if (SeguridadUsuario_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_CierreDiario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_FechaModificacion);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_CierreDiario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_CierreDiario_FechaModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_FechaModificacion);
                     }
                    
                 }
-                if (Valor_OrigenValor_Id != null)
+                if (SeguridadUsuario_CodigoExterno != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_OrigenValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Id);
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_CodigoExterno);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_OrigenValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_CodigoExterno);
                     }
                    
                 }
-                if (Valor_OrigenValor_Nombre != null)
+                if (BancaCuenta_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_OrigenValor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Nombre);
+                        this.Where.Add(ColumnEnum.BancaCuenta_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_OrigenValor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Id);
                     }
                    
                 }
-                if (Valor_OrigenValor_Descripcion != null)
+                if (BancaCuenta_TipoId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_OrigenValor_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Descripcion);
+                        this.Where.Add(ColumnEnum.BancaCuenta_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_TipoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_OrigenValor_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_Descripcion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_TipoId);
                     }
                    
                 }
-                if (Valor_OrigenValor_CodigoExterno != null)
+                if (BancaCuenta_EmpresaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_OrigenValor_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_CodigoExterno);
+                        this.Where.Add(ColumnEnum.BancaCuenta_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_EmpresaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_OrigenValor_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_OrigenValor_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_EmpresaId);
+                    }
+                   
+                }
+                if (BancaCuenta_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Nombre);
+                    }
+                   
+                }
+                if (BancaCuenta_Numero != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_Numero, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Numero);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_Numero, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Numero);
+                    }
+                   
+                }
+                if (BancaCuenta_Alias != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_Alias, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Alias);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_Alias, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Alias);
+                    }
+                   
+                }
+                if (BancaCuenta_CBU != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_CBU, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_CBU);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_CBU, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_CBU);
+                    }
+                   
+                }
+                if (BancaCuenta_BancoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_BancoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_BancoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_BancoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_BancoId);
+                    }
+                   
+                }
+                if (BancaCuenta_SucursalBancaria != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_SucursalBancaria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_SucursalBancaria);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_SucursalBancaria, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_SucursalBancaria);
+                    }
+                   
+                }
+                if (BancaCuenta_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_Habilitado);
+                    }
+                   
+                }
+                if (BancaCuenta_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_UsuarioCreacion);
+                    }
+                   
+                }
+                if (BancaCuenta_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_FechaCreacion);
+                    }
+                   
+                }
+                if (BancaCuenta_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_UsuarioModificacion);
+                    }
+                   
+                }
+                if (BancaCuenta_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_FechaModificacion);
+                    }
+                   
+                }
+                if (BancaCuenta_CodigoExterno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.BancaCuenta_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.BancaCuenta_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, BancaCuenta_CodigoExterno);
+                    }
+                   
+                }
+                if (OperacionContenedor_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Id);
+                    }
+                   
+                }
+                if (OperacionContenedor_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Nombre);
+                    }
+                   
+                }
+                if (OperacionContenedor_DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_DepositarioId);
+                    }
+                   
+                }
+                if (OperacionContenedor_TipoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_TipoId);
+                    }
+                   
+                }
+                if (OperacionContenedor_Identificador != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_Identificador, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Identificador);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_Identificador, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Identificador);
+                    }
+                   
+                }
+                if (OperacionContenedor_FechaApertura != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaApertura);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaApertura);
+                    }
+                   
+                }
+                if (OperacionContenedor_FechaCierre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaCierre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaCierre);
+                    }
+                   
+                }
+                if (OperacionContenedor_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_Habilitado);
+                    }
+                   
+                }
+                if (OperacionContenedor_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_UsuarioCreacion);
+                    }
+                   
+                }
+                if (OperacionContenedor_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaCreacion);
+                    }
+                   
+                }
+                if (OperacionContenedor_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_UsuarioModificacion);
+                    }
+                   
+                }
+                if (OperacionContenedor_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionContenedor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionContenedor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionContenedor_FechaModificacion);
+                    }
+                   
+                }
+                if (OperacionSesion_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_Id);
+                    }
+                   
+                }
+                if (OperacionSesion_DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_DepositarioId);
+                    }
+                   
+                }
+                if (OperacionSesion_UsuarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_UsuarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_UsuarioId);
+                    }
+                   
+                }
+                if (OperacionSesion_FechaInicio != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_FechaInicio, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_FechaInicio);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_FechaInicio, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_FechaInicio);
+                    }
+                   
+                }
+                if (OperacionSesion_FechaCierre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_FechaCierre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_FechaCierre);
+                    }
+                   
+                }
+                if (OperacionSesion_EsCierreAutomatico != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionSesion_EsCierreAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_EsCierreAutomatico);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionSesion_EsCierreAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionSesion_EsCierreAutomatico);
+                    }
+                   
+                }
+                if (OperacionTurno_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Id);
+                    }
+                   
+                }
+                if (OperacionTurno_TurnoDepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_TurnoDepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_TurnoDepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_TurnoDepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_TurnoDepositarioId);
+                    }
+                   
+                }
+                if (OperacionTurno_DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_DepositarioId);
+                    }
+                   
+                }
+                if (OperacionTurno_SectorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_SectorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_SectorId);
+                    }
+                   
+                }
+                if (OperacionTurno_FechaApertura != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaApertura);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_FechaApertura, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaApertura);
+                    }
+                   
+                }
+                if (OperacionTurno_FechaCierre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaCierre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_FechaCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaCierre);
+                    }
+                   
+                }
+                if (OperacionTurno_Fecha != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Fecha);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Fecha);
+                    }
+                   
+                }
+                if (OperacionTurno_Secuencia != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_Secuencia, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Secuencia);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_Secuencia, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Secuencia);
+                    }
+                   
+                }
+                if (OperacionTurno_CierreDiarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_CierreDiarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_CierreDiarioId);
+                    }
+                   
+                }
+                if (OperacionTurno_Observaciones != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_Observaciones, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Observaciones);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_Observaciones, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Observaciones);
+                    }
+                   
+                }
+                if (OperacionTurno_CodigoTurno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_CodigoTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_CodigoTurno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_CodigoTurno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_CodigoTurno);
+                    }
+                   
+                }
+                if (OperacionTurno_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_UsuarioCreacion);
+                    }
+                   
+                }
+                if (OperacionTurno_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaCreacion);
+                    }
+                   
+                }
+                if (OperacionTurno_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_UsuarioModificacion);
+                    }
+                   
+                }
+                if (OperacionTurno_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_FechaModificacion);
+                    }
+                   
+                }
+                if (OperacionTurno_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTurno_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTurno_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTurno_Habilitado);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Id);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Nombre);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_Fecha != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Fecha);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_Fecha);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_DepositarioId);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_SesionId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_SesionId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_SesionId);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_CodigoCierre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_CodigoCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_CodigoCierre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_CodigoCierre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_CodigoCierre);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_UsuarioCreacion);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_FechaCreacion);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_UsuarioModificacion);
+                    }
+                   
+                }
+                if (OperacionCierreDiario_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionCierreDiario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionCierreDiario_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionCierreDiario_FechaModificacion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Id);
+                    }
+                   
+                }
+                if (ValorOrigenValor_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Nombre);
+                    }
+                   
+                }
+                if (ValorOrigenValor_Descripcion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_Descripcion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Descripcion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_EmpresaId);
+                    }
+                   
+                }
+                if (ValorOrigenValor_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_Habilitado);
+                    }
+                   
+                }
+                if (ValorOrigenValor_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_UsuarioCreacion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_FechaCreacion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_UsuarioModificacion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_FechaModificacion);
+                    }
+                   
+                }
+                if (ValorOrigenValor_CodigoExterno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorOrigenValor_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorOrigenValor_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorOrigenValor_CodigoExterno);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Id);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_EmpresaId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_LenguajeId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_LenguajeId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_LenguajeId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_PerfilId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_PerfilId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_PerfilId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Nombre);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Apellido != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Apellido);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Apellido);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_NombreApellido != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_NombreApellido);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_NombreApellido);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Documento != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Documento);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Documento);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Legajo != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Legajo);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Legajo);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Mail != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Mail);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Mail);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_FechaIngreso != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaIngreso);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaIngreso);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_NickName != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_NickName);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_NickName);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Password != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Password);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Password);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Token != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Token);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Token);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Avatar != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Avatar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Avatar);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Habilitado);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_Bloqueado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Bloqueado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_Bloqueado);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_FechaExpiracion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaExpiracion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaExpiracion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_UsuarioCreacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaCreacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_UsuarioModificacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_FechaModificacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioCreacion_CodigoExterno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioCreacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioCreacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioCreacion_CodigoExterno);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Id);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_EmpresaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_EmpresaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_EmpresaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_EmpresaId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_LenguajeId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_LenguajeId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_LenguajeId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_LenguajeId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_PerfilId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_PerfilId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_PerfilId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_PerfilId);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Nombre);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Apellido != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Apellido);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Apellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Apellido);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_NombreApellido != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_NombreApellido);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_NombreApellido, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_NombreApellido);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Documento != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Documento);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Documento, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Documento);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Legajo != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Legajo);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Legajo, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Legajo);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Mail != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Mail);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Mail, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Mail);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_FechaIngreso != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaIngreso);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaIngreso, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaIngreso);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_NickName != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_NickName);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_NickName, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_NickName);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Password != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Password);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Password, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Password);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Token != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Token);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Token, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Token);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Avatar != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Avatar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Avatar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Avatar);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Habilitado);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_Bloqueado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Bloqueado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_Bloqueado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_Bloqueado);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_FechaExpiracion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaExpiracion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaExpiracion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaExpiracion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_UsuarioCreacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaCreacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_UsuarioModificacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_FechaModificacion);
+                    }
+                   
+                }
+                if (SeguridadUsuario_UsuarioModificacion_CodigoExterno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.SeguridadUsuario_UsuarioModificacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.SeguridadUsuario_UsuarioModificacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, SeguridadUsuario_UsuarioModificacion_CodigoExterno);
                     }
                    
                 }
@@ -1666,19 +3318,48 @@ using System.Text;
 		{
 				public enum ColumnEnum : int
                 {
-					Operacion_TransaccionDetalle_Id,
-					Operacion_TransaccionDetalle_TransaccionId,
-					Operacion_TransaccionDetalle_DenominacionId,
-					Operacion_TransaccionDetalle_CantidadUnidades,
-					Operacion_TransaccionDetalle_Fecha,
-					Operacion_Transaccion_Id,
-					Valor_Denominacion_Id,
-					Valor_Denominacion_Nombre,
-					Valor_Denominacion_TipoValorId,
-					Valor_Denominacion_MonedaId,
-					Valor_Denominacion_Unidades,
-					Valor_Denominacion_CodigoCcTalk,
-					Valor_Denominacion_CodigoExterno
+					OperacionTransaccionDetalle_Id,
+					OperacionTransaccionDetalle_TransaccionId,
+					OperacionTransaccionDetalle_DenominacionId,
+					OperacionTransaccionDetalle_CantidadUnidades,
+					OperacionTransaccionDetalle_Fecha,
+					OperacionTransaccion_Id,
+					OperacionTransaccion_TipoId,
+					OperacionTransaccion_DepositarioId,
+					OperacionTransaccion_SectorId,
+					OperacionTransaccion_SucursalId,
+					OperacionTransaccion_MonedaId,
+					OperacionTransaccion_UsuarioId,
+					OperacionTransaccion_CuentaId,
+					OperacionTransaccion_ContenedorId,
+					OperacionTransaccion_SesionId,
+					OperacionTransaccion_TurnoId,
+					OperacionTransaccion_CierreDiarioId,
+					OperacionTransaccion_TotalValidado,
+					OperacionTransaccion_TotalAValidar,
+					OperacionTransaccion_Fecha,
+					OperacionTransaccion_Finalizada,
+					OperacionTransaccion_EsDepositoAutomatico,
+					OperacionTransaccion_OrigenValorId,
+					OperacionTransaccion_CodigoOperacion,
+					OperacionTransaccion_FechaCreacion,
+					OperacionTransaccion_FechaModificacion,
+					OperacionTransaccion_UsuarioCreacion,
+					OperacionTransaccion_UsuarioModificacion,
+					ValorDenominacion_Id,
+					ValorDenominacion_Nombre,
+					ValorDenominacion_TipoValorId,
+					ValorDenominacion_MonedaId,
+					ValorDenominacion_Unidades,
+					ValorDenominacion_Imagen,
+					ValorDenominacion_CodigoCcTalk,
+					ValorDenominacion_Posicion,
+					ValorDenominacion_CodigoExterno,
+					ValorDenominacion_Habilitado,
+					ValorDenominacion_UsuarioCreacion,
+					ValorDenominacion_FechaCreacion,
+					ValorDenominacion_UsuarioModificacion,
+					ValorDenominacion_FechaModificacion
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where = new WhereCollection();
@@ -1723,9 +3404,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Integracion.OperacionTransaccionDetalle Add(Int64 Operacion_TransaccionDetalle_Id,Int64 Operacion_TransaccionDetalle_TransaccionId,Int64 Operacion_TransaccionDetalle_DenominacionId,Int64 Operacion_TransaccionDetalle_CantidadUnidades,DateTime Operacion_TransaccionDetalle_Fecha,Int64 Operacion_Transaccion_Id,Int64 Valor_Denominacion_Id,String Valor_Denominacion_Nombre,Int64 Valor_Denominacion_TipoValorId,Int64 Valor_Denominacion_MonedaId,Decimal Valor_Denominacion_Unidades,String Valor_Denominacion_CodigoCcTalk,String Valor_Denominacion_CodigoExterno) 
+			public Entities.Views.Integracion.OperacionTransaccionDetalle Add(Int64 OperacionTransaccionDetalle_Id,Int64 OperacionTransaccionDetalle_TransaccionId,Int64 OperacionTransaccionDetalle_DenominacionId,Int64 OperacionTransaccionDetalle_CantidadUnidades,DateTime OperacionTransaccionDetalle_Fecha,Int64 OperacionTransaccion_Id,Int64 OperacionTransaccion_TipoId,Int64 OperacionTransaccion_DepositarioId,Int64 OperacionTransaccion_SectorId,Int64 OperacionTransaccion_SucursalId,Int64 OperacionTransaccion_MonedaId,Int64 OperacionTransaccion_UsuarioId,Int64 OperacionTransaccion_CuentaId,Int64 OperacionTransaccion_ContenedorId,Int64 OperacionTransaccion_SesionId,Int64 OperacionTransaccion_TurnoId,Int64 OperacionTransaccion_CierreDiarioId,Double OperacionTransaccion_TotalValidado,Double OperacionTransaccion_TotalAValidar,DateTime OperacionTransaccion_Fecha,Boolean OperacionTransaccion_Finalizada,Boolean OperacionTransaccion_EsDepositoAutomatico,Int64 OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime OperacionTransaccion_FechaCreacion,DateTime OperacionTransaccion_FechaModificacion,Int64 OperacionTransaccion_UsuarioCreacion,Int64 OperacionTransaccion_UsuarioModificacion,Int64 ValorDenominacion_Id,String ValorDenominacion_Nombre,Int64 ValorDenominacion_TipoValorId,Int64 ValorDenominacion_MonedaId,Decimal ValorDenominacion_Unidades,String ValorDenominacion_Imagen,String ValorDenominacion_CodigoCcTalk,Int32 ValorDenominacion_Posicion,String ValorDenominacion_CodigoExterno,Boolean ValorDenominacion_Habilitado,Int64 ValorDenominacion_UsuarioCreacion,DateTime ValorDenominacion_FechaCreacion,Int64 ValorDenominacion_UsuarioModificacion,DateTime ValorDenominacion_FechaModificacion) 
 			{
-			  return (Entities.Views.Integracion.OperacionTransaccionDetalle)base.Add(new Entities.Views.Integracion.OperacionTransaccionDetalle(Operacion_TransaccionDetalle_Id,Operacion_TransaccionDetalle_TransaccionId,Operacion_TransaccionDetalle_DenominacionId,Operacion_TransaccionDetalle_CantidadUnidades,Operacion_TransaccionDetalle_Fecha,Operacion_Transaccion_Id,Valor_Denominacion_Id,Valor_Denominacion_Nombre,Valor_Denominacion_TipoValorId,Valor_Denominacion_MonedaId,Valor_Denominacion_Unidades,Valor_Denominacion_CodigoCcTalk,Valor_Denominacion_CodigoExterno));
+			  return (Entities.Views.Integracion.OperacionTransaccionDetalle)base.Add(new Entities.Views.Integracion.OperacionTransaccionDetalle(OperacionTransaccionDetalle_Id,OperacionTransaccionDetalle_TransaccionId,OperacionTransaccionDetalle_DenominacionId,OperacionTransaccionDetalle_CantidadUnidades,OperacionTransaccionDetalle_Fecha,OperacionTransaccion_Id,OperacionTransaccion_TipoId,OperacionTransaccion_DepositarioId,OperacionTransaccion_SectorId,OperacionTransaccion_SucursalId,OperacionTransaccion_MonedaId,OperacionTransaccion_UsuarioId,OperacionTransaccion_CuentaId,OperacionTransaccion_ContenedorId,OperacionTransaccion_SesionId,OperacionTransaccion_TurnoId,OperacionTransaccion_CierreDiarioId,OperacionTransaccion_TotalValidado,OperacionTransaccion_TotalAValidar,OperacionTransaccion_Fecha,OperacionTransaccion_Finalizada,OperacionTransaccion_EsDepositoAutomatico,OperacionTransaccion_OrigenValorId,OperacionTransaccion_CodigoOperacion,OperacionTransaccion_FechaCreacion,OperacionTransaccion_FechaModificacion,OperacionTransaccion_UsuarioCreacion,OperacionTransaccion_UsuarioModificacion,ValorDenominacion_Id,ValorDenominacion_Nombre,ValorDenominacion_TipoValorId,ValorDenominacion_MonedaId,ValorDenominacion_Unidades,ValorDenominacion_Imagen,ValorDenominacion_CodigoCcTalk,ValorDenominacion_Posicion,ValorDenominacion_CodigoExterno,ValorDenominacion_Habilitado,ValorDenominacion_UsuarioCreacion,ValorDenominacion_FechaCreacion,ValorDenominacion_UsuarioModificacion,ValorDenominacion_FechaModificacion));
 			}
             public new List<Entities.Views.Integracion.OperacionTransaccionDetalle> Items()
             {
@@ -1748,176 +3429,553 @@ using System.Text;
             /// <summary>
             /// Gets 
             /// </summary>
-            /// <param name="Operacion_TransaccionDetalle_Id"></param>
-            /// <param name="Operacion_TransaccionDetalle_TransaccionId"></param>
-            /// <param name="Operacion_TransaccionDetalle_DenominacionId"></param>
-            /// <param name="Operacion_TransaccionDetalle_CantidadUnidades"></param>
-            /// <param name="Operacion_TransaccionDetalle_Fecha"></param>
-            /// <param name="Operacion_Transaccion_Id"></param>
-            /// <param name="Valor_Denominacion_Id"></param>
-            /// <param name="Valor_Denominacion_Nombre"></param>
-            /// <param name="Valor_Denominacion_TipoValorId"></param>
-            /// <param name="Valor_Denominacion_MonedaId"></param>
-            /// <param name="Valor_Denominacion_Unidades"></param>
-            /// <param name="Valor_Denominacion_CodigoCcTalk"></param>
-            /// <param name="Valor_Denominacion_CodigoExterno"></param>
+            /// <param name="OperacionTransaccionDetalle_Id"></param>
+            /// <param name="OperacionTransaccionDetalle_TransaccionId"></param>
+            /// <param name="OperacionTransaccionDetalle_DenominacionId"></param>
+            /// <param name="OperacionTransaccionDetalle_CantidadUnidades"></param>
+            /// <param name="OperacionTransaccionDetalle_Fecha"></param>
+            /// <param name="OperacionTransaccion_Id"></param>
+            /// <param name="OperacionTransaccion_TipoId"></param>
+            /// <param name="OperacionTransaccion_DepositarioId"></param>
+            /// <param name="OperacionTransaccion_SectorId"></param>
+            /// <param name="OperacionTransaccion_SucursalId"></param>
+            /// <param name="OperacionTransaccion_MonedaId"></param>
+            /// <param name="OperacionTransaccion_UsuarioId"></param>
+            /// <param name="OperacionTransaccion_CuentaId"></param>
+            /// <param name="OperacionTransaccion_ContenedorId"></param>
+            /// <param name="OperacionTransaccion_SesionId"></param>
+            /// <param name="OperacionTransaccion_TurnoId"></param>
+            /// <param name="OperacionTransaccion_CierreDiarioId"></param>
+            /// <param name="OperacionTransaccion_TotalValidado"></param>
+            /// <param name="OperacionTransaccion_TotalAValidar"></param>
+            /// <param name="OperacionTransaccion_Fecha"></param>
+            /// <param name="OperacionTransaccion_Finalizada"></param>
+            /// <param name="OperacionTransaccion_EsDepositoAutomatico"></param>
+            /// <param name="OperacionTransaccion_OrigenValorId"></param>
+            /// <param name="OperacionTransaccion_CodigoOperacion"></param>
+            /// <param name="OperacionTransaccion_FechaCreacion"></param>
+            /// <param name="OperacionTransaccion_FechaModificacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioCreacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioModificacion"></param>
+            /// <param name="ValorDenominacion_Id"></param>
+            /// <param name="ValorDenominacion_Nombre"></param>
+            /// <param name="ValorDenominacion_TipoValorId"></param>
+            /// <param name="ValorDenominacion_MonedaId"></param>
+            /// <param name="ValorDenominacion_Unidades"></param>
+            /// <param name="ValorDenominacion_Imagen"></param>
+            /// <param name="ValorDenominacion_CodigoCcTalk"></param>
+            /// <param name="ValorDenominacion_Posicion"></param>
+            /// <param name="ValorDenominacion_CodigoExterno"></param>
+            /// <param name="ValorDenominacion_Habilitado"></param>
+            /// <param name="ValorDenominacion_UsuarioCreacion"></param>
+            /// <param name="ValorDenominacion_FechaCreacion"></param>
+            /// <param name="ValorDenominacion_UsuarioModificacion"></param>
+            /// <param name="ValorDenominacion_FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Views.Integracion.OperacionTransaccionDetalle> Items(Int64? Operacion_TransaccionDetalle_Id,Int64? Operacion_TransaccionDetalle_TransaccionId,Int64? Operacion_TransaccionDetalle_DenominacionId,Int64? Operacion_TransaccionDetalle_CantidadUnidades,DateTime? Operacion_TransaccionDetalle_Fecha,Int64? Operacion_Transaccion_Id,Int64? Valor_Denominacion_Id,String Valor_Denominacion_Nombre,Int64? Valor_Denominacion_TipoValorId,Int64? Valor_Denominacion_MonedaId,Decimal? Valor_Denominacion_Unidades,String Valor_Denominacion_CodigoCcTalk,String Valor_Denominacion_CodigoExterno)
+            public List<Entities.Views.Integracion.OperacionTransaccionDetalle> Items(Int64? OperacionTransaccionDetalle_Id,Int64? OperacionTransaccionDetalle_TransaccionId,Int64? OperacionTransaccionDetalle_DenominacionId,Int64? OperacionTransaccionDetalle_CantidadUnidades,DateTime? OperacionTransaccionDetalle_Fecha,Int64? OperacionTransaccion_Id,Int64? OperacionTransaccion_TipoId,Int64? OperacionTransaccion_DepositarioId,Int64? OperacionTransaccion_SectorId,Int64? OperacionTransaccion_SucursalId,Int64? OperacionTransaccion_MonedaId,Int64? OperacionTransaccion_UsuarioId,Int64? OperacionTransaccion_CuentaId,Int64? OperacionTransaccion_ContenedorId,Int64? OperacionTransaccion_SesionId,Int64? OperacionTransaccion_TurnoId,Int64? OperacionTransaccion_CierreDiarioId,Double? OperacionTransaccion_TotalValidado,Double? OperacionTransaccion_TotalAValidar,DateTime? OperacionTransaccion_Fecha,Boolean? OperacionTransaccion_Finalizada,Boolean? OperacionTransaccion_EsDepositoAutomatico,Int64? OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime? OperacionTransaccion_FechaCreacion,DateTime? OperacionTransaccion_FechaModificacion,Int64? OperacionTransaccion_UsuarioCreacion,Int64? OperacionTransaccion_UsuarioModificacion,Int64? ValorDenominacion_Id,String ValorDenominacion_Nombre,Int64? ValorDenominacion_TipoValorId,Int64? ValorDenominacion_MonedaId,Decimal? ValorDenominacion_Unidades,String ValorDenominacion_Imagen,String ValorDenominacion_CodigoCcTalk,Int32? ValorDenominacion_Posicion,String ValorDenominacion_CodigoExterno,Boolean? ValorDenominacion_Habilitado,Int64? ValorDenominacion_UsuarioCreacion,DateTime? ValorDenominacion_FechaCreacion,Int64? ValorDenominacion_UsuarioModificacion,DateTime? ValorDenominacion_FechaModificacion)
             {
                 this.Where.Clear();
-                if (Operacion_TransaccionDetalle_Id != null)
+                if (OperacionTransaccionDetalle_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_Id);
                     }
                    
                 }
-                if (Operacion_TransaccionDetalle_TransaccionId != null)
+                if (OperacionTransaccionDetalle_TransaccionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionDetalle_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_TransaccionId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionDetalle_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionDetalle_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_TransaccionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionDetalle_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_TransaccionId);
                     }
                    
                 }
-                if (Operacion_TransaccionDetalle_DenominacionId != null)
+                if (OperacionTransaccionDetalle_DenominacionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionDetalle_DenominacionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_DenominacionId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionDetalle_DenominacionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_DenominacionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionDetalle_DenominacionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_DenominacionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionDetalle_DenominacionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_DenominacionId);
                     }
                    
                 }
-                if (Operacion_TransaccionDetalle_CantidadUnidades != null)
+                if (OperacionTransaccionDetalle_CantidadUnidades != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionDetalle_CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_CantidadUnidades);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionDetalle_CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_CantidadUnidades);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionDetalle_CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_CantidadUnidades);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionDetalle_CantidadUnidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_CantidadUnidades);
                     }
                    
                 }
-                if (Operacion_TransaccionDetalle_Fecha != null)
+                if (OperacionTransaccionDetalle_Fecha != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_Fecha);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionDetalle_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionDetalle_Fecha);
                     }
                    
                 }
-                if (Operacion_Transaccion_Id != null)
+                if (OperacionTransaccion_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
                     }
                    
                 }
-                if (Valor_Denominacion_Id != null)
+                if (OperacionTransaccion_TipoId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
                     }
                    
                 }
-                if (Valor_Denominacion_Nombre != null)
+                if (OperacionTransaccion_DepositarioId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Nombre);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Nombre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
                     }
                    
                 }
-                if (Valor_Denominacion_TipoValorId != null)
+                if (OperacionTransaccion_SectorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_TipoValorId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_TipoValorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
                     }
                    
                 }
-                if (Valor_Denominacion_MonedaId != null)
+                if (OperacionTransaccion_SucursalId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_MonedaId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_MonedaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
                     }
                    
                 }
-                if (Valor_Denominacion_Unidades != null)
+                if (OperacionTransaccion_MonedaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_Unidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Unidades);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_Unidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_Unidades);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
                     }
                    
                 }
-                if (Valor_Denominacion_CodigoCcTalk != null)
+                if (OperacionTransaccion_UsuarioId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_CodigoCcTalk, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_CodigoCcTalk);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_CodigoCcTalk, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_CodigoCcTalk);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
                     }
                    
                 }
-                if (Valor_Denominacion_CodigoExterno != null)
+                if (OperacionTransaccion_CuentaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_Denominacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_CodigoExterno);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_Denominacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_Denominacion_CodigoExterno);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_ContenedorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_SesionId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TurnoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_CierreDiarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TotalValidado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TotalAValidar != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
+                    }
+                   
+                }
+                if (OperacionTransaccion_Fecha != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
+                    }
+                   
+                }
+                if (OperacionTransaccion_Finalizada != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
+                    }
+                   
+                }
+                if (OperacionTransaccion_EsDepositoAutomatico != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
+                    }
+                   
+                }
+                if (OperacionTransaccion_OrigenValorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_CodigoOperacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
+                    }
+                   
+                }
+                if (ValorDenominacion_Id != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Id);
+                    }
+                   
+                }
+                if (ValorDenominacion_Nombre != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Nombre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Nombre);
+                    }
+                   
+                }
+                if (ValorDenominacion_TipoValorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_TipoValorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_TipoValorId);
+                    }
+                   
+                }
+                if (ValorDenominacion_MonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_MonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_MonedaId);
+                    }
+                   
+                }
+                if (ValorDenominacion_Unidades != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Unidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Unidades);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Unidades, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Unidades);
+                    }
+                   
+                }
+                if (ValorDenominacion_Imagen != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Imagen, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Imagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Imagen, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Imagen);
+                    }
+                   
+                }
+                if (ValorDenominacion_CodigoCcTalk != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_CodigoCcTalk, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_CodigoCcTalk);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_CodigoCcTalk, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_CodigoCcTalk);
+                    }
+                   
+                }
+                if (ValorDenominacion_Posicion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Posicion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Posicion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Posicion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Posicion);
+                    }
+                   
+                }
+                if (ValorDenominacion_CodigoExterno != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_CodigoExterno, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_CodigoExterno);
+                    }
+                   
+                }
+                if (ValorDenominacion_Habilitado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_Habilitado);
+                    }
+                   
+                }
+                if (ValorDenominacion_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_UsuarioCreacion);
+                    }
+                   
+                }
+                if (ValorDenominacion_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_FechaCreacion);
+                    }
+                   
+                }
+                if (ValorDenominacion_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_UsuarioModificacion);
+                    }
+                   
+                }
+                if (ValorDenominacion_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ValorDenominacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorDenominacion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorDenominacion_FechaModificacion);
                     }
                    
                 }
@@ -1992,11 +4050,33 @@ using System.Text;
 		{
 				public enum ColumnEnum : int
                 {
-					Operacion_TransaccionSobre_Id,
-					Operacion_TransaccionSobre_TransaccionId,
-					Operacion_TransaccionSobre_CodigoSobre,
-					Operacion_TransaccionSobre_Fecha,
-					Operacion_Transaccion_Id
+					OperacionTransaccionSobre_Id,
+					OperacionTransaccionSobre_TransaccionId,
+					OperacionTransaccionSobre_CodigoSobre,
+					OperacionTransaccionSobre_Fecha,
+					OperacionTransaccion_Id,
+					OperacionTransaccion_TipoId,
+					OperacionTransaccion_DepositarioId,
+					OperacionTransaccion_SectorId,
+					OperacionTransaccion_SucursalId,
+					OperacionTransaccion_MonedaId,
+					OperacionTransaccion_UsuarioId,
+					OperacionTransaccion_CuentaId,
+					OperacionTransaccion_ContenedorId,
+					OperacionTransaccion_SesionId,
+					OperacionTransaccion_TurnoId,
+					OperacionTransaccion_CierreDiarioId,
+					OperacionTransaccion_TotalValidado,
+					OperacionTransaccion_TotalAValidar,
+					OperacionTransaccion_Fecha,
+					OperacionTransaccion_Finalizada,
+					OperacionTransaccion_EsDepositoAutomatico,
+					OperacionTransaccion_OrigenValorId,
+					OperacionTransaccion_CodigoOperacion,
+					OperacionTransaccion_FechaCreacion,
+					OperacionTransaccion_FechaModificacion,
+					OperacionTransaccion_UsuarioCreacion,
+					OperacionTransaccion_UsuarioModificacion
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where = new WhereCollection();
@@ -2041,9 +4121,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Integracion.OperacionTransaccionSobre Add(Int64 Operacion_TransaccionSobre_Id,Int64 Operacion_TransaccionSobre_TransaccionId,String Operacion_TransaccionSobre_CodigoSobre,DateTime Operacion_TransaccionSobre_Fecha,Int64 Operacion_Transaccion_Id) 
+			public Entities.Views.Integracion.OperacionTransaccionSobre Add(Int64 OperacionTransaccionSobre_Id,Int64 OperacionTransaccionSobre_TransaccionId,String OperacionTransaccionSobre_CodigoSobre,DateTime OperacionTransaccionSobre_Fecha,Int64 OperacionTransaccion_Id,Int64 OperacionTransaccion_TipoId,Int64 OperacionTransaccion_DepositarioId,Int64 OperacionTransaccion_SectorId,Int64 OperacionTransaccion_SucursalId,Int64 OperacionTransaccion_MonedaId,Int64 OperacionTransaccion_UsuarioId,Int64 OperacionTransaccion_CuentaId,Int64 OperacionTransaccion_ContenedorId,Int64 OperacionTransaccion_SesionId,Int64 OperacionTransaccion_TurnoId,Int64 OperacionTransaccion_CierreDiarioId,Double OperacionTransaccion_TotalValidado,Double OperacionTransaccion_TotalAValidar,DateTime OperacionTransaccion_Fecha,Boolean OperacionTransaccion_Finalizada,Boolean OperacionTransaccion_EsDepositoAutomatico,Int64 OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime OperacionTransaccion_FechaCreacion,DateTime OperacionTransaccion_FechaModificacion,Int64 OperacionTransaccion_UsuarioCreacion,Int64 OperacionTransaccion_UsuarioModificacion) 
 			{
-			  return (Entities.Views.Integracion.OperacionTransaccionSobre)base.Add(new Entities.Views.Integracion.OperacionTransaccionSobre(Operacion_TransaccionSobre_Id,Operacion_TransaccionSobre_TransaccionId,Operacion_TransaccionSobre_CodigoSobre,Operacion_TransaccionSobre_Fecha,Operacion_Transaccion_Id));
+			  return (Entities.Views.Integracion.OperacionTransaccionSobre)base.Add(new Entities.Views.Integracion.OperacionTransaccionSobre(OperacionTransaccionSobre_Id,OperacionTransaccionSobre_TransaccionId,OperacionTransaccionSobre_CodigoSobre,OperacionTransaccionSobre_Fecha,OperacionTransaccion_Id,OperacionTransaccion_TipoId,OperacionTransaccion_DepositarioId,OperacionTransaccion_SectorId,OperacionTransaccion_SucursalId,OperacionTransaccion_MonedaId,OperacionTransaccion_UsuarioId,OperacionTransaccion_CuentaId,OperacionTransaccion_ContenedorId,OperacionTransaccion_SesionId,OperacionTransaccion_TurnoId,OperacionTransaccion_CierreDiarioId,OperacionTransaccion_TotalValidado,OperacionTransaccion_TotalAValidar,OperacionTransaccion_Fecha,OperacionTransaccion_Finalizada,OperacionTransaccion_EsDepositoAutomatico,OperacionTransaccion_OrigenValorId,OperacionTransaccion_CodigoOperacion,OperacionTransaccion_FechaCreacion,OperacionTransaccion_FechaModificacion,OperacionTransaccion_UsuarioCreacion,OperacionTransaccion_UsuarioModificacion));
 			}
             public new List<Entities.Views.Integracion.OperacionTransaccionSobre> Items()
             {
@@ -2066,72 +4146,358 @@ using System.Text;
             /// <summary>
             /// Gets 
             /// </summary>
-            /// <param name="Operacion_TransaccionSobre_Id"></param>
-            /// <param name="Operacion_TransaccionSobre_TransaccionId"></param>
-            /// <param name="Operacion_TransaccionSobre_CodigoSobre"></param>
-            /// <param name="Operacion_TransaccionSobre_Fecha"></param>
-            /// <param name="Operacion_Transaccion_Id"></param>
+            /// <param name="OperacionTransaccionSobre_Id"></param>
+            /// <param name="OperacionTransaccionSobre_TransaccionId"></param>
+            /// <param name="OperacionTransaccionSobre_CodigoSobre"></param>
+            /// <param name="OperacionTransaccionSobre_Fecha"></param>
+            /// <param name="OperacionTransaccion_Id"></param>
+            /// <param name="OperacionTransaccion_TipoId"></param>
+            /// <param name="OperacionTransaccion_DepositarioId"></param>
+            /// <param name="OperacionTransaccion_SectorId"></param>
+            /// <param name="OperacionTransaccion_SucursalId"></param>
+            /// <param name="OperacionTransaccion_MonedaId"></param>
+            /// <param name="OperacionTransaccion_UsuarioId"></param>
+            /// <param name="OperacionTransaccion_CuentaId"></param>
+            /// <param name="OperacionTransaccion_ContenedorId"></param>
+            /// <param name="OperacionTransaccion_SesionId"></param>
+            /// <param name="OperacionTransaccion_TurnoId"></param>
+            /// <param name="OperacionTransaccion_CierreDiarioId"></param>
+            /// <param name="OperacionTransaccion_TotalValidado"></param>
+            /// <param name="OperacionTransaccion_TotalAValidar"></param>
+            /// <param name="OperacionTransaccion_Fecha"></param>
+            /// <param name="OperacionTransaccion_Finalizada"></param>
+            /// <param name="OperacionTransaccion_EsDepositoAutomatico"></param>
+            /// <param name="OperacionTransaccion_OrigenValorId"></param>
+            /// <param name="OperacionTransaccion_CodigoOperacion"></param>
+            /// <param name="OperacionTransaccion_FechaCreacion"></param>
+            /// <param name="OperacionTransaccion_FechaModificacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioCreacion"></param>
+            /// <param name="OperacionTransaccion_UsuarioModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Views.Integracion.OperacionTransaccionSobre> Items(Int64? Operacion_TransaccionSobre_Id,Int64? Operacion_TransaccionSobre_TransaccionId,String Operacion_TransaccionSobre_CodigoSobre,DateTime? Operacion_TransaccionSobre_Fecha,Int64? Operacion_Transaccion_Id)
+            public List<Entities.Views.Integracion.OperacionTransaccionSobre> Items(Int64? OperacionTransaccionSobre_Id,Int64? OperacionTransaccionSobre_TransaccionId,String OperacionTransaccionSobre_CodigoSobre,DateTime? OperacionTransaccionSobre_Fecha,Int64? OperacionTransaccion_Id,Int64? OperacionTransaccion_TipoId,Int64? OperacionTransaccion_DepositarioId,Int64? OperacionTransaccion_SectorId,Int64? OperacionTransaccion_SucursalId,Int64? OperacionTransaccion_MonedaId,Int64? OperacionTransaccion_UsuarioId,Int64? OperacionTransaccion_CuentaId,Int64? OperacionTransaccion_ContenedorId,Int64? OperacionTransaccion_SesionId,Int64? OperacionTransaccion_TurnoId,Int64? OperacionTransaccion_CierreDiarioId,Double? OperacionTransaccion_TotalValidado,Double? OperacionTransaccion_TotalAValidar,DateTime? OperacionTransaccion_Fecha,Boolean? OperacionTransaccion_Finalizada,Boolean? OperacionTransaccion_EsDepositoAutomatico,Int64? OperacionTransaccion_OrigenValorId,String OperacionTransaccion_CodigoOperacion,DateTime? OperacionTransaccion_FechaCreacion,DateTime? OperacionTransaccion_FechaModificacion,Int64? OperacionTransaccion_UsuarioCreacion,Int64? OperacionTransaccion_UsuarioModificacion)
             {
                 this.Where.Clear();
-                if (Operacion_TransaccionSobre_Id != null)
+                if (OperacionTransaccionSobre_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Id);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_TransaccionId != null)
+                if (OperacionTransaccionSobre_TransaccionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_TransaccionId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_TransaccionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_TransaccionId);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_CodigoSobre != null)
+                if (OperacionTransaccionSobre_CodigoSobre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_CodigoSobre);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_CodigoSobre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_CodigoSobre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_CodigoSobre);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_Fecha != null)
+                if (OperacionTransaccionSobre_Fecha != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Fecha);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Fecha);
                     }
                    
                 }
-                if (Operacion_Transaccion_Id != null)
+                if (OperacionTransaccion_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_Transaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_Transaccion_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Id);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TipoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TipoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TipoId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_DepositarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_DepositarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_DepositarioId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_SectorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SectorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SectorId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_SucursalId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SucursalId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SucursalId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_MonedaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_MonedaId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_UsuarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_CuentaId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CuentaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CuentaId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_ContenedorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_ContenedorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_ContenedorId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_SesionId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_SesionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_SesionId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TurnoId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TurnoId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TurnoId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_CierreDiarioId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CierreDiarioId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CierreDiarioId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TotalValidado != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalValidado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalValidado);
+                    }
+                   
+                }
+                if (OperacionTransaccion_TotalAValidar != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_TotalAValidar, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_TotalAValidar);
+                    }
+                   
+                }
+                if (OperacionTransaccion_Fecha != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Fecha);
+                    }
+                   
+                }
+                if (OperacionTransaccion_Finalizada != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_Finalizada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_Finalizada);
+                    }
+                   
+                }
+                if (OperacionTransaccion_EsDepositoAutomatico != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_EsDepositoAutomatico, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_EsDepositoAutomatico);
+                    }
+                   
+                }
+                if (OperacionTransaccion_OrigenValorId != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_OrigenValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_OrigenValorId);
+                    }
+                   
+                }
+                if (OperacionTransaccion_CodigoOperacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_CodigoOperacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_CodigoOperacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_FechaCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaCreacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_FechaModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_FechaModificacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_UsuarioCreacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioCreacion);
+                    }
+                   
+                }
+                if (OperacionTransaccion_UsuarioModificacion != null)
+                {
+                    if (this.Where.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccion_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccion_UsuarioModificacion);
                     }
                    
                 }
@@ -2206,24 +4572,24 @@ using System.Text;
 		{
 				public enum ColumnEnum : int
                 {
-					Operacion_TransaccionSobreDetalle_Id,
-					Operacion_TransaccionSobreDetalle_SobreId,
-					Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId,
-					Operacion_TransaccionSobreDetalle_CantidadDeclarada,
-					Operacion_TransaccionSobreDetalle_ValorDeclarado,
-					Operacion_TransaccionSobreDetalle_Fecha,
-					Operacion_TransaccionSobre_Id,
-					Operacion_TransaccionSobre_TransaccionId,
-					Operacion_TransaccionSobre_CodigoSobre,
-					Operacion_TransaccionSobre_Fecha,
-					Valor_RelacionMonedaTipoValor_Id,
-					Valor_RelacionMonedaTipoValor_MonedaId,
-					Valor_RelacionMonedaTipoValor_TipoValorId,
-					Valor_RelacionMonedaTipoValor_Habilitado,
-					Valor_RelacionMonedaTipoValor_UsuarioCreacion,
-					Valor_RelacionMonedaTipoValor_FechaCreacion,
-					Valor_RelacionMonedaTipoValor_UsuarioModificacion,
-					Valor_RelacionMonedaTipoValor_FechaModificacion
+					OperacionTransaccionSobreDetalle_Id,
+					OperacionTransaccionSobreDetalle_SobreId,
+					OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId,
+					OperacionTransaccionSobreDetalle_CantidadDeclarada,
+					OperacionTransaccionSobreDetalle_ValorDeclarado,
+					OperacionTransaccionSobreDetalle_Fecha,
+					OperacionTransaccionSobre_Id,
+					OperacionTransaccionSobre_TransaccionId,
+					OperacionTransaccionSobre_CodigoSobre,
+					OperacionTransaccionSobre_Fecha,
+					ValorRelacionMonedaTipoValor_Id,
+					ValorRelacionMonedaTipoValor_MonedaId,
+					ValorRelacionMonedaTipoValor_TipoValorId,
+					ValorRelacionMonedaTipoValor_Habilitado,
+					ValorRelacionMonedaTipoValor_UsuarioCreacion,
+					ValorRelacionMonedaTipoValor_FechaCreacion,
+					ValorRelacionMonedaTipoValor_UsuarioModificacion,
+					ValorRelacionMonedaTipoValor_FechaModificacion
 				}
 			protected List<IDataItem> _cacheItemList = new List<IDataItem>();
          public WhereCollection Where = new WhereCollection();
@@ -2268,9 +4634,9 @@ using System.Text;
 				this.EndTransaction(true);
 			}
 			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-			public Entities.Views.Integracion.OperacionTransaccionSobreDetalle Add(Int64 Operacion_TransaccionSobreDetalle_Id,Int64 Operacion_TransaccionSobreDetalle_SobreId,Int64 Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId,Int64 Operacion_TransaccionSobreDetalle_CantidadDeclarada,Double Operacion_TransaccionSobreDetalle_ValorDeclarado,DateTime Operacion_TransaccionSobreDetalle_Fecha,Int64 Operacion_TransaccionSobre_Id,Int64 Operacion_TransaccionSobre_TransaccionId,String Operacion_TransaccionSobre_CodigoSobre,DateTime Operacion_TransaccionSobre_Fecha,Int64 Valor_RelacionMonedaTipoValor_Id,Int64 Valor_RelacionMonedaTipoValor_MonedaId,Int64 Valor_RelacionMonedaTipoValor_TipoValorId,Boolean Valor_RelacionMonedaTipoValor_Habilitado,Int64 Valor_RelacionMonedaTipoValor_UsuarioCreacion,DateTime Valor_RelacionMonedaTipoValor_FechaCreacion,Int64 Valor_RelacionMonedaTipoValor_UsuarioModificacion,DateTime Valor_RelacionMonedaTipoValor_FechaModificacion) 
+			public Entities.Views.Integracion.OperacionTransaccionSobreDetalle Add(Int64 OperacionTransaccionSobreDetalle_Id,Int64 OperacionTransaccionSobreDetalle_SobreId,Int64 OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId,Int64 OperacionTransaccionSobreDetalle_CantidadDeclarada,Double OperacionTransaccionSobreDetalle_ValorDeclarado,DateTime OperacionTransaccionSobreDetalle_Fecha,Int64 OperacionTransaccionSobre_Id,Int64 OperacionTransaccionSobre_TransaccionId,String OperacionTransaccionSobre_CodigoSobre,DateTime OperacionTransaccionSobre_Fecha,Int64 ValorRelacionMonedaTipoValor_Id,Int64 ValorRelacionMonedaTipoValor_MonedaId,Int64 ValorRelacionMonedaTipoValor_TipoValorId,Boolean ValorRelacionMonedaTipoValor_Habilitado,Int64 ValorRelacionMonedaTipoValor_UsuarioCreacion,DateTime ValorRelacionMonedaTipoValor_FechaCreacion,Int64 ValorRelacionMonedaTipoValor_UsuarioModificacion,DateTime ValorRelacionMonedaTipoValor_FechaModificacion) 
 			{
-			  return (Entities.Views.Integracion.OperacionTransaccionSobreDetalle)base.Add(new Entities.Views.Integracion.OperacionTransaccionSobreDetalle(Operacion_TransaccionSobreDetalle_Id,Operacion_TransaccionSobreDetalle_SobreId,Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId,Operacion_TransaccionSobreDetalle_CantidadDeclarada,Operacion_TransaccionSobreDetalle_ValorDeclarado,Operacion_TransaccionSobreDetalle_Fecha,Operacion_TransaccionSobre_Id,Operacion_TransaccionSobre_TransaccionId,Operacion_TransaccionSobre_CodigoSobre,Operacion_TransaccionSobre_Fecha,Valor_RelacionMonedaTipoValor_Id,Valor_RelacionMonedaTipoValor_MonedaId,Valor_RelacionMonedaTipoValor_TipoValorId,Valor_RelacionMonedaTipoValor_Habilitado,Valor_RelacionMonedaTipoValor_UsuarioCreacion,Valor_RelacionMonedaTipoValor_FechaCreacion,Valor_RelacionMonedaTipoValor_UsuarioModificacion,Valor_RelacionMonedaTipoValor_FechaModificacion));
+			  return (Entities.Views.Integracion.OperacionTransaccionSobreDetalle)base.Add(new Entities.Views.Integracion.OperacionTransaccionSobreDetalle(OperacionTransaccionSobreDetalle_Id,OperacionTransaccionSobreDetalle_SobreId,OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId,OperacionTransaccionSobreDetalle_CantidadDeclarada,OperacionTransaccionSobreDetalle_ValorDeclarado,OperacionTransaccionSobreDetalle_Fecha,OperacionTransaccionSobre_Id,OperacionTransaccionSobre_TransaccionId,OperacionTransaccionSobre_CodigoSobre,OperacionTransaccionSobre_Fecha,ValorRelacionMonedaTipoValor_Id,ValorRelacionMonedaTipoValor_MonedaId,ValorRelacionMonedaTipoValor_TipoValorId,ValorRelacionMonedaTipoValor_Habilitado,ValorRelacionMonedaTipoValor_UsuarioCreacion,ValorRelacionMonedaTipoValor_FechaCreacion,ValorRelacionMonedaTipoValor_UsuarioModificacion,ValorRelacionMonedaTipoValor_FechaModificacion));
 			}
             public new List<Entities.Views.Integracion.OperacionTransaccionSobreDetalle> Items()
             {
@@ -2293,241 +4659,241 @@ using System.Text;
             /// <summary>
             /// Gets 
             /// </summary>
-            /// <param name="Operacion_TransaccionSobreDetalle_Id"></param>
-            /// <param name="Operacion_TransaccionSobreDetalle_SobreId"></param>
-            /// <param name="Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId"></param>
-            /// <param name="Operacion_TransaccionSobreDetalle_CantidadDeclarada"></param>
-            /// <param name="Operacion_TransaccionSobreDetalle_ValorDeclarado"></param>
-            /// <param name="Operacion_TransaccionSobreDetalle_Fecha"></param>
-            /// <param name="Operacion_TransaccionSobre_Id"></param>
-            /// <param name="Operacion_TransaccionSobre_TransaccionId"></param>
-            /// <param name="Operacion_TransaccionSobre_CodigoSobre"></param>
-            /// <param name="Operacion_TransaccionSobre_Fecha"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_Id"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_MonedaId"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_TipoValorId"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_Habilitado"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_UsuarioCreacion"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_FechaCreacion"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_UsuarioModificacion"></param>
-            /// <param name="Valor_RelacionMonedaTipoValor_FechaModificacion"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_Id"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_SobreId"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_CantidadDeclarada"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_ValorDeclarado"></param>
+            /// <param name="OperacionTransaccionSobreDetalle_Fecha"></param>
+            /// <param name="OperacionTransaccionSobre_Id"></param>
+            /// <param name="OperacionTransaccionSobre_TransaccionId"></param>
+            /// <param name="OperacionTransaccionSobre_CodigoSobre"></param>
+            /// <param name="OperacionTransaccionSobre_Fecha"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_Id"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_MonedaId"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_TipoValorId"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_Habilitado"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_UsuarioCreacion"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_FechaCreacion"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_UsuarioModificacion"></param>
+            /// <param name="ValorRelacionMonedaTipoValor_FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Views.Integracion.OperacionTransaccionSobreDetalle> Items(Int64? Operacion_TransaccionSobreDetalle_Id,Int64? Operacion_TransaccionSobreDetalle_SobreId,Int64? Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId,Int64? Operacion_TransaccionSobreDetalle_CantidadDeclarada,Double? Operacion_TransaccionSobreDetalle_ValorDeclarado,DateTime? Operacion_TransaccionSobreDetalle_Fecha,Int64? Operacion_TransaccionSobre_Id,Int64? Operacion_TransaccionSobre_TransaccionId,String Operacion_TransaccionSobre_CodigoSobre,DateTime? Operacion_TransaccionSobre_Fecha,Int64? Valor_RelacionMonedaTipoValor_Id,Int64? Valor_RelacionMonedaTipoValor_MonedaId,Int64? Valor_RelacionMonedaTipoValor_TipoValorId,Boolean? Valor_RelacionMonedaTipoValor_Habilitado,Int64? Valor_RelacionMonedaTipoValor_UsuarioCreacion,DateTime? Valor_RelacionMonedaTipoValor_FechaCreacion,Int64? Valor_RelacionMonedaTipoValor_UsuarioModificacion,DateTime? Valor_RelacionMonedaTipoValor_FechaModificacion)
+            public List<Entities.Views.Integracion.OperacionTransaccionSobreDetalle> Items(Int64? OperacionTransaccionSobreDetalle_Id,Int64? OperacionTransaccionSobreDetalle_SobreId,Int64? OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId,Int64? OperacionTransaccionSobreDetalle_CantidadDeclarada,Double? OperacionTransaccionSobreDetalle_ValorDeclarado,DateTime? OperacionTransaccionSobreDetalle_Fecha,Int64? OperacionTransaccionSobre_Id,Int64? OperacionTransaccionSobre_TransaccionId,String OperacionTransaccionSobre_CodigoSobre,DateTime? OperacionTransaccionSobre_Fecha,Int64? ValorRelacionMonedaTipoValor_Id,Int64? ValorRelacionMonedaTipoValor_MonedaId,Int64? ValorRelacionMonedaTipoValor_TipoValorId,Boolean? ValorRelacionMonedaTipoValor_Habilitado,Int64? ValorRelacionMonedaTipoValor_UsuarioCreacion,DateTime? ValorRelacionMonedaTipoValor_FechaCreacion,Int64? ValorRelacionMonedaTipoValor_UsuarioModificacion,DateTime? ValorRelacionMonedaTipoValor_FechaModificacion)
             {
                 this.Where.Clear();
-                if (Operacion_TransaccionSobreDetalle_Id != null)
+                if (OperacionTransaccionSobreDetalle_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_Id);
                     }
                    
                 }
-                if (Operacion_TransaccionSobreDetalle_SobreId != null)
+                if (OperacionTransaccionSobreDetalle_SobreId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_SobreId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_SobreId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_SobreId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_SobreId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_SobreId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_SobreId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_SobreId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_SobreId);
                     }
                    
                 }
-                if (Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId != null)
+                if (OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_RelacionMonedaTipoValorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId);
                     }
                    
                 }
-                if (Operacion_TransaccionSobreDetalle_CantidadDeclarada != null)
+                if (OperacionTransaccionSobreDetalle_CantidadDeclarada != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_CantidadDeclarada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_CantidadDeclarada);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_CantidadDeclarada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_CantidadDeclarada);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_CantidadDeclarada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_CantidadDeclarada);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_CantidadDeclarada, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_CantidadDeclarada);
                     }
                    
                 }
-                if (Operacion_TransaccionSobreDetalle_ValorDeclarado != null)
+                if (OperacionTransaccionSobreDetalle_ValorDeclarado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_ValorDeclarado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_ValorDeclarado);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_ValorDeclarado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_ValorDeclarado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_ValorDeclarado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_ValorDeclarado);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_ValorDeclarado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_ValorDeclarado);
                     }
                    
                 }
-                if (Operacion_TransaccionSobreDetalle_Fecha != null)
+                if (OperacionTransaccionSobreDetalle_Fecha != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobreDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_Fecha);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobreDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobreDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobreDetalle_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobreDetalle_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobreDetalle_Fecha);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_Id != null)
+                if (OperacionTransaccionSobre_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Id);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Id);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_TransaccionId != null)
+                if (OperacionTransaccionSobre_TransaccionId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_TransaccionId);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_TransaccionId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_TransaccionId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_TransaccionId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_TransaccionId);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_CodigoSobre != null)
+                if (OperacionTransaccionSobre_CodigoSobre != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_CodigoSobre);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_CodigoSobre);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_CodigoSobre);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_CodigoSobre, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_CodigoSobre);
                     }
                    
                 }
-                if (Operacion_TransaccionSobre_Fecha != null)
+                if (OperacionTransaccionSobre_Fecha != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Operacion_TransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Fecha);
+                        this.Where.Add(ColumnEnum.OperacionTransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Fecha);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Operacion_TransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Operacion_TransaccionSobre_Fecha);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperacionTransaccionSobre_Fecha, DepositaryWebApi.sqlEnum.OperandEnum.Equal, OperacionTransaccionSobre_Fecha);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_Id != null)
+                if (ValorRelacionMonedaTipoValor_Id != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_Id);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_Id);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_Id);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_Id, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_Id);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_MonedaId != null)
+                if (ValorRelacionMonedaTipoValor_MonedaId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_MonedaId);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_MonedaId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_MonedaId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_MonedaId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_MonedaId);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_TipoValorId != null)
+                if (ValorRelacionMonedaTipoValor_TipoValorId != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_TipoValorId);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_TipoValorId);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_TipoValorId);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_TipoValorId, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_TipoValorId);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_Habilitado != null)
+                if (ValorRelacionMonedaTipoValor_Habilitado != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_Habilitado);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_Habilitado);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_Habilitado);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_Habilitado, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_Habilitado);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_UsuarioCreacion != null)
+                if (ValorRelacionMonedaTipoValor_UsuarioCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_UsuarioCreacion);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_UsuarioCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_UsuarioCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_UsuarioCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_UsuarioCreacion);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_FechaCreacion != null)
+                if (ValorRelacionMonedaTipoValor_FechaCreacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_FechaCreacion);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_FechaCreacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_FechaCreacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_FechaCreacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_FechaCreacion);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_UsuarioModificacion != null)
+                if (ValorRelacionMonedaTipoValor_UsuarioModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_UsuarioModificacion);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_UsuarioModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_UsuarioModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_UsuarioModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_UsuarioModificacion);
                     }
                    
                 }
-                if (Valor_RelacionMonedaTipoValor_FechaModificacion != null)
+                if (ValorRelacionMonedaTipoValor_FechaModificacion != null)
                 {
                     if (this.Where.Count == 0)
                     {
-                        this.Where.Add(ColumnEnum.Valor_RelacionMonedaTipoValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_FechaModificacion);
+                        this.Where.Add(ColumnEnum.ValorRelacionMonedaTipoValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_FechaModificacion);
                     }
                     else
                     {
-                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Valor_RelacionMonedaTipoValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, Valor_RelacionMonedaTipoValor_FechaModificacion);
+                        this.Where.Add(DepositaryWebApi.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ValorRelacionMonedaTipoValor_FechaModificacion, DepositaryWebApi.sqlEnum.OperandEnum.Equal, ValorRelacionMonedaTipoValor_FechaModificacion);
                     }
                    
                 }

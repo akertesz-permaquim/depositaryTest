@@ -17,7 +17,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerConfiguracion")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
             string DepositaryCode = JwtController.GetDepositaryCode(HttpContext, _configuration);

@@ -27,7 +27,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerDatosIniciales")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerDatosIniciales([FromBody] InicializacionModel model)
         {
             try
@@ -589,6 +589,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Post endpoints
 
         [HttpPost("ObtenerTokenInicializacion")]
+        [ApiExplorerSettings(IgnoreApi = true)]
 
         public ActionResult ObtenerTokenInicializacion([FromBody] InicializacionModel model)
         {

@@ -24,7 +24,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         #region Endpoints
         [HttpPost]
         [Route("ObtenerGeografia")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerGeografia([FromBody] GeografiaModel data)
         {
             try
@@ -112,7 +112,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerPaises")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerPaises()
         {
             GeografiaPaisModel data = new();
@@ -148,7 +148,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerProvincias")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerProvincias()
         {
             GeografiaProvinciaModel data = new();
@@ -182,7 +182,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerCiudades")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerCiudades()
         {
             GeografiaCiudadModel data = new();
@@ -216,7 +216,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerZonas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerZonas()
         {
             GeografiaZonaModel data = new();
@@ -249,7 +249,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerCodigosPostales")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerCodigosPostales()
         {
             GeografiaCodigoPostalModel data = new();

@@ -25,6 +25,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("ObtenerAplicacion")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerAplicacion([FromBody] AplicacionModel data)
         {
             try
@@ -105,6 +106,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerTiposDatos")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposDatos()
         {
             AplicacionTipoDatoModel data = new();
@@ -138,6 +140,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerValidacionesDatos")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerValidacionesDatos()
         {
             AplicacionValidacionDatoModel data = new();
@@ -171,6 +174,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerConfiguraciones")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
             AplicacionConfiguracionModel data = new();
@@ -204,6 +208,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerConfiguracionesEmpresas")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerConfiguracionesEmpresas()
         {
             AplicacionConfiguracionEmpresaModel data = new();

@@ -22,6 +22,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpPost]
         [Route("ObtenerAuditoria")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerAuditoria([FromBody] AuditoriaModel data)
         {
             try
@@ -80,6 +81,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerTiposLog")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposLog()
         {
             AuditoriaTipoLogModel data = new();
