@@ -25,5 +25,11 @@ using System.Text;
              {
                  get { return _result; }
              }
+             public void Dispose()
+             {
+                 _cacheItemList = null;
+				
+                 base.Dispose(true);
+             }
         }// class Sincronizacion
 	} // namespace Permaquim.Depositario.Business.Procedures.Sincronizacion

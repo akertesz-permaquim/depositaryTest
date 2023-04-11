@@ -338,6 +338,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -345,7 +355,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Configuracion
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -684,6 +715,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -691,7 +732,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionEmpresa
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -979,6 +1041,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -986,7 +1058,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionTipoDato
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Aplicacion {
@@ -1308,6 +1401,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -1315,7 +1418,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionValidacionDato
 	} //namespace Permaquim.Depositario.Business.Relations.Aplicacion
 	namespace Permaquim.Depositario.Business.Relations.Auditoria {
@@ -1620,6 +1744,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -1627,7 +1761,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Log
 	} //namespace Permaquim.Depositario.Business.Relations.Auditoria
 	namespace Permaquim.Depositario.Business.Relations.Auditoria {
@@ -1915,6 +2070,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -1922,7 +2087,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoLog
 	} //namespace Permaquim.Depositario.Business.Relations.Auditoria
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2244,6 +2430,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -2251,7 +2447,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Banco
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2641,6 +2858,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -2648,7 +2875,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Cuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -2953,6 +3201,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -2960,7 +3218,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoCuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Banca {
@@ -3248,6 +3527,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -3255,7 +3544,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioCuenta
 	} //namespace Permaquim.Depositario.Business.Relations.Banca
 	namespace Permaquim.Depositario.Business.Relations.Biometria {
@@ -3560,6 +3870,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -3567,9 +3887,1022 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class HuellaDactilar
 	} //namespace Permaquim.Depositario.Business.Relations.Biometria
+	namespace Permaquim.Depositario.Business.Relations.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class Entidad : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					Tipo,
+					Nombre,
+					Esquema,
+					HabilitarAgrupamiento,
+					HabilitarMovilidad,
+					HabilitarFiltrado,
+					HabilitarColumnasOpcionales,
+					HabilitarOrdenamiento,
+					HabilitarRedimensionamiento,
+					HabilitarPaginado,
+					RegistrosPorPagina,
+					HabilitarAuditoria,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+			   protected List<Entities.Relations.Customizador.Entidad> _cacheItemList = new List<Entities.Relations.Customizador.Entidad>();
+			   protected List<Entities.Relations.Customizador.Entidad> _entities = null;
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
+            public Entidad() : base()
+            {
+                base._dataItem = new Entities.Relations.Customizador.Entidad();
+                Where = new CustomWhereParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Customizador.Entidad item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// Entidad Add Method
+         /// </summary>
+         /// <param name='Tipo'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Esquema'></param>
+         /// <param name='HabilitarAgrupamiento'></param>
+         /// <param name='HabilitarMovilidad'></param>
+         /// <param name='HabilitarFiltrado'></param>
+         /// <param name='HabilitarColumnasOpcionales'></param>
+         /// <param name='HabilitarOrdenamiento'></param>
+         /// <param name='HabilitarRedimensionamiento'></param>
+         /// <param name='HabilitarPaginado'></param>
+         /// <param name='RegistrosPorPagina'></param>
+         /// <param name='HabilitarAuditoria'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Relations.Customizador.Entidad</returns>
+			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			{
+			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,RegistrosPorPagina,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Relations.Customizador.Entidad> Items()
+            {
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Customizador.Entidad items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.Entidad> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Int32? RegistrosPorPagina,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (Tipo != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Esquema != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
+                    }
+                   
+                }
+                if (HabilitarAgrupamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
+                    }
+                   
+                }
+                if (HabilitarMovilidad != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
+                    }
+                   
+                }
+                if (HabilitarFiltrado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
+                    }
+                   
+                }
+                if (HabilitarColumnasOpcionales != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
+                    }
+                   
+                }
+                if (HabilitarOrdenamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
+                    }
+                   
+                }
+                if (HabilitarRedimensionamiento != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
+                    }
+                   
+                }
+                if (HabilitarPaginado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
+                    }
+                   
+                }
+                if (RegistrosPorPagina != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
+                    }
+                   
+                }
+                if (HabilitarAuditoria != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Customizador.Entidad> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Customizador.Entidad Add(Entities.Relations.Customizador.Entidad item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Customizador.Entidad)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Customizador.Entidad item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Customizador.Entidad item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Customizador.Entidad with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="Tipo"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Esquema"></param>
+            /// <param name="HabilitarAgrupamiento"></param>
+            /// <param name="HabilitarMovilidad"></param>
+            /// <param name="HabilitarFiltrado"></param>
+            /// <param name="HabilitarColumnasOpcionales"></param>
+            /// <param name="HabilitarOrdenamiento"></param>
+            /// <param name="HabilitarRedimensionamiento"></param>
+            /// <param name="HabilitarPaginado"></param>
+            /// <param name="RegistrosPorPagina"></param>
+            /// <param name="HabilitarAuditoria"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            {
+                 Entities.Tables.Customizador.Entidad item = new Entities.Tables.Customizador.Entidad();
+                 item.Id = Id;
+                 item.Tipo = Tipo;
+                 item.Nombre = Nombre;
+                 item.Esquema = Esquema;
+                 item.HabilitarAgrupamiento = HabilitarAgrupamiento;
+                 item.HabilitarMovilidad = HabilitarMovilidad;
+                 item.HabilitarFiltrado = HabilitarFiltrado;
+                 item.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
+                 item.HabilitarOrdenamiento = HabilitarOrdenamiento;
+                 item.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
+                 item.HabilitarPaginado = HabilitarPaginado;
+                 item.RegistrosPorPagina = RegistrosPorPagina;
+                 item.HabilitarAuditoria = HabilitarAuditoria;
+                 item.Habilitado = Habilitado;
+                 item.UsuarioCreacion = UsuarioCreacion;
+                 item.FechaCreacion = FechaCreacion;
+                 item.UsuarioModificacion = UsuarioModificacion;
+                 item.FechaModificacion = FechaModificacion;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
+            }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
+        } // class Entidad
+	} //namespace Permaquim.Depositario.Business.Relations.Customizador
+	namespace Permaquim.Depositario.Business.Relations.Customizador {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class EntidadAtributo : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					EntidadId,
+					Nombre,
+					VisibleEnGrilla,
+					VisibleEnSelectorColumnas,
+					Redimensionable,
+					Agrupable,
+					Movible,
+					Ordenable,
+					Filtrable,
+					PosicionEnGrilla,
+					AnchoMinimoEnGrilla,
+					AnchoEnGrilla,
+					Habilitado,
+					UsuarioCreacion,
+					FechaCreacion,
+					UsuarioModificacion,
+					FechaModificacion
+				}
+			   protected List<Entities.Relations.Customizador.EntidadAtributo> _cacheItemList = new List<Entities.Relations.Customizador.EntidadAtributo>();
+			   protected List<Entities.Relations.Customizador.EntidadAtributo> _entities = null;
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
+            public EntidadAtributo() : base()
+            {
+                base._dataItem = new Entities.Relations.Customizador.EntidadAtributo();
+                Where = new CustomWhereParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Customizador.EntidadAtributo item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// EntidadAtributo Add Method
+         /// </summary>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='VisibleEnGrilla'></param>
+         /// <param name='VisibleEnSelectorColumnas'></param>
+         /// <param name='Redimensionable'></param>
+         /// <param name='Agrupable'></param>
+         /// <param name='Movible'></param>
+         /// <param name='Ordenable'></param>
+         /// <param name='Filtrable'></param>
+         /// <param name='PosicionEnGrilla'></param>
+         /// <param name='AnchoMinimoEnGrilla'></param>
+         /// <param name='AnchoEnGrilla'></param>
+         /// <param name='Habilitado'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='FechaCreacion'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='FechaModificacion'></param>
+         /// <returns>Entities.Relations.Customizador.EntidadAtributo</returns>
+			public Entities.Relations.Customizador.EntidadAtributo Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			{
+			  return (Entities.Relations.Customizador.EntidadAtributo)base.Add(new Entities.Relations.Customizador.EntidadAtributo(EntidadId,Nombre,VisibleEnGrilla,VisibleEnSelectorColumnas,Redimensionable,Agrupable,Movible,Ordenable,Filtrable,PosicionEnGrilla,AnchoMinimoEnGrilla,AnchoEnGrilla,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			}
+            public new List<Entities.Relations.Customizador.EntidadAtributo> Items()
+            {
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Customizador.EntidadAtributo items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64? Id,Int64? EntidadId,String Nombre,Boolean? VisibleEnGrilla,Boolean? VisibleEnSelectorColumnas,Boolean? Redimensionable,Boolean? Agrupable,Boolean? Movible,Boolean? Ordenable,Boolean? Filtrable,Int32? PosicionEnGrilla,Int32? AnchoMinimoEnGrilla,Int32? AnchoEnGrilla,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (EntidadId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (VisibleEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
+                    }
+                   
+                }
+                if (VisibleEnSelectorColumnas != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
+                    }
+                   
+                }
+                if (Redimensionable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
+                    }
+                   
+                }
+                if (Agrupable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
+                    }
+                   
+                }
+                if (Movible != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
+                    }
+                   
+                }
+                if (Ordenable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
+                    }
+                   
+                }
+                if (Filtrable != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
+                    }
+                   
+                }
+                if (PosicionEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
+                    }
+                   
+                }
+                if (AnchoMinimoEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
+                    }
+                   
+                }
+                if (AnchoEnGrilla != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
+                    }
+                   
+                }
+                if (Habilitado != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
+                    }
+                   
+                }
+                if (UsuarioCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
+                    }
+                   
+                }
+                if (FechaCreacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
+                    }
+                   
+                }
+                if (UsuarioModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
+                    }
+                   
+                }
+                if (FechaModificacion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Customizador.EntidadAtributo> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Customizador.EntidadAtributo Add(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Customizador.EntidadAtributo)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Customizador.EntidadAtributo item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Customizador.EntidadAtributo with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="EntidadId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="VisibleEnGrilla"></param>
+            /// <param name="VisibleEnSelectorColumnas"></param>
+            /// <param name="Redimensionable"></param>
+            /// <param name="Agrupable"></param>
+            /// <param name="Movible"></param>
+            /// <param name="Ordenable"></param>
+            /// <param name="Filtrable"></param>
+            /// <param name="PosicionEnGrilla"></param>
+            /// <param name="AnchoMinimoEnGrilla"></param>
+            /// <param name="AnchoEnGrilla"></param>
+            /// <param name="Habilitado"></param>
+            /// <param name="UsuarioCreacion"></param>
+            /// <param name="FechaCreacion"></param>
+            /// <param name="UsuarioModificacion"></param>
+            /// <param name="FechaModificacion"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            {
+                 Entities.Tables.Customizador.EntidadAtributo item = new Entities.Tables.Customizador.EntidadAtributo();
+                 item.Id = Id;
+                 item.EntidadId = EntidadId;
+                 item.Nombre = Nombre;
+                 item.VisibleEnGrilla = VisibleEnGrilla;
+                 item.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
+                 item.Redimensionable = Redimensionable;
+                 item.Agrupable = Agrupable;
+                 item.Movible = Movible;
+                 item.Ordenable = Ordenable;
+                 item.Filtrable = Filtrable;
+                 item.PosicionEnGrilla = PosicionEnGrilla;
+                 item.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
+                 item.AnchoEnGrilla = AnchoEnGrilla;
+                 item.Habilitado = Habilitado;
+                 item.UsuarioCreacion = UsuarioCreacion;
+                 item.FechaCreacion = FechaCreacion;
+                 item.UsuarioModificacion = UsuarioModificacion;
+                 item.FechaModificacion = FechaModificacion;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
+            }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
+        } // class EntidadAtributo
+	} //namespace Permaquim.Depositario.Business.Relations.Customizador
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
 	    /// <summary>
 	    /// 
@@ -3974,6 +5307,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -3981,7 +5324,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Empresa
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -4286,6 +5650,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -4293,7 +5667,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Grupo
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -4598,6 +5993,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -4605,7 +6010,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RelacionMonedaSucursal
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -4910,6 +6336,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -4917,7 +6353,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sector
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
@@ -5290,6 +6747,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -5297,7 +6764,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sucursal
 	} //namespace Permaquim.Depositario.Business.Relations.Directorio
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -5653,6 +7141,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -5660,7 +7158,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ComandoContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -6016,6 +7535,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -6023,7 +7552,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ComandoPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -6328,6 +7878,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -6335,7 +7895,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class ConfiguracionDepositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -6352,8 +7933,8 @@ using System.Text;
 					SectorId,
 					NumeroSerie,
 					CodigoExterno,
-					TipoContenedorId,
 					ModeloId,
+					TipoContenedorId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -6403,17 +7984,17 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='NumeroSerie'></param>
          /// <param name='CodigoExterno'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Depositario</returns>
-			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,TipoContenedorId,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,TipoContenedorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Dispositivo.Depositario> Items()
             {
@@ -6452,15 +8033,15 @@ using System.Text;
             /// <param name="SectorId"></param>
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
-            /// <param name="TipoContenedorId"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? TipoContenedorId,Int64? ModeloId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Int64? TipoContenedorId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -6535,18 +8116,6 @@ using System.Text;
                     }
                    
                 }
-                if (TipoContenedorId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
-                    }
-                   
-                }
                 if (ModeloId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -6556,6 +8125,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
+                    }
+                   
+                }
+                if (TipoContenedorId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
                     }
                    
                 }
@@ -6646,15 +8227,15 @@ using System.Text;
             /// <param name="SectorId"></param>
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
-            /// <param name="TipoContenedorId"></param>
             /// <param name="ModeloId"></param>
+            /// <param name="TipoContenedorId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 TipoContenedorId,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Int64 TipoContenedorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Dispositivo.Depositario item = new Entities.Tables.Dispositivo.Depositario();
                  item.Id = Id;
@@ -6663,8 +8244,8 @@ using System.Text;
                  item.SectorId = SectorId;
                  item.NumeroSerie = NumeroSerie;
                  item.CodigoExterno = CodigoExterno;
-                 item.TipoContenedorId = TipoContenedorId;
                  item.ModeloId = ModeloId;
+                 item.TipoContenedorId = TipoContenedorId;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -6708,6 +8289,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -6715,7 +8306,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Depositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -7207,6 +8819,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -7214,7 +8836,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -7553,6 +9196,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -7560,7 +9213,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioEstado
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -7865,6 +9539,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -7872,7 +9556,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioMoneda
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -8517,6 +10222,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -8524,7 +10239,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class DepositarioPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -8812,6 +10548,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -8819,7 +10565,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Marca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -9158,6 +10925,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -9165,7 +10942,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Modelo
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -9226,12 +11024,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Decripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.PlantillaMoneda</returns>
-			public Entities.Relations.Dispositivo.PlantillaMoneda Add(String Nombre,String Decripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.PlantillaMoneda Add(String Nombre,String Decripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.PlantillaMoneda)base.Add(new Entities.Relations.Dispositivo.PlantillaMoneda(Nombre,Decripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9453,6 +11251,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -9460,7 +11268,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PlantillaMoneda
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -9527,12 +11356,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId'></param>
          /// <param name='Secuencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.PlantillaMonedaDetalle</returns>
-			public Entities.Relations.Dispositivo.PlantillaMonedaDetalle Add(Permaquim.Depositario.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,String Nombre,String Decripcion,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int16 Secuencia,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.PlantillaMonedaDetalle Add(Permaquim.Depositario.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,String Nombre,String Decripcion,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int16 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.PlantillaMonedaDetalle)base.Add(new Entities.Relations.Dispositivo.PlantillaMonedaDetalle(PlantillaMonedaId,Nombre,Decripcion,MonedaId,Secuencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9799,6 +11628,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -9806,7 +11645,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PlantillaMonedaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -10145,6 +12005,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -10152,7 +12022,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoConfiguracionDepositario
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -10644,6 +12535,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -10651,7 +12552,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoContadora
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Dispositivo {
@@ -11313,6 +13235,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -11320,7 +13252,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoPlaca
 	} //namespace Permaquim.Depositario.Business.Relations.Dispositivo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -11625,6 +13578,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -11632,7 +13595,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Esquema
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -12005,6 +13989,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -12012,7 +14006,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Estilo {
@@ -12300,6 +14315,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -12307,7 +14332,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoEsquemaDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Estilo
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -12629,6 +14675,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -12636,7 +14692,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ciudad
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -12958,6 +15035,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -12965,7 +15052,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class CodigoPostal
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -13287,6 +15395,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -13294,7 +15412,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Pais
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -13616,6 +15755,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -13623,7 +15772,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Provincia
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
 	namespace Permaquim.Depositario.Business.Relations.Geografia {
@@ -13928,6 +16098,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -13935,9 +16115,594 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Zona
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
+	namespace Permaquim.Depositario.Business.Relations.Impresion {
+	    /// <summary>
+	    /// 
+	    /// </summary>
+		public class PlantillaTicket : RelationsDataHandler
+		{
+				public enum ColumnEnum : int
+                {
+					Id,
+					TipoId,
+					DepositarioModeloId,
+					Nombre,
+					Descripcion,
+					Impresora,
+					TextoCabecera,
+					NombreFuenteCabecera,
+					TamanioFuenteCabecera,
+					UbicacionTextoCabecera,
+					TextoPie,
+					NombreFuentePie,
+					TamanioFuentePie,
+					UbicacionTextoPie,
+					Imagen,
+					UbicacionImagen,
+					UbicacionTextoDetalle,
+					AnchoDetalle,
+					TamanioEntreLineas,
+					AnchoReporte,
+					FactorAltoReporte,
+					LineasAlFinal
+				}
+			   protected List<Entities.Relations.Impresion.PlantillaTicket> _cacheItemList = new List<Entities.Relations.Impresion.PlantillaTicket>();
+			   protected List<Entities.Relations.Impresion.PlantillaTicket> _entities = null;
+            public CustomWhereParameter Where { get; set; }
+            public CustomOrderByParameter OrderBy { get; set; }
+            public CustomGroupByParameter GroupBy { get; set; }
+            public CustomAggregateParameter Aggregate { get; set; }
+            public PlantillaTicket() : base()
+            {
+                base._dataItem = new Entities.Relations.Impresion.PlantillaTicket();
+                Where = new CustomWhereParameter();
+                OrderBy = new CustomOrderByParameter();
+                GroupBy = new CustomGroupByParameter();
+                Aggregate = new CustomAggregateParameter();
+            }
+            public class CustomAggregateParameter : AggregateParameter
+            {
+                 internal AggregateParameter aggregateParameter = new AggregateParameter();
+                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
+                     {
+                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
+                     }
+            }
+			// Adds to a memory cache to hold pending transactions
+			public void AddToCache(Entities.Relations.Impresion.PlantillaTicket item)
+			{
+				_cacheItemList.Add(item);
+			}
+			public void UpdateCache()
+			{
+                this.BeginTransaction();
+				foreach(IDataItem item in _cacheItemList)
+					base.Add(item);
+				this.EndTransaction(true);
+			}
+			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
+         /// <summary>
+         /// PlantillaTicket Add Method
+         /// </summary>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId'></param>
+         /// <param name='Nombre'></param>
+         /// <param name='Descripcion'></param>
+         /// <param name='Impresora'></param>
+         /// <param name='TextoCabecera'></param>
+         /// <param name='NombreFuenteCabecera'></param>
+         /// <param name='TamanioFuenteCabecera'></param>
+         /// <param name='UbicacionTextoCabecera'></param>
+         /// <param name='TextoPie'></param>
+         /// <param name='NombreFuentePie'></param>
+         /// <param name='TamanioFuentePie'></param>
+         /// <param name='UbicacionTextoPie'></param>
+         /// <param name='Imagen'></param>
+         /// <param name='UbicacionImagen'></param>
+         /// <param name='UbicacionTextoDetalle'></param>
+         /// <param name='AnchoDetalle'></param>
+         /// <param name='TamanioEntreLineas'></param>
+         /// <param name='AnchoReporte'></param>
+         /// <param name='FactorAltoReporte'></param>
+         /// <param name='LineasAlFinal'></param>
+         /// <returns>Entities.Relations.Impresion.PlantillaTicket</returns>
+			public Entities.Relations.Impresion.PlantillaTicket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal) 
+			{
+			  return (Entities.Relations.Impresion.PlantillaTicket)base.Add(new Entities.Relations.Impresion.PlantillaTicket(TipoId,DepositarioModeloId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal));
+			}
+            public new List<Entities.Relations.Impresion.PlantillaTicket> Items()
+            {
+                base.WhereParameter = this.Where.whereParameter;
+                base.OrderByParameter = this.OrderBy.orderByParameter;
+                base.GroupByParameter = this.GroupBy.groupByParameter;
+                base.TopQuantity = this.TopQuantity;
+                base.AnalizeIDataItem();
+                _entities = base.Items().Cast<Entities.Relations.Impresion.PlantillaTicket>().ToList<Entities.Relations.Impresion.PlantillaTicket>();
+                return _entities;
+            }
+            /// <summary>
+            /// Gets Entities.Relations.Impresion.PlantillaTicket items by Pk
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64 Id)
+            {
+                this.Where.Clear();
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                return this.Items();
+            }
+            /// <summary>
+            /// Gets items with all fields
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns></returns>
+            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? AnchoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Int32? LineasAlFinal)
+            {
+                this.Where.whereParameter.Clear();
+                if (Id != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
+                    }
+                   
+                }
+                if (TipoId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
+                    }
+                   
+                }
+                if (DepositarioModeloId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
+                    }
+                   
+                }
+                if (Nombre != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
+                    }
+                   
+                }
+                if (Descripcion != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
+                    }
+                   
+                }
+                if (Impresora != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
+                    }
+                   
+                }
+                if (TextoCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
+                    }
+                   
+                }
+                if (NombreFuenteCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
+                    }
+                   
+                }
+                if (TamanioFuenteCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
+                    }
+                   
+                }
+                if (UbicacionTextoCabecera != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
+                    }
+                   
+                }
+                if (TextoPie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
+                    }
+                   
+                }
+                if (NombreFuentePie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
+                    }
+                   
+                }
+                if (TamanioFuentePie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
+                    }
+                   
+                }
+                if (UbicacionTextoPie != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
+                    }
+                   
+                }
+                if (Imagen != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
+                    }
+                   
+                }
+                if (UbicacionImagen != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
+                    }
+                   
+                }
+                if (UbicacionTextoDetalle != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
+                    }
+                   
+                }
+                if (AnchoDetalle != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
+                    }
+                   
+                }
+                if (TamanioEntreLineas != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
+                    }
+                   
+                }
+                if (AnchoReporte != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
+                    }
+                   
+                }
+                if (FactorAltoReporte != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
+                    }
+                   
+                }
+                if (LineasAlFinal != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
+                    }
+                   
+                }
+                return this.Items();
+            }
+            public List<Entities.Relations.Impresion.PlantillaTicket> Result 
+            {
+                get { return _entities; }
+            }
+            public Entities.Relations.Impresion.PlantillaTicket Add(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
+                return (Entities.Relations.Impresion.PlantillaTicket)base.Add((IDataItem)item);
+            }
+            public Int64 Update(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                return base.Update((IDataItem)item);
+            }
+            public Int64 Delete(Entities.Relations.Impresion.PlantillaTicket item)
+            {
+                return base.DeleteItem((IDataItem)item);
+            }
+            /// Updates an instance of Entities.Relations.Impresion.PlantillaTicket with parameters
+            /// </summary>
+            /// <param name="Id"></param>
+            /// <param name="TipoId"></param>
+            /// <param name="DepositarioModeloId"></param>
+            /// <param name="Nombre"></param>
+            /// <param name="Descripcion"></param>
+            /// <param name="Impresora"></param>
+            /// <param name="TextoCabecera"></param>
+            /// <param name="NombreFuenteCabecera"></param>
+            /// <param name="TamanioFuenteCabecera"></param>
+            /// <param name="UbicacionTextoCabecera"></param>
+            /// <param name="TextoPie"></param>
+            /// <param name="NombreFuentePie"></param>
+            /// <param name="TamanioFuentePie"></param>
+            /// <param name="UbicacionTextoPie"></param>
+            /// <param name="Imagen"></param>
+            /// <param name="UbicacionImagen"></param>
+            /// <param name="UbicacionTextoDetalle"></param>
+            /// <param name="AnchoDetalle"></param>
+            /// <param name="TamanioEntreLineas"></param>
+            /// <param name="AnchoReporte"></param>
+            /// <param name="FactorAltoReporte"></param>
+            /// <param name="LineasAlFinal"></param>
+            /// <returns>Int64</returns>
+            public Int64 Update(Int64 Id,Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal)
+            {
+                 Entities.Tables.Impresion.PlantillaTicket item = new Entities.Tables.Impresion.PlantillaTicket();
+                 item.Id = Id;
+                 item.TipoId = TipoId;
+                 item.DepositarioModeloId = DepositarioModeloId;
+                 item.Nombre = Nombre;
+                 item.Descripcion = Descripcion;
+                 item.Impresora = Impresora;
+                 item.TextoCabecera = TextoCabecera;
+                 item.NombreFuenteCabecera = NombreFuenteCabecera;
+                 item.TamanioFuenteCabecera = TamanioFuenteCabecera;
+                 item.UbicacionTextoCabecera = UbicacionTextoCabecera;
+                 item.TextoPie = TextoPie;
+                 item.NombreFuentePie = NombreFuentePie;
+                 item.TamanioFuentePie = TamanioFuentePie;
+                 item.UbicacionTextoPie = UbicacionTextoPie;
+                 item.Imagen = Imagen;
+                 item.UbicacionImagen = UbicacionImagen;
+                 item.UbicacionTextoDetalle = UbicacionTextoDetalle;
+                 item.AnchoDetalle = AnchoDetalle;
+                 item.TamanioEntreLineas = TamanioEntreLineas;
+                 item.AnchoReporte = AnchoReporte;
+                 item.FactorAltoReporte = FactorAltoReporte;
+                 item.LineasAlFinal = LineasAlFinal;
+
+                return base.Update((IDataItem)item);
+            }
+            public class CustomWhereParameter : WhereParameter {
+                 internal WhereParameter whereParameter = new WhereParameter();
+                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
+                 {
+                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
+                 }
+                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
+                 {
+                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
+                 }
+                 public void Clear()
+                 {
+                     this.whereParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.whereParameter.Count;
+                     }
+                 }
+            }
+            public class CustomOrderByParameter : OrderByParameter {
+                 internal OrderByParameter orderByParameter = new OrderByParameter();
+                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
+                 {
+                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
+                 }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
+            }
+            public class CustomGroupByParameter : GroupByParameter {
+                 internal GroupByParameter groupByParameter = new GroupByParameter();
+                 public void Add(ColumnEnum column)
+                 {
+                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
+                 }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
+            }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
+        } // class PlantillaTicket
+	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
 	    /// <summary>
 	    /// 
@@ -14563,6 +17328,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -14570,7 +17345,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ticket
 	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
@@ -14875,6 +17671,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -14882,7 +17688,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoTicket
 	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -15204,6 +18031,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -15211,7 +18048,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class CierreDiario
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -15567,6 +18425,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -15574,7 +18442,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Contenedor
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -15845,6 +18734,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -15852,7 +18751,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Evento
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -16106,6 +19026,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -16113,7 +19043,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Sesion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -16418,6 +19369,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -16425,7 +19386,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoContenedor
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -16730,6 +19712,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -16737,7 +19729,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoEvento
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17042,6 +20055,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -17049,7 +20072,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoTransaccion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17592,6 +20636,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -17599,7 +20653,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Transaccion
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -17836,6 +20911,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -17843,7 +20928,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -18063,6 +21169,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -18070,7 +21186,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionSobre
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -18324,6 +21461,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -18331,7 +21478,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TransaccionSobreDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -18755,6 +21923,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -18762,7 +21940,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Turno
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Operacion {
@@ -19050,6 +22249,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -19057,7 +22266,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TurnoUsuario
 	} //namespace Permaquim.Depositario.Business.Relations.Operacion
 	namespace Permaquim.Depositario.Business.Relations.Regionalizacion {
@@ -19379,6 +22609,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -19386,7 +22626,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Lenguaje
 	} //namespace Permaquim.Depositario.Business.Relations.Regionalizacion
 	namespace Permaquim.Depositario.Business.Relations.Regionalizacion {
@@ -19708,6 +22969,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -19715,7 +22986,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class LenguajeItem
 	} //namespace Permaquim.Depositario.Business.Relations.Regionalizacion
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -20020,6 +23312,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -20027,7 +23329,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Aplicacion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -20315,6 +23638,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -20322,7 +23655,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AplicacionParametro
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -20627,6 +23981,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -20634,7 +23998,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AplicacionParametroValor
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -20973,6 +24358,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -20980,7 +24375,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Funcion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -21285,6 +24701,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -21292,7 +24718,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class IdentificadorUsuario
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -21648,6 +25095,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -21655,7 +25112,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Menu
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -21977,6 +25455,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -21984,7 +25472,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Rol
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22357,6 +25866,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -22364,7 +25883,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RolFuncion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22652,6 +26192,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -22659,7 +26209,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoAplicacion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -22947,6 +26518,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -22954,7 +26535,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoFuncion
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -23259,6 +26861,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -23266,7 +26878,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoIdentificador
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -23554,6 +27187,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -23561,7 +27204,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class TipoMenu
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24138,6 +27802,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -24145,7 +27819,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Usuario
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24433,6 +28128,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -24440,7 +28145,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioRol
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Seguridad {
@@ -24728,6 +28454,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -24735,7 +28471,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class UsuarioSector
 	} //namespace Permaquim.Depositario.Business.Relations.Seguridad
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -25023,6 +28780,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -25030,7 +28797,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Configuracion
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -25284,6 +29072,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -25291,7 +29089,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Ejecucion
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -25349,13 +29168,13 @@ using System.Text;
          /// Entidad Add Method
          /// </summary>
          /// <param name='Nombre'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Sincronizacion.Entidad</returns>
-			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Sincronizacion.Entidad Add(String Nombre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Sincronizacion.Entidad)base.Add(new Entities.Relations.Sincronizacion.Entidad(Nombre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -25562,6 +29381,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -25569,7 +29398,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Entidad
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -25625,13 +29475,13 @@ using System.Text;
          /// <summary>
          /// EntidadCabecera Add Method
          /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Sincronizacion.Entidad EntidadId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Permaquim.Depositario.Entities.Relations.Sincronizacion.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
+			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadCabecera)base.Add(new Entities.Relations.Sincronizacion.EntidadCabecera(EntidadId,Valor,Fechainicio,Fechafin,EjecucionId));
 			}
@@ -25823,6 +29673,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -25830,7 +29690,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EntidadCabecera
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Sincronizacion {
@@ -26067,6 +29948,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -26074,7 +29965,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EntidadDetalle
 	} //namespace Permaquim.Depositario.Business.Relations.Sincronizacion
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -26413,6 +30325,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -26420,7 +30342,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class AgendaTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -26725,6 +30668,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -26732,7 +30685,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaDetalleTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Turno {
@@ -26749,7 +30723,9 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					OperaSinTurno,
+					OperaDiasCorridos
 				}
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _cacheItemList = new List<Entities.Relations.Turno.EsquemaTurno>();
 			   protected List<Entities.Relations.Turno.EsquemaTurno> _entities = null;
@@ -26795,10 +30771,12 @@ using System.Text;
          /// <param name='FechaCreacion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='OperaSinTurno'></param>
+         /// <param name='OperaDiasCorridos'></param>
          /// <returns>Entities.Relations.Turno.EsquemaTurno</returns>
-			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos) 
 			{
-			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,OperaSinTurno,OperaDiasCorridos));
 			}
             public new List<Entities.Relations.Turno.EsquemaTurno> Items()
             {
@@ -26838,8 +30816,10 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Turno.EsquemaTurno> Items(Int64? Id,String Nombre,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,Boolean? OperaSinTurno,Boolean? OperaDiasCorridos)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -26926,6 +30906,30 @@ using System.Text;
                     }
                    
                 }
+                if (OperaSinTurno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaSinTurno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaSinTurno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaSinTurno);
+                    }
+                   
+                }
+                if (OperaDiasCorridos != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.OperaDiasCorridos, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.OperaDiasCorridos, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, OperaDiasCorridos);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Turno.EsquemaTurno> Result 
@@ -26954,8 +30958,10 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="OperaSinTurno"></param>
+            /// <param name="OperaDiasCorridos"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos)
             {
                  Entities.Tables.Turno.EsquemaTurno item = new Entities.Tables.Turno.EsquemaTurno();
                  item.Id = Id;
@@ -26965,6 +30971,8 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.OperaSinTurno = OperaSinTurno;
+                 item.OperaDiasCorridos = OperaDiasCorridos;
 
                 return base.Update((IDataItem)item);
             }
@@ -27003,6 +31011,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -27010,7 +31028,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class EsquemaTurno
 	} //namespace Permaquim.Depositario.Business.Relations.Turno
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -27383,6 +31422,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -27390,7 +31439,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Denominacion
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -27712,6 +31782,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -27719,7 +31799,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Moneda
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -28024,6 +32125,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -28031,7 +32142,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class OrigenValor
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -28319,6 +32451,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -28326,7 +32468,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class RelacionMonedaTipoValor
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Valor {
@@ -28631,6 +32794,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -28638,7 +32811,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Tipo
 	} //namespace Permaquim.Depositario.Business.Relations.Valor
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -28943,6 +33137,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -28950,7 +33154,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class Perfil
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -29238,6 +33463,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -29245,7 +33480,28 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PerfilItem
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
 	namespace Permaquim.Depositario.Business.Relations.Visualizacion {
@@ -29550,6 +33806,16 @@ using System.Text;
                  {
                      this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
                  }
+                 public void Clear()
+                 {
+                     this.orderByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.orderByParameter.Count;
+                     }
+                 }
             }
             public class CustomGroupByParameter : GroupByParameter {
                  internal GroupByParameter groupByParameter = new GroupByParameter();
@@ -29557,6 +33823,27 @@ using System.Text;
                  {
                      this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
                  }
+                 public void Clear()
+                 {
+                     this.groupByParameter.Clear();
+                 }
+                 public long Count
+                 {
+                     get {
+                         return this.groupByParameter.Count;
+                     }
+                 }
             }
+             public void Dispose()
+             {
+                 _entities = null;
+                 _cacheItemList = null;
+                 Where = null;
+                 OrderBy = null;
+                 GroupBy = null;
+                 Aggregate = null;
+				
+                 base.Dispose(true);
+             }
         } // class PerfilTipo
 	} //namespace Permaquim.Depositario.Business.Relations.Visualizacion
