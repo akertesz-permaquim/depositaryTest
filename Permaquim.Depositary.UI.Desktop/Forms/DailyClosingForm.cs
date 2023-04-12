@@ -92,7 +92,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.MainPanel.Enabled = false;
             _currentDailyclosing = DatabaseController.ClosePendingDays();
-            PrintTicket();
+            if (!ConfigurationController.IsDevelopment())
+                PrintTicket();
             FormsController.OpenChildForm(this, new OtherOperationsForm(), _device);
         }
         #endregion

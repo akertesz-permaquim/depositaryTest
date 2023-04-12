@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerValor")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerValor([FromBody] ValorModel data)
         {
 
@@ -114,7 +114,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerMonedas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerMonedas()
         {
             ValorMonedaModel data = new();
@@ -148,7 +148,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerDenominaciones")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerDenominaciones()
         {
             ValorDenominacionModel data = new();
@@ -181,7 +181,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTipos")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTipos()
         {
             ValorTipoModel data = new();
@@ -215,7 +215,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerRelacionesMonedasTiposValores")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerRelacionesMonedasTiposValores()
         {
             ValorRelacionMonedaTipoValorModel data = new();
@@ -248,7 +248,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerOrigenes")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerOrigenes()
         {
             ValorOrigenValorModel data = new();

@@ -23,7 +23,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerTurno")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTurno([FromBody] TurnoModel data)
         {
 
@@ -92,7 +92,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerAgendas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerAgendas()
         {
             TurnoAgendaTurnoModel data = new();
@@ -126,7 +126,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEsquemas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEsquemas()
         {
             TurnoEsquemaTurnoModel data = new();
@@ -160,7 +160,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEsquemasDetalles")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEsquemasDetalles()
         {
             TurnoEsquemaDetalleTurnoModel data = new();

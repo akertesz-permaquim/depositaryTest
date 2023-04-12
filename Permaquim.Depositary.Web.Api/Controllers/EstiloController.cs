@@ -24,7 +24,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerEstilo")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEstilo([FromBody] EstiloModel data)
         {
             try
@@ -94,7 +94,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEsquemas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEsquemas()
         {
             EstiloEsquemaModel data = new();
@@ -129,7 +129,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEsquemasDetalles")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEsquemasDetalles()
         {
             EstiloEsquemaDetalleModel data = new();
@@ -163,7 +163,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTiposEsquemasDetalles")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposEsquemasDetalles()
         {
             EstiloTipoEsquemaDetalleModel data = new();

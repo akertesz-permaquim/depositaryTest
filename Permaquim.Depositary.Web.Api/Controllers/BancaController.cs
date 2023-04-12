@@ -24,7 +24,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerBanca")]
-        [Authorize]
+        [Authorize] 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerBanca([FromBody] BancaModel data)
         {
             try
@@ -103,7 +104,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerBancos")]
-        [Authorize]
+        [Authorize] 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerBancos()
         {
             BancaBancoModel data = new();
@@ -137,7 +139,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerCuentas")]
-        [Authorize]
+        [Authorize] 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerCuentas()
         {
             BancaCuentaModel data = new();
@@ -170,7 +173,8 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTiposCuenta")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
+
         public async Task<IActionResult> ObtenerTiposCuenta()
         {
             BancaTipoCuentaModel data = new();
@@ -204,6 +208,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
         [HttpGet]
         [Route("ObtenerUsuariosCuenta")]
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerUsuariosCuenta()
         {
             BancaUsuarioCuentaModel data = new();

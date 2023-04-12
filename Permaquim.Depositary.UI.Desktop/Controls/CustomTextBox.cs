@@ -397,9 +397,12 @@ using System.Drawing.Drawing2D;
         }
         private void textBox1_Leave(object sender, EventArgs e)
         {
+        if (textBox1.Text.Length > 0)
+        {
             isFocused = false;
             this.Invalidate();
             SetPlaceholder();
+        }
         }
         ///::::+
         #endregion

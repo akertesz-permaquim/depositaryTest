@@ -21,7 +21,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerSincronizacion")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerSincronizacion([FromBody] SincronizacionModel data)
         {
             //Por defecto se indica una fecha minima para no usar nulos
@@ -52,7 +52,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("IniciarEjecucion")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> IniciarEjecucion([FromBody] SincronizacionEjecucionModel data)
         {
             try
@@ -123,7 +123,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("FinalizarEjecucion")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> FinalizarEjecucion([FromBody] SincronizacionEjecucionModel data)
         {
             try
@@ -168,7 +168,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEntidades")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEntidades()
         {
             SincronizacionEntidadModel data = new();

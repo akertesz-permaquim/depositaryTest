@@ -7,21 +7,26 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class ConfigurationController
     {
+        private const string CODIGODEPOSITARIO = "CodigoDepositario";
+        private const string PASSWORDKEY = "PasswordKey";
+        private const string ASPNETCORE_ENVIRONMENT = "ASPNETCORE_ENVIRONMENT";
+        private const string DEVELOPMENT = "DEVELOPMENT";
+        private static Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario _depositaryConfiguratioEntities = new();
         public static string GetDepositaryConfigurationItem(DepositaryConfigurationEnum key)
         {
             string returnValue = string.Empty;
 
-            Permaquim.Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario entities = new();
-            entities.Where.Add(Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.DepositarioId,
+            _depositaryConfiguratioEntities.Where.Clear(); 
+            _depositaryConfiguratioEntities.Where.Add(Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.DepositarioId,
                 Depositario.sqlEnum.OperandEnum.Equal, DatabaseController.CurrentDepositary.Id);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+            _depositaryConfiguratioEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.Habilitado,
                 Depositario.sqlEnum.OperandEnum.Equal, true);
-            entities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
+            _depositaryConfiguratioEntities.Where.Add(Depositario.sqlEnum.ConjunctionEnum.AND,
                 Depositario.Business.Tables.Dispositivo.ConfiguracionDepositario.ColumnEnum.TipoId,
                 Depositario.sqlEnum.OperandEnum.Equal, (long)key);
-            if (entities.Items().Count > 0)
-                returnValue = entities.Result.FirstOrDefault().Valor;
+            if (_depositaryConfiguratioEntities.Items().Count > 0)
+                returnValue = _depositaryConfiguratioEntities.Result.FirstOrDefault().Valor;
 
             return returnValue;
         }
@@ -35,15 +40,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         public static string GetCurrentDepositaryCode()
         {
             return Cryptography.Decrypt(
-                ConfigurationController.GetConfiguration("CodigoDepositario"), 
-                ConfigurationController.GetConfiguration("PasswordKey"));
+                ConfigurationController.GetConfiguration(CODIGODEPOSITARIO), 
+                ConfigurationController.GetConfiguration(PASSWORDKEY));
         }
   
         private static string GetConfiguration(string configurationEntry)
         {
 
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == null ? String.Empty :
-                 Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") + ".";
+            var env = Environment.GetEnvironmentVariable(ASPNETCORE_ENVIRONMENT) == null ? String.Empty :
+                 Environment.GetEnvironmentVariable(ASPNETCORE_ENVIRONMENT) + ".";
             var builder = new ConfigurationBuilder()
                             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory + @"\")
                             .AddJsonFile("appsettings." + env + "json", optional: false, reloadOnChange: true);
@@ -57,9 +62,9 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
         {
             try
             {
-                string? env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                string? env = Environment.GetEnvironmentVariable(ASPNETCORE_ENVIRONMENT);
 
-                return env == null? false: Convert.ToBoolean(env.Equals("DEVELOPMENT"));
+                return env == null? false: Convert.ToBoolean(env.Equals(DEVELOPMENT));
             }
             catch (Exception)
             {

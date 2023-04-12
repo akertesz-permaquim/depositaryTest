@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <GenerationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <NetVersion>NetCore</NetVersion>
-  <GarbageCollectionCode>GC.Collect(2, GCCollectionMode.Forced);</GarbageCollectionCode>
-  <UsesExplicitGarbageCollection>true</UsesExplicitGarbageCollection>
+  <GarbageCollectionCode />
+  <UsesExplicitGarbageCollection>false</UsesExplicitGarbageCollection>
   <SupportedCharacters> .</SupportedCharacters>
   <ConnectionStringName>ConnectionString</ConnectionStringName>
   <ChildrenPrefix>ListOf_</ChildrenPrefix>
@@ -20,8 +20,13 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Depositario;Data Source=PC-SISTEMAS</ConnectionString>
-  <SelectedViews />
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioIntegracion;Data Source=PC-SISTEMAS</ConnectionString>
+  <SelectedViews>
+    <string>Integracion.OperacionTransaccion</string>
+    <string>Integracion.OperacionTransaccionDetalle</string>
+    <string>Integracion.OperacionTransaccionSobre</string>
+    <string>Integracion.OperacionTransaccionSobreDetalle</string>
+  </SelectedViews>
   <SelectedStoredProcedures>
     <string>Sincronizacion.ObtenerIdDestino</string>
   </SelectedStoredProcedures>
@@ -368,7 +373,7 @@
     <string>Visualizacion.PerfilItem</string>
     <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
-  <SelectedDatabase>Depositario</SelectedDatabase>
+  <SelectedDatabase>DepositarioIntegracion</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
   </SelectedTemplates>

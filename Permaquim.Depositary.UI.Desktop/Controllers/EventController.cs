@@ -16,7 +16,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
         private static int _eventTime  = ParameterController.EventEvaluationSeconds;
 
-        private static Permaquim.Depositario.Business.Tables.Operacion.Evento entities = new();
+        private static Permaquim.Depositario.Business.Tables.Operacion.Evento _entities = new();
 
         public static void CreateEvent(EventTypeEnum eventTypeEnum, string message, string value)
         {
@@ -119,7 +119,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
             }
 
           
-            entities.Add(new Depositario.Entities.Tables.Operacion.Evento()
+            _entities.Add(new Depositario.Entities.Tables.Operacion.Evento()
             {
                 DepositarioId = DatabaseController.CurrentDepositary.Id,
                 Fecha = DateTime.Now,

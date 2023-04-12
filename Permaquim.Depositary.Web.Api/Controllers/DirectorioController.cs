@@ -25,7 +25,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerDirectorio")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerDirectorio([FromBody] DirectorioModel data)
         {
             try
@@ -114,7 +114,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerGrupos")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerGrupos()
         {
             DirectorioGrupoModel data = new();
@@ -148,7 +148,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerEmpresas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerEmpresas()
         {
             DirectorioEmpresaModel data = new();
@@ -181,7 +181,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerSucursales")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerSucursales()
         {
             DirectorioSucursalModel data = new();
@@ -214,7 +214,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerSectores")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerSectores()
         {
             DirectorioSectorModel data = new();
@@ -247,7 +247,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerRelacionesMonedasSucursales")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerRelacionesMonedasSucursales()
         {
             DirectorioRelacionMonedaSucursalModel data = new();

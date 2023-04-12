@@ -35,7 +35,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpPost]
         [Route("ObtenerDispositivo")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerDispositivo([FromBody] DispositivoModel data)
         {
             try
@@ -184,7 +184,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerDepositarios")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerDepositarios()
         {
             DispositivoDepositarioModel data = new();
@@ -218,7 +218,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerMarcas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerMarcas()
         {
             DispositivoMarcaModel data = new();
@@ -251,7 +251,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerModelos")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerModelos()
         {
             DispositivoModeloModel data = new();
@@ -284,7 +284,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTiposPlacas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposPlacas()
         {
             DispositivoTipoPlacaModel data = new();
@@ -317,7 +317,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerComandosContadoras")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerComandosContadoras()
         {
             DispositivoComandoContadoraModel data = new();
@@ -350,7 +350,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerComandosPlacas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerComandosPlacas()
         {
             DispositivoComandoPlacaModel data = new();
@@ -383,7 +383,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerConfiguraciones")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerConfiguraciones()
         {
             DispositivoConfiguracionDepositarioModel data = new();
@@ -415,7 +415,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerContadoras")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerContadoras()
         {
             DispositivoDepositarioContadoraModel data = new();
@@ -479,7 +479,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerPlacas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerPlacas()
         {
             DispositivoDepositarioPlacaModel data = new();
@@ -512,7 +512,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerMonedas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerMonedas()
         {
             DispositivoDepositarioMonedaModel data = new();
@@ -545,7 +545,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTiposConfiguraciones")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposConfiguraciones()
         {
             DispositivoTipoConfiguracionDepositarioModel data = new();
@@ -578,7 +578,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerTiposContadoras")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerTiposContadoras()
         {
             DispositivoTipoContadoraModel data = new();
@@ -611,7 +611,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerPlantillasMonedas")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerPlantillasMonedas()
         {
             DispositivoPlantillaMonedaModel data = new();
@@ -644,7 +644,7 @@ namespace Permaquim.Depositary.Web.Api.Controllers
 
         [HttpGet]
         [Route("ObtenerPlantillasMonedasDetalles")]
-        [Authorize]
+        [Authorize] [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> ObtenerPlantillasMonedasDetalles()
         {
             DispositivoPlantillaMonedaDetalleModel data = new();

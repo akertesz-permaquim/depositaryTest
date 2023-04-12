@@ -5,13 +5,15 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 {
     internal static class AuditController
     {
+        private static Depositario.Business.Tables.Auditoria.Log _logEntities = new();
+
         public static void Log(LogTypeEnum logType, string description, string detail)
         {
             try
             {
                 StackTrace stackTrace = new StackTrace(); //Para obtener el nombre del metodo que lo llamo
 
-                Depositario.Business.Tables.Auditoria.Log entities = new();
+                
                 Depositario.Entities.Tables.Auditoria.Log entity = new()
                 {
                     AplicacionId = Global.Constants.APPLICATION_ID,
@@ -27,7 +29,7 @@ namespace Permaquim.Depositary.UI.Desktop.Controllers
 
                 };
 
-                entities.Add(entity);
+                _logEntities.Add(entity);
             }
             catch
             {

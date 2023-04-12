@@ -176,8 +176,6 @@ using System.Text;
 					public const string Empresa = "Empresa";
 					public const string Sucursal = "Sucursal";
 					public const string Sector = "Sector";
-					public const string TurnoId = "TurnoId";
-					public const string Turno = "Turno";
 					public const string Depositario = "Depositario";
 					public const string CantidadTransacciones = "CantidadTransacciones";
 					public const string TotalValidado = "TotalValidado";
@@ -199,8 +197,6 @@ using System.Text;
 					Empresa,
 					Sucursal,
 					Sector,
-					TurnoId,
-					Turno,
 					Depositario,
 					CantidadTransacciones,
 					TotalValidado,
@@ -217,7 +213,7 @@ using System.Text;
 	               /// <summary>
                 /// Constructor with Parameters 
 	               /// <summary>
-                public  CierresDiarios(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,Int64 TurnoId,String Turno,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario)
+                public  CierresDiarios(Int64 CierreDiarioId,Int64 DepositarioId,Int64 SectorId,Int64 SucursalId,Int64 EmpresaId,Int64 UsuarioId,String Usuario,DateTime Fecha,String CierreDiario,String Empresa,String Sucursal,String Sector,String Depositario,Int32 CantidadTransacciones,Double TotalValidado,Double TotalAValidar,String Moneda,String CodigoCierreDiario)
                 {
                     this.CierreDiarioId = CierreDiarioId;
                     this.DepositarioId = DepositarioId;
@@ -231,8 +227,6 @@ using System.Text;
                     this.Empresa = Empresa;
                     this.Sucursal = Sucursal;
                     this.Sector = Sector;
-                    this.TurnoId = TurnoId;
-                    this.Turno = Turno;
                     this.Depositario = Depositario;
                     this.CantidadTransacciones = CantidadTransacciones;
                     this.TotalValidado = TotalValidado;
@@ -264,10 +258,6 @@ using System.Text;
              public String Sucursal { get; set; }
              [DataItemAttributeFieldName("Sector","Sector")]
              public String Sector { get; set; }
-             [DataItemAttributeFieldName("TurnoId","TurnoId")]
-             public Int64 TurnoId { get; set; }
-             [DataItemAttributeFieldName("Turno","Turno")]
-             public String Turno { get; set; }
              [DataItemAttributeFieldName("Depositario","Depositario")]
              public String Depositario { get; set; }
              [DataItemAttributeFieldName("CantidadTransacciones","CantidadTransacciones")]

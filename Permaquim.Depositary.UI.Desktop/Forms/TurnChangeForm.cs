@@ -103,7 +103,8 @@ namespace Permaquim.Depositary.UI.Desktop
         {
             this.MainPanel.Enabled = false;
             _turnChange = DatabaseController.CloseCurrentTurn();
-            PrintTicket();
+            if(!ConfigurationController.IsDevelopment())
+                PrintTicket();
             FormsController.OpenChildForm(this,new OtherOperationsForm(), _device);
         }
         #endregion
@@ -521,7 +522,8 @@ namespace Permaquim.Depositary.UI.Desktop
                     ReportController.TurnToPrint = DatabaseController.LastTurn;
 
                     ReportController.PrintReport(ReportTypeEnum.TurnChange,
-                         DatabaseController.GetTurnEnvelopeBagContentItems(DatabaseController.LastTurn.Id), DatabaseController.GetTurnTransactions(DatabaseController.LastTurn.Id), i);
+                         DatabaseController.GetTurnEnvelopeBagContentItems(DatabaseController.LastTurn.Id), 
+                         DatabaseController.GetTurnTransactions(DatabaseController.LastTurn.Id), i);
                 }
             }
         }
