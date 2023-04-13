@@ -1,5 +1,17 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 
+
+#nullable enable
 namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     public class Worker : BackgroundService
@@ -10,59 +22,32 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
         private readonly IConfiguration _configuration;
         private HttpClient client = new HttpClient();
         private List<WorkerTask> _workerTasks = new List<WorkerTask>();
+        private FileInfo _file;
 
         public Worker(ILogger<Worker> logger, IConfiguration configuration) 
         {
-            _logger = logger;
-            _configuration = configuration;
+            this._logger = logger;
+            this._configuration = configuration;
         }
+
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
-                Log("Starting Service "+_configuration.GetSection("TaskDelay").Get<int>());
-            }catch (Exception ex)
+                string str = AppDomain.CurrentDomain.BaseDirectory + "\\" + this._configuration.GetSection("LogFile").Get<string>();
+                this.Log("Starting Service ..");
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(((object)ex).ToString());
             }
             return base.StartAsync(cancellationToken);
         }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-
-          
             try
             {
-
-                _workerTasks = AppConfiguration.GetWorkerTasks(_configuration.GetSection("TaskJson").Get<string>());
-                
-                while (!stoppingToken.IsCancellationRequested)
-                {
-
-                    NativeMethods.LaunchProcess(@"C:\Windows\notepad.exe");
-
-                    foreach (var item in _workerTasks)
-                    {
-                        switch (item.WorkerTaskType)
-                        {
-                            case WorkerTask.WorkerTaskTypeEnum.Url:
-                                var result = await client.GetAsync(item.Target);
-
-                                if (result.IsSuccessStatusCode)
-                                {
-                                    _logger.LogInformation("The website is up. Status code {StatusCode}", result.StatusCode);
-                                }
-                                else
-                                {
-                                    _logger.LogError("The website is down. Status code {StatusCode}", result.StatusCode);
-                                }
-                                break;
-
-                            case WorkerTask.WorkerTaskTypeEnum.Executable:
-
-                                bool isUp = true;
-
-
                 this._workerTasks = AppConfiguration.GetWorkerTasks(this._configuration.GetSection("TaskJson").Get<string>());
                 this._threads = new Dictionary<WorkerTask, Thread>();
                 this.CreateThreads(stoppingToken);
@@ -79,31 +64,31 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             }
         }
 
-        private void CreateThreads(CancellationToken ct)
+        private void CreateThreads(CancellationToken stoppingToken)
         {
             foreach (WorkerTask workerTask in this._workerTasks)
             {
-                if(!workerTask.FileExists) {
-                    if(!workerTask.FileExistCheck)
+                if (!workerTask.FileExists)
+                {
+                    if(!workerTask.ValidPathCheck)
                     {
-                        Log($"{workerTask.ProcessName} has an invalid path. Path: {workerTask.Target}");
+                        Log($"Invalid path for process {workerTask.ProcessName}");
                     }
                     continue;
-                
                 }
-                Thread thread = this.CreateThread(workerTask,ct);
+                Thread thread = this.CreateThread(workerTask,stoppingToken);
                 this._threads.Add(workerTask, thread);
             }
         }
 
-        private Thread CreateThread(WorkerTask workerTask,CancellationToken ct)
+        private Thread CreateThread(WorkerTask workerTask, CancellationToken stoppingToken)
         {
-            Thread thread = new(()=>WorkerTaskRun(workerTask,ct));
+            Thread thread = new(()=>WorkerTaskRun(workerTask,stoppingToken));
             thread.Name = workerTask.ProcessName;
             return thread;
         }
-        
-        private void CheckThreads(CancellationToken ct)
+
+        private void CheckThreads(CancellationToken stoppingToken)
         {
             foreach (WorkerTask key in this._threads.Keys)
             {
@@ -112,7 +97,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                 {
                     if (threadState == System.Threading.ThreadState.Stopped || threadState == System.Threading.ThreadState.Aborted)
                     {
-                        this._threads[key] = this.CreateThread(key,ct);
+                        this._threads[key] = this.CreateThread(key,stoppingToken);
                         this._threads[key].Start();
                     }
                 }
@@ -121,7 +106,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             }
         }
 
-        public override Task StopAsync(CancellationToken cancellationToken) 
+        public override Task StopAsync(CancellationToken cancellationToken)
         {
             this.client.Dispose();
             this._logger.LogInformation("The service has been stopped...");
@@ -136,26 +121,21 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
         }
 
-        private void WorkerTaskRun(WorkerTask task, CancellationToken ct)
+        private void WorkerTaskRun(WorkerTask task, CancellationToken stoppingToken)
         {
-            while (!ct.IsCancellationRequested)
+            while (!stoppingToken.IsCancellationRequested)
             {
                 if (!this.IsRunning(task))
                 {
                     if (task.Process != null)
                     {
-                        if(!task.Process.Responding)
-                        {
-                            task.Process.Kill();
-                        }
                         int downtimeOfProcess = this.GetDowntimeOfProcess(task.Process);
                         if (downtimeOfProcess < task.SleepTime)
                         {
                             int num = task.SleepTime - downtimeOfProcess;
-                            this.Log(string.Concat((string[])new string[6]
+                            this.Log(string.Concat((string[])new string[5]
                             {
-                                $"{task.ProcessName} down:",
-                                (string) "Dt Difference: ",
+                                (string) $"{task.ProcessName} Dt Difference: ",
                                 (string) num.ToString(),
                                 (string) Environment.NewLine,
                                 (string) "Downtime: ",
@@ -165,104 +145,56 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                             {
                                 try
                                 {
-                                    if (task.ProcessId != 0)
-                                    {
-
-                                        var process = Process.GetProcessById(task.ProcessId);
-                                        if (process.HasExited) isUp = false;
-                                    }
-                                    else
-                                    {
-                                        isUp = false;
-                                    }
+                                    Thread.Sleep(num);
                                 }
-                                catch (ArgumentException argex)
+                                catch (Exception ex)
                                 {
-                                    isUp = false;
+                                    this.Log(ex.Message + " / " + ex.StackTrace);
                                 }
-
-                                if (!isUp)
-                                {
-
-                                    NativeMethods.LaunchProcess(item.Target);
-
-                                    //Thread.Sleep(_configuration.GetSection("TaskDelay").Get<int>());
-                                    if (item.ProcessId == 0) Log("Starting process " + item.ProcessName + "...");
-                                    //item.ProcessId = Process.Start(item.Target).Id;
-
-                                    //System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                                    //System.Security.SecureString ssPwd = new System.Security.SecureString();
-                                    //proc.StartInfo.UseShellExecute = true;
-                                    //proc.StartInfo.FileName = item.Target;
-                                    //proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(item.Target);
-                                    //proc.StartInfo.UserName = "SB1015-I5";
-                                    //string password = "admin";
-                                    //for (int x = 0; x < password.Length; x++)
-                                    //{
-                                    //    ssPwd.AppendChar(password[x]);
-                                    //}
-                                    //password = "";
-                                    //proc.StartInfo.Password = ssPwd;
-                                    //proc.Start();
-                                    //item.ProcessId = proc.Id;
-
-                                }
-                                break;
-
-                            default:
-                                break;
-=======
                             }
                             else
-                                Thread.Sleep(task.SleepTime - POLL_TIME);
+                            {
+                                if (task.SleepTime - POLL_TIME > 0)
+                                {
+                                    Thread.Sleep(task.SleepTime - POLL_TIME);
+                                }
+                                else
+                                {
+                                    Thread.Sleep(task.SleepTime);
+                                }
+                            }
                         }
                     }
-                    if (!ct.IsCancellationRequested)
+                    if (!stoppingToken.IsCancellationRequested)
                     {
                         try
                         {
                             this.LaunchApplication(task);
                             task.Failing = false;
-                        }catch(Exception ex) {
+                        }catch(Exception ex)
+                        {
                             if (!task.Failing)
                             {
-                                task.Failing = true;
                                 Log(ex.ToString());
+                                task.Failing = true;
                             }
->>>>>>> Stashed changes
                         }
-
-                        await Task.Delay(500, stoppingToken);
                     }
                 }
-<<<<<<< Updated upstream
-            }catch (Exception ex)
-            {
-                Log(ex.ToString());
-=======
                 Thread.Sleep(POLL_TIME);
->>>>>>> Stashed changes
             }
         }
-private bool IsRunning(WorkerTask task)
-        {
-            throw new NotImplementedException();
-        }
 
-        public override Task StopAsync(CancellationToken cancellationToken)
+        private int GetDowntimeOfProcess(Process process) => (int)(DateTime.Now - process.ExitTime).TotalMilliseconds;
+
+        private bool IsRunning(WorkerTask task)
         {
-<<<<<<< Updated upstream
-            client.Dispose();
-            _logger.LogInformation("The service has been stopped...");
-            return base.StopAsync(cancellationToken);
-=======
             bool flag = true;
             try
             {
                 if (task.ProcessId > 0)
                 {
-                    var process = Process.GetProcessById(task.ProcessId);
-                    if (process.HasExited || !process.Responding)
+                    if (Process.GetProcessById(task.ProcessId).HasExited)
                         flag = false;
                 }
                 else
@@ -273,8 +205,23 @@ private bool IsRunning(WorkerTask task)
                 flag = false;
             }
             return flag;
->>>>>>> Stashed changes
         }
 
+        private void LaunchApplication(WorkerTask task)
+        {
+            switch (task.WorkerTaskType)
+            {
+                case WorkerTask.WorkerTaskTypeEnum.Executable:
+                    task.ProcessId = Process.Start(task.Target).Id;
+                    break;
+                case WorkerTask.WorkerTaskTypeEnum.UIExecutable:
+                    task.ProcessId = NativeMethods.LaunchProcess(task.Target);
+                    break;
+            }
+            if (task.ProcessId <= 0)
+                return;
+            task.Process = Process.GetProcessById(task.ProcessId);
+            task.ProcessHandle = task.Process.SafeHandle;
+        }
     }
 }

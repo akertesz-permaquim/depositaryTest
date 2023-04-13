@@ -1,10 +1,16 @@
-﻿namespace Permaquim.Depositary.ApplicationStatusMonitor
+﻿using Microsoft.Win32.SafeHandles;
+using System.Diagnostics;
+using System.IO;
+
+
+#nullable enable
+namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     internal class WorkerTask
     {
         public bool Failing { get; set; }
         private bool _fileCheck = false;
-        public bool FileExistCheck { get
+        public bool ValidPathCheck { get
             {
                 if (!_fileCheck)
                 {
@@ -14,7 +20,8 @@
                 return _fileCheck;
             }
         }
-        public bool FileExists => !string.IsNullOrEmpty(Target) && File.Exists(Target);
+
+
         public SafeProcessHandle ProcessHandle { private get; set; }
 
         public Process Process { get; set; }
@@ -43,14 +50,15 @@
         }
 
         public WorkerTask.WorkerTaskTypeEnum WorkerTaskType { get; set; }
+        public bool FileExists => !string.IsNullOrEmpty(Target) && File.Exists(this.Target);
 
         public enum WorkerTaskTypeEnum
         {
             None,
             Executable,
-            Url
+            UIExecutable,
+            Url,
         }
-
-
     }
 }
+
