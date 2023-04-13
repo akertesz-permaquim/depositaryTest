@@ -1,25 +1,9 @@
-<<<<<<< Updated upstream
-using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Net;
-using System.Security;
-=======
-using System.Diagnostics;
->>>>>>> Stashed changes
 
 namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     public class Worker : BackgroundService
     {
-<<<<<<< Updated upstream
-        private readonly ILogger<Worker> _logger;
-        private readonly IConfiguration _configuration;
-        private HttpClient client = new();
-        private List<WorkerTask> _workerTasks = new();
-        private FileInfo _file;
-        public Worker(ILogger<Worker> logger, IConfiguration configuration)
-=======
-        
         private const int POLL_TIME = 1000;
         private Dictionary<WorkerTask, Thread> _threads;
         private readonly ILogger<Worker> _logger;
@@ -28,7 +12,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
         private List<WorkerTask> _workerTasks = new List<WorkerTask>();
 
         public Worker(ILogger<Worker> logger, IConfiguration configuration) 
->>>>>>> Stashed changes
         {
             _logger = logger;
             _configuration = configuration;
@@ -37,8 +20,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
         {
             try
             {
-                _file = new FileInfo(_configuration.GetSection("LogFile").Get<string>());
-                _file.Create().Close();
                 Log("Starting Service "+_configuration.GetSection("TaskDelay").Get<int>());
             }catch (Exception ex)
             {
@@ -52,7 +33,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
           
             try
             {
-<<<<<<< Updated upstream
+
                 _workerTasks = AppConfiguration.GetWorkerTasks(_configuration.GetSection("TaskJson").Get<string>());
                 
                 while (!stoppingToken.IsCancellationRequested)
@@ -81,7 +62,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
                                 bool isUp = true;
 
-=======
+
                 this._workerTasks = AppConfiguration.GetWorkerTasks(this._configuration.GetSection("TaskJson").Get<string>());
                 this._threads = new Dictionary<WorkerTask, Thread>();
                 this.CreateThreads(stoppingToken);
@@ -182,13 +163,12 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                             }));
                             if (num > 0)
                             {
->>>>>>> Stashed changes
                                 try
                                 {
-                                    if (item.ProcessId != 0)
+                                    if (task.ProcessId != 0)
                                     {
 
-                                        var process = Process.GetProcessById(item.ProcessId);
+                                        var process = Process.GetProcessById(task.ProcessId);
                                         if (process.HasExited) isUp = false;
                                     }
                                     else
@@ -200,7 +180,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 {
                                     isUp = false;
                                 }
-<<<<<<< Updated upstream
 
                                 if (!isUp)
                                 {
@@ -265,6 +244,11 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 >>>>>>> Stashed changes
             }
         }
+private bool IsRunning(WorkerTask task)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Task StopAsync(CancellationToken cancellationToken)
         {
 <<<<<<< Updated upstream
@@ -292,13 +276,5 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 >>>>>>> Stashed changes
         }
 
-        private void Log(string log)
-        {
-            var fs = File.AppendText(_file.FullName);
-            fs.WriteLine(log);
-            Console.WriteLine(log);
-            fs.Close();
-            
-        }
     }
 }

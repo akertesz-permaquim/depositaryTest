@@ -2,8 +2,6 @@
 {
     internal class WorkerTask
     {
-<<<<<<< Updated upstream
-=======
         public bool Failing { get; set; }
         private bool _fileCheck = false;
         public bool FileExistCheck { get
@@ -46,21 +44,12 @@
 
         public WorkerTask.WorkerTaskTypeEnum WorkerTaskType { get; set; }
 
->>>>>>> Stashed changes
         public enum WorkerTaskTypeEnum
         {
             None,
             Executable,
             Url
         }
-        public int ExecutionOrder { get; set; }
-        public string Target { get; set; }
-
-        public int ProcessId { get; set; }
-
-        public string ProcessName
-        { get { try { return Path.GetFileName(Target); } catch { return Target; } } }
-        public WorkerTaskTypeEnum WorkerTaskType { get; set; }
 
 
     }

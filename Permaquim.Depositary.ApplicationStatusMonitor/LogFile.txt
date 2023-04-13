@@ -1,0 +1,10 @@
+Starting Service ..
+notepa++.exe has an invalid path. Path: C:\Program Files\Notepad++\notepa++.exe
+notepad.exe down:Dt Difference: 9789
+Downtime: 211
+Starting Service ..
+notepa++.exe has an invalid path. Path: C:\Program Files\Notepad++\notepa++.exe
+Starting Service ..
+notepa++.exe has an invalid path. Path: C:\Program Files\Notepad++\notepa++.exe
+notepad.exe down:Dt Difference: 9322
+Downtime: 678
