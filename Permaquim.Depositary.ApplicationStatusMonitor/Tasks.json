@@ -1,6 +1,7 @@
 [
   {
     "ExecutionOrder": 1,
+<<<<<<< Updated upstream
     "Target": "C:\\Windows\\notepad.exe",
     "WorkerTaskType": 2
   },
@@ -8,5 +9,16 @@
     "ExecutionOrder": 1,
     "Target": "http://www.google.com",
     "WorkerTaskType": 1
+=======
+    "Target": "C:\\Windows\\System32\\notepad.exe",
+    "WorkerTaskType": 2,
+    "SleepTime": 10000
+  },
+  {
+    "ExecutionOrder": 1,
+    "Target": "C:\\Program Files\\Notepad++\\notepa++.exe",
+    "WorkerTaskType": 2,
+    "SleepTime": 5000
+>>>>>>> Stashed changes
   }
 ]
