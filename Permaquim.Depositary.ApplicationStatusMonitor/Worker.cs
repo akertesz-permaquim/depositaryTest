@@ -1,34 +1,18 @@
-<<<<<<< Updated upstream
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net;
 using System.Security;
-=======
-using System.Diagnostics;
->>>>>>> Stashed changes
 
 namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     public class Worker : BackgroundService
     {
-<<<<<<< Updated upstream
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _configuration;
         private HttpClient client = new();
         private List<WorkerTask> _workerTasks = new();
         private FileInfo _file;
         public Worker(ILogger<Worker> logger, IConfiguration configuration)
-=======
-        
-        private const int POLL_TIME = 1000;
-        private Dictionary<WorkerTask, Thread> _threads;
-        private readonly ILogger<Worker> _logger;
-        private readonly IConfiguration _configuration;
-        private HttpClient client = new HttpClient();
-        private List<WorkerTask> _workerTasks = new List<WorkerTask>();
-
-        public Worker(ILogger<Worker> logger, IConfiguration configuration) 
->>>>>>> Stashed changes
         {
             _logger = logger;
             _configuration = configuration;
@@ -52,7 +36,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
           
             try
             {
-<<<<<<< Updated upstream
                 _workerTasks = AppConfiguration.GetWorkerTasks(_configuration.GetSection("TaskJson").Get<string>());
                 
                 while (!stoppingToken.IsCancellationRequested)
@@ -81,108 +64,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
                                 bool isUp = true;
 
-=======
-                this._workerTasks = AppConfiguration.GetWorkerTasks(this._configuration.GetSection("TaskJson").Get<string>());
-                this._threads = new Dictionary<WorkerTask, Thread>();
-                this.CreateThreads(stoppingToken);
-                int taskDelay = this._configuration.GetSection("TaskDelay").Get<int>();
-                while (!stoppingToken.IsCancellationRequested)
-                {
-                    this.CheckThreads(stoppingToken);
-                    await Task.Delay(taskDelay, stoppingToken);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.Log(((object)ex).ToString());
-            }
-        }
-
-        private void CreateThreads(CancellationToken ct)
-        {
-            foreach (WorkerTask workerTask in this._workerTasks)
-            {
-                if(!workerTask.FileExists) {
-                    if(!workerTask.FileExistCheck)
-                    {
-                        Log($"{workerTask.ProcessName} has an invalid path. Path: {workerTask.Target}");
-                    }
-                    continue;
-                
-                }
-                Thread thread = this.CreateThread(workerTask,ct);
-                this._threads.Add(workerTask, thread);
-            }
-        }
-
-        private Thread CreateThread(WorkerTask workerTask,CancellationToken ct)
-        {
-            Thread thread = new(()=>WorkerTaskRun(workerTask,ct));
-            thread.Name = workerTask.ProcessName;
-            return thread;
-        }
-        
-        private void CheckThreads(CancellationToken ct)
-        {
-            foreach (WorkerTask key in this._threads.Keys)
-            {
-                System.Threading.ThreadState threadState = this._threads[key].ThreadState;
-                if (threadState != System.Threading.ThreadState.Unstarted)
-                {
-                    if (threadState == System.Threading.ThreadState.Stopped || threadState == System.Threading.ThreadState.Aborted)
-                    {
-                        this._threads[key] = this.CreateThread(key,ct);
-                        this._threads[key].Start();
-                    }
-                }
-                else
-                    this._threads[key].Start();
-            }
-        }
-
-        public override Task StopAsync(CancellationToken cancellationToken) 
-        {
-            this.client.Dispose();
-            this._logger.LogInformation("The service has been stopped...");
-            return base.StopAsync(cancellationToken);
-        }
-
-        private void Log(string log) {
-            Console.WriteLine(log);
-            var sw = File.AppendText("LogFile.txt");
-            sw.WriteLine(log);
-            sw.Close();
-
-        }
-
-        private void WorkerTaskRun(WorkerTask task, CancellationToken ct)
-        {
-            while (!ct.IsCancellationRequested)
-            {
-                if (!this.IsRunning(task))
-                {
-                    if (task.Process != null)
-                    {
-                        if(!task.Process.Responding)
-                        {
-                            task.Process.Kill();
-                        }
-                        int downtimeOfProcess = this.GetDowntimeOfProcess(task.Process);
-                        if (downtimeOfProcess < task.SleepTime)
-                        {
-                            int num = task.SleepTime - downtimeOfProcess;
-                            this.Log(string.Concat((string[])new string[6]
-                            {
-                                $"{task.ProcessName} down:",
-                                (string) "Dt Difference: ",
-                                (string) num.ToString(),
-                                (string) Environment.NewLine,
-                                (string) "Downtime: ",
-                                (string) downtimeOfProcess.ToString()
-                            }));
-                            if (num > 0)
-                            {
->>>>>>> Stashed changes
                                 try
                                 {
                                     if (item.ProcessId != 0)
@@ -200,7 +81,6 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
                                 {
                                     isUp = false;
                                 }
-<<<<<<< Updated upstream
 
                                 if (!isUp)
                                 {
@@ -232,64 +112,21 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
                             default:
                                 break;
-=======
-                            }
-                            else
-                                Thread.Sleep(task.SleepTime - POLL_TIME);
-                        }
-                    }
-                    if (!ct.IsCancellationRequested)
-                    {
-                        try
-                        {
-                            this.LaunchApplication(task);
-                            task.Failing = false;
-                        }catch(Exception ex) {
-                            if (!task.Failing)
-                            {
-                                task.Failing = true;
-                                Log(ex.ToString());
-                            }
->>>>>>> Stashed changes
                         }
 
                         await Task.Delay(500, stoppingToken);
                     }
                 }
-<<<<<<< Updated upstream
             }catch (Exception ex)
             {
                 Log(ex.ToString());
-=======
-                Thread.Sleep(POLL_TIME);
->>>>>>> Stashed changes
             }
         }
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-<<<<<<< Updated upstream
             client.Dispose();
             _logger.LogInformation("The service has been stopped...");
             return base.StopAsync(cancellationToken);
-=======
-            bool flag = true;
-            try
-            {
-                if (task.ProcessId > 0)
-                {
-                    var process = Process.GetProcessById(task.ProcessId);
-                    if (process.HasExited || !process.Responding)
-                        flag = false;
-                }
-                else
-                    flag = false;
-            }
-            catch (ArgumentException ex)
-            {
-                flag = false;
-            }
-            return flag;
->>>>>>> Stashed changes
         }
 
         private void Log(string log)
