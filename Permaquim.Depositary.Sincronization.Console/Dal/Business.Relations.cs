@@ -66,12 +66,12 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Aplicacion.Configuracion</returns>
-			public Entities.Relations.Aplicacion.Configuracion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Aplicacion.Configuracion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Aplicacion.Configuracion)base.Add(new Entities.Relations.Aplicacion.Configuracion(AplicacionId,ValidacionDatoId,Descripcion,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -443,12 +443,12 @@ using System.Text;
          /// <param name='Clave'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Aplicacion.ConfiguracionEmpresa</returns>
-			public Entities.Relations.Aplicacion.ConfiguracionEmpresa Add(Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Aplicacion.ConfiguracionEmpresa Add(Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Descripcion,String Clave,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Aplicacion.ConfiguracionEmpresa)base.Add(new Entities.Relations.Aplicacion.ConfiguracionEmpresa(EmpresaId,ValidacionDatoId,Descripcion,Clave,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -814,12 +814,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Aplicacion.ConfiguracionTipoDato</returns>
-			public Entities.Relations.Aplicacion.ConfiguracionTipoDato Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Aplicacion.ConfiguracionTipoDato Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Aplicacion.ConfiguracionTipoDato)base.Add(new Entities.Relations.Aplicacion.ConfiguracionTipoDato(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1144,12 +1144,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='ExpresionRegular'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Aplicacion.ConfiguracionValidacionDato</returns>
-			public Entities.Relations.Aplicacion.ConfiguracionValidacionDato Add(Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionTipoDato TipoDatoId,String Nombre,String Descripcion,String ExpresionRegular,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Aplicacion.ConfiguracionValidacionDato Add(Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionTipoDato TipoDatoId,String Nombre,String Descripcion,String ExpresionRegular,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Aplicacion.ConfiguracionValidacionDato)base.Add(new Entities.Relations.Aplicacion.ConfiguracionValidacionDato(TipoDatoId,Nombre,Descripcion,ExpresionRegular,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -1498,8 +1498,8 @@ using System.Text;
          /// <summary>
          /// Log Add Method
          /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Auditoria.TipoLog TipoId'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId'></param>
+         /// <param name='TipoId'></param>
+         /// <param name='AplicacionId'></param>
          /// <param name='Fecha'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Detalle'></param>
@@ -1507,7 +1507,7 @@ using System.Text;
          /// <param name='Metodo'></param>
          /// <param name='UsuarioId'></param>
          /// <returns>Entities.Relations.Auditoria.Log</returns>
-			public Entities.Relations.Auditoria.Log Add(Permaquim.Depositario.Entities.Relations.Auditoria.TipoLog TipoId,Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,DateTime Fecha,String Descripcion,String Detalle,String Modulo,String Metodo,Int64 UsuarioId) 
+			public Entities.Relations.Auditoria.Log Add(Int64 TipoId,Int64 AplicacionId,DateTime Fecha,String Descripcion,String Detalle,String Modulo,String Metodo,Int64 UsuarioId) 
 			{
 			  return (Entities.Relations.Auditoria.Log)base.Add(new Entities.Relations.Auditoria.Log(TipoId,AplicacionId,Fecha,Descripcion,Detalle,Modulo,Metodo,UsuarioId));
 			}
@@ -1843,12 +1843,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Auditoria.TipoLog</returns>
-			public Entities.Relations.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Auditoria.TipoLog Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Auditoria.TipoLog)base.Add(new Entities.Relations.Auditoria.TipoLog(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2173,12 +2173,12 @@ using System.Text;
          /// <param name='Codigo'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.Banco</returns>
-			public Entities.Relations.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.Banco Add(String Nombre,String Descripcion,String Codigo,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.Banco)base.Add(new Entities.Relations.Banca.Banco(Nombre,Descripcion,Codigo,PaisId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -2492,7 +2492,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Banca.Cuenta> _cacheItemList = new List<Entities.Relations.Banca.Cuenta>();
 			   protected List<Entities.Relations.Banca.Cuenta> _entities = null;
@@ -2541,14 +2542,15 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Banca.Banco BancoId'></param>
          /// <param name='SucursalBancaria'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Banca.Cuenta</returns>
-			public Entities.Relations.Banca.Cuenta Add(Permaquim.Depositario.Entities.Relations.Banca.TipoCuenta TipoId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Numero,String Alias,String CBU,Permaquim.Depositario.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.Cuenta Add(Permaquim.Depositario.Entities.Relations.Banca.TipoCuenta TipoId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Numero,String Alias,String CBU,Permaquim.Depositario.Entities.Relations.Banca.Banco BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Banca.Cuenta)base.Add(new Entities.Relations.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,Alias,CBU,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Banca.Cuenta)base.Add(new Entities.Relations.Banca.Cuenta(TipoId,EmpresaId,Nombre,Numero,Alias,CBU,BancoId,SucursalBancaria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Banca.Cuenta> Items()
             {
@@ -2595,8 +2597,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Banca.Cuenta> Items(Int64? Id,Int64? TipoId,Int64? EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64? BancoId,String SucursalBancaria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -2767,6 +2770,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Banca.Cuenta> Result 
@@ -2802,8 +2817,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 TipoId,Int64 EmpresaId,String Nombre,String Numero,String Alias,String CBU,Int64 BancoId,String SucursalBancaria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Banca.Cuenta item = new Entities.Tables.Banca.Cuenta();
                  item.Id = Id;
@@ -2820,6 +2836,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -2915,7 +2932,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Banca.TipoCuenta> _cacheItemList = new List<Entities.Relations.Banca.TipoCuenta>();
 			   protected List<Entities.Relations.Banca.TipoCuenta> _entities = null;
@@ -2959,14 +2977,15 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Banca.TipoCuenta</returns>
-			public Entities.Relations.Banca.TipoCuenta Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.TipoCuenta Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Banca.TipoCuenta)base.Add(new Entities.Relations.Banca.TipoCuenta(MonedaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Banca.TipoCuenta)base.Add(new Entities.Relations.Banca.TipoCuenta(MonedaId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Banca.TipoCuenta> Items()
             {
@@ -3008,8 +3027,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Banca.TipoCuenta> Items(Int64? Id,Int64? MonedaId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Banca.TipoCuenta> Items(Int64? Id,Int64? MonedaId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -3120,6 +3140,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Banca.TipoCuenta> Result 
@@ -3150,8 +3182,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 MonedaId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Banca.TipoCuenta item = new Entities.Tables.Banca.TipoCuenta();
                  item.Id = Id;
@@ -3163,6 +3196,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -3300,12 +3334,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Banca.Cuenta CuentaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Banca.UsuarioCuenta</returns>
-			public Entities.Relations.Banca.UsuarioCuenta Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Banca.UsuarioCuenta Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Banca.Cuenta CuentaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Banca.UsuarioCuenta)base.Add(new Entities.Relations.Banca.UsuarioCuenta(UsuarioId,CuentaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3628,12 +3662,12 @@ using System.Text;
          /// <param name='Dedo'></param>
          /// <param name='Huella'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Biometria.HuellaDactilar</returns>
-			public Entities.Relations.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Biometria.HuellaDactilar Add(Int64 UsuarioId,Byte Dedo,String Huella,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Biometria.HuellaDactilar)base.Add(new Entities.Relations.Biometria.HuellaDactilar(UsuarioId,Dedo,Huella,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -3911,998 +3945,6 @@ using System.Text;
              }
         } // class HuellaDactilar
 	} //namespace Permaquim.Depositario.Business.Relations.Biometria
-	namespace Permaquim.Depositario.Business.Relations.Customizador {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class Entidad : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					Tipo,
-					Nombre,
-					Esquema,
-					HabilitarAgrupamiento,
-					HabilitarMovilidad,
-					HabilitarFiltrado,
-					HabilitarColumnasOpcionales,
-					HabilitarOrdenamiento,
-					HabilitarRedimensionamiento,
-					HabilitarPaginado,
-					RegistrosPorPagina,
-					HabilitarAuditoria,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-			   protected List<Entities.Relations.Customizador.Entidad> _cacheItemList = new List<Entities.Relations.Customizador.Entidad>();
-			   protected List<Entities.Relations.Customizador.Entidad> _entities = null;
-            public CustomWhereParameter Where { get; set; }
-            public CustomOrderByParameter OrderBy { get; set; }
-            public CustomGroupByParameter GroupBy { get; set; }
-            public CustomAggregateParameter Aggregate { get; set; }
-            public Entidad() : base()
-            {
-                base._dataItem = new Entities.Relations.Customizador.Entidad();
-                Where = new CustomWhereParameter();
-                OrderBy = new CustomOrderByParameter();
-                GroupBy = new CustomGroupByParameter();
-                Aggregate = new CustomAggregateParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Customizador.Entidad item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// Entidad Add Method
-         /// </summary>
-         /// <param name='Tipo'></param>
-         /// <param name='Nombre'></param>
-         /// <param name='Esquema'></param>
-         /// <param name='HabilitarAgrupamiento'></param>
-         /// <param name='HabilitarMovilidad'></param>
-         /// <param name='HabilitarFiltrado'></param>
-         /// <param name='HabilitarColumnasOpcionales'></param>
-         /// <param name='HabilitarOrdenamiento'></param>
-         /// <param name='HabilitarRedimensionamiento'></param>
-         /// <param name='HabilitarPaginado'></param>
-         /// <param name='RegistrosPorPagina'></param>
-         /// <param name='HabilitarAuditoria'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Relations.Customizador.Entidad</returns>
-			public Entities.Relations.Customizador.Entidad Add(String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
-			{
-			  return (Entities.Relations.Customizador.Entidad)base.Add(new Entities.Relations.Customizador.Entidad(Tipo,Nombre,Esquema,HabilitarAgrupamiento,HabilitarMovilidad,HabilitarFiltrado,HabilitarColumnasOpcionales,HabilitarOrdenamiento,HabilitarRedimensionamiento,HabilitarPaginado,RegistrosPorPagina,HabilitarAuditoria,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Relations.Customizador.Entidad> Items()
-            {
-                base.WhereParameter = this.Where.whereParameter;
-                base.OrderByParameter = this.OrderBy.orderByParameter;
-                base.GroupByParameter = this.GroupBy.groupByParameter;
-                base.TopQuantity = this.TopQuantity;
-                base.AnalizeIDataItem();
-                _entities = base.Items().Cast<Entities.Relations.Customizador.Entidad>().ToList<Entities.Relations.Customizador.Entidad>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Customizador.Entidad items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.Entidad> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Tipo"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Esquema"></param>
-            /// <param name="HabilitarAgrupamiento"></param>
-            /// <param name="HabilitarMovilidad"></param>
-            /// <param name="HabilitarFiltrado"></param>
-            /// <param name="HabilitarColumnasOpcionales"></param>
-            /// <param name="HabilitarOrdenamiento"></param>
-            /// <param name="HabilitarRedimensionamiento"></param>
-            /// <param name="HabilitarPaginado"></param>
-            /// <param name="RegistrosPorPagina"></param>
-            /// <param name="HabilitarAuditoria"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.Entidad> Items(Int64? Id,String Tipo,String Nombre,String Esquema,Boolean? HabilitarAgrupamiento,Boolean? HabilitarMovilidad,Boolean? HabilitarFiltrado,Boolean? HabilitarColumnasOpcionales,Boolean? HabilitarOrdenamiento,Boolean? HabilitarRedimensionamiento,Boolean? HabilitarPaginado,Int32? RegistrosPorPagina,Boolean? HabilitarAuditoria,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (Tipo != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Tipo, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Tipo);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (Esquema != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Esquema, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Esquema);
-                    }
-                   
-                }
-                if (HabilitarAgrupamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAgrupamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAgrupamiento);
-                    }
-                   
-                }
-                if (HabilitarMovilidad != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarMovilidad, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarMovilidad);
-                    }
-                   
-                }
-                if (HabilitarFiltrado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarFiltrado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarFiltrado);
-                    }
-                   
-                }
-                if (HabilitarColumnasOpcionales != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarColumnasOpcionales, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarColumnasOpcionales);
-                    }
-                   
-                }
-                if (HabilitarOrdenamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarOrdenamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarOrdenamiento);
-                    }
-                   
-                }
-                if (HabilitarRedimensionamiento != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarRedimensionamiento, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarRedimensionamiento);
-                    }
-                   
-                }
-                if (HabilitarPaginado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarPaginado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarPaginado);
-                    }
-                   
-                }
-                if (RegistrosPorPagina != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.RegistrosPorPagina, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, RegistrosPorPagina);
-                    }
-                   
-                }
-                if (HabilitarAuditoria != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.HabilitarAuditoria, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, HabilitarAuditoria);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Customizador.Entidad> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Customizador.Entidad Add(Entities.Relations.Customizador.Entidad item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Customizador.Entidad)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Customizador.Entidad item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Customizador.Entidad item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Customizador.Entidad with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="Tipo"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Esquema"></param>
-            /// <param name="HabilitarAgrupamiento"></param>
-            /// <param name="HabilitarMovilidad"></param>
-            /// <param name="HabilitarFiltrado"></param>
-            /// <param name="HabilitarColumnasOpcionales"></param>
-            /// <param name="HabilitarOrdenamiento"></param>
-            /// <param name="HabilitarRedimensionamiento"></param>
-            /// <param name="HabilitarPaginado"></param>
-            /// <param name="RegistrosPorPagina"></param>
-            /// <param name="HabilitarAuditoria"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Tipo,String Nombre,String Esquema,Boolean HabilitarAgrupamiento,Boolean HabilitarMovilidad,Boolean HabilitarFiltrado,Boolean HabilitarColumnasOpcionales,Boolean HabilitarOrdenamiento,Boolean HabilitarRedimensionamiento,Boolean HabilitarPaginado,Int32 RegistrosPorPagina,Boolean HabilitarAuditoria,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
-            {
-                 Entities.Tables.Customizador.Entidad item = new Entities.Tables.Customizador.Entidad();
-                 item.Id = Id;
-                 item.Tipo = Tipo;
-                 item.Nombre = Nombre;
-                 item.Esquema = Esquema;
-                 item.HabilitarAgrupamiento = HabilitarAgrupamiento;
-                 item.HabilitarMovilidad = HabilitarMovilidad;
-                 item.HabilitarFiltrado = HabilitarFiltrado;
-                 item.HabilitarColumnasOpcionales = HabilitarColumnasOpcionales;
-                 item.HabilitarOrdenamiento = HabilitarOrdenamiento;
-                 item.HabilitarRedimensionamiento = HabilitarRedimensionamiento;
-                 item.HabilitarPaginado = HabilitarPaginado;
-                 item.RegistrosPorPagina = RegistrosPorPagina;
-                 item.HabilitarAuditoria = HabilitarAuditoria;
-                 item.Habilitado = Habilitado;
-                 item.UsuarioCreacion = UsuarioCreacion;
-                 item.FechaCreacion = FechaCreacion;
-                 item.UsuarioModificacion = UsuarioModificacion;
-                 item.FechaModificacion = FechaModificacion;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-                 public void Clear()
-                 {
-                     this.orderByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.orderByParameter.Count;
-                     }
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-                 public void Clear()
-                 {
-                     this.groupByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.groupByParameter.Count;
-                     }
-                 }
-            }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
-        } // class Entidad
-	} //namespace Permaquim.Depositario.Business.Relations.Customizador
-	namespace Permaquim.Depositario.Business.Relations.Customizador {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class EntidadAtributo : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					EntidadId,
-					Nombre,
-					VisibleEnGrilla,
-					VisibleEnSelectorColumnas,
-					Redimensionable,
-					Agrupable,
-					Movible,
-					Ordenable,
-					Filtrable,
-					PosicionEnGrilla,
-					AnchoMinimoEnGrilla,
-					AnchoEnGrilla,
-					Habilitado,
-					UsuarioCreacion,
-					FechaCreacion,
-					UsuarioModificacion,
-					FechaModificacion
-				}
-			   protected List<Entities.Relations.Customizador.EntidadAtributo> _cacheItemList = new List<Entities.Relations.Customizador.EntidadAtributo>();
-			   protected List<Entities.Relations.Customizador.EntidadAtributo> _entities = null;
-            public CustomWhereParameter Where { get; set; }
-            public CustomOrderByParameter OrderBy { get; set; }
-            public CustomGroupByParameter GroupBy { get; set; }
-            public CustomAggregateParameter Aggregate { get; set; }
-            public EntidadAtributo() : base()
-            {
-                base._dataItem = new Entities.Relations.Customizador.EntidadAtributo();
-                Where = new CustomWhereParameter();
-                OrderBy = new CustomOrderByParameter();
-                GroupBy = new CustomGroupByParameter();
-                Aggregate = new CustomAggregateParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Customizador.EntidadAtributo item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// EntidadAtributo Add Method
-         /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
-         /// <param name='Nombre'></param>
-         /// <param name='VisibleEnGrilla'></param>
-         /// <param name='VisibleEnSelectorColumnas'></param>
-         /// <param name='Redimensionable'></param>
-         /// <param name='Agrupable'></param>
-         /// <param name='Movible'></param>
-         /// <param name='Ordenable'></param>
-         /// <param name='Filtrable'></param>
-         /// <param name='PosicionEnGrilla'></param>
-         /// <param name='AnchoMinimoEnGrilla'></param>
-         /// <param name='AnchoEnGrilla'></param>
-         /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
-         /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
-         /// <param name='FechaModificacion'></param>
-         /// <returns>Entities.Relations.Customizador.EntidadAtributo</returns>
-			public Entities.Relations.Customizador.EntidadAtributo Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
-			{
-			  return (Entities.Relations.Customizador.EntidadAtributo)base.Add(new Entities.Relations.Customizador.EntidadAtributo(EntidadId,Nombre,VisibleEnGrilla,VisibleEnSelectorColumnas,Redimensionable,Agrupable,Movible,Ordenable,Filtrable,PosicionEnGrilla,AnchoMinimoEnGrilla,AnchoEnGrilla,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
-			}
-            public new List<Entities.Relations.Customizador.EntidadAtributo> Items()
-            {
-                base.WhereParameter = this.Where.whereParameter;
-                base.OrderByParameter = this.OrderBy.orderByParameter;
-                base.GroupByParameter = this.GroupBy.groupByParameter;
-                base.TopQuantity = this.TopQuantity;
-                base.AnalizeIDataItem();
-                _entities = base.Items().Cast<Entities.Relations.Customizador.EntidadAtributo>().ToList<Entities.Relations.Customizador.EntidadAtributo>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Customizador.EntidadAtributo items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="EntidadId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="VisibleEnGrilla"></param>
-            /// <param name="VisibleEnSelectorColumnas"></param>
-            /// <param name="Redimensionable"></param>
-            /// <param name="Agrupable"></param>
-            /// <param name="Movible"></param>
-            /// <param name="Ordenable"></param>
-            /// <param name="Filtrable"></param>
-            /// <param name="PosicionEnGrilla"></param>
-            /// <param name="AnchoMinimoEnGrilla"></param>
-            /// <param name="AnchoEnGrilla"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Customizador.EntidadAtributo> Items(Int64? Id,Int64? EntidadId,String Nombre,Boolean? VisibleEnGrilla,Boolean? VisibleEnSelectorColumnas,Boolean? Redimensionable,Boolean? Agrupable,Boolean? Movible,Boolean? Ordenable,Boolean? Filtrable,Int32? PosicionEnGrilla,Int32? AnchoMinimoEnGrilla,Int32? AnchoEnGrilla,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (EntidadId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.EntidadId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, EntidadId);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (VisibleEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnGrilla);
-                    }
-                   
-                }
-                if (VisibleEnSelectorColumnas != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.VisibleEnSelectorColumnas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, VisibleEnSelectorColumnas);
-                    }
-                   
-                }
-                if (Redimensionable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Redimensionable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Redimensionable);
-                    }
-                   
-                }
-                if (Agrupable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Agrupable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Agrupable);
-                    }
-                   
-                }
-                if (Movible != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Movible, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Movible);
-                    }
-                   
-                }
-                if (Ordenable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Ordenable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Ordenable);
-                    }
-                   
-                }
-                if (Filtrable != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Filtrable, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Filtrable);
-                    }
-                   
-                }
-                if (PosicionEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.PosicionEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, PosicionEnGrilla);
-                    }
-                   
-                }
-                if (AnchoMinimoEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoMinimoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoMinimoEnGrilla);
-                    }
-                   
-                }
-                if (AnchoEnGrilla != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoEnGrilla, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoEnGrilla);
-                    }
-                   
-                }
-                if (Habilitado != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Habilitado, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Habilitado);
-                    }
-                   
-                }
-                if (UsuarioCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioCreacion);
-                    }
-                   
-                }
-                if (FechaCreacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaCreacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaCreacion);
-                    }
-                   
-                }
-                if (UsuarioModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UsuarioModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UsuarioModificacion);
-                    }
-                   
-                }
-                if (FechaModificacion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FechaModificacion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FechaModificacion);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Customizador.EntidadAtributo> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Customizador.EntidadAtributo Add(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Customizador.EntidadAtributo)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Customizador.EntidadAtributo item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Customizador.EntidadAtributo with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="EntidadId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="VisibleEnGrilla"></param>
-            /// <param name="VisibleEnSelectorColumnas"></param>
-            /// <param name="Redimensionable"></param>
-            /// <param name="Agrupable"></param>
-            /// <param name="Movible"></param>
-            /// <param name="Ordenable"></param>
-            /// <param name="Filtrable"></param>
-            /// <param name="PosicionEnGrilla"></param>
-            /// <param name="AnchoMinimoEnGrilla"></param>
-            /// <param name="AnchoEnGrilla"></param>
-            /// <param name="Habilitado"></param>
-            /// <param name="UsuarioCreacion"></param>
-            /// <param name="FechaCreacion"></param>
-            /// <param name="UsuarioModificacion"></param>
-            /// <param name="FechaModificacion"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 EntidadId,String Nombre,Boolean VisibleEnGrilla,Boolean VisibleEnSelectorColumnas,Boolean Redimensionable,Boolean Agrupable,Boolean Movible,Boolean Ordenable,Boolean Filtrable,Int32 PosicionEnGrilla,Int32 AnchoMinimoEnGrilla,Int32 AnchoEnGrilla,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
-            {
-                 Entities.Tables.Customizador.EntidadAtributo item = new Entities.Tables.Customizador.EntidadAtributo();
-                 item.Id = Id;
-                 item.EntidadId = EntidadId;
-                 item.Nombre = Nombre;
-                 item.VisibleEnGrilla = VisibleEnGrilla;
-                 item.VisibleEnSelectorColumnas = VisibleEnSelectorColumnas;
-                 item.Redimensionable = Redimensionable;
-                 item.Agrupable = Agrupable;
-                 item.Movible = Movible;
-                 item.Ordenable = Ordenable;
-                 item.Filtrable = Filtrable;
-                 item.PosicionEnGrilla = PosicionEnGrilla;
-                 item.AnchoMinimoEnGrilla = AnchoMinimoEnGrilla;
-                 item.AnchoEnGrilla = AnchoEnGrilla;
-                 item.Habilitado = Habilitado;
-                 item.UsuarioCreacion = UsuarioCreacion;
-                 item.FechaCreacion = FechaCreacion;
-                 item.UsuarioModificacion = UsuarioModificacion;
-                 item.FechaModificacion = FechaModificacion;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-                 public void Clear()
-                 {
-                     this.orderByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.orderByParameter.Count;
-                     }
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-                 public void Clear()
-                 {
-                     this.groupByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.groupByParameter.Count;
-                     }
-                 }
-            }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
-        } // class EntidadAtributo
-	} //namespace Permaquim.Depositario.Business.Relations.Customizador
 	namespace Permaquim.Depositario.Business.Relations.Directorio {
 	    /// <summary>
 	    /// 
@@ -4975,12 +4017,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId'></param>
          /// <param name='Habilitado'></param>
          /// <param name='EsDefault'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Empresa</returns>
-			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Permaquim.Depositario.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositario.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Empresa Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Grupo GrupoId,String CodigoExterno,String Direccion,Permaquim.Depositario.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositario.Entities.Relations.Estilo.Esquema EstiloEsquemaId,Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Boolean Habilitado,Boolean EsDefault,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Empresa)base.Add(new Entities.Relations.Directorio.Empresa(Nombre,Descripcion,GrupoId,CodigoExterno,Direccion,CodigoPostalId,EstiloEsquemaId,LenguajeId,Habilitado,EsDefault,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5408,12 +4450,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Grupo</returns>
-			public Entities.Relations.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Grupo Add(String Nombre,String Descripcion,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Grupo)base.Add(new Entities.Relations.Directorio.Grupo(Nombre,Descripcion,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -5751,12 +4793,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId'></param>
          /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.RelacionMonedaSucursal</returns>
-			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.RelacionMonedaSucursal Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.RelacionMonedaSucursal)base.Add(new Entities.Relations.Directorio.RelacionMonedaSucursal(MonedaId,SucursalId,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6050,7 +5092,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Directorio.Sector> _cacheItemList = new List<Entities.Relations.Directorio.Sector>();
 			   protected List<Entities.Relations.Directorio.Sector> _entities = null;
@@ -6094,14 +5137,15 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Directorio.Sector</returns>
-			public Entities.Relations.Directorio.Sector Add(Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Sector Add(Permaquim.Depositario.Entities.Relations.Directorio.Sucursal SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Directorio.Sector)base.Add(new Entities.Relations.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Directorio.Sector)base.Add(new Entities.Relations.Directorio.Sector(SucursalId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Directorio.Sector> Items()
             {
@@ -6143,8 +5187,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Directorio.Sector> Items(Int64? Id,Int64? SucursalId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Directorio.Sector> Items(Int64? Id,Int64? SucursalId,String Nombre,String Descripcion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -6255,6 +5300,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Directorio.Sector> Result 
@@ -6285,8 +5342,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 SucursalId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Directorio.Sector item = new Entities.Tables.Directorio.Sector();
                  item.Id = Id;
@@ -6298,6 +5356,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -6445,12 +5504,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.CodigoPostal CodigoPostalId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.Zona ZonaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Directorio.Sucursal</returns>
-			public Entities.Relations.Directorio.Sucursal Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,Permaquim.Depositario.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositario.Entities.Relations.Geografia.Zona ZonaId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Directorio.Sucursal Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String CodigoExterno,String Direccion,Permaquim.Depositario.Entities.Relations.Geografia.CodigoPostal CodigoPostalId,Permaquim.Depositario.Entities.Relations.Geografia.Zona ZonaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Directorio.Sucursal)base.Add(new Entities.Relations.Directorio.Sucursal(Nombre,Descripcion,EmpresaId,CodigoExterno,Direccion,CodigoPostalId,ZonaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -6854,12 +5913,12 @@ using System.Text;
          /// <param name='TiempoDetencion'></param>
          /// <param name='Respuesta'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ComandoContadora</returns>
-			public Entities.Relations.Dispositivo.ComandoContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoContadora TipoContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ComandoContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoContadora TipoContadoraId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ComandoContadora)base.Add(new Entities.Relations.Dispositivo.ComandoContadora(TipoContadoraId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -7248,12 +6307,12 @@ using System.Text;
          /// <param name='TiempoDetencion'></param>
          /// <param name='Respuesta'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ComandoPlaca</returns>
-			public Entities.Relations.Dispositivo.ComandoPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ComandoPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String Nombre,String Descripcion,String Comando,Int64 TiempoDetencion,String Respuesta,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ComandoPlaca)base.Add(new Entities.Relations.Dispositivo.ComandoPlaca(TipoPlacaId,Nombre,Descripcion,Comando,TiempoDetencion,Respuesta,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -7636,12 +6695,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.ConfiguracionDepositario</returns>
-			public Entities.Relations.Dispositivo.ConfiguracionDepositario Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.ConfiguracionDepositario Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoConfiguracionDepositario TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.ConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.ConfiguracionDepositario(TipoId,DepositarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -7933,8 +6992,8 @@ using System.Text;
 					SectorId,
 					NumeroSerie,
 					CodigoExterno,
-					ModeloId,
 					TipoContenedorId,
+					ModeloId,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -7984,17 +7043,17 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='NumeroSerie'></param>
          /// <param name='CodigoExterno'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId'></param>
+         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Depositario</returns>
-			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Depositario Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,String NumeroSerie,String CodigoExterno,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoContenedorId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,ModeloId,TipoContenedorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Dispositivo.Depositario)base.Add(new Entities.Relations.Dispositivo.Depositario(Nombre,Descripcion,SectorId,NumeroSerie,CodigoExterno,TipoContenedorId,ModeloId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Dispositivo.Depositario> Items()
             {
@@ -8033,15 +7092,15 @@ using System.Text;
             /// <param name="SectorId"></param>
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
-            /// <param name="ModeloId"></param>
             /// <param name="TipoContenedorId"></param>
+            /// <param name="ModeloId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? ModeloId,Int64? TipoContenedorId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Dispositivo.Depositario> Items(Int64? Id,String Nombre,String Descripcion,Int64? SectorId,String NumeroSerie,String CodigoExterno,Int64? TipoContenedorId,Int64? ModeloId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -8116,18 +7175,6 @@ using System.Text;
                     }
                    
                 }
-                if (ModeloId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
-                    }
-                   
-                }
                 if (TipoContenedorId != null)
                 {
                     if (this.Where.whereParameter.Count == 0)
@@ -8137,6 +7184,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoContenedorId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoContenedorId);
+                    }
+                   
+                }
+                if (ModeloId != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.ModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, ModeloId);
                     }
                    
                 }
@@ -8227,15 +7286,15 @@ using System.Text;
             /// <param name="SectorId"></param>
             /// <param name="NumeroSerie"></param>
             /// <param name="CodigoExterno"></param>
-            /// <param name="ModeloId"></param>
             /// <param name="TipoContenedorId"></param>
+            /// <param name="ModeloId"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 ModeloId,Int64 TipoContenedorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 SectorId,String NumeroSerie,String CodigoExterno,Int64 TipoContenedorId,Int64 ModeloId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Dispositivo.Depositario item = new Entities.Tables.Dispositivo.Depositario();
                  item.Id = Id;
@@ -8244,8 +7303,8 @@ using System.Text;
                  item.SectorId = SectorId;
                  item.NumeroSerie = NumeroSerie;
                  item.CodigoExterno = CodigoExterno;
-                 item.ModeloId = ModeloId;
                  item.TipoContenedorId = TipoContenedorId;
+                 item.ModeloId = ModeloId;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -8412,12 +7471,12 @@ using System.Text;
          /// <param name='PollTime'></param>
          /// <param name='Sleeptime'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioContadora</returns>
-			public Entities.Relations.Dispositivo.DepositarioContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoContadora TipoContadoraId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.TipoContadora TipoContadoraId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,String NumeroSerie,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioContadora)base.Add(new Entities.Relations.Dispositivo.DepositarioContadora(TipoContadoraId,DepositarioId,NumeroSerie,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,PollTime,Sleeptime,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9297,12 +8356,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId'></param>
          /// <param name='IndiceEnContadora'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioMoneda</returns>
-			public Entities.Relations.Dispositivo.DepositarioMoneda Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioMoneda Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Int32 IndiceEnContadora,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioMoneda)base.Add(new Entities.Relations.Dispositivo.DepositarioMoneda(DepositarioId,MonedaId,IndiceEnContadora,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -9680,12 +8739,12 @@ using System.Text;
          /// <param name='PollTime'></param>
          /// <param name='Sleeptime'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.DepositarioPlaca</returns>
-			public Entities.Relations.Dispositivo.DepositarioPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.DepositarioPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Dispositivo.TipoPlaca TipoPlacaId,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.DepositarioPlaca)base.Add(new Entities.Relations.Dispositivo.DepositarioPlaca(DepositarioId,TipoPlacaId,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,PollTime,Sleeptime,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10321,12 +9380,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Marca</returns>
-			public Entities.Relations.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Marca Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.Marca)base.Add(new Entities.Relations.Dispositivo.Marca(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -10653,12 +9712,12 @@ using System.Text;
          /// <param name='Imagen'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.Modelo</returns>
-			public Entities.Relations.Dispositivo.Modelo Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,String Imagen,Permaquim.Depositario.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.Modelo Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Marca MarcaId,String Nombre,String Descripcion,String Imagen,Permaquim.Depositario.Entities.Relations.Dispositivo.PlantillaMoneda PlantillaMonedaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.Modelo)base.Add(new Entities.Relations.Dispositivo.Modelo(MarcaId,Nombre,Descripcion,Imagen,PlantillaMonedaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -11733,12 +10792,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoConfiguracionDepositario</returns>
-			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoConfiguracionDepositario Add(String Clave,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Aplicacion.ConfiguracionValidacionDato ValidacionDatoId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoConfiguracionDepositario)base.Add(new Entities.Relations.Dispositivo.TipoConfiguracionDepositario(Clave,Nombre,Descripcion,ValidacionDatoId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12128,12 +11187,12 @@ using System.Text;
          /// <param name='PollTime'></param>
          /// <param name='Sleeptime'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoContadora</returns>
-			public Entities.Relations.Dispositivo.TipoContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoContadora Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoContadora)base.Add(new Entities.Relations.Dispositivo.TipoContadora(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,PollTime,Sleeptime,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -12678,12 +11737,12 @@ using System.Text;
          /// <param name='PollTime'></param>
          /// <param name='Sleeptime'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Dispositivo.TipoPlaca</returns>
-			public Entities.Relations.Dispositivo.TipoPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Dispositivo.TipoPlaca Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo ModeloId,String Nombre,String Descripcion,String PortName,Int32 Parity,Int32 DataBits,Int32 ReadBufferSize,Int32 StopBits,Int32 ReadTimeout,Int32 Handshake,Int32 BaudRate,Boolean RtsEnable,Boolean SensorA,Int16 BitSensorA,Boolean SensorB,Int16 BitSensorB,Boolean SensorC,Int16 BitSensorC,Boolean SensorD,Int16 BitSensorD,Boolean SensorL,Int16 BitSensorL,Int32 PollTime,Int32 Sleeptime,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Dispositivo.TipoPlaca)base.Add(new Entities.Relations.Dispositivo.TipoPlaca(ModeloId,Nombre,Descripcion,PortName,Parity,DataBits,ReadBufferSize,StopBits,ReadTimeout,Handshake,BaudRate,RtsEnable,SensorA,BitSensorA,SensorB,BitSensorB,SensorC,BitSensorC,SensorD,BitSensorD,SensorL,BitSensorL,PollTime,Sleeptime,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13336,12 +12395,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.Esquema</returns>
-			public Entities.Relations.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.Esquema Add(String Nombre,String Descripcion,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.Esquema)base.Add(new Entities.Relations.Estilo.Esquema(Nombre,Descripcion,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -13687,12 +12746,12 @@ using System.Text;
          /// <param name='Valor'></param>
          /// <param name='Imagen'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.EsquemaDetalle</returns>
-			public Entities.Relations.Estilo.EsquemaDetalle Add(Permaquim.Depositario.Entities.Relations.Estilo.Esquema EsquemaId,Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,String Imagen,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.EsquemaDetalle Add(Permaquim.Depositario.Entities.Relations.Estilo.Esquema EsquemaId,Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Estilo.TipoEsquemaDetalle TipoEsquemaDetalleId,String Nombre,String Descripcion,String Valor,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.EsquemaDetalle)base.Add(new Entities.Relations.Estilo.EsquemaDetalle(EsquemaId,AplicacionId,TipoEsquemaDetalleId,Nombre,Descripcion,Valor,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14088,12 +13147,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Estilo.TipoEsquemaDetalle</returns>
-			public Entities.Relations.Estilo.TipoEsquemaDetalle Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Estilo.TipoEsquemaDetalle Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Estilo.TipoEsquemaDetalle)base.Add(new Entities.Relations.Estilo.TipoEsquemaDetalle(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14418,12 +13477,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.Provincia ProvinciaId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Ciudad</returns>
-			public Entities.Relations.Geografia.Ciudad Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Ciudad Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Provincia ProvinciaId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Ciudad)base.Add(new Entities.Relations.Geografia.Ciudad(Nombre,Descripcion,ProvinciaId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -14778,12 +13837,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.Ciudad CiudadId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.CodigoPostal</returns>
-			public Entities.Relations.Geografia.CodigoPostal Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.CodigoPostal Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Ciudad CiudadId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.CodigoPostal)base.Add(new Entities.Relations.Geografia.CodigoPostal(Nombre,Descripcion,CiudadId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15138,12 +14197,12 @@ using System.Text;
          /// <param name='Codigo'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Pais</returns>
-			public Entities.Relations.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Pais Add(String Nombre,String Descripcion,String Codigo,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Pais)base.Add(new Entities.Relations.Geografia.Pais(Nombre,Descripcion,Codigo,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15498,12 +14557,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId'></param>
          /// <param name='CodigoExterno'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Geografia.Provincia</returns>
-			public Entities.Relations.Geografia.Provincia Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Provincia Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,String CodigoExterno,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Geografia.Provincia)base.Add(new Entities.Relations.Geografia.Provincia(Nombre,Descripcion,PaisId,CodigoExterno,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -15812,7 +14871,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Geografia.Zona> _cacheItemList = new List<Entities.Relations.Geografia.Zona>();
 			   protected List<Entities.Relations.Geografia.Zona> _entities = null;
@@ -15856,14 +14916,15 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Codigo'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Geografia.Zona</returns>
-			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Geografia.Zona Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Geografia.Zona)base.Add(new Entities.Relations.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Geografia.Zona)base.Add(new Entities.Relations.Geografia.Zona(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Geografia.Zona> Items()
             {
@@ -15905,8 +14966,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Geografia.Zona> Items(Int64? Id,String Nombre,String Descripcion,String Codigo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Geografia.Zona> Items(Int64? Id,String Nombre,String Descripcion,String Codigo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -16017,6 +15079,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Geografia.Zona> Result 
@@ -16047,8 +15121,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Geografia.Zona item = new Entities.Tables.Geografia.Zona();
                  item.Id = Id;
@@ -16060,6 +15135,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -16139,570 +15215,6 @@ using System.Text;
              }
         } // class Zona
 	} //namespace Permaquim.Depositario.Business.Relations.Geografia
-	namespace Permaquim.Depositario.Business.Relations.Impresion {
-	    /// <summary>
-	    /// 
-	    /// </summary>
-		public class PlantillaTicket : RelationsDataHandler
-		{
-				public enum ColumnEnum : int
-                {
-					Id,
-					TipoId,
-					DepositarioModeloId,
-					Nombre,
-					Descripcion,
-					Impresora,
-					TextoCabecera,
-					NombreFuenteCabecera,
-					TamanioFuenteCabecera,
-					UbicacionTextoCabecera,
-					TextoPie,
-					NombreFuentePie,
-					TamanioFuentePie,
-					UbicacionTextoPie,
-					Imagen,
-					UbicacionImagen,
-					UbicacionTextoDetalle,
-					AnchoDetalle,
-					TamanioEntreLineas,
-					AnchoReporte,
-					FactorAltoReporte,
-					LineasAlFinal
-				}
-			   protected List<Entities.Relations.Impresion.PlantillaTicket> _cacheItemList = new List<Entities.Relations.Impresion.PlantillaTicket>();
-			   protected List<Entities.Relations.Impresion.PlantillaTicket> _entities = null;
-            public CustomWhereParameter Where { get; set; }
-            public CustomOrderByParameter OrderBy { get; set; }
-            public CustomGroupByParameter GroupBy { get; set; }
-            public CustomAggregateParameter Aggregate { get; set; }
-            public PlantillaTicket() : base()
-            {
-                base._dataItem = new Entities.Relations.Impresion.PlantillaTicket();
-                Where = new CustomWhereParameter();
-                OrderBy = new CustomOrderByParameter();
-                GroupBy = new CustomGroupByParameter();
-                Aggregate = new CustomAggregateParameter();
-            }
-            public class CustomAggregateParameter : AggregateParameter
-            {
-                 internal AggregateParameter aggregateParameter = new AggregateParameter();
-                 public void Add(Permaquim.Depositario.sqlEnum.FunctionEnum functionEnum, ColumnEnum column)
-                     {
-                         this.aggregateParameter.Add(functionEnum, Enum.GetName(typeof(ColumnEnum), column));
-                     }
-            }
-			// Adds to a memory cache to hold pending transactions
-			public void AddToCache(Entities.Relations.Impresion.PlantillaTicket item)
-			{
-				_cacheItemList.Add(item);
-			}
-			public void UpdateCache()
-			{
-                this.BeginTransaction();
-				foreach(IDataItem item in _cacheItemList)
-					base.Add(item);
-				this.EndTransaction(true);
-			}
-			// Method that accepts arguments corresponding to fields (Those wich aren´t identity.)
-         /// <summary>
-         /// PlantillaTicket Add Method
-         /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId'></param>
-         /// <param name='Nombre'></param>
-         /// <param name='Descripcion'></param>
-         /// <param name='Impresora'></param>
-         /// <param name='TextoCabecera'></param>
-         /// <param name='NombreFuenteCabecera'></param>
-         /// <param name='TamanioFuenteCabecera'></param>
-         /// <param name='UbicacionTextoCabecera'></param>
-         /// <param name='TextoPie'></param>
-         /// <param name='NombreFuentePie'></param>
-         /// <param name='TamanioFuentePie'></param>
-         /// <param name='UbicacionTextoPie'></param>
-         /// <param name='Imagen'></param>
-         /// <param name='UbicacionImagen'></param>
-         /// <param name='UbicacionTextoDetalle'></param>
-         /// <param name='AnchoDetalle'></param>
-         /// <param name='TamanioEntreLineas'></param>
-         /// <param name='AnchoReporte'></param>
-         /// <param name='FactorAltoReporte'></param>
-         /// <param name='LineasAlFinal'></param>
-         /// <returns>Entities.Relations.Impresion.PlantillaTicket</returns>
-			public Entities.Relations.Impresion.PlantillaTicket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal) 
-			{
-			  return (Entities.Relations.Impresion.PlantillaTicket)base.Add(new Entities.Relations.Impresion.PlantillaTicket(TipoId,DepositarioModeloId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal));
-			}
-            public new List<Entities.Relations.Impresion.PlantillaTicket> Items()
-            {
-                base.WhereParameter = this.Where.whereParameter;
-                base.OrderByParameter = this.OrderBy.orderByParameter;
-                base.GroupByParameter = this.GroupBy.groupByParameter;
-                base.TopQuantity = this.TopQuantity;
-                base.AnalizeIDataItem();
-                _entities = base.Items().Cast<Entities.Relations.Impresion.PlantillaTicket>().ToList<Entities.Relations.Impresion.PlantillaTicket>();
-                return _entities;
-            }
-            /// <summary>
-            /// Gets Entities.Relations.Impresion.PlantillaTicket items by Pk
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64 Id)
-            {
-                this.Where.Clear();
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                         this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND,ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                return this.Items();
-            }
-            /// <summary>
-            /// Gets items with all fields
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="TipoId"></param>
-            /// <param name="DepositarioModeloId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Impresora"></param>
-            /// <param name="TextoCabecera"></param>
-            /// <param name="NombreFuenteCabecera"></param>
-            /// <param name="TamanioFuenteCabecera"></param>
-            /// <param name="UbicacionTextoCabecera"></param>
-            /// <param name="TextoPie"></param>
-            /// <param name="NombreFuentePie"></param>
-            /// <param name="TamanioFuentePie"></param>
-            /// <param name="UbicacionTextoPie"></param>
-            /// <param name="Imagen"></param>
-            /// <param name="UbicacionImagen"></param>
-            /// <param name="UbicacionTextoDetalle"></param>
-            /// <param name="AnchoDetalle"></param>
-            /// <param name="TamanioEntreLineas"></param>
-            /// <param name="AnchoReporte"></param>
-            /// <param name="FactorAltoReporte"></param>
-            /// <param name="LineasAlFinal"></param>
-            /// <returns></returns>
-            public List<Entities.Relations.Impresion.PlantillaTicket> Items(Int64? Id,Int64? TipoId,Int64? DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32? TamanioFuenteCabecera,Int32? UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32? TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32? UbicacionTextoDetalle,Int32? AnchoDetalle,Int32? TamanioEntreLineas,Int32? AnchoReporte,Int32? FactorAltoReporte,Int32? LineasAlFinal)
-            {
-                this.Where.whereParameter.Clear();
-                if (Id != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Id, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Id);
-                    }
-                   
-                }
-                if (TipoId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TipoId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TipoId);
-                    }
-                   
-                }
-                if (DepositarioModeloId != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DepositarioModeloId, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DepositarioModeloId);
-                    }
-                   
-                }
-                if (Nombre != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Nombre, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Nombre);
-                    }
-                   
-                }
-                if (Descripcion != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Descripcion, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Descripcion);
-                    }
-                   
-                }
-                if (Impresora != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Impresora, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Impresora);
-                    }
-                   
-                }
-                if (TextoCabecera != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoCabecera);
-                    }
-                   
-                }
-                if (NombreFuenteCabecera != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuenteCabecera);
-                    }
-                   
-                }
-                if (TamanioFuenteCabecera != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuenteCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuenteCabecera);
-                    }
-                   
-                }
-                if (UbicacionTextoCabecera != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoCabecera, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoCabecera);
-                    }
-                   
-                }
-                if (TextoPie != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TextoPie);
-                    }
-                   
-                }
-                if (NombreFuentePie != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.NombreFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, NombreFuentePie);
-                    }
-                   
-                }
-                if (TamanioFuentePie != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioFuentePie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioFuentePie);
-                    }
-                   
-                }
-                if (UbicacionTextoPie != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoPie, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoPie);
-                    }
-                   
-                }
-                if (Imagen != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Imagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Imagen);
-                    }
-                   
-                }
-                if (UbicacionImagen != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionImagen, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionImagen);
-                    }
-                   
-                }
-                if (UbicacionTextoDetalle != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.UbicacionTextoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, UbicacionTextoDetalle);
-                    }
-                   
-                }
-                if (AnchoDetalle != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoDetalle, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoDetalle);
-                    }
-                   
-                }
-                if (TamanioEntreLineas != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.TamanioEntreLineas, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, TamanioEntreLineas);
-                    }
-                   
-                }
-                if (AnchoReporte != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.AnchoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, AnchoReporte);
-                    }
-                   
-                }
-                if (FactorAltoReporte != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.FactorAltoReporte, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, FactorAltoReporte);
-                    }
-                   
-                }
-                if (LineasAlFinal != null)
-                {
-                    if (this.Where.whereParameter.Count == 0)
-                    {
-                        this.Where.Add(ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
-                    }
-                    else
-                    {
-                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.LineasAlFinal, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, LineasAlFinal);
-                    }
-                   
-                }
-                return this.Items();
-            }
-            public List<Entities.Relations.Impresion.PlantillaTicket> Result 
-            {
-                get { return _entities; }
-            }
-            public Entities.Relations.Impresion.PlantillaTicket Add(Entities.Relations.Impresion.PlantillaTicket item)
-            {
-                RelationsDataHandler dh = new RelationsDataHandler(this._dataItem);
-                return (Entities.Relations.Impresion.PlantillaTicket)base.Add((IDataItem)item);
-            }
-            public Int64 Update(Entities.Relations.Impresion.PlantillaTicket item)
-            {
-                return base.Update((IDataItem)item);
-            }
-            public Int64 Delete(Entities.Relations.Impresion.PlantillaTicket item)
-            {
-                return base.DeleteItem((IDataItem)item);
-            }
-            /// Updates an instance of Entities.Relations.Impresion.PlantillaTicket with parameters
-            /// </summary>
-            /// <param name="Id"></param>
-            /// <param name="TipoId"></param>
-            /// <param name="DepositarioModeloId"></param>
-            /// <param name="Nombre"></param>
-            /// <param name="Descripcion"></param>
-            /// <param name="Impresora"></param>
-            /// <param name="TextoCabecera"></param>
-            /// <param name="NombreFuenteCabecera"></param>
-            /// <param name="TamanioFuenteCabecera"></param>
-            /// <param name="UbicacionTextoCabecera"></param>
-            /// <param name="TextoPie"></param>
-            /// <param name="NombreFuentePie"></param>
-            /// <param name="TamanioFuentePie"></param>
-            /// <param name="UbicacionTextoPie"></param>
-            /// <param name="Imagen"></param>
-            /// <param name="UbicacionImagen"></param>
-            /// <param name="UbicacionTextoDetalle"></param>
-            /// <param name="AnchoDetalle"></param>
-            /// <param name="TamanioEntreLineas"></param>
-            /// <param name="AnchoReporte"></param>
-            /// <param name="FactorAltoReporte"></param>
-            /// <param name="LineasAlFinal"></param>
-            /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,Int64 DepositarioModeloId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal)
-            {
-                 Entities.Tables.Impresion.PlantillaTicket item = new Entities.Tables.Impresion.PlantillaTicket();
-                 item.Id = Id;
-                 item.TipoId = TipoId;
-                 item.DepositarioModeloId = DepositarioModeloId;
-                 item.Nombre = Nombre;
-                 item.Descripcion = Descripcion;
-                 item.Impresora = Impresora;
-                 item.TextoCabecera = TextoCabecera;
-                 item.NombreFuenteCabecera = NombreFuenteCabecera;
-                 item.TamanioFuenteCabecera = TamanioFuenteCabecera;
-                 item.UbicacionTextoCabecera = UbicacionTextoCabecera;
-                 item.TextoPie = TextoPie;
-                 item.NombreFuentePie = NombreFuentePie;
-                 item.TamanioFuentePie = TamanioFuentePie;
-                 item.UbicacionTextoPie = UbicacionTextoPie;
-                 item.Imagen = Imagen;
-                 item.UbicacionImagen = UbicacionImagen;
-                 item.UbicacionTextoDetalle = UbicacionTextoDetalle;
-                 item.AnchoDetalle = AnchoDetalle;
-                 item.TamanioEntreLineas = TamanioEntreLineas;
-                 item.AnchoReporte = AnchoReporte;
-                 item.FactorAltoReporte = FactorAltoReporte;
-                 item.LineasAlFinal = LineasAlFinal;
-
-                return base.Update((IDataItem)item);
-            }
-            public class CustomWhereParameter : WhereParameter {
-                 internal WhereParameter whereParameter = new WhereParameter();
-                 public void Add(ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void  Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand,object value)
-                 {
-                     this.whereParameter.Add(Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum betweenColumn, Permaquim.Depositario.sqlEnum.OperandEnum operand, object valueFrom, object valueTo)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), betweenColumn), valueFrom, valueTo);
-                 }
-                 public void Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum conjunction,ColumnEnum column, Permaquim.Depositario.sqlEnum.OperandEnum operand, object value)
-                 {
-                     this.whereParameter.Add(conjunction, Enum.GetName(typeof(ColumnEnum), column), operand, value);
-                 }
-                 public void Clear()
-                 {
-                     this.whereParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.whereParameter.Count;
-                     }
-                 }
-            }
-            public class CustomOrderByParameter : OrderByParameter {
-                 internal OrderByParameter orderByParameter = new OrderByParameter();
-                 public void Add(ColumnEnum column, Permaquim.Depositario.sqlEnum.DirEnum direction = Permaquim.Depositario.sqlEnum.DirEnum.ASC)
-                 {
-                     this.orderByParameter.Add(Enum.GetName(typeof(ColumnEnum), column), direction);
-                 }
-                 public void Clear()
-                 {
-                     this.orderByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.orderByParameter.Count;
-                     }
-                 }
-            }
-            public class CustomGroupByParameter : GroupByParameter {
-                 internal GroupByParameter groupByParameter = new GroupByParameter();
-                 public void Add(ColumnEnum column)
-                 {
-                     this.groupByParameter.Add(Enum.GetName(typeof(ColumnEnum), column));
-                 }
-                 public void Clear()
-                 {
-                     this.groupByParameter.Clear();
-                 }
-                 public long Count
-                 {
-                     get {
-                         return this.groupByParameter.Count;
-                     }
-                 }
-            }
-             public void Dispose()
-             {
-                 _entities = null;
-                 _cacheItemList = null;
-                 Where = null;
-                 OrderBy = null;
-                 GroupBy = null;
-                 Aggregate = null;
-				
-                 base.Dispose(true);
-             }
-        } // class PlantillaTicket
-	} //namespace Permaquim.Depositario.Business.Relations.Impresion
 	namespace Permaquim.Depositario.Business.Relations.Impresion {
 	    /// <summary>
 	    /// 
@@ -16801,12 +15313,12 @@ using System.Text;
          /// <param name='FactorAltoReporte'></param>
          /// <param name='LineasAlFinal'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Impresion.Ticket</returns>
-			public Entities.Relations.Impresion.Ticket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Impresion.Ticket Add(Permaquim.Depositario.Entities.Relations.Impresion.TipoTicket TipoId,Permaquim.Depositario.Entities.Relations.Dispositivo.Modelo DepositarioModeloId,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,String Nombre,String Descripcion,String Impresora,String TextoCabecera,String NombreFuenteCabecera,Int32 TamanioFuenteCabecera,Int32 UbicacionTextoCabecera,String TextoPie,String NombreFuentePie,Int32 TamanioFuentePie,String UbicacionTextoPie,String Imagen,String UbicacionImagen,Int32 UbicacionTextoDetalle,Int32 AnchoDetalle,Int32 TamanioEntreLineas,Int32 AnchoReporte,Int32 FactorAltoReporte,Int32 LineasAlFinal,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Impresion.Ticket)base.Add(new Entities.Relations.Impresion.Ticket(TipoId,DepositarioModeloId,EmpresaId,Nombre,Descripcion,Impresora,TextoCabecera,NombreFuenteCabecera,TamanioFuenteCabecera,UbicacionTextoCabecera,TextoPie,NombreFuentePie,TamanioFuentePie,UbicacionTextoPie,Imagen,UbicacionImagen,UbicacionTextoDetalle,AnchoDetalle,TamanioEntreLineas,AnchoReporte,FactorAltoReporte,LineasAlFinal,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17429,12 +15941,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Codigo'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Impresion.TipoTicket</returns>
-			public Entities.Relations.Impresion.TipoTicket Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Impresion.TipoTicket Add(String Nombre,String Descripcion,String Codigo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Impresion.TipoTicket)base.Add(new Entities.Relations.Impresion.TipoTicket(Nombre,Descripcion,Codigo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -17774,12 +16286,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId'></param>
          /// <param name='CodigoCierre'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.CierreDiario</returns>
-			public Entities.Relations.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId,String CodigoCierre,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.CierreDiario Add(String Nombre,DateTime Fecha,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Operacion.Sesion SesionId,String CodigoCierre,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.CierreDiario)base.Add(new Entities.Relations.Operacion.CierreDiario(Nombre,Fecha,DepositarioId,SesionId,CodigoCierre,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -18138,12 +16650,12 @@ using System.Text;
          /// <param name='FechaApertura'></param>
          /// <param name='FechaCierre'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.Contenedor</returns>
-			public Entities.Relations.Operacion.Contenedor Add(String Nombre,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.Contenedor Add(String Nombre,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Operacion.TipoContenedor TipoId,String Identificador,DateTime FechaApertura,DateTime FechaCierre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.Contenedor)base.Add(new Entities.Relations.Operacion.Contenedor(Nombre,DepositarioId,TipoId,Identificador,FechaApertura,FechaCierre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19083,7 +17595,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _cacheItemList = new List<Entities.Relations.Operacion.TipoContenedor>();
 			   protected List<Entities.Relations.Operacion.TipoContenedor> _entities = null;
@@ -19127,14 +17640,15 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Capacidad'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Operacion.TipoContenedor</returns>
-			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoContenedor Add(String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Operacion.TipoContenedor)base.Add(new Entities.Relations.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Operacion.TipoContenedor)base.Add(new Entities.Relations.Operacion.TipoContenedor(Nombre,Descripcion,Capacidad,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Operacion.TipoContenedor> Items()
             {
@@ -19176,8 +17690,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Operacion.TipoContenedor> Items(Int64? Id,String Nombre,String Descripcion,Int32? Capacidad,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Operacion.TipoContenedor> Items(Int64? Id,String Nombre,String Descripcion,Int32? Capacidad,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -19288,6 +17803,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Operacion.TipoContenedor> Result 
@@ -19318,8 +17845,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int32 Capacidad,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Operacion.TipoContenedor item = new Entities.Tables.Operacion.TipoContenedor();
                  item.Id = Id;
@@ -19331,6 +17859,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -19470,12 +17999,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsBloqueante'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TipoEvento</returns>
-			public Entities.Relations.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoEvento Add(String Nombre,String Descripcion,Boolean EsBloqueante,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TipoEvento)base.Add(new Entities.Relations.Operacion.TipoEvento(Nombre,Descripcion,EsBloqueante,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -19813,12 +18342,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='FuncionId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TipoTransaccion</returns>
-			public Entities.Relations.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Int64 FuncionId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TipoTransaccion Add(String Nombre,String Descripcion,Int64 FuncionId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TipoTransaccion)base.Add(new Entities.Relations.Operacion.TipoTransaccion(Nombre,Descripcion,FuncionId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -21575,13 +20104,13 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId'></param>
          /// <param name='Observaciones'></param>
          /// <param name='CodigoTurno'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Operacion.Turno</returns>
-			public Entities.Relations.Operacion.Turno Add(Permaquim.Depositario.Entities.Relations.Turno.AgendaTurno TurnoDepositarioId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,String CodigoTurno,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Operacion.Turno Add(Permaquim.Depositario.Entities.Relations.Turno.AgendaTurno TurnoDepositarioId,Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,DateTime FechaApertura,DateTime FechaCierre,DateTime Fecha,Int32 Secuencia,Permaquim.Depositario.Entities.Relations.Operacion.CierreDiario CierreDiarioId,String Observaciones,String CodigoTurno,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Operacion.Turno)base.Add(new Entities.Relations.Operacion.Turno(TurnoDepositarioId,DepositarioId,SectorId,FechaApertura,FechaCierre,Fecha,Secuencia,CierreDiarioId,Observaciones,CodigoTurno,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -22024,10 +20553,10 @@ using System.Text;
          /// <param name='Habilitado'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Operacion.TurnoUsuario</returns>
-			public Entities.Relations.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Operacion.TurnoUsuario Add(Int64 UsuarioId,Int64 TurnoId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Operacion.TurnoUsuario)base.Add(new Entities.Relations.Operacion.TurnoUsuario(UsuarioId,TurnoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -22352,12 +20881,12 @@ using System.Text;
          /// <param name='Cultura'></param>
          /// <param name='EsDefault'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Regionalizacion.Lenguaje</returns>
-			public Entities.Relations.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,String Cultura,Boolean EsDefault,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Regionalizacion.Lenguaje Add(String Nombre,String Descripcion,String Cultura,Boolean EsDefault,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Regionalizacion.Lenguaje)base.Add(new Entities.Relations.Regionalizacion.Lenguaje(Nombre,Descripcion,Cultura,EsDefault,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -22712,12 +21241,12 @@ using System.Text;
          /// <param name='Texto'></param>
          /// <param name='Habilitado'></param>
          /// <param name='LargoMaximo'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Regionalizacion.LenguajeItem</returns>
-			public Entities.Relations.Regionalizacion.LenguajeItem Add(Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Regionalizacion.LenguajeItem Add(Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,String Clave,String Texto,Boolean Habilitado,Int32 LargoMaximo,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Regionalizacion.LenguajeItem)base.Add(new Entities.Relations.Regionalizacion.LenguajeItem(LenguajeId,Clave,Texto,Habilitado,LargoMaximo,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23070,12 +21599,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Aplicacion</returns>
-			public Entities.Relations.Seguridad.Aplicacion Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Aplicacion Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoAplicacion TipoId,String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Aplicacion)base.Add(new Entities.Relations.Seguridad.Aplicacion(TipoId,Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23411,12 +21940,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId'></param>
          /// <param name='Nombre'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.AplicacionParametro</returns>
-			public Entities.Relations.Seguridad.AplicacionParametro Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.AplicacionParametro Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.AplicacionParametro)base.Add(new Entities.Relations.Seguridad.AplicacionParametro(AplicacionId,Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -23739,12 +22268,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.AplicacionParametro ParametroId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.AplicacionParametroValor</returns>
-			public Entities.Relations.Seguridad.AplicacionParametroValor Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Seguridad.AplicacionParametro ParametroId,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.AplicacionParametroValor Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Seguridad.AplicacionParametro ParametroId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.AplicacionParametroValor)base.Add(new Entities.Relations.Seguridad.AplicacionParametroValor(AplicacionId,ParametroId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -24086,12 +22615,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Referencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Funcion</returns>
-			public Entities.Relations.Seguridad.Funcion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Funcion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,Permaquim.Depositario.Entities.Relations.Seguridad.TipoFuncion TipoId,String Nombre,String Descripcion,String Referencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.Funcion)base.Add(new Entities.Relations.Seguridad.Funcion(AplicacionId,TipoId,Nombre,Descripcion,Referencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -24459,12 +22988,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='Valor'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.IdentificadorUsuario</returns>
-			public Entities.Relations.Seguridad.IdentificadorUsuario Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoIdentificador TipoId,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,String Valor,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.IdentificadorUsuario Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoIdentificador TipoId,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,String Valor,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.IdentificadorUsuario)base.Add(new Entities.Relations.Seguridad.IdentificadorUsuario(TipoId,UsuarioId,Valor,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -24757,6 +23286,7 @@ using System.Text;
 					FuncionId,
 					Imagen,
 					DependeDe,
+					Orden,
 					Habilitado,
 					UsuarioCreacion,
 					FechaCreacion,
@@ -24807,15 +23337,16 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId'></param>
          /// <param name='Imagen'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Menu DependeDe'></param>
+         /// <param name='Orden'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.Menu</returns>
-			public Entities.Relations.Seguridad.Menu Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositario.Entities.Relations.Seguridad.Menu DependeDe,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Menu Add(Permaquim.Depositario.Entities.Relations.Seguridad.TipoMenu TipoId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,String Imagen,Permaquim.Depositario.Entities.Relations.Seguridad.Menu DependeDe,Int32 Orden,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
-			  return (Entities.Relations.Seguridad.Menu)base.Add(new Entities.Relations.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Seguridad.Menu)base.Add(new Entities.Relations.Seguridad.Menu(TipoId,Nombre,Descripcion,FuncionId,Imagen,DependeDe,Orden,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
             public new List<Entities.Relations.Seguridad.Menu> Items()
             {
@@ -24855,13 +23386,14 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.Menu> Items(Int64? Id,Int64? TipoId,String Nombre,String Descripcion,Int64? FuncionId,String Imagen,Int64? DependeDe,Int32? Orden,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -24945,6 +23477,18 @@ using System.Text;
                     else
                     {
                         this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.DependeDe, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, DependeDe);
+                    }
+                   
+                }
+                if (Orden != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.Orden, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Orden);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.Orden, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, Orden);
                     }
                    
                 }
@@ -25036,13 +23580,14 @@ using System.Text;
             /// <param name="FuncionId"></param>
             /// <param name="Imagen"></param>
             /// <param name="DependeDe"></param>
+            /// <param name="Orden"></param>
             /// <param name="Habilitado"></param>
             /// <param name="UsuarioCreacion"></param>
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 TipoId,String Nombre,String Descripcion,Int64 FuncionId,String Imagen,Int64 DependeDe,Int32 Orden,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
             {
                  Entities.Tables.Seguridad.Menu item = new Entities.Tables.Seguridad.Menu();
                  item.Id = Id;
@@ -25052,6 +23597,7 @@ using System.Text;
                  item.FuncionId = FuncionId;
                  item.Imagen = Imagen;
                  item.DependeDe = DependeDe;
+                 item.Orden = Orden;
                  item.Habilitado = Habilitado;
                  item.UsuarioCreacion = UsuarioCreacion;
                  item.FechaCreacion = FechaCreacion;
@@ -25153,7 +23699,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Seguridad.Rol> _cacheItemList = new List<Entities.Relations.Seguridad.Rol>();
 			   protected List<Entities.Relations.Seguridad.Rol> _entities = null;
@@ -25198,14 +23745,15 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Rol DependeDe'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Seguridad.Rol</returns>
-			public Entities.Relations.Seguridad.Rol Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Rol Add(Permaquim.Depositario.Entities.Relations.Seguridad.Aplicacion AplicacionId,String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Seguridad.Rol DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Seguridad.Rol)base.Add(new Entities.Relations.Seguridad.Rol(AplicacionId,Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Seguridad.Rol)base.Add(new Entities.Relations.Seguridad.Rol(AplicacionId,Nombre,Descripcion,DependeDe,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Seguridad.Rol> Items()
             {
@@ -25248,8 +23796,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Rol> Items(Int64? Id,Int64? AplicacionId,String Nombre,String Descripcion,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.Rol> Items(Int64? Id,Int64? AplicacionId,String Nombre,String Descripcion,Int64? DependeDe,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -25372,6 +23921,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Seguridad.Rol> Result 
@@ -25403,8 +23964,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 AplicacionId,String Nombre,String Descripcion,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 AplicacionId,String Nombre,String Descripcion,Int64 DependeDe,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Seguridad.Rol item = new Entities.Tables.Seguridad.Rol();
                  item.Id = Id;
@@ -25417,6 +23979,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -25564,12 +24127,12 @@ using System.Text;
          /// <param name='PuedeEliminar'></param>
          /// <param name='PuedeVisualizar'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.RolFuncion</returns>
-			public Entities.Relations.Seguridad.RolFuncion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,Permaquim.Depositario.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.RolFuncion Add(Permaquim.Depositario.Entities.Relations.Seguridad.Funcion FuncionId,Permaquim.Depositario.Entities.Relations.Seguridad.Rol RolId,String Descripcion,Boolean PuedeAgregar,Boolean PuedeModificar,Boolean PuedeEliminar,Boolean PuedeVisualizar,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.RolFuncion)base.Add(new Entities.Relations.Seguridad.RolFuncion(FuncionId,RolId,Descripcion,PuedeAgregar,PuedeModificar,PuedeEliminar,PuedeVisualizar,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -25965,12 +24528,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoAplicacion</returns>
-			public Entities.Relations.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoAplicacion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoAplicacion)base.Add(new Entities.Relations.Seguridad.TipoAplicacion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26291,12 +24854,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoFuncion</returns>
-			public Entities.Relations.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoFuncion Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoFuncion)base.Add(new Entities.Relations.Seguridad.TipoFuncion(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26619,12 +25182,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Mascara'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoIdentificador</returns>
-			public Entities.Relations.Seguridad.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoIdentificador Add(String Nombre,String Descripcion,String Mascara,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoIdentificador)base.Add(new Entities.Relations.Seguridad.TipoIdentificador(Nombre,Descripcion,Mascara,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -26960,12 +25523,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Descripcion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.TipoMenu</returns>
-			public Entities.Relations.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.TipoMenu Add(String Nombre,String Descripcion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.TipoMenu)base.Add(new Entities.Relations.Seguridad.TipoMenu(Nombre,Descripcion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -27260,7 +25823,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Seguridad.Usuario> _cacheItemList = new List<Entities.Relations.Seguridad.Usuario>();
 			   protected List<Entities.Relations.Seguridad.Usuario> _entities = null;
@@ -27320,14 +25884,15 @@ using System.Text;
          /// <param name='CantidadLogueosIncorrectos'></param>
          /// <param name='Bloqueado'></param>
          /// <param name='FechaExpiracion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Seguridad.Usuario</returns>
-			public Entities.Relations.Seguridad.Usuario Add(Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Permaquim.Depositario.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.Usuario Add(Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Permaquim.Depositario.Entities.Relations.Regionalizacion.Lenguaje LenguajeId,Permaquim.Depositario.Entities.Relations.Visualizacion.Perfil PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Seguridad.Usuario)base.Add(new Entities.Relations.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,NombreApellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,FechaExpiracion,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Seguridad.Usuario)base.Add(new Entities.Relations.Seguridad.Usuario(EmpresaId,LenguajeId,PerfilId,Nombre,Apellido,NombreApellido,Documento,Legajo,Mail,FechaIngreso,NickName,Password,Token,Avatar,FechaUltimoLogin,DebeCambiarPassword,Habilitado,CantidadLogueosIncorrectos,Bloqueado,FechaExpiracion,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Seguridad.Usuario> Items()
             {
@@ -27385,8 +25950,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,DateTime? FechaExpiracion,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Seguridad.Usuario> Items(Int64? Id,Int64? EmpresaId,Int64? LenguajeId,Int64? PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime? FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime? FechaUltimoLogin,Boolean? DebeCambiarPassword,Boolean? Habilitado,Int32? CantidadLogueosIncorrectos,Boolean? Bloqueado,DateTime? FechaExpiracion,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -27689,6 +26255,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Seguridad.Usuario> Result 
@@ -27735,8 +26313,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,Int64 EmpresaId,Int64 LenguajeId,Int64 PerfilId,String Nombre,String Apellido,String NombreApellido,String Documento,String Legajo,String Mail,DateTime FechaIngreso,String NickName,String Password,String Token,String Avatar,DateTime FechaUltimoLogin,Boolean DebeCambiarPassword,Boolean Habilitado,Int32 CantidadLogueosIncorrectos,Boolean Bloqueado,DateTime FechaExpiracion,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Seguridad.Usuario item = new Entities.Tables.Seguridad.Usuario();
                  item.Id = Id;
@@ -27764,6 +26343,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -27901,12 +26481,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Rol RolId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.UsuarioRol</returns>
-			public Entities.Relations.Seguridad.UsuarioRol Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.UsuarioRol Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Seguridad.Rol RolId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.UsuarioRol)base.Add(new Entities.Relations.Seguridad.UsuarioRol(UsuarioId,RolId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -28227,12 +26807,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Seguridad.UsuarioSector</returns>
-			public Entities.Relations.Seguridad.UsuarioSector Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Seguridad.UsuarioSector Add(Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioId,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Seguridad.UsuarioSector)base.Add(new Entities.Relations.Seguridad.UsuarioSector(UsuarioId,SectorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -28874,13 +27454,13 @@ using System.Text;
          /// <summary>
          /// Ejecucion Add Method
          /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId'></param>
+         /// <param name='DepositarioId'></param>
          /// <param name='FechaInicio'></param>
          /// <param name='FechaFin'></param>
          /// <param name='Finalizada'></param>
          /// <param name='EsPrimeraSincronizacion'></param>
          /// <returns>Entities.Relations.Sincronizacion.Ejecucion</returns>
-			public Entities.Relations.Sincronizacion.Ejecucion Add(Permaquim.Depositario.Entities.Relations.Dispositivo.Depositario DepositarioId,DateTime FechaInicio,DateTime FechaFin,Boolean Finalizada,Boolean EsPrimeraSincronizacion) 
+			public Entities.Relations.Sincronizacion.Ejecucion Add(Int64 DepositarioId,DateTime FechaInicio,DateTime FechaFin,Boolean Finalizada,Boolean EsPrimeraSincronizacion) 
 			{
 			  return (Entities.Relations.Sincronizacion.Ejecucion)base.Add(new Entities.Relations.Sincronizacion.Ejecucion(DepositarioId,FechaInicio,FechaFin,Finalizada,EsPrimeraSincronizacion));
 			}
@@ -29475,13 +28055,13 @@ using System.Text;
          /// <summary>
          /// EntidadCabecera Add Method
          /// </summary>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId'></param>
+         /// <param name='EntidadId'></param>
          /// <param name='Valor'></param>
          /// <param name='Fechainicio'></param>
          /// <param name='Fechafin'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId'></param>
          /// <returns>Entities.Relations.Sincronizacion.EntidadCabecera</returns>
-			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Permaquim.Depositario.Entities.Relations.Customizador.Entidad EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
+			public Entities.Relations.Sincronizacion.EntidadCabecera Add(Int64 EntidadId,String Valor,DateTime Fechainicio,DateTime Fechafin,Permaquim.Depositario.Entities.Relations.Sincronizacion.Ejecucion EjecucionId) 
 			{
 			  return (Entities.Relations.Sincronizacion.EntidadCabecera)base.Add(new Entities.Relations.Sincronizacion.EntidadCabecera(EntidadId,Valor,Fechainicio,Fechafin,EjecucionId));
 			}
@@ -30052,13 +28632,13 @@ using System.Text;
          /// <param name='Fecha'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId'></param>
          /// <param name='Secuencia'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='Habilitado'></param>
          /// <returns>Entities.Relations.Turno.AgendaTurno</returns>
-			public Entities.Relations.Turno.AgendaTurno Add(String Nombre,Permaquim.Depositario.Entities.Relations.Turno.EsquemaDetalleTurno EsquemaDetalleTurnoId,DateTime Fecha,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
+			public Entities.Relations.Turno.AgendaTurno Add(String Nombre,Permaquim.Depositario.Entities.Relations.Turno.EsquemaDetalleTurno EsquemaDetalleTurnoId,DateTime Fecha,Permaquim.Depositario.Entities.Relations.Directorio.Sector SectorId,Int32 Secuencia,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean Habilitado) 
 			{
 			  return (Entities.Relations.Turno.AgendaTurno)base.Add(new Entities.Relations.Turno.AgendaTurno(Nombre,EsquemaDetalleTurnoId,Fecha,SectorId,Secuencia,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,Habilitado));
 			}
@@ -30426,12 +29006,12 @@ using System.Text;
          /// <param name='Nombre'></param>
          /// <param name='Secuencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Turno.EsquemaDetalleTurno</returns>
-			public Entities.Relations.Turno.EsquemaDetalleTurno Add(Permaquim.Depositario.Entities.Relations.Turno.EsquemaTurno EsquemaTurnoId,String Nombre,Int32 Secuencia,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Turno.EsquemaDetalleTurno Add(Permaquim.Depositario.Entities.Relations.Turno.EsquemaTurno EsquemaTurnoId,String Nombre,Int32 Secuencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Turno.EsquemaDetalleTurno)base.Add(new Entities.Relations.Turno.EsquemaDetalleTurno(EsquemaTurnoId,Nombre,Secuencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -30767,14 +29347,14 @@ using System.Text;
          /// </summary>
          /// <param name='Nombre'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <param name='OperaSinTurno'></param>
          /// <param name='OperaDiasCorridos'></param>
          /// <returns>Entities.Relations.Turno.EsquemaTurno</returns>
-			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos) 
+			public Entities.Relations.Turno.EsquemaTurno Add(String Nombre,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,Boolean OperaSinTurno,Boolean OperaDiasCorridos) 
 			{
 			  return (Entities.Relations.Turno.EsquemaTurno)base.Add(new Entities.Relations.Turno.EsquemaTurno(Nombre,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,OperaSinTurno,OperaDiasCorridos));
 			}
@@ -31072,7 +29652,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Valor.Denominacion> _cacheItemList = new List<Entities.Relations.Valor.Denominacion>();
 			   protected List<Entities.Relations.Valor.Denominacion> _entities = null;
@@ -31120,14 +29701,15 @@ using System.Text;
          /// <param name='CodigoCcTalk'></param>
          /// <param name='Posicion'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.Denominacion</returns>
-			public Entities.Relations.Valor.Denominacion Add(String Nombre,Permaquim.Depositario.Entities.Relations.Valor.Tipo TipoValorId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Denominacion Add(String Nombre,Permaquim.Depositario.Entities.Relations.Valor.Tipo TipoValorId,Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Valor.Denominacion)base.Add(new Entities.Relations.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Denominacion)base.Add(new Entities.Relations.Valor.Denominacion(Nombre,TipoValorId,MonedaId,Unidades,Imagen,CodigoCcTalk,Posicion,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Valor.Denominacion> Items()
             {
@@ -31173,8 +29755,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Int32? Posicion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Denominacion> Items(Int64? Id,String Nombre,Int64? TipoValorId,Int64? MonedaId,Decimal? Unidades,String Imagen,String CodigoCcTalk,Int32? Posicion,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -31333,6 +29916,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.Denominacion> Result 
@@ -31367,8 +29962,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Int64 TipoValorId,Int64 MonedaId,Decimal Unidades,String Imagen,String CodigoCcTalk,Int32 Posicion,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Valor.Denominacion item = new Entities.Tables.Valor.Denominacion();
                  item.Id = Id;
@@ -31384,6 +29980,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -31480,7 +30077,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Valor.Moneda> _cacheItemList = new List<Entities.Relations.Valor.Moneda>();
 			   protected List<Entities.Relations.Valor.Moneda> _entities = null;
@@ -31525,14 +30123,15 @@ using System.Text;
          /// <param name='Codigo'></param>
          /// <param name='Simbolo'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.Moneda</returns>
-			public Entities.Relations.Valor.Moneda Add(String Nombre,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,String Codigo,String Simbolo,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Moneda Add(String Nombre,Permaquim.Depositario.Entities.Relations.Geografia.Pais PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Valor.Moneda)base.Add(new Entities.Relations.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Moneda)base.Add(new Entities.Relations.Valor.Moneda(Nombre,PaisId,Codigo,Simbolo,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Valor.Moneda> Items()
             {
@@ -31575,8 +30174,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Moneda> Items(Int64? Id,String Nombre,Int64? PaisId,String Codigo,String Simbolo,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -31699,6 +30299,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.Moneda> Result 
@@ -31730,8 +30342,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,Int64 PaisId,String Codigo,String Simbolo,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Valor.Moneda item = new Entities.Tables.Valor.Moneda();
                  item.Id = Id;
@@ -31744,6 +30357,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -31839,7 +30453,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Valor.OrigenValor> _cacheItemList = new List<Entities.Relations.Valor.OrigenValor>();
 			   protected List<Entities.Relations.Valor.OrigenValor> _entities = null;
@@ -31883,14 +30498,15 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.OrigenValor</returns>
-			public Entities.Relations.Valor.OrigenValor Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.OrigenValor Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Directorio.Empresa EmpresaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Valor.OrigenValor)base.Add(new Entities.Relations.Valor.OrigenValor(Nombre,Descripcion,EmpresaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.OrigenValor)base.Add(new Entities.Relations.Valor.OrigenValor(Nombre,Descripcion,EmpresaId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Valor.OrigenValor> Items()
             {
@@ -31932,8 +30548,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Int64? EmpresaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.OrigenValor> Items(Int64? Id,String Nombre,String Descripcion,Int64? EmpresaId,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -32044,6 +30661,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.OrigenValor> Result 
@@ -32074,8 +30703,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 EmpresaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,Int64 EmpresaId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Valor.OrigenValor item = new Entities.Tables.Valor.OrigenValor();
                  item.Id = Id;
@@ -32087,6 +30717,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -32224,12 +30855,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Valor.Tipo TipoValorId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Valor.RelacionMonedaTipoValor</returns>
-			public Entities.Relations.Valor.RelacionMonedaTipoValor Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Permaquim.Depositario.Entities.Relations.Valor.Tipo TipoValorId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.RelacionMonedaTipoValor Add(Permaquim.Depositario.Entities.Relations.Valor.Moneda MonedaId,Permaquim.Depositario.Entities.Relations.Valor.Tipo TipoValorId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Valor.RelacionMonedaTipoValor)base.Add(new Entities.Relations.Valor.RelacionMonedaTipoValor(MonedaId,TipoValorId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -32508,7 +31139,8 @@ using System.Text;
 					UsuarioCreacion,
 					FechaCreacion,
 					UsuarioModificacion,
-					FechaModificacion
+					FechaModificacion,
+					CodigoExterno
 				}
 			   protected List<Entities.Relations.Valor.Tipo> _cacheItemList = new List<Entities.Relations.Valor.Tipo>();
 			   protected List<Entities.Relations.Valor.Tipo> _entities = null;
@@ -32552,14 +31184,15 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Imagen'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
+         /// <param name='CodigoExterno'></param>
          /// <returns>Entities.Relations.Valor.Tipo</returns>
-			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Valor.Tipo Add(String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno) 
 			{
-			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
+			  return (Entities.Relations.Valor.Tipo)base.Add(new Entities.Relations.Valor.Tipo(Nombre,Descripcion,Imagen,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion,CodigoExterno));
 			}
             public new List<Entities.Relations.Valor.Tipo> Items()
             {
@@ -32601,8 +31234,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns></returns>
-            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion)
+            public List<Entities.Relations.Valor.Tipo> Items(Int64? Id,String Nombre,String Descripcion,String Imagen,Boolean? Habilitado,Int64? UsuarioCreacion,DateTime? FechaCreacion,Int64? UsuarioModificacion,DateTime? FechaModificacion,String CodigoExterno)
             {
                 this.Where.whereParameter.Clear();
                 if (Id != null)
@@ -32713,6 +31347,18 @@ using System.Text;
                     }
                    
                 }
+                if (CodigoExterno != null)
+                {
+                    if (this.Where.whereParameter.Count == 0)
+                    {
+                        this.Where.Add(ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                    else
+                    {
+                        this.Where.Add(Permaquim.Depositario.sqlEnum.ConjunctionEnum.AND, ColumnEnum.CodigoExterno, Permaquim.Depositario.sqlEnum.OperandEnum.Equal, CodigoExterno);
+                    }
+                   
+                }
                 return this.Items();
             }
             public List<Entities.Relations.Valor.Tipo> Result 
@@ -32743,8 +31389,9 @@ using System.Text;
             /// <param name="FechaCreacion"></param>
             /// <param name="UsuarioModificacion"></param>
             /// <param name="FechaModificacion"></param>
+            /// <param name="CodigoExterno"></param>
             /// <returns>Int64</returns>
-            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion)
+            public Int64 Update(Int64 Id,String Nombre,String Descripcion,String Imagen,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion,String CodigoExterno)
             {
                  Entities.Tables.Valor.Tipo item = new Entities.Tables.Valor.Tipo();
                  item.Id = Id;
@@ -32756,6 +31403,7 @@ using System.Text;
                  item.FechaCreacion = FechaCreacion;
                  item.UsuarioModificacion = UsuarioModificacion;
                  item.FechaModificacion = FechaModificacion;
+                 item.CodigoExterno = CodigoExterno;
 
                 return base.Update((IDataItem)item);
             }
@@ -32895,12 +31543,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='Permaquim.Depositario.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.Perfil</returns>
-			public Entities.Relations.Visualizacion.Perfil Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.Perfil Add(String Nombre,String Descripcion,Permaquim.Depositario.Entities.Relations.Visualizacion.PerfilTipo PerfilTipoId,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.Perfil)base.Add(new Entities.Relations.Visualizacion.Perfil(Nombre,Descripcion,PerfilTipoId,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -33236,12 +31884,12 @@ using System.Text;
          /// <param name='Permaquim.Depositario.Entities.Relations.Visualizacion.Perfil PerfilId'></param>
          /// <param name='IdTablaReferencia'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.PerfilItem</returns>
-			public Entities.Relations.Visualizacion.PerfilItem Add(Permaquim.Depositario.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.PerfilItem Add(Permaquim.Depositario.Entities.Relations.Visualizacion.Perfil PerfilId,Int64 IdTablaReferencia,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.PerfilItem)base.Add(new Entities.Relations.Visualizacion.PerfilItem(PerfilId,IdTablaReferencia,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}
@@ -33564,12 +32212,12 @@ using System.Text;
          /// <param name='Descripcion'></param>
          /// <param name='EsAdministrador'></param>
          /// <param name='Habilitado'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion'></param>
+         /// <param name='UsuarioCreacion'></param>
          /// <param name='FechaCreacion'></param>
-         /// <param name='Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion'></param>
+         /// <param name='UsuarioModificacion'></param>
          /// <param name='FechaModificacion'></param>
          /// <returns>Entities.Relations.Visualizacion.PerfilTipo</returns>
-			public Entities.Relations.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioCreacion,DateTime FechaCreacion,Permaquim.Depositario.Entities.Relations.Seguridad.Usuario UsuarioModificacion,DateTime FechaModificacion) 
+			public Entities.Relations.Visualizacion.PerfilTipo Add(String Nombre,String Descripcion,Boolean EsAdministrador,Boolean Habilitado,Int64 UsuarioCreacion,DateTime FechaCreacion,Int64 UsuarioModificacion,DateTime FechaModificacion) 
 			{
 			  return (Entities.Relations.Visualizacion.PerfilTipo)base.Add(new Entities.Relations.Visualizacion.PerfilTipo(Nombre,Descripcion,EsAdministrador,Habilitado,UsuarioCreacion,FechaCreacion,UsuarioModificacion,FechaModificacion));
 			}

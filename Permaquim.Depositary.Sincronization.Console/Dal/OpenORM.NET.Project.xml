@@ -26,39 +26,8 @@
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
-    <string>Auditoria.DepurarAuditoria</string>
-    <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
-    <string>dbo.fn_diagramobjects</string>
     <string>dbo.IniciarPrimeraSincronizacion</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>dbo.splitCapital</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
-    <string>Seguridad.ObtenerUsuarios</string>
     <string>Sincronizacion.ObtenerIdDestino</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
@@ -112,8 +81,6 @@
     <string>Banca.TipoCuenta</string>
     <string>Banca.UsuarioCuenta</string>
     <string>Biometria.HuellaDactilar</string>
-    <string>Customizador.Entidad</string>
-    <string>Customizador.EntidadAtributo</string>
     <string>Directorio.Empresa</string>
     <string>Directorio.Grupo</string>
     <string>Directorio.RelacionMonedaSucursal</string>
@@ -142,7 +109,6 @@
     <string>Geografia.Pais</string>
     <string>Geografia.Provincia</string>
     <string>Geografia.Zona</string>
-    <string>Impresion.PlantillaTicket</string>
     <string>Impresion.Ticket</string>
     <string>Impresion.TipoTicket</string>
     <string>Operacion.CierreDiario</string>
@@ -192,7 +158,7 @@
     <string>Visualizacion.PerfilItem</string>
     <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
-  <SelectedDatabase>Depositario</SelectedDatabase>
+  <SelectedDatabase>DepositarioTemplateClient</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
     <string>c6885894-f5e6-505c-bc2d-480cd6d456a1</string>
