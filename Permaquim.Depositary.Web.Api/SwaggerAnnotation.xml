@@ -572,7 +572,7 @@
             
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Add(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime)">
+        <member name="M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Add(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.Boolean,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime)">
             <summary>
             Entidad Add Method
             </summary>
@@ -586,6 +586,7 @@
             <param name='HabilitarOrdenamiento'></param>
             <param name='HabilitarRedimensionamiento'></param>
             <param name='HabilitarPaginado'></param>
+            <param name='RegistrosPorPagina'></param>
             <param name='HabilitarAuditoria'></param>
             <param name='Habilitado'></param>
             <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion.Entities.Relations.Seguridad.UsuarioUsuarioCreacion'></param>
@@ -601,7 +602,7 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Items(System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Items(System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Gets items with all fields
             </summary>
@@ -616,6 +617,7 @@
             <param name="HabilitarOrdenamiento"></param>
             <param name="HabilitarRedimensionamiento"></param>
             <param name="HabilitarPaginado"></param>
+            <param name="RegistrosPorPagina"></param>
             <param name="HabilitarAuditoria"></param>
             <param name="Habilitado"></param>
             <param name="UsuarioCreacion"></param>
@@ -624,7 +626,7 @@
             <param name="FechaModificacion"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Update(System.Int64,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Customizador.Entidad.Update(System.Int64,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)" -->
         <member name="T:DepositaryWebApi.Business.Relations.Customizador.EntidadAtributo">
             <summary>
             
@@ -2057,6 +2059,74 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Geografia.Zona.Update(System.Int64,System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String)" -->
+        <member name="T:DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.Add(DepositaryWebApi.Entities.Relations.Impresion.TipoTicket,DepositaryWebApi.Entities.Relations.Dispositivo.Modelo,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            PlantillaTicket Add Method
+            </summary>
+            <param name='DepositaryWebApi.Entities.Relations.Impresion.TipoTicket TipoId.Entities.Relations.Impresion.TipoTicketTipoId'></param>
+            <param name='DepositaryWebApi.Entities.Relations.Dispositivo.Modelo DepositarioModeloId.Entities.Relations.Dispositivo.ModeloDepositarioModeloId'></param>
+            <param name='Nombre'></param>
+            <param name='Descripcion'></param>
+            <param name='Impresora'></param>
+            <param name='TextoCabecera'></param>
+            <param name='NombreFuenteCabecera'></param>
+            <param name='TamanioFuenteCabecera'></param>
+            <param name='UbicacionTextoCabecera'></param>
+            <param name='TextoPie'></param>
+            <param name='NombreFuentePie'></param>
+            <param name='TamanioFuentePie'></param>
+            <param name='UbicacionTextoPie'></param>
+            <param name='Imagen'></param>
+            <param name='UbicacionImagen'></param>
+            <param name='UbicacionTextoDetalle'></param>
+            <param name='AnchoDetalle'></param>
+            <param name='TamanioEntreLineas'></param>
+            <param name='AnchoReporte'></param>
+            <param name='FactorAltoReporte'></param>
+            <param name='LineasAlFinal'></param>
+            <returns>Entities.Relations.Impresion.PlantillaTicket</returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.Items(System.Int64)">
+            <summary>
+            Gets Entities.Relations.Impresion.PlantillaTicket items by Pk
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Gets items with all fields
+            </summary>
+            <param name="Id"></param>
+            <param name="TipoId"></param>
+            <param name="DepositarioModeloId"></param>
+            <param name="Nombre"></param>
+            <param name="Descripcion"></param>
+            <param name="Impresora"></param>
+            <param name="TextoCabecera"></param>
+            <param name="NombreFuenteCabecera"></param>
+            <param name="TamanioFuenteCabecera"></param>
+            <param name="UbicacionTextoCabecera"></param>
+            <param name="TextoPie"></param>
+            <param name="NombreFuentePie"></param>
+            <param name="TamanioFuentePie"></param>
+            <param name="UbicacionTextoPie"></param>
+            <param name="Imagen"></param>
+            <param name="UbicacionImagen"></param>
+            <param name="UbicacionTextoDetalle"></param>
+            <param name="AnchoDetalle"></param>
+            <param name="TamanioEntreLineas"></param>
+            <param name="AnchoReporte"></param>
+            <param name="FactorAltoReporte"></param>
+            <param name="LineasAlFinal"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Impresion.PlantillaTicket.Update(System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" -->
         <member name="T:DepositaryWebApi.Business.Relations.Impresion.Ticket">
             <summary>
             
@@ -3046,7 +3116,7 @@
             
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Add(DepositaryWebApi.Entities.Relations.Seguridad.TipoMenu,System.String,System.String,DepositaryWebApi.Entities.Relations.Seguridad.Funcion,System.String,DepositaryWebApi.Entities.Relations.Seguridad.Menu,System.Boolean,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime)">
+        <member name="M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Add(DepositaryWebApi.Entities.Relations.Seguridad.TipoMenu,System.String,System.String,DepositaryWebApi.Entities.Relations.Seguridad.Funcion,System.String,DepositaryWebApi.Entities.Relations.Seguridad.Menu,System.Int32,System.Boolean,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime,DepositaryWebApi.Entities.Relations.Seguridad.Usuario,System.DateTime)">
             <summary>
             Menu Add Method
             </summary>
@@ -3056,6 +3126,7 @@
             <param name='DepositaryWebApi.Entities.Relations.Seguridad.Funcion FuncionId.Entities.Relations.Seguridad.FuncionFuncionId'></param>
             <param name='Imagen'></param>
             <param name='DepositaryWebApi.Entities.Relations.Seguridad.Menu DependeDe.Entities.Relations.Seguridad.MenuDependeDe'></param>
+            <param name='Orden'></param>
             <param name='Habilitado'></param>
             <param name='DepositaryWebApi.Entities.Relations.Seguridad.Usuario UsuarioCreacion.Entities.Relations.Seguridad.UsuarioUsuarioCreacion'></param>
             <param name='FechaCreacion'></param>
@@ -3070,7 +3141,7 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Gets items with all fields
             </summary>
@@ -3081,6 +3152,7 @@
             <param name="FuncionId"></param>
             <param name="Imagen"></param>
             <param name="DependeDe"></param>
+            <param name="Orden"></param>
             <param name="Habilitado"></param>
             <param name="UsuarioCreacion"></param>
             <param name="FechaCreacion"></param>
@@ -3088,7 +3160,7 @@
             <param name="FechaModificacion"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Update(System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Relations.Seguridad.Menu.Update(System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,System.Int64,System.Int32,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)" -->
         <member name="T:DepositaryWebApi.Business.Relations.Seguridad.Rol">
             <summary>
             
@@ -4171,6 +4243,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Aplicacion.Configuracion.Add(System.Int64,System.Int64,System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -4254,6 +4329,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionEmpresa">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -4343,6 +4421,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionTipoDato.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -4420,6 +4501,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Aplicacion.ConfiguracionValidacionDato">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -4507,6 +4591,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Auditoria.Log.Add(System.Int64,System.Int64,System.DateTime,System.String,System.String,System.String,System.String,System.Int64)">
             <summary>
@@ -4589,6 +4676,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Auditoria.TipoLog.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -4666,6 +4756,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Banca.Banco">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -4750,6 +4843,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Banca.Cuenta">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -4847,6 +4943,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Banca.TipoCuenta.Add(System.Int64,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String)">
             <summary>
@@ -4931,6 +5030,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Banca.UsuarioCuenta.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -5008,6 +5110,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Biometria.HuellaDactilar">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -5093,8 +5198,11 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
-        <member name="M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Add(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Add(System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Entidad Add Method
             </summary>
@@ -5108,6 +5216,7 @@
             <param name='HabilitarOrdenamiento'></param>
             <param name='HabilitarRedimensionamiento'></param>
             <param name='HabilitarPaginado'></param>
+            <param name='RegistrosPorPagina'></param>
             <param name='HabilitarAuditoria'></param>
             <param name='Habilitado'></param>
             <param name='UsuarioCreacion'></param>
@@ -5123,7 +5232,7 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Items(System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Items(System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Gets Entities.Tables.Customizador.Entidad items with parameters.
             </summary>
@@ -5138,6 +5247,7 @@
             <param name="HabilitarOrdenamiento"></param>
             <param name="HabilitarRedimensionamiento"></param>
             <param name="HabilitarPaginado"></param>
+            <param name="RegistrosPorPagina"></param>
             <param name="HabilitarAuditoria"></param>
             <param name="Habilitado"></param>
             <param name="UsuarioCreacion"></param>
@@ -5161,7 +5271,7 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Update(DepositaryWebApi.Entities.Tables.Customizador.Entidad)" -->
-        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Update(System.Int64,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Update(System.Int64,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.Int32},System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})" -->
         <member name="M:DepositaryWebApi.Business.Tables.Customizador.Entidad.Delete(DepositaryWebApi.Entities.Tables.Customizador.Entidad)">
             <summary>
             Deletes an instance of Entities.Tables.Customizador.Entidad
@@ -5188,6 +5298,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Customizador.EntidadAtributo">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -5291,6 +5404,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Directorio.Empresa.Add(System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -5385,6 +5501,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Directorio.Grupo.Add(System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -5464,6 +5583,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Directorio.RelacionMonedaSucursal">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -5549,6 +5671,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Directorio.Sector.Add(System.Int64,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String)">
             <summary>
@@ -5630,6 +5755,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Directorio.Sucursal">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -5723,6 +5851,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.ComandoContadora.Add(System.Int64,System.String,System.String,System.String,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -5808,6 +5939,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.ComandoPlaca">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -5899,6 +6033,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.ConfiguracionDepositario.Add(System.Int64,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -5978,6 +6115,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.Depositario">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6068,6 +6208,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.DepositarioContadora">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6175,6 +6318,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.DepositarioEstado.Add(System.Int64,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String,System.DateTime)">
             <summary>
@@ -6261,6 +6407,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.DepositarioMoneda.Add(System.Int64,System.Int64,System.Int32,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -6340,6 +6489,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.DepositarioPlaca">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6465,6 +6617,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.Marca.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -6542,6 +6697,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.Modelo">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6631,6 +6789,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.PlantillaMoneda.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -6708,6 +6869,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.PlantillaMonedaDetalle">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6797,6 +6961,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Dispositivo.TipoConfiguracionDepositario.Add(System.String,System.String,System.String,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -6880,6 +7047,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.TipoContadora">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -6984,6 +7154,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Dispositivo.TipoPlaca">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -7111,6 +7284,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Estilo.Esquema.Add(System.String,System.String,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -7190,6 +7366,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Estilo.EsquemaDetalle">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -7283,6 +7462,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Estilo.TipoEsquemaDetalle.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -7360,6 +7542,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Geografia.Ciudad">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -7447,6 +7632,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Geografia.CodigoPostal.Add(System.String,System.String,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -7528,6 +7716,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Geografia.Pais">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -7615,6 +7806,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Geografia.Provincia.Add(System.String,System.String,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -7699,6 +7893,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Geografia.Zona.Add(System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String)">
             <summary>
@@ -7779,7 +7976,118 @@
             </summary>
             <returns>Last Items()</returns>
         </member>
+        <member name="T:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Add(System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            PlantillaTicket Add Method
+            </summary>
+            <param name='TipoId'></param>
+            <param name='DepositarioModeloId'></param>
+            <param name='Nombre'></param>
+            <param name='Descripcion'></param>
+            <param name='Impresora'></param>
+            <param name='TextoCabecera'></param>
+            <param name='NombreFuenteCabecera'></param>
+            <param name='TamanioFuenteCabecera'></param>
+            <param name='UbicacionTextoCabecera'></param>
+            <param name='TextoPie'></param>
+            <param name='NombreFuentePie'></param>
+            <param name='TamanioFuentePie'></param>
+            <param name='UbicacionTextoPie'></param>
+            <param name='Imagen'></param>
+            <param name='UbicacionImagen'></param>
+            <param name='UbicacionTextoDetalle'></param>
+            <param name='AnchoDetalle'></param>
+            <param name='TamanioEntreLineas'></param>
+            <param name='AnchoReporte'></param>
+            <param name='FactorAltoReporte'></param>
+            <param name='LineasAlFinal'></param>
+            <returns>Entities.Tables.Impresion.PlantillaTicket</returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Items(System.Int64)">
+            <summary>
+            Gets Entities.Tables.Impresion.PlantillaTicket items by Pk
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Gets Entities.Tables.Impresion.PlantillaTicket items with parameters.
+            </summary>
+            <param name="Id"></param>
+            <param name="TipoId"></param>
+            <param name="DepositarioModeloId"></param>
+            <param name="Nombre"></param>
+            <param name="Descripcion"></param>
+            <param name="Impresora"></param>
+            <param name="TextoCabecera"></param>
+            <param name="NombreFuenteCabecera"></param>
+            <param name="TamanioFuenteCabecera"></param>
+            <param name="UbicacionTextoCabecera"></param>
+            <param name="TextoPie"></param>
+            <param name="NombreFuentePie"></param>
+            <param name="TamanioFuentePie"></param>
+            <param name="UbicacionTextoPie"></param>
+            <param name="Imagen"></param>
+            <param name="UbicacionImagen"></param>
+            <param name="UbicacionTextoDetalle"></param>
+            <param name="AnchoDetalle"></param>
+            <param name="TamanioEntreLineas"></param>
+            <param name="AnchoReporte"></param>
+            <param name="FactorAltoReporte"></param>
+            <param name="LineasAlFinal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Add(DepositaryWebApi.Entities.Tables.Impresion.PlantillaTicket)">
+            <summary>
+            Adds an instance of Entities.Tables.Impresion.PlantillaTicket
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.AddOrUpdate(DepositaryWebApi.Entities.Tables.Impresion.PlantillaTicket)">
+            <summary>
+            Adds or updates an instance of Entities.Tables.Impresion.PlantillaTicket
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Update(DepositaryWebApi.Entities.Tables.Impresion.PlantillaTicket)" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Update(System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" -->
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Delete(DepositaryWebApi.Entities.Tables.Impresion.PlantillaTicket)">
+            <summary>
+            Deletes an instance of Entities.Tables.Impresion.PlantillaTicket
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Delete">
+            <summary>
+            Deletes Entities.Tables.Impresion.PlantillaTicket with where conditions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Delete(System.Int64)">
+            <summary>
+            Deletes by Pks
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:DepositaryWebApi.Business.Tables.Impresion.PlantillaTicket.Result">
+            <summary>
+            Holds last Items() executed.
+            </summary>
+            <returns>Last Items()</returns>
+        </member>
         <member name="T:DepositaryWebApi.Business.Tables.Impresion.Ticket">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -7903,6 +8211,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Impresion.TipoTicket.Add(System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -7982,6 +8293,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.CierreDiario">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8066,6 +8380,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.Contenedor">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8157,6 +8474,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.Evento.Add(System.Int64,System.Nullable{System.Int64},System.Int64,System.String,System.String,System.DateTime)">
             <summary>
@@ -8235,6 +8555,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.Sesion.Add(System.Nullable{System.Int64},System.Int64,System.DateTime,System.Nullable{System.DateTime},System.Nullable{System.Boolean})">
             <summary>
@@ -8308,6 +8631,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.TipoContenedor">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8395,6 +8721,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.TipoEvento.Add(System.String,System.String,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -8477,6 +8806,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.TipoTransaccion.Add(System.String,System.String,System.Nullable{System.Int64},System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -8556,6 +8888,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.Transaccion">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8669,6 +9004,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.TransaccionDetalle.Add(System.Int64,System.Int64,System.Int64,System.DateTime)">
             <summary>
@@ -8743,6 +9081,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.TransaccionSobre.Add(System.Int64,System.String,System.DateTime)">
             <summary>
@@ -8812,6 +9153,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.TransaccionSobreDetalle">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8888,6 +9232,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Operacion.Turno">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -8987,6 +9334,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Operacion.TurnoUsuario.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -9064,6 +9414,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Regionalizacion.Lenguaje">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9151,6 +9504,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Regionalizacion.LenguajeItem.Add(System.Int64,System.String,System.String,System.Boolean,System.Int32,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -9232,6 +9588,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.Aplicacion">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9317,6 +9676,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.AplicacionParametro.Add(System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -9394,6 +9756,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.AplicacionParametroValor">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9476,6 +9841,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.Funcion">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9565,6 +9933,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.IdentificadorUsuario.Add(System.Int64,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -9647,8 +10018,11 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
-        <member name="M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Add(System.Int64,System.String,System.String,System.Int64,System.String,System.Nullable{System.Int64},System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Add(System.Int64,System.String,System.String,System.Int64,System.String,System.Nullable{System.Int64},System.Int32,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Menu Add Method
             </summary>
@@ -9658,6 +10032,7 @@
             <param name='FuncionId'></param>
             <param name='Imagen'></param>
             <param name='DependeDe'></param>
+            <param name='Orden'></param>
             <param name='Habilitado'></param>
             <param name='UsuarioCreacion'></param>
             <param name='FechaCreacion'></param>
@@ -9672,7 +10047,7 @@
             <param name="Id"></param>
             <returns></returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
             Gets Entities.Tables.Seguridad.Menu items with parameters.
             </summary>
@@ -9683,6 +10058,7 @@
             <param name="FuncionId"></param>
             <param name="Imagen"></param>
             <param name="DependeDe"></param>
+            <param name="Orden"></param>
             <param name="Habilitado"></param>
             <param name="UsuarioCreacion"></param>
             <param name="FechaCreacion"></param>
@@ -9705,7 +10081,7 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Update(DepositaryWebApi.Entities.Tables.Seguridad.Menu)" -->
-        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Update(System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,System.Nullable{System.Int64},System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Update(System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,System.Nullable{System.Int64},System.Int32,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})" -->
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.Menu.Delete(DepositaryWebApi.Entities.Tables.Seguridad.Menu)">
             <summary>
             Deletes an instance of Entities.Tables.Seguridad.Menu
@@ -9732,6 +10108,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.Rol">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9818,6 +10197,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.RolFuncion">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -9911,6 +10293,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.TipoAplicacion.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -9991,6 +10376,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.TipoFuncion.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -10068,6 +10456,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.TipoIdentificador">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -10153,6 +10544,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.TipoMenu.Add(System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -10230,6 +10624,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.Usuario">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -10349,6 +10746,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Seguridad.UsuarioRol.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -10426,6 +10826,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Seguridad.UsuarioSector">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -10509,6 +10912,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Sincronizacion.Configuracion.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -10589,6 +10995,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Sincronizacion.Ejecucion.Add(System.Nullable{System.Int64},System.DateTime,System.Nullable{System.DateTime},System.Boolean,System.Boolean)">
             <summary>
@@ -10662,6 +11071,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Sincronizacion.Entidad">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -10743,6 +11155,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Sincronizacion.EntidadCabecera.Add(System.Int64,System.String,System.DateTime,System.Nullable{System.DateTime},System.Int64)">
             <summary>
@@ -10819,6 +11234,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Sincronizacion.EntidadDetalle.Add(System.Int64,System.DateTime,System.Int64,System.Int64)">
             <summary>
@@ -10890,6 +11308,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Turno.AgendaTurno">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -10979,6 +11400,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Turno.EsquemaDetalleTurno.Add(System.Int64,System.String,System.Int32,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11061,6 +11485,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Turno.EsquemaTurno.Add(System.String,System.Boolean,System.Boolean,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11140,6 +11567,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Valor.Denominacion">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -11235,6 +11665,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Valor.Moneda.Add(System.String,System.Int64,System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11318,6 +11751,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Valor.OrigenValor">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -11405,6 +11841,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Valor.RelacionMonedaTipoValor.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11482,6 +11921,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Valor.Tipo">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -11569,6 +12011,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Visualizacion.Perfil.Add(System.String,System.String,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11651,6 +12096,9 @@
             <summary>
             
             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:DepositaryWebApi.Business.Tables.Visualizacion.PerfilItem.Add(System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Nullable{System.Int64},System.Nullable{System.DateTime})">
             <summary>
@@ -11728,6 +12176,9 @@
             <returns>Last Items()</returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Tables.Visualizacion.PerfilTipo">
+            <summary>
+            
+            </summary>
             <summary>
             
             </summary>
@@ -11820,7 +12271,7 @@
             </summary>
             <returns>Last Items()</returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccion.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.String)">
+        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccion.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.String,System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.String)">
             <summary>
             Gets 
             </summary>
@@ -11844,40 +12295,19 @@
             <param name="OperacionTransaccion_OrigenValorId"></param>
             <param name="OperacionTransaccion_CodigoOperacion"></param>
             <param name="OperacionTransaccion_FechaCreacion"></param>
-            <param name="OperacionTransaccion_FechaModificacion"></param>
-            <param name="OperacionTransaccion_UsuarioCreacion"></param>
-            <param name="OperacionTransaccion_UsuarioModificacion"></param>
             <param name="OperacionTipoTransaccion_Id"></param>
             <param name="OperacionTipoTransaccion_Nombre"></param>
             <param name="OperacionTipoTransaccion_Descripcion"></param>
-            <param name="OperacionTipoTransaccion_FuncionId"></param>
-            <param name="OperacionTipoTransaccion_Habilitado"></param>
-            <param name="OperacionTipoTransaccion_UsuarioCreacion"></param>
-            <param name="OperacionTipoTransaccion_FechaCreacion"></param>
-            <param name="OperacionTipoTransaccion_UsuarioModificacion"></param>
-            <param name="OperacionTipoTransaccion_FechaModificacion"></param>
             <param name="DispositivoDepositario_Id"></param>
             <param name="DispositivoDepositario_Nombre"></param>
             <param name="DispositivoDepositario_Descripcion"></param>
             <param name="DispositivoDepositario_SectorId"></param>
             <param name="DispositivoDepositario_NumeroSerie"></param>
             <param name="DispositivoDepositario_CodigoExterno"></param>
-            <param name="DispositivoDepositario_TipoContenedorId"></param>
-            <param name="DispositivoDepositario_ModeloId"></param>
-            <param name="DispositivoDepositario_Habilitado"></param>
-            <param name="DispositivoDepositario_UsuarioCreacion"></param>
-            <param name="DispositivoDepositario_FechaCreacion"></param>
-            <param name="DispositivoDepositario_UsuarioModificacion"></param>
-            <param name="DispositivoDepositario_FechaModificacion"></param>
             <param name="DirectorioSector_Id"></param>
             <param name="DirectorioSector_SucursalId"></param>
             <param name="DirectorioSector_Nombre"></param>
             <param name="DirectorioSector_Descripcion"></param>
-            <param name="DirectorioSector_Habilitado"></param>
-            <param name="DirectorioSector_UsuarioCreacion"></param>
-            <param name="DirectorioSector_FechaCreacion"></param>
-            <param name="DirectorioSector_UsuarioModificacion"></param>
-            <param name="DirectorioSector_FechaModificacion"></param>
             <param name="DirectorioSector_CodigoExterno"></param>
             <param name="DirectorioSucursal_Id"></param>
             <param name="DirectorioSucursal_Nombre"></param>
@@ -11887,47 +12317,15 @@
             <param name="DirectorioSucursal_Direccion"></param>
             <param name="DirectorioSucursal_CodigoPostalId"></param>
             <param name="DirectorioSucursal_ZonaId"></param>
-            <param name="DirectorioSucursal_Habilitado"></param>
-            <param name="DirectorioSucursal_UsuarioCreacion"></param>
-            <param name="DirectorioSucursal_FechaCreacion"></param>
-            <param name="DirectorioSucursal_UsuarioModificacion"></param>
-            <param name="DirectorioSucursal_FechaModificacion"></param>
             <param name="ValorMoneda_Id"></param>
             <param name="ValorMoneda_Nombre"></param>
             <param name="ValorMoneda_PaisId"></param>
             <param name="ValorMoneda_Codigo"></param>
             <param name="ValorMoneda_Simbolo"></param>
             <param name="ValorMoneda_CodigoExterno"></param>
-            <param name="ValorMoneda_Habilitado"></param>
-            <param name="ValorMoneda_UsuarioCreacion"></param>
-            <param name="ValorMoneda_FechaCreacion"></param>
-            <param name="ValorMoneda_UsuarioModificacion"></param>
-            <param name="ValorMoneda_FechaModificacion"></param>
             <param name="SeguridadUsuario_Id"></param>
             <param name="SeguridadUsuario_EmpresaId"></param>
-            <param name="SeguridadUsuario_LenguajeId"></param>
-            <param name="SeguridadUsuario_PerfilId"></param>
-            <param name="SeguridadUsuario_Nombre"></param>
-            <param name="SeguridadUsuario_Apellido"></param>
-            <param name="SeguridadUsuario_NombreApellido"></param>
-            <param name="SeguridadUsuario_Documento"></param>
-            <param name="SeguridadUsuario_Legajo"></param>
-            <param name="SeguridadUsuario_Mail"></param>
-            <param name="SeguridadUsuario_FechaIngreso"></param>
             <param name="SeguridadUsuario_NickName"></param>
-            <param name="SeguridadUsuario_Password"></param>
-            <param name="SeguridadUsuario_Token"></param>
-            <param name="SeguridadUsuario_Avatar"></param>
-            <param name="SeguridadUsuario_FechaUltimoLogin"></param>
-            <param name="SeguridadUsuario_DebeCambiarPassword"></param>
-            <param name="SeguridadUsuario_Habilitado"></param>
-            <param name="SeguridadUsuario_CantidadLogueosIncorrectos"></param>
-            <param name="SeguridadUsuario_Bloqueado"></param>
-            <param name="SeguridadUsuario_FechaExpiracion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion"></param>
-            <param name="SeguridadUsuario_FechaCreacion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion"></param>
-            <param name="SeguridadUsuario_FechaModificacion"></param>
             <param name="SeguridadUsuario_CodigoExterno"></param>
             <param name="BancaCuenta_Id"></param>
             <param name="BancaCuenta_TipoId"></param>
@@ -11938,11 +12336,6 @@
             <param name="BancaCuenta_CBU"></param>
             <param name="BancaCuenta_BancoId"></param>
             <param name="BancaCuenta_SucursalBancaria"></param>
-            <param name="BancaCuenta_Habilitado"></param>
-            <param name="BancaCuenta_UsuarioCreacion"></param>
-            <param name="BancaCuenta_FechaCreacion"></param>
-            <param name="BancaCuenta_UsuarioModificacion"></param>
-            <param name="BancaCuenta_FechaModificacion"></param>
             <param name="BancaCuenta_CodigoExterno"></param>
             <param name="OperacionContenedor_Id"></param>
             <param name="OperacionContenedor_Nombre"></param>
@@ -11951,11 +12344,6 @@
             <param name="OperacionContenedor_Identificador"></param>
             <param name="OperacionContenedor_FechaApertura"></param>
             <param name="OperacionContenedor_FechaCierre"></param>
-            <param name="OperacionContenedor_Habilitado"></param>
-            <param name="OperacionContenedor_UsuarioCreacion"></param>
-            <param name="OperacionContenedor_FechaCreacion"></param>
-            <param name="OperacionContenedor_UsuarioModificacion"></param>
-            <param name="OperacionContenedor_FechaModificacion"></param>
             <param name="OperacionSesion_Id"></param>
             <param name="OperacionSesion_DepositarioId"></param>
             <param name="OperacionSesion_UsuarioId"></param>
@@ -11973,83 +12361,17 @@
             <param name="OperacionTurno_CierreDiarioId"></param>
             <param name="OperacionTurno_Observaciones"></param>
             <param name="OperacionTurno_CodigoTurno"></param>
-            <param name="OperacionTurno_UsuarioCreacion"></param>
-            <param name="OperacionTurno_FechaCreacion"></param>
-            <param name="OperacionTurno_UsuarioModificacion"></param>
-            <param name="OperacionTurno_FechaModificacion"></param>
-            <param name="OperacionTurno_Habilitado"></param>
             <param name="OperacionCierreDiario_Id"></param>
             <param name="OperacionCierreDiario_Nombre"></param>
             <param name="OperacionCierreDiario_Fecha"></param>
             <param name="OperacionCierreDiario_DepositarioId"></param>
             <param name="OperacionCierreDiario_SesionId"></param>
             <param name="OperacionCierreDiario_CodigoCierre"></param>
-            <param name="OperacionCierreDiario_UsuarioCreacion"></param>
-            <param name="OperacionCierreDiario_FechaCreacion"></param>
-            <param name="OperacionCierreDiario_UsuarioModificacion"></param>
-            <param name="OperacionCierreDiario_FechaModificacion"></param>
             <param name="ValorOrigenValor_Id"></param>
             <param name="ValorOrigenValor_Nombre"></param>
             <param name="ValorOrigenValor_Descripcion"></param>
             <param name="ValorOrigenValor_EmpresaId"></param>
-            <param name="ValorOrigenValor_Habilitado"></param>
-            <param name="ValorOrigenValor_UsuarioCreacion"></param>
-            <param name="ValorOrigenValor_FechaCreacion"></param>
-            <param name="ValorOrigenValor_UsuarioModificacion"></param>
-            <param name="ValorOrigenValor_FechaModificacion"></param>
             <param name="ValorOrigenValor_CodigoExterno"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Id"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_EmpresaId"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_LenguajeId"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_PerfilId"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Nombre"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Apellido"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_NombreApellido"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Documento"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Legajo"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Mail"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_FechaIngreso"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_NickName"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Password"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Token"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Avatar"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Habilitado"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_Bloqueado"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_FechaExpiracion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_UsuarioCreacion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_FechaCreacion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_UsuarioModificacion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_FechaModificacion"></param>
-            <param name="SeguridadUsuario_UsuarioCreacion_CodigoExterno"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Id"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_EmpresaId"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_LenguajeId"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_PerfilId"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Nombre"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Apellido"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_NombreApellido"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Documento"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Legajo"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Mail"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_FechaIngreso"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_NickName"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Password"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Token"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Avatar"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Habilitado"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_Bloqueado"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_FechaExpiracion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_UsuarioCreacion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_FechaCreacion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_UsuarioModificacion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_FechaModificacion"></param>
-            <param name="SeguridadUsuario_UsuarioModificacion_CodigoExterno"></param>
             <returns></returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionDetalle">
@@ -12063,7 +12385,7 @@
             </summary>
             <returns>Last Items()</returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionDetalle.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.String,System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionDetalle.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Decimal},System.String,System.String)">
             <summary>
             Gets 
             </summary>
@@ -12090,25 +12412,13 @@
             <param name="OperacionTransaccion_Finalizada"></param>
             <param name="OperacionTransaccion_EsDepositoAutomatico"></param>
             <param name="OperacionTransaccion_OrigenValorId"></param>
-            <param name="OperacionTransaccion_CodigoOperacion"></param>
-            <param name="OperacionTransaccion_FechaCreacion"></param>
-            <param name="OperacionTransaccion_FechaModificacion"></param>
-            <param name="OperacionTransaccion_UsuarioCreacion"></param>
-            <param name="OperacionTransaccion_UsuarioModificacion"></param>
             <param name="ValorDenominacion_Id"></param>
             <param name="ValorDenominacion_Nombre"></param>
             <param name="ValorDenominacion_TipoValorId"></param>
             <param name="ValorDenominacion_MonedaId"></param>
             <param name="ValorDenominacion_Unidades"></param>
-            <param name="ValorDenominacion_Imagen"></param>
             <param name="ValorDenominacion_CodigoCcTalk"></param>
-            <param name="ValorDenominacion_Posicion"></param>
             <param name="ValorDenominacion_CodigoExterno"></param>
-            <param name="ValorDenominacion_Habilitado"></param>
-            <param name="ValorDenominacion_UsuarioCreacion"></param>
-            <param name="ValorDenominacion_FechaCreacion"></param>
-            <param name="ValorDenominacion_UsuarioModificacion"></param>
-            <param name="ValorDenominacion_FechaModificacion"></param>
             <returns></returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobre">
@@ -12122,7 +12432,7 @@
             </summary>
             <returns>Last Items()</returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobre.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64})">
+        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobre.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.String)">
             <summary>
             Gets 
             </summary>
@@ -12149,10 +12459,6 @@
             <param name="OperacionTransaccion_EsDepositoAutomatico"></param>
             <param name="OperacionTransaccion_OrigenValorId"></param>
             <param name="OperacionTransaccion_CodigoOperacion"></param>
-            <param name="OperacionTransaccion_FechaCreacion"></param>
-            <param name="OperacionTransaccion_FechaModificacion"></param>
-            <param name="OperacionTransaccion_UsuarioCreacion"></param>
-            <param name="OperacionTransaccion_UsuarioModificacion"></param>
             <returns></returns>
         </member>
         <member name="T:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobreDetalle">
@@ -12166,7 +12472,7 @@
             </summary>
             <returns>Last Items()</returns>
         </member>
-        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobreDetalle.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.DateTime})">
+        <member name="M:DepositaryWebApi.Business.Views.Integracion.OperacionTransaccionSobreDetalle.Items(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Double},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64})">
             <summary>
             Gets 
             </summary>
@@ -12183,11 +12489,6 @@
             <param name="ValorRelacionMonedaTipoValor_Id"></param>
             <param name="ValorRelacionMonedaTipoValor_MonedaId"></param>
             <param name="ValorRelacionMonedaTipoValor_TipoValorId"></param>
-            <param name="ValorRelacionMonedaTipoValor_Habilitado"></param>
-            <param name="ValorRelacionMonedaTipoValor_UsuarioCreacion"></param>
-            <param name="ValorRelacionMonedaTipoValor_FechaCreacion"></param>
-            <param name="ValorRelacionMonedaTipoValor_UsuarioModificacion"></param>
-            <param name="ValorRelacionMonedaTipoValor_FechaModificacion"></param>
             <returns></returns>
         </member>
         <member name="M:DepositaryWebApi.Utilities.ExecuteWithTimeMeasurement(System.Action)">
@@ -12441,6 +12742,11 @@
              Represents the child collection of TipoPlaca that have this ModeloId value.
             </summary>
         </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Dispositivo.Modelo.ListOf_PlantillaTicket_DepositarioModeloId">
+            <summary>
+             Represents the child collection of PlantillaTicket that have this DepositarioModeloId value.
+            </summary>
+        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Dispositivo.Modelo.ListOf_Ticket_DepositarioModeloId">
             <summary>
              Represents the child collection of Ticket that have this DepositarioModeloId value.
@@ -12549,8 +12855,14 @@
              Represents the child collection of Sucursal that have this ZonaId value.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Relations.Impresion.PlantillaTicket.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Relations.Impresion.Ticket.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Relations.Impresion.TipoTicket.#ctor" -->
+        <member name="P:DepositaryWebApi.Entities.Relations.Impresion.TipoTicket.ListOf_PlantillaTicket_TipoId">
+            <summary>
+             Represents the child collection of PlantillaTicket that have this TipoId value.
+            </summary>
+        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Impresion.TipoTicket.ListOf_Ticket_TipoId">
             <summary>
              Represents the child collection of Ticket that have this TipoId value.
@@ -12794,24 +13106,24 @@
              Represents the child collection of TipoLog that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Banco_UsuarioCreacion">
-            <summary>
-             Represents the child collection of Banco that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Banco_UsuarioModificacion">
             <summary>
              Represents the child collection of Banco that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Cuenta_UsuarioCreacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Banco_UsuarioCreacion">
             <summary>
-             Represents the child collection of Cuenta that have this UsuarioCreacion value.
+             Represents the child collection of Banco that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Cuenta_UsuarioModificacion">
             <summary>
              Represents the child collection of Cuenta that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Cuenta_UsuarioCreacion">
+            <summary>
+             Represents the child collection of Cuenta that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoCuenta_UsuarioCreacion">
@@ -12824,6 +13136,11 @@
              Represents the child collection of TipoCuenta that have this UsuarioModificacion value.
             </summary>
         </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioCuenta_UsuarioCreacion">
+            <summary>
+             Represents the child collection of UsuarioCuenta that have this UsuarioCreacion value.
+            </summary>
+        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioCuenta_UsuarioModificacion">
             <summary>
              Represents the child collection of UsuarioCuenta that have this UsuarioModificacion value.
@@ -12832,11 +13149,6 @@
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioCuenta_UsuarioId">
             <summary>
              Represents the child collection of UsuarioCuenta that have this UsuarioId value.
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioCuenta_UsuarioCreacion">
-            <summary>
-             Represents the child collection of UsuarioCuenta that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_HuellaDactilar_UsuarioCreacion">
@@ -12869,14 +13181,14 @@
              Represents the child collection of EntidadAtributo that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Empresa_UsuarioCreacion">
-            <summary>
-             Represents the child collection of Empresa that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Empresa_UsuarioModificacion">
             <summary>
              Represents the child collection of Empresa that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Empresa_UsuarioCreacion">
+            <summary>
+             Represents the child collection of Empresa that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Grupo_UsuarioModificacion">
@@ -12939,24 +13251,24 @@
              Represents the child collection of ComandoPlaca that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_ConfiguracionDepositario_UsuarioModificacion">
-            <summary>
-             Represents the child collection of ConfiguracionDepositario that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_ConfiguracionDepositario_UsuarioCreacion">
             <summary>
              Represents the child collection of ConfiguracionDepositario that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Depositario_UsuarioModificacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_ConfiguracionDepositario_UsuarioModificacion">
             <summary>
-             Represents the child collection of Depositario that have this UsuarioModificacion value.
+             Represents the child collection of ConfiguracionDepositario that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Depositario_UsuarioCreacion">
             <summary>
              Represents the child collection of Depositario that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Depositario_UsuarioModificacion">
+            <summary>
+             Represents the child collection of Depositario that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_DepositarioContadora_UsuarioModificacion">
@@ -13019,19 +13331,14 @@
              Represents the child collection of PlantillaMoneda that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PlantillaMonedaDetalle_UsuarioModificacion">
-            <summary>
-             Represents the child collection of PlantillaMonedaDetalle that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PlantillaMonedaDetalle_UsuarioCreacion">
             <summary>
              Represents the child collection of PlantillaMonedaDetalle that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoConfiguracionDepositario_UsuarioModificacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PlantillaMonedaDetalle_UsuarioModificacion">
             <summary>
-             Represents the child collection of TipoConfiguracionDepositario that have this UsuarioModificacion value.
+             Represents the child collection of PlantillaMonedaDetalle that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoConfiguracionDepositario_UsuarioCreacion">
@@ -13039,14 +13346,19 @@
              Represents the child collection of TipoConfiguracionDepositario that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoContadora_UsuarioModificacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoConfiguracionDepositario_UsuarioModificacion">
             <summary>
-             Represents the child collection of TipoContadora that have this UsuarioModificacion value.
+             Represents the child collection of TipoConfiguracionDepositario that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoContadora_UsuarioCreacion">
             <summary>
              Represents the child collection of TipoContadora that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoContadora_UsuarioModificacion">
+            <summary>
+             Represents the child collection of TipoContadora that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoPlaca_UsuarioCreacion">
@@ -13099,14 +13411,14 @@
              Represents the child collection of Ciudad that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_CodigoPostal_UsuarioModificacion">
-            <summary>
-             Represents the child collection of CodigoPostal that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_CodigoPostal_UsuarioCreacion">
             <summary>
              Represents the child collection of CodigoPostal that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_CodigoPostal_UsuarioModificacion">
+            <summary>
+             Represents the child collection of CodigoPostal that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Pais_UsuarioModificacion">
@@ -13119,14 +13431,14 @@
              Represents the child collection of Pais that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Provincia_UsuarioModificacion">
-            <summary>
-             Represents the child collection of Provincia that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Provincia_UsuarioCreacion">
             <summary>
              Represents the child collection of Provincia that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Provincia_UsuarioModificacion">
+            <summary>
+             Represents the child collection of Provincia that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Zona_UsuarioModificacion">
@@ -13139,14 +13451,14 @@
              Represents the child collection of Zona that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Ticket_UsuarioModificacion">
-            <summary>
-             Represents the child collection of Ticket that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Ticket_UsuarioCreacion">
             <summary>
              Represents the child collection of Ticket that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Ticket_UsuarioModificacion">
+            <summary>
+             Represents the child collection of Ticket that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TipoTicket_UsuarioCreacion">
@@ -13209,11 +13521,6 @@
              Represents the child collection of TipoTransaccion that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Transaccion_UsuarioId">
-            <summary>
-             Represents the child collection of Transaccion that have this UsuarioId value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Transaccion_UsuarioCreacion">
             <summary>
              Represents the child collection of Transaccion that have this UsuarioCreacion value.
@@ -13224,14 +13531,19 @@
              Represents the child collection of Transaccion that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Turno_UsuarioModificacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Transaccion_UsuarioId">
             <summary>
-             Represents the child collection of Turno that have this UsuarioModificacion value.
+             Represents the child collection of Transaccion that have this UsuarioId value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Turno_UsuarioCreacion">
             <summary>
              Represents the child collection of Turno that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Turno_UsuarioModificacion">
+            <summary>
+             Represents the child collection of Turno that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_TurnoUsuario_UsuarioModificacion">
@@ -13254,14 +13566,14 @@
              Represents the child collection of Lenguaje that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_LenguajeItem_UsuarioCreacion">
-            <summary>
-             Represents the child collection of LenguajeItem that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_LenguajeItem_UsuarioModificacion">
             <summary>
              Represents the child collection of LenguajeItem that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_LenguajeItem_UsuarioCreacion">
+            <summary>
+             Represents the child collection of LenguajeItem that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Aplicacion_UsuarioModificacion">
@@ -13294,19 +13606,14 @@
              Represents the child collection of AplicacionParametroValor that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Funcion_UsuarioCreacion">
-            <summary>
-             Represents the child collection of Funcion that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Funcion_UsuarioModificacion">
             <summary>
              Represents the child collection of Funcion that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_IdentificadorUsuario_UsuarioId">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Funcion_UsuarioCreacion">
             <summary>
-             Represents the child collection of IdentificadorUsuario that have this UsuarioId value.
+             Represents the child collection of Funcion that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_IdentificadorUsuario_UsuarioModificacion">
@@ -13319,14 +13626,19 @@
              Represents the child collection of IdentificadorUsuario that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Menu_UsuarioCreacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_IdentificadorUsuario_UsuarioId">
             <summary>
-             Represents the child collection of Menu that have this UsuarioCreacion value.
+             Represents the child collection of IdentificadorUsuario that have this UsuarioId value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Menu_UsuarioModificacion">
             <summary>
              Represents the child collection of Menu that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Menu_UsuarioCreacion">
+            <summary>
+             Represents the child collection of Menu that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Rol_UsuarioCreacion">
@@ -13389,6 +13701,11 @@
              Represents the child collection of TipoMenu that have this UsuarioCreacion value.
             </summary>
         </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioRol_UsuarioCreacion">
+            <summary>
+             Represents the child collection of UsuarioRol that have this UsuarioCreacion value.
+            </summary>
+        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioRol_UsuarioModificacion">
             <summary>
              Represents the child collection of UsuarioRol that have this UsuarioModificacion value.
@@ -13399,24 +13716,19 @@
              Represents the child collection of UsuarioRol that have this UsuarioId value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioRol_UsuarioCreacion">
-            <summary>
-             Represents the child collection of UsuarioRol that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioSector_UsuarioCreacion">
             <summary>
              Represents the child collection of UsuarioSector that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioSector_UsuarioId">
-            <summary>
-             Represents the child collection of UsuarioSector that have this UsuarioId value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioSector_UsuarioModificacion">
             <summary>
              Represents the child collection of UsuarioSector that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_UsuarioSector_UsuarioId">
+            <summary>
+             Represents the child collection of UsuarioSector that have this UsuarioId value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_AgendaTurno_UsuarioModificacion">
@@ -13429,14 +13741,14 @@
              Represents the child collection of AgendaTurno that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_EsquemaDetalleTurno_UsuarioModificacion">
-            <summary>
-             Represents the child collection of EsquemaDetalleTurno that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_EsquemaDetalleTurno_UsuarioCreacion">
             <summary>
              Represents the child collection of EsquemaDetalleTurno that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_EsquemaDetalleTurno_UsuarioModificacion">
+            <summary>
+             Represents the child collection of EsquemaDetalleTurno that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_EsquemaTurno_UsuarioCreacion">
@@ -13469,14 +13781,14 @@
              Represents the child collection of Moneda that have this UsuarioModificacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_OrigenValor_UsuarioModificacion">
-            <summary>
-             Represents the child collection of OrigenValor that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_OrigenValor_UsuarioCreacion">
             <summary>
              Represents the child collection of OrigenValor that have this UsuarioCreacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_OrigenValor_UsuarioModificacion">
+            <summary>
+             Represents the child collection of OrigenValor that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_RelacionMonedaTipoValor_UsuarioModificacion">
@@ -13489,24 +13801,24 @@
              Represents the child collection of RelacionMonedaTipoValor that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Tipo_UsuarioModificacion">
-            <summary>
-             Represents the child collection of Tipo that have this UsuarioModificacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Tipo_UsuarioCreacion">
             <summary>
              Represents the child collection of Tipo that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Perfil_UsuarioCreacion">
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Tipo_UsuarioModificacion">
             <summary>
-             Represents the child collection of Perfil that have this UsuarioCreacion value.
+             Represents the child collection of Tipo that have this UsuarioModificacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Perfil_UsuarioModificacion">
             <summary>
              Represents the child collection of Perfil that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_Perfil_UsuarioCreacion">
+            <summary>
+             Represents the child collection of Perfil that have this UsuarioCreacion value.
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PerfilItem_UsuarioModificacion">
@@ -13519,14 +13831,14 @@
              Represents the child collection of PerfilItem that have this UsuarioCreacion value.
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PerfilTipo_UsuarioCreacion">
-            <summary>
-             Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PerfilTipo_UsuarioModificacion">
             <summary>
              Represents the child collection of PerfilTipo that have this UsuarioModificacion value.
+            </summary>
+        </member>
+        <member name="P:DepositaryWebApi.Entities.Relations.Seguridad.Usuario.ListOf_PerfilTipo_UsuarioCreacion">
+            <summary>
+             Represents the child collection of PerfilTipo that have this UsuarioCreacion value.
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Relations.Seguridad.UsuarioRol.#ctor" -->
@@ -13683,6 +13995,7 @@
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Geografia.Pais.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Geografia.Provincia.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Geografia.Zona.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Impresion.PlantillaTicket.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Impresion.Ticket.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Impresion.TipoTicket.#ctor" -->
         <!-- Badly formed XML comment ignored for member "M:DepositaryWebApi.Entities.Tables.Operacion.CierreDiario.#ctor" -->
@@ -13736,1139 +14049,494 @@
             Parameterless Constructor
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.String,System.DateTime,System.DateTime,System.Int64,System.Int64,System.Int64,System.String,System.String,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.Int64,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.String,System.Int64,System.String,System.String,System.String,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.DateTime,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.DateTime,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String,System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int64,System.String,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String,System.Int64,System.String,System.Int64,System.Int64,System.String,System.DateTime,System.DateTime,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.Int64,System.Int64,System.DateTime,System.DateTime,System.Boolean,System.Int64,System.Int64,System.Int64,System.Int64,System.DateTime,System.DateTime,System.DateTime,System.Int32,System.Int64,System.String,System.String,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Boolean,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.String,System.Int64,System.DateTime,System.Int64,System.DateTime,System.Int64,System.String,System.String,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String,System.Int64,System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.DateTime,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.DateTime,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String,System.Int64,System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.DateTime,System.Boolean,System.Boolean,System.Int32,System.Boolean,System.DateTime,System.Int64,System.DateTime,System.Int64,System.DateTime,System.String)">
+        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.String,System.DateTime,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.Int64,System.Int64,System.String,System.Int64,System.String,System.String,System.String,System.Int64,System.Int64,System.String,System.String,System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int64,System.String,System.String,System.Int64,System.String,System.Int64,System.Int64,System.String,System.DateTime,System.DateTime,System.Int64,System.Int64,System.Int64,System.DateTime,System.DateTime,System.Boolean,System.Int64,System.Int64,System.Int64,System.Int64,System.DateTime,System.DateTime,System.DateTime,System.Int32,System.Int64,System.String,System.String,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.String,System.Int64,System.String,System.String,System.Int64,System.String)">
             <summary>
             Constructor with Parameters 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_Id">
             <summary>
-            Id de la Transaccion- TEST
+            Identificador de la Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_TipoId">
             <summary>
-            Tipo de Transaccion -TEST
+            Identificador del tipo de Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_DepositarioId">
             <summary>
-            
+            Identificador de Depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_SectorId">
             <summary>
-            
+            Identificador de Sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_SucursalId">
             <summary>
-            
+            Identificador de sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_MonedaId">
             <summary>
-            
+            Identificador de Moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_UsuarioId">
             <summary>
-            
+            Identificador de usuario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_CuentaId">
             <summary>
-            
+            Identificador de Cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_ContenedorId">
             <summary>
-            
+            Identificador de Contenedor (Bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_SesionId">
             <summary>
-            
+            Identificador de Sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_TurnoId">
             <summary>
-            
+            Identificador de Turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_CierreDiarioId">
             <summary>
-            
+            Identificador de Cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_TotalValidado">
             <summary>
-            
+            Importe de valores detectado por la contadora
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_TotalAValidar">
             <summary>
-            
+            Total de valores por identificar (Dice contener)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_Fecha">
             <summary>
-            
+            Fecha de la operación
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_Finalizada">
             <summary>
-            
+            Indica si la transacción fué finalizada sin errores
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_EsDepositoAutomatico">
             <summary>
-            
+            Indica si la transacción finalizó automáticamente (Por Timeout)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_OrigenValorId">
             <summary>
-            
+            Identificador del orígen del valor 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_CodigoOperacion">
             <summary>
-            
+            Código unívoco formado por el identificador del depositario, fecha e identificados de registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_FechaCreacion">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTransaccion_UsuarioModificacion">
-            <summary>
-            
+            Fecha de creación del registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_Id">
             <summary>
-            
+            Identificador de transacción
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_Nombre">
             <summary>
-            
+            Nombre del tipo de la transacción
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_Descripcion">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_FuncionId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTipoTransaccion_FechaModificacion">
-            <summary>
-            
+            Descripción del tipo de la transacción
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_Id">
             <summary>
-            
+            Identificador de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_Nombre">
             <summary>
-            
+            Nombre de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_Descripcion">
             <summary>
-            
+            Descripcion de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_SectorId">
             <summary>
-            
+            Identificador de sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_NumeroSerie">
             <summary>
-            
+            Número de serie del equipo (Depositario)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_CodigoExterno">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_TipoContenedorId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_ModeloId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DispositivoDepositario_FechaModificacion">
-            <summary>
-            
+            Código externo (utilizado para integración con sistemas externos)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_Id">
             <summary>
-            
+            Identificador de Sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_SucursalId">
             <summary>
-            
+            Identificador de sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_Nombre">
             <summary>
-            
+            Nombre del sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_Descripcion">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_FechaModificacion">
-            <summary>
-            
+            Descripción del sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSector_CodigoExterno">
             <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_Id">
             <summary>
-            
+            Identificador de Sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_Nombre">
             <summary>
-            
+            Nombre de la sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_Descripcion">
             <summary>
-            
+            Descripción de la sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_EmpresaId">
             <summary>
-            
+            Identificador de Empresa
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_CodigoExterno">
             <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_Direccion">
             <summary>
-            
+            Dirección de la Susursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_CodigoPostalId">
             <summary>
-            
+            Identificador del código postal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_ZonaId">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.DirectorioSucursal_FechaModificacion">
-            <summary>
-            
+            Identificador de zona
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_Id">
             <summary>
-            
+            Identificador de Modena
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_Nombre">
             <summary>
-            
+            Nombre de la moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_PaisId">
             <summary>
-            
+            Identificador de País
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_Codigo">
             <summary>
-            
+            Código de Moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_Simbolo">
             <summary>
-            
+            Símbolo de moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_CodigoExterno">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorMoneda_FechaModificacion">
-            <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Id">
             <summary>
-            
+            Identificador de usuario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_EmpresaId">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_LenguajeId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_PerfilId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Nombre">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Apellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_NombreApellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Documento">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Legajo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Mail">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_FechaIngreso">
-            <summary>
-            
+            Identificador de Empresa
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_NickName">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Password">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Avatar">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_FechaUltimoLogin">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_DebeCambiarPassword">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_CantidadLogueosIncorrectos">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_Bloqueado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_FechaExpiracion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_FechaModificacion">
-            <summary>
-            
+            Nombre del usuario en el sistema
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_CodigoExterno">
             <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_Id">
             <summary>
-            
+            Identificador de cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_TipoId">
             <summary>
-            
+            Identificador de tipo de cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_EmpresaId">
             <summary>
-            
+            Identificador de empresa
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_Nombre">
             <summary>
-            
+            Nombre de la cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_Numero">
             <summary>
-            
+            Número de la cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_Alias">
             <summary>
-            
+            Alias de la cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_CBU">
             <summary>
-            
+            Clave bancaria uniforme de la cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_BancoId">
             <summary>
-            
+            Identificador de banco
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_SucursalBancaria">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_FechaModificacion">
-            <summary>
-            
+            Sucursal bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.BancaCuenta_CodigoExterno">
             <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_Id">
             <summary>
-            
+            Identificador de Contenedor (bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_Nombre">
             <summary>
-            
+            Nombre del contenedor (bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_DepositarioId">
             <summary>
-            
+            Identificador de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_TipoId">
             <summary>
-            
+            Identificador de tipo de cotenedor
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_Identificador">
             <summary>
-            
+            Código alfanumérico que identifica el contenedor (Si en la configuración se indica como requerido)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_FechaApertura">
             <summary>
-            
+            Fecha de apertura del contenedor (bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_FechaCierre">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionContenedor_FechaModificacion">
-            <summary>
-            
+            Fecha de cierre del contenedor (bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_Id">
             <summary>
-            
+            Identificador de Sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_DepositarioId">
             <summary>
-            
+            Identificador de depositario en donde se genera la sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_UsuarioId">
             <summary>
-            
+            Identificador de usuario que genera la sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_FechaInicio">
             <summary>
-            
+            Fecha de inicio de la sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_FechaCierre">
             <summary>
-            
+            Fecha de cierre de la sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionSesion_EsCierreAutomatico">
             <summary>
-            
+            indica si la sesión se cerró automáticamente (Timeout)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_Id">
             <summary>
-            
+            Identificador de turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_TurnoDepositarioId">
             <summary>
-            
+            Identificador de depositario / turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_DepositarioId">
             <summary>
-            
+            Identificador de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_SectorId">
             <summary>
-            
+            Identificador de sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_FechaApertura">
             <summary>
-            
+            Fecha de apertura del turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_FechaCierre">
             <summary>
-            
+            Fecha de cierre del turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_Fecha">
             <summary>
-            
+            Fecha de programación del turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_Secuencia">
             <summary>
-            
+            Secuencia del turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_CierreDiarioId">
             <summary>
-            
+            Identificador del cierre diario que incluye al turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_Observaciones">
             <summary>
-            
+            Observaciones
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_CodigoTurno">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionTurno_Habilitado">
-            <summary>
-            
+            Código del turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_Id">
             <summary>
-            
+            Identificador del cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_Nombre">
             <summary>
-            
+            Nombre del cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_Fecha">
             <summary>
-            
+            Fecha del cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_DepositarioId">
             <summary>
-            
+            Identificador de depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_SesionId">
             <summary>
-            
+            Identificador de la sesión en la que se generó el cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_CodigoCierre">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.OperacionCierreDiario_FechaModificacion">
-            <summary>
-            
+            Código del cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_Id">
             <summary>
-            
+            Identificador del orígen del valor
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_Nombre">
             <summary>
-            
+            Nombre del orígen del valor
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_Descripcion">
             <summary>
-            
+            Descripción del orígen del valor
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_EmpresaId">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_FechaModificacion">
-            <summary>
-            
+            Identificador de empresa
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.ValorOrigenValor_CodigoExterno">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_EmpresaId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_LenguajeId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_PerfilId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Nombre">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Apellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_NombreApellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Documento">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Legajo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Mail">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_FechaIngreso">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_NickName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Password">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Avatar">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_FechaUltimoLogin">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_DebeCambiarPassword">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_CantidadLogueosIncorrectos">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_Bloqueado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_FechaExpiracion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioCreacion_CodigoExterno">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_EmpresaId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_LenguajeId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_PerfilId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Nombre">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Apellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_NombreApellido">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Documento">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Legajo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Mail">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_FechaIngreso">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_NickName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Password">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Avatar">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_FechaUltimoLogin">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_DebeCambiarPassword">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_CantidadLogueosIncorrectos">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_Bloqueado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_FechaExpiracion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccion.SeguridadUsuario_UsuarioModificacion_CodigoExterno">
-            <summary>
-            
+            Código externo (usado para integración con otros sistemas)
             </summary>
         </member>
         <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.#ctor">
@@ -14876,7 +14544,7 @@
             Parameterless Constructor
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.DateTime,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.String,System.DateTime,System.DateTime,System.Int64,System.Int64,System.Int64,System.String,System.Int64,System.Int64,System.Decimal,System.String,System.String,System.Int32,System.String,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)">
+        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.DateTime,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.Int64,System.String,System.Int64,System.Int64,System.Decimal,System.String,System.String)">
             <summary>
             Constructor with Parameters 
             </summary>
@@ -14888,17 +14556,17 @@
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccionDetalle_TransaccionId">
             <summary>
-            Identificador de transaccion
+            Identificador de la transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccionDetalle_DenominacionId">
             <summary>
-            Identificador de denominacion
+            Identificador de la denominacion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccionDetalle_CantidadUnidades">
             <summary>
-            Cantidad sensada de la denminación
+            Cantidad sensada de la denominación
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccionDetalle_Fecha">
@@ -14908,117 +14576,92 @@
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_Id">
             <summary>
-            Id de la Transaccion- TEST
+            Identificador de la Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_TipoId">
             <summary>
-            Tipo de Transaccion -TEST
+            Identificador del tipo de Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_DepositarioId">
             <summary>
-            
+            Identificador de Depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_SectorId">
             <summary>
-            
+            Identificador de Sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_SucursalId">
             <summary>
-            
+            Identificador de sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_MonedaId">
             <summary>
-            
+            Identificador de Moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_UsuarioId">
             <summary>
-            
+            Identificador de usuario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_CuentaId">
             <summary>
-            
+            Identificador de Cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_ContenedorId">
             <summary>
-            
+            Identificador de Contenedor (Bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_SesionId">
             <summary>
-            
+            Identificador de Sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_TurnoId">
             <summary>
-            
+            Identificador de Turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_CierreDiarioId">
             <summary>
-            
+            Identificador de Cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_TotalValidado">
             <summary>
-            
+            Importe de valores detectado por la contadora
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_TotalAValidar">
             <summary>
-            
+            Total de valores por identificar (Dice contener)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_Fecha">
             <summary>
-            
+            Fecha de la operación
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_Finalizada">
             <summary>
-            
+            Indica si la transacción fué finalizada sin errores
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_EsDepositoAutomatico">
             <summary>
-            
+            Indica si la transacción finalizó automáticamente (Por Timeout)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_OrigenValorId">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_CodigoOperacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.OperacionTransaccion_UsuarioModificacion">
-            <summary>
-            
+            Identificador del orígen del valor 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_Id">
@@ -15046,47 +14689,12 @@
             
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_Imagen">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_CodigoCcTalk">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_Posicion">
-            <summary>
-            Indica en qué posición del buffer es informada la cantidad detectada por la lectora
-            </summary>
-        </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_CodigoExterno">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionDetalle.ValorDenominacion_FechaModificacion">
             <summary>
             
             </summary>
@@ -15096,144 +14704,124 @@
             Parameterless Constructor
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.#ctor(System.Int64,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.String,System.DateTime,System.DateTime,System.Int64,System.Int64)">
+        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.#ctor(System.Int64,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.Double,System.DateTime,System.Boolean,System.Boolean,System.Int64,System.String)">
             <summary>
             Constructor with Parameters 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccionSobre_Id">
             <summary>
-            
+            Identificador de registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccionSobre_TransaccionId">
             <summary>
-            
+            Identificador de la transacción
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccionSobre_CodigoSobre">
             <summary>
-            
+            Código alfanumérico que identifica el sobre (Si en la configuración se indica como requerido)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccionSobre_Fecha">
             <summary>
-            
+            Fecha de alta del registro 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_Id">
             <summary>
-            Id de la Transaccion- TEST
+            Identificador de la Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_TipoId">
             <summary>
-            Tipo de Transaccion -TEST
+            Identificador del tipo de Transaccion
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_DepositarioId">
             <summary>
-            
+            Identificador de Depositario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_SectorId">
             <summary>
-            
+            Identificador de Sector
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_SucursalId">
             <summary>
-            
+            Identificador de sucursal
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_MonedaId">
             <summary>
-            
+            Identificador de Moneda
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_UsuarioId">
             <summary>
-            
+            Identificador de usuario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_CuentaId">
             <summary>
-            
+            Identificador de Cuenta bancaria
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_ContenedorId">
             <summary>
-            
+            Identificador de Contenedor (Bolsa)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_SesionId">
             <summary>
-            
+            Identificador de Sesión
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_TurnoId">
             <summary>
-            
+            Identificador de Turno
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_CierreDiarioId">
             <summary>
-            
+            Identificador de Cierre diario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_TotalValidado">
             <summary>
-            
+            Importe de valores detectado por la contadora
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_TotalAValidar">
             <summary>
-            
+            Total de valores por identificar (Dice contener)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_Fecha">
             <summary>
-            
+            Fecha de la operación
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_Finalizada">
             <summary>
-            
+            Indica si la transacción fué finalizada sin errores
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_EsDepositoAutomatico">
             <summary>
-            
+            Indica si la transacción finalizó automáticamente (Por Timeout)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_OrigenValorId">
             <summary>
-            
+            Identificador del orígen del valor 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_CodigoOperacion">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_FechaModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobre.OperacionTransaccion_UsuarioModificacion">
-            <summary>
-            
+            Código unívoco formado por el identificador del depositario, fecha e identificados de registro
             </summary>
         </member>
         <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.#ctor">
@@ -15241,59 +14829,59 @@
             Parameterless Constructor
             </summary>
         </member>
-        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.DateTime,System.Int64,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.Int64,System.Boolean,System.Int64,System.DateTime,System.Int64,System.DateTime)">
+        <member name="M:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Double,System.DateTime,System.Int64,System.Int64,System.String,System.DateTime,System.Int64,System.Int64,System.Int64)">
             <summary>
             Constructor with Parameters 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_Id">
             <summary>
-            
+            Identificador de registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_SobreId">
             <summary>
-            
+            Identificador de sobre
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_RelacionMonedaTipoValorId">
             <summary>
-            
+            Identificador del valor indicado por el usuario
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_CantidadDeclarada">
             <summary>
-            
+            Cantidad del valor declarado (RelacionMonedaTipoValorId)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_ValorDeclarado">
             <summary>
-            
+            Valor declarado (RelacionMonedaTipoValorId)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobreDetalle_Fecha">
             <summary>
-            
+            Fecha de alta del registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobre_Id">
             <summary>
-            
+            Identificador de registro
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobre_TransaccionId">
             <summary>
-            
+            Identificador de la transacción
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobre_CodigoSobre">
             <summary>
-            
+            Código alfanumérico que identifica el sobre (Si en la configuración se indica como requerido)
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.OperacionTransaccionSobre_Fecha">
             <summary>
-            
+            Fecha de alta del registro 
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_Id">
@@ -15307,31 +14895,6 @@
             </summary>
         </member>
         <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_TipoValorId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_Habilitado">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_UsuarioCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_FechaCreacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_UsuarioModificacion">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DepositaryWebApi.Entities.Views.Integracion.OperacionTransaccionSobreDetalle.ValorRelacionMonedaTipoValor_FechaModificacion">
             <summary>
             
             </summary>

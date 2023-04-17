@@ -20,7 +20,7 @@
   <ForceDatetimeToDatetimeNow>false</ForceDatetimeToDatetimeNow>
   <DeletePreviousGeneratedFiles>false</DeletePreviousGeneratedFiles>
   <DbDriver>SQL</DbDriver>
-  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioIntegracion;Data Source=PC-SISTEMAS</ConnectionString>
+  <ConnectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=DepositarioTemplateServer;Data Source=PC-SISTEMAS</ConnectionString>
   <SelectedViews>
     <string>Integracion.OperacionTransaccion</string>
     <string>Integracion.OperacionTransaccionDetalle</string>
@@ -31,37 +31,10 @@
     <string>Sincronizacion.ObtenerIdDestino</string>
   </SelectedStoredProcedures>
   <UnselectedStoredProcedures>
+    <string>Auditoria.DepurarAuditoria</string>
     <string>Customizador.ConstruirEntidadesyAtributos</string>
     <string>dbo.FinalizarPrimeraSincronizacion</string>
-    <string>dbo.fn_diagramobjects</string>
     <string>dbo.IniciarPrimeraSincronizacion</string>
-    <string>dbo.sp_alterdiagram</string>
-    <string>dbo.sp_creatediagram</string>
-    <string>dbo.sp_dropdiagram</string>
-    <string>dbo.sp_helpdiagramdefinition</string>
-    <string>dbo.sp_helpdiagrams</string>
-    <string>dbo.sp_renamediagram</string>
-    <string>dbo.sp_upgraddiagrams</string>
-    <string>dbo.splitCapital</string>
-    <string>Desarrollo.ActualizarLenguajeItem</string>
-    <string>Desarrollo.GenerarTablaModelo</string>
-    <string>Desarrollo.GenerarTablaTipoModelo</string>
-    <string>Dispositivo.ObtenerDepositarios</string>
-    <string>Dispositivo.ObtenerInformacionDepositario</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoBillete</string>
-    <string>Operacion.ObtenerDatosTransaccionDepositoSobre</string>
-    <string>Operacion.ObtenerDetalleTransaccion</string>
-    <string>Operacion.ObtenerDetalleTransaccionSobre</string>
-    <string>Operacion.ObtenerEventosPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasAValidarPorDepositario</string>
-    <string>Operacion.ObtenerExistenciasPorDepositario</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorContenedor</string>
-    <string>Operacion.ObtenerPorcentajeOcupacionBolsaPorDepositario</string>
-    <string>Operacion.ObtenerTotalesGeneralesPorMonedaDepositario</string>
-    <string>Operacion.ObtenerTransaccionesPorDepositario</string>
-    <string>Operacion.ObtenerTransaccionesSobrePorDepositario</string>
-    <string>Regionalizacion.ObtenerTextosLenguaje</string>
-    <string>Seguridad.ObtenerRolesPorUsuario</string>
     <string>Sincronizacion.ObtenerIdOrigen</string>
   </UnselectedStoredProcedures>
   <MappedStoredProcedures>
@@ -373,7 +346,7 @@
     <string>Visualizacion.PerfilItem</string>
     <string>Visualizacion.PerfilTipo</string>
   </SelectedTables>
-  <SelectedDatabase>DepositarioIntegracion</SelectedDatabase>
+  <SelectedDatabase>DepositarioTemplateServer</SelectedDatabase>
   <SelectedTemplates>
     <string>2014e055-c7dd-4e8b-be94-e71b20110430</string>
   </SelectedTemplates>
