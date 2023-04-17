@@ -566,6 +566,6 @@ public class DataHandlerBase: IDataHandler, IDisposable
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         Dispose(disposing: true);
-        GC.Collect(2, GCCollectionMode.Forced);
+        GC.Collect(0,GCCollectionMode.Forced);
     }
 }

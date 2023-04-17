@@ -245,11 +245,6 @@
                             <div class="col-md-9">
                                 <RadzenTextBox style="display: block" @bind-Value="@(Provincia_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
-                                @if (@crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenRequiredValidator Component="CodigoExterno" Text="CodigoExterno is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
-                                }
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">

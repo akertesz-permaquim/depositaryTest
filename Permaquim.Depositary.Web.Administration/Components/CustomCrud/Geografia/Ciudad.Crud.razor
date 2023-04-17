@@ -89,7 +89,7 @@
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Geografia.Ciudad" Title=@MultilenguajeController.ObtenerTextoPorClave("PROVINCIAID",dataLenguaje) Property="ProvinciaId" Type="typeof(IEnumerable<Int64>)" FilterValue="@selectedFilter_ProvinciaId" FilterOperator="FilterOperator.Contains" LogicalFilterOperator="LogicalFilterOperator.And"
-                            Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("ProvinciaId",dataCustomizacionPagina.AtributosColumnas)>
+                              Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("ProvinciaId",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("ProvinciaId",dataCustomizacionPagina.AtributosColumnas)>
                             <Template>
                                 @if (Provincia_ProvinciaId_entities.FirstOrDefault(c => c.Id == @context.ProvinciaId) != null)
                                 {
@@ -249,11 +249,6 @@
                             <div class="col-md-9">
                                 <RadzenTextBox style="display: block" @bind-Value="@(Ciudad_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
                                 </RadzenTextBox>
-                                @if (@crudMode != CrudMode.Delete)
-                                {
-                                    <RadzenRequiredValidator Component="CodigoExterno" Text="CodigoExterno is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>
-                                }
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">

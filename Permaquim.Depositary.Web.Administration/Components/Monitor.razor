@@ -64,153 +64,30 @@
                                             </div>
                                         }
                                         else
+                                        {
                                             @context.Empresa
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal"
+                                        }
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SUCURSAL",dataLenguaje)" Property="Sucursal"
                                       Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Sucursal",dataCustomizacionGrillaDepositarios.AtributosColumnas)>
-                                        <Template>
-                                            @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                                    <Template>
+                                        @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
                                         {
                                             <div class="textoResaltadoRow">
                                                 @context.Sucursal
                                             </div>
                                         }
                                         else
-
+                                        {
                                             @context.Sucursal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector"
+                                        }
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="MonitorEntities.DepositarioMonitor" Title="@MultilenguajeController.ObtenerTextoPorClave("SECTOR",dataLenguaje)" Property="Sector"
                                       Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Sector",dataCustomizacionGrillaDepositarios.AtributosColumnas)>
-                                        <Template>
-                                            @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
+                                    <Template>
+                                        @if (rowsDepositariosExpandidas.Exists(x => x.DepositarioId == context.DepositarioId))
                                         {
                                             <div class="textoResaltadoRow">
                                                 @context.Sector
@@ -218,6 +95,7 @@
                                         }
                                         else
                                             @context.Sector
+
 
 
 
@@ -463,7 +341,7 @@
                                         <RadzenTabsItem Icon="local_atm" Text="@MultilenguajeController.ObtenerTextoPorClave("SOLAPA_DEPOSITOS",dataLenguaje)">
                                             <RadzenDataGrid FilterText="@MultilenguajeController.ObtenerTextoPorClave("CABECERA_FILTRO",dataLenguaje)" IsEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_VACIO",dataLenguaje)" IsNotNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_NULO",dataLenguaje)" IsNullText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_ES_NULO",dataLenguaje)" LessThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A",dataLenguaje)" LessThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MENOR_A_O_IGUAL",dataLenguaje)" NotEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_EQUIVALE",dataLenguaje)" IsNotEmptyText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_VACIO",dataLenguaje)" OrOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_OR",dataLenguaje)" GreaterThanText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A",dataLenguaje)" GreaterThanOrEqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_MAYOR_A_O_IGUAL",dataLenguaje)" AndOperatorText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_OPERADOR_AND",dataLenguaje)" AllColumnsText="@MultilenguajeController.ObtenerTextoPorClave("MOSTRAR_TODAS_COLUMNAS",dataLenguaje)" ContainsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_CONTIENE",dataLenguaje)" DoesNotContainText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_NO_CONTIENE",dataLenguaje)" ClearFilterText="@MultilenguajeController.ObtenerTextoPorClave("LIMPIAR_FILTRO",dataLenguaje)" ApplyFilterText="@MultilenguajeController.ObtenerTextoPorClave("APLICAR_FILTRO",dataLenguaje)" EqualsText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_EXACTO",dataLenguaje)" EndsWithText="@MultilenguajeController.ObtenerTextoPorClave("FILTRO_TERMINA_CON",dataLenguaje)" PageSizeText="@MultilenguajeController.ObtenerTextoPorClave("REGISTROS_POR_PAGINA",dataLenguaje)" StartsWithText="@MultilenguajeController.ObtenerTextoPorClave("EMPIEZA_CON",dataLenguaje)" ColumnsShowingText="@MultilenguajeController.ObtenerTextoPorClave("COLUMNAS_OPCIONALES",dataLenguaje)" TItem="MonitorEntities.TransaccionValidadaMonitor"
                                             AllowColumnReorder=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarMovilidad",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowColumnPicking=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarColumnasOpcionales",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowFiltering=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarFiltrado",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowColumnResize=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarRedimensionamiento",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowSorting=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarOrdenamiento",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowPaging=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarPaginado",dataCustomizacionGrillaTransacciones.AtributosTabla) AllowGrouping=@CustomizadorController.ObtenerPropiedadGrilla("HabilitarAgrupamiento",dataCustomizacionGrillaTransacciones.AtributosTabla)
-                                                                                                PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionGrillaTransacciones.AtributosTabla)"
+                                            PageSize="@CustomizadorController.ObtenerPaginadoDefault(dataUsuario.EmpresaId, dataCustomizacionGrillaTransacciones.AtributosTabla)"
                                             @ref="@gridTransacciones"
                                             @bind-Settings="@gridTransaccionesSettings"
                                             IsLoading="@estaCargandoGridTransacciones"
@@ -1259,8 +1137,7 @@ else
         dataDepositarios = null;
 
     }
-
-    }
+}
 
 <style>
     .rz-expanded-row-template {

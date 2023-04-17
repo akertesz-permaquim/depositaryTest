@@ -189,6 +189,8 @@
                                 </div>
                             </FilterTemplate>
                         </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="CodigoExterno" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
+                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Seguridad.Usuario" Property="Habilitado" FilterValue="@Habilitado_filter" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("Habilitado",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("Habilitado",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("Habilitado",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("Habilitado",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("Habilitado",dataCustomizacionPagina.AtributosColumnas) Title=@MultilenguajeController.ObtenerTextoPorClave("HABILITADO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center">
                             <Template Context="data">
                                 <RadzenCheckBox TValue="bool" Value=@data.Habilitado Disabled="true">
@@ -480,8 +482,8 @@
                                 </RadzenTextBox>
                                 @if (@crudMode != CrudMode.Delete)
                                 {
-@*                                    <RadzenRequiredValidator Component="Mail" Text="Mail is required" Style="position: absolute">
-                                    </RadzenRequiredValidator>*@
+                                    @*                                    <RadzenRequiredValidator Component="Mail" Text="Mail is required" Style="position: absolute">
+                </RadzenRequiredValidator>*@
                                     <RadzenEmailValidator Component="Mail" Style="position: absolute"></RadzenEmailValidator>
                                 }
                             </div>
@@ -517,8 +519,8 @@
                             </div>
                             <div class="col-md-auto">
                                 <RadzenFileInput Name="Avatar" @bind-Value="@Usuario_entity.Avatar" Error="@ErrorFileInput_Avatar" TValue="string" Class="w-100" />
-@*                                <RadzenRequiredValidator Component="Avatar" Text="Avatar is required" Style="position : inherit ">
-                                </RadzenRequiredValidator>*@
+                                @*                                <RadzenRequiredValidator Component="Avatar" Text="Avatar is required" Style="position : inherit ">
+                </RadzenRequiredValidator>*@
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
@@ -547,6 +549,16 @@
                             </div>
                             <div class="col-md-9">
                                 <RadzenCheckBox @bind-Value=@Usuario_entity.DebeCambiarPassword Name="DebeCambiarPasswordCheckBox" TValue="bool" Change=@(args => DebeCambiarPasswordChange(args, @Usuario_entity)) Disabled="@(crudMode == CrudMode.Delete || crudMode == CrudMode.Add || estaProcesando)" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem" class="row">
+                            <div class="col-md-3">
+                                <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Component="CodigoExterno" style="width: 100%">
+                                </RadzenLabel>
+                            </div>
+                            <div class="col-md-9">
+                                <RadzenTextBox style="display: block" @bind-Value="@(Usuario_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                                </RadzenTextBox>
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">

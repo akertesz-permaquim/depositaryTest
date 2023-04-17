@@ -525,6 +525,8 @@
                         resultado = true;
 
                 }
+
+                bTablesDepositarioEstado.Dispose();
             }
 
             return resultado;
@@ -638,6 +640,8 @@
                                 }
                             }
                         }
+
+                        _bTablesDepositario.Dispose();
                     }
                 }
             }
@@ -698,14 +702,20 @@
                                                             resultado.Add(depositario.Id);
                                                     }
                                                 }
+
+                                                bTablesDepositario.Dispose();
                                             }
                                         }
                                     }
+                                    bTablesSector.Dispose();
                                 }
                             }
                         }
+                        bTablesSucursal.Dispose();
                     }
                 }
+
+                bTablesEmpresa.Dispose();
             }
 
 
@@ -718,10 +728,6 @@
 
             //if (bRelationsEmpresa.Result.Count > 0)
             //{
-
-
-
-
             //    foreach (var empresa in bRelationsEmpresa.Result)
             //    {
             //        foreach (var sucursal in empresa.ListOf_Sucursal_EmpresaId)
@@ -955,6 +961,8 @@
                     returnValue = bTEjecucion.Result.FirstOrDefault().FechaInicio;
 
                 }
+
+                bTEjecucion.Dispose();
             }
 
             return returnValue;

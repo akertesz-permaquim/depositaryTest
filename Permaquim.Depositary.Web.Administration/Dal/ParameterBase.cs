@@ -2,25 +2,25 @@ using System;
 using System.Collections.Generic;
 public class ParameterItem
 {
-	public string Column  {get;set;}
-	public string Operand {get;set;}
+    public string Column { get; set; }
+    public string Operand { get; set; }
     public string Name { get; set; }
-    public List<ParameterItemValue> Values {get;set;}
-	public string FullQuery  {get;set;}
-	public bool IsFieldParameter  {get;set;} = true;
+    public List<ParameterItemValue> Values { get; set; }
+    public string FullQuery { get; set; }
+    public bool IsFieldParameter { get; set; } = true;
     public ParameterItem(String fullQuery, bool isFieldParameter = true)
-	{
-		FullQuery = fullQuery;
-		IsFieldParameter = isFieldParameter;
-	}
+    {
+        FullQuery = fullQuery;
+        IsFieldParameter = isFieldParameter;
+    }
     public ParameterItem(string fullQuery, string column, string operand, string name, List<ParameterItemValue> values, bool isFieldParameter = true)
-	{
-		Operand   = operand;
-		Values     = values;
+    {
+        Operand = operand;
+        Values = values;
         Name = name;
-		FullQuery = fullQuery;
-		IsFieldParameter = isFieldParameter;
-	}
+        FullQuery = fullQuery;
+        IsFieldParameter = isFieldParameter;
+    }
 }
 public class ParameterItemValue
 {
@@ -174,7 +174,7 @@ public class OrderByParameterBase
     {
         _orderByParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _orderByParameters.Count; }
     }
@@ -215,7 +215,7 @@ public class GroupByParameterBase
     {
         _groupByParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _groupByParameters.Count; }
     }
@@ -224,7 +224,7 @@ public class GroupByParameterBase
         return GetSQL();
     }
 }
-public  class AggregateParameterBase
+public class AggregateParameterBase
 {
     private const string _AVG = " AVG ";
     private const string _COUNT = " COUNT ";
@@ -263,7 +263,7 @@ public  class AggregateParameterBase
             throw ex;
         }
     }
-    internal string GetSQL() 
+    internal string GetSQL()
     {
         string _buff = String.Empty;
         try
@@ -290,7 +290,7 @@ public  class AggregateParameterBase
     {
         _aggregateParameters.Clear();
     }
-    public object Count
+    public long Count
     {
         get { return _aggregateParameters.Count; }
     }
@@ -310,34 +310,34 @@ public class WhereParameter : WhereParameterBase
             string _buff = String.Empty;
             if (values != null)
             {
-                if(values.GetType().ToString().StartsWith(Constants.SYSTEM_COLLECTIONS)) 
+                if (values.GetType().ToString().StartsWith(Constants.SYSTEM_COLLECTIONS))
                 {
-                        foreach (object value in values)
-                        {
-                            _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
-                            _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), value));
-                        }
-                 }
-                 else 
-                 {
+                    foreach (object value in values)
+                    {
                         _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
-                        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), values));
+                        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), value));
+                    }
+                }
+                else
+                {
+                    _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
+                    _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), values));
                 }
             }
             switch (operand)
             {
                 case Permaquim.Depositary.sqlEnum.OperandEnum.In:
                 case Permaquim.Depositary.sqlEnum.OperandEnum.NotIn:
-                      if( _buff.Length > 0)
-                       _whereParameters.Add(new ParameterItem(column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
+                    if (_buff.Length > 0)
+                        _whereParameters.Add(new ParameterItem(column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
                     break;
                 case Permaquim.Depositary.sqlEnum.OperandEnum.IsNull:
                 case Permaquim.Depositary.sqlEnum.OperandEnum.IsNotNull:
                     _whereParameters.Add(new ParameterItem(column + " " + operandString, column, operandString, column, _values));
                     break;
                 default:
-                      if( _buff.Length > 0)
-                    _whereParameters.Add(new ParameterItem(column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
+                    if (_buff.Length > 0)
+                        _whereParameters.Add(new ParameterItem(column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
                     break;
             }
         }
@@ -355,34 +355,34 @@ public class WhereParameter : WhereParameterBase
             string _buff = String.Empty;
             if (values != null)
             {
-                if(values.GetType().ToString().StartsWith(Constants.SYSTEM_COLLECTIONS)) 
+                if (values.GetType().ToString().StartsWith(Constants.SYSTEM_COLLECTIONS))
                 {
-                        foreach (object value in values)
-                        {
-                            _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
-                            _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), value));
-                        }
-                 }
-                 else 
-                 {
+                    foreach (object value in values)
+                    {
                         _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
-                        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), values));
+                        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), value));
+                    }
+                }
+                else
+                {
+                    _buff += Constants.INPUT_PARAMETER + GetNextParameterIndex().ToString() + ",";
+                    _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + GetCurrentParameterIndex().ToString(), values));
                 }
             }
             switch (operand)
             {
                 case Permaquim.Depositary.sqlEnum.OperandEnum.In:
                 case Permaquim.Depositary.sqlEnum.OperandEnum.NotIn:
-                      if( _buff.Length > 0)
-                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
+                    if (_buff.Length > 0)
+                        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " (" + _buff.Substring(0, _buff.Length - 1) + ")", column, operandString, column, _values));
                     break;
                 case Permaquim.Depositary.sqlEnum.OperandEnum.IsNull:
                 case Permaquim.Depositary.sqlEnum.OperandEnum.IsNotNull:
                     _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString, column, operandString, column, _values));
                     break;
                 default:
-                      if( _buff.Length > 0)
-                         _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
+                    if (_buff.Length > 0)
+                        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + column + " " + operandString + " " + _buff.Substring(0, _buff.Length - 1), column, operandString, column, _values));
                     break;
             }
         }
@@ -411,12 +411,12 @@ public class WhereParameter : WhereParameterBase
     {
         if (_whereParameters.Count > 0)
         {
-        List<ParameterItemValue> _values = new List<ParameterItemValue>();
-        string firstParameter = GetNextParameterIndex().ToString();
-        string secondParameter = GetNextParameterIndex().ToString();
-        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + firstParameter, fromValue));
-        _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + secondParameter, toValue));
-        _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + betweenColumn + " BETWEEN " + Constants.INPUT_PARAMETER + firstParameter + " AND " + Constants.INPUT_PARAMETER + secondParameter, betweenColumn, "Between", betweenColumn, _values));
+            List<ParameterItemValue> _values = new List<ParameterItemValue>();
+            string firstParameter = GetNextParameterIndex().ToString();
+            string secondParameter = GetNextParameterIndex().ToString();
+            _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + firstParameter, fromValue));
+            _values.Add(new ParameterItemValue(Constants.INPUT_PARAMETER + secondParameter, toValue));
+            _whereParameters.Add(new ParameterItem(" " + Enum.GetName(typeof(Permaquim.Depositary.sqlEnum.ConjunctionEnum), Conjunction) + " " + betweenColumn + " BETWEEN " + Constants.INPUT_PARAMETER + firstParameter + " AND " + Constants.INPUT_PARAMETER + secondParameter, betweenColumn, "Between", betweenColumn, _values));
         }
         else
         {

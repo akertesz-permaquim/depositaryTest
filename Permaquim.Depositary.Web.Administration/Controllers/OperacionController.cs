@@ -126,6 +126,8 @@
                 {
                     resultado.Add(transaccion);
                 }
+
+                oTransaccion.Dispose();
             }
 
             return resultado;
@@ -148,6 +150,8 @@
                 {
                     bolsaColocada = oContenedor.Result.FirstOrDefault().Id;
                 }
+
+                oContenedor.Dispose();
             }
 
             return bolsaColocada;
@@ -246,7 +250,6 @@
             using (Depositary.Business.Tables.Operacion.Contenedor bTablesContenedor = new())
             {
 
-
                 bTablesContenedor.Where.Add(Depositary.Business.Tables.Operacion.Contenedor.ColumnEnum.Id, Depositary.sqlEnum.OperandEnum.Equal, pContenedorId);
 
                 bTablesContenedor.Items();
@@ -294,15 +297,20 @@
                                                 }
                                             }
                                         }
+
+                                        bTablesTransaccionDetalle.Dispose();
                                     }
                                     resultado = (double)cantidadUnidadesAcumuladas * 100 / cantidadMaxima;
 
                                 }
+                                bTablesTransaccion.Dispose();
                             }
 
                         }
+                        bTablesTipoContenedor.Dispose();
                     }
                 }
+                bTablesContenedor.Dispose();
             }
 
             //Depositary.Business.Relations.Operacion.Contenedor contenedor = new();
@@ -532,6 +540,8 @@
                         oTransaccion.Items();
 
                         resultado = oTransaccion.Result.Count.ToString();
+
+                        oTransaccion.Dispose();
                     }
                 }
             }
@@ -588,8 +598,11 @@
                                     transaccionesTotales++;
                                 }
 
+                                oTipoTransaccion.Dispose();
                             }
                         }
+
+                        oTransaccion.Dispose();
                     }
 
                 }
@@ -609,7 +622,7 @@
 
         public static bool VerificarFechaServidor()
         {
-            bool resultado = false;
+            bool resultado = true;
 
             //Se lee la ultima transaccion recibida y se compara la fecha y hora del servidor contra la de la transaccion
             Depositary.Business.Tables.Operacion.Transaccion transaccion = new();
@@ -618,12 +631,10 @@
 
             transaccion.Items();
 
-            if (transaccion.Result.Count == 0)
-                resultado = true;
-            else
+            if (transaccion.Result.Count > 0)
             {
-                if((DateTime.Now - transaccion.Result.FirstOrDefault().Fecha).TotalSeconds >= 0)
-                    resultado = true;
+                if((DateTime.Now - transaccion.Result.FirstOrDefault().Fecha).TotalSeconds < 0)
+                    resultado = false;
             }
 
             return resultado;

@@ -145,6 +145,8 @@
              </RadzenDataGridColumn>
              <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.Tipo" Property="FechaModificacion" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("FechaModificacion",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("FechaModificacion",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("FECHAMODIFICACION",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
      </RadzenDataGridColumn>
+             <RadzenDataGridColumn TItem="Depositary.Entities.Tables.Valor.Tipo" Property="CodigoExterno" Filterable=@CustomizadorController.ObtenerPropiedadColumnaFiltrable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Groupable=@CustomizadorController.ObtenerPropiedadColumnaAgrupable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Resizable=@CustomizadorController.ObtenerPropiedadColumnaRedimensionable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Reorderable=@CustomizadorController.ObtenerPropiedadColumnaMovible("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) MinWidth=@CustomizadorController.ObtenerPropiedadAnchoMinimoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Width=@CustomizadorController.ObtenerPropiedadAnchoColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Pickable=@CustomizadorController.ObtenerPropiedadVisibilidadColumnaEnSelector("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) OrderIndex=@CustomizadorController.ObtenerPropiedadPosicionColumnaEnGrilla("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Sortable=@CustomizadorController.ObtenerPropiedadColumnaOrdenable("CodigoExterno",dataCustomizacionPagina.AtributosColumnas) Visible=@CustomizadorController.ObtenerPropiedadVisibilidadColumna("CodigoExterno",dataCustomizacionPagina.AtributosColumnas)  Title=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Frozen="false" TextAlign="TextAlign.Center" >
+     </RadzenDataGridColumn>
          </Columns>
          </RadzenDataGrid>
      <hr>
@@ -211,6 +213,16 @@
                      </div>
                      <div class="col-md-auto">
                  <RadzenCheckBox @bind-Value=@Tipo_entity.Habilitado  Name="HabilitadoCheckBox" TValue="bool" Change=@(args => HabilitadoChange(args, @Tipo_entity)) Disabled = "@(crudMode == CrudMode.Delete)" />
+                     </div>
+                 </div>
+                 <div style="margin-bottom: 1rem" class="row">
+                     <div class="col-md-3">
+                         <RadzenLabel Text=@MultilenguajeController.ObtenerTextoPorClave("CODIGOEXTERNO",dataLenguaje) Component="CodigoExterno" style="width: 100%">
+                         </RadzenLabel>
+                     </div>
+                     <div class="col-md-auto">
+                         <RadzenTextBox  style="display: block" @bind-Value="@(Tipo_entity.CodigoExterno)" Name="CodigoExterno" Disabled="@(crudMode==CrudMode.Delete || estaProcesando)">
+                         </RadzenTextBox>
                      </div>
                  </div>
              <div class="row">
