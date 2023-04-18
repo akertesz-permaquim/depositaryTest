@@ -498,7 +498,7 @@ else
         depositariosUsuario = ReportController.ObtenerListadoDepositariosPorPerfil(dataUsuario.Id);
         dataDepositariosCombo = depositariosUsuario; //En principio vemos todos los depositarios accesibles por perfil.
         dataUsuarios = ReportController.ObtenerUsuarios(false);
-        dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta);
+        dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta.Value.AddHours(23).AddMinutes(59).AddSeconds(59));
         dataOrigenes = ReportController.ObtenerOrigenes(false);
         dataTurnos = ReportController.ObtenerTurnos();
     }
@@ -509,7 +509,7 @@ else
     private void OnChanged_fechaDesdeDatePicker(DateTime? value)
     {
         if(value.HasValue)
-            dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta);
+            dataContenedores = ReportController.ObtenerContenedores(false, parametrosTransaccionesView.fechaDesde, parametrosTransaccionesView.fechaHasta.Value.AddHours(23).AddMinutes(59).AddSeconds(59));
     }
 
     private void OnChanged_fechaHastaDatePicker(DateTime? value)

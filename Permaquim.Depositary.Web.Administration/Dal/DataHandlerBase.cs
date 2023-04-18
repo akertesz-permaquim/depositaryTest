@@ -541,31 +541,20 @@ public class DataHandlerBase: IDataHandler, IDisposable
  
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposedValue)
-        {
-            if (disposing)
-            {
-                // TODO: dispose managed state (managed objects)
-                _itemList = null;
-                _fieldList = null;
-                _dataItem = null;
-            }
- 
-            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-            // TODO: set large fields to null
-            _connection = null;
-            _command = null;
-            _transaction = null;
-            _datareader = null;
- 
-            disposedValue = true;
-        }
+        _itemList = null;
+        _fieldList = null;
+        _dataItem = null;
+        _dataFieldDefinitions = null;
+        _connection = null;
+        _command = null;
+        _transaction = null;
+        _datareader = null;
     }
  
     void IDisposable.Dispose()
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         Dispose(disposing: true);
-        GC.Collect(0,GCCollectionMode.Forced);
+        //GC.Collect(0,GCCollectionMode.Forced);
     }
 }

@@ -13,7 +13,10 @@ builder.Services.AddScoped<Radzen.ContextMenuService>();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddLocalization();
 builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
+builder.Services.AddServerSideBlazor().AddCircuitOptions(
+        options => { options.DetailedErrors = true;
+        options.DisconnectedCircuitMaxRetained = 1;
+            options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromSeconds(1); });
 builder.Services.AddServerSideBlazor().AddHubOptions(options => { options.MaximumReceiveMessageSize = 10 * 1024 * 1024; });
 builder.Services.AddBlazorDownloadFile();
 
@@ -47,6 +50,7 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 {
     DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es-AR")
 });
+
 
 app.UseHttpsRedirection();
 
