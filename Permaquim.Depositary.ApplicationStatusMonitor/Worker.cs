@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 {
     public class Worker : BackgroundService
     {
+        private bool _otherAppsRunning { get; set; }
         private const int POLL_TIME = 1000;
         private Dictionary<WorkerTask, Thread> _threads;
         private readonly ILogger<Worker> _logger;
@@ -35,6 +37,7 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             try
             {
                 string str = AppDomain.CurrentDomain.BaseDirectory + "\\" + this._configuration.GetSection("LogFile").Get<string>();
+                _otherAppsRunning = AppAlreadyRuning();
                 this.Log("Starting Service ..");
             }
             catch (Exception ex)
@@ -44,23 +47,49 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
             return base.StartAsync(cancellationToken);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        private bool AppAlreadyRuning()
         {
-            try
+            bool running = false;
+            var processes = Process.GetProcessesByName(System.AppDomain.CurrentDomain.FriendlyName);
+
+            if (processes.Length > 1)
             {
-                this._workerTasks = AppConfiguration.GetWorkerTasks(this._configuration.GetSection("TaskJson").Get<string>());
-                this._threads = new Dictionary<WorkerTask, Thread>();
-                this.CreateThreads(stoppingToken);
-                int taskDelay = this._configuration.GetSection("TaskDelay").Get<int>();
-                while (!stoppingToken.IsCancellationRequested)
+                try
                 {
-                    this.CheckThreads(stoppingToken);
-                    await Task.Delay(taskDelay, stoppingToken);
+                    running = processes.Any(x => !x.HasExited);
+                }
+                catch (Exception)
+                {
+                    Log("Couldn't check if a process is already running...");
                 }
             }
-            catch (Exception ex)
+            return running;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            if (!_otherAppsRunning)
             {
-                this.Log(((object)ex).ToString());
+                try
+                {
+                    this._workerTasks = AppConfiguration.GetWorkerTasks(this._configuration.GetSection("TaskJson").Get<string>());
+                    this._threads = new Dictionary<WorkerTask, Thread>();
+                    this.CreateThreads(stoppingToken);
+                    int taskDelay = this._configuration.GetSection("TaskDelay").Get<int>();
+                    while (!stoppingToken.IsCancellationRequested)
+                    {
+                        this.CheckThreads(stoppingToken);
+                        await Task.Delay(taskDelay, stoppingToken);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Log(((object)ex).ToString());
+                }
+            }
+            else
+            {
+                Log("Application already running... Exiting");
             }
         }
 
@@ -115,9 +144,20 @@ namespace Permaquim.Depositary.ApplicationStatusMonitor
 
         private void Log(string log) {
             Console.WriteLine(log);
-            var sw = File.AppendText("LogFile.txt");
-            sw.WriteLine(log);
-            sw.Close();
+            while (true)
+            {
+                try
+                {
+                    var sw = File.AppendText(AppDomain.CurrentDomain.BaseDirectory + @"\" + "LogFile.txt");
+                    sw.WriteLine(log);
+                    sw.Close();
+                    break;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(100);
+                }
+            }
 
         }
 
